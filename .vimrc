@@ -18,8 +18,8 @@ Bundle 'django.vim'
 Bundle 'Tagbar'
 Bundle 'tComment'
 Bundle 'vcscommand.vim'
-Bundle 'JavaScript-syntax'
 
+Bundle 'pangloss/vim-javascript'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'ervandew/supertab'
 Bundle 'wincent/Command-T'
