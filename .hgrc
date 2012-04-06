@@ -1,0 +1,47 @@
+# mercurial config
+[ui]
+username = Marcel Beumer <marcel@marcelbeumer.com>
+# merge = vimdiff
+
+[web]
+cacerts= /etc/hg-dummy-cert.pem
+style = gitweb
+
+[ui]
+verbose = True
+
+[hooks]
+commit.cleanup = [ -n "$PROJECT_ROOT" ] && removeemptydirs
+update.cleanup = [ -n "$PROJECT_ROOT" ] && removeemptydirs
+
+[extensions]
+mq =
+bookmarks =
+children =
+churn =
+color =
+extdiff =
+graphlog =
+#hggit =
+hgk =
+highlight =
+keyword =
+mercurial_keyring =
+progress =
+purge =
+# hgshelve=~/Development/Clones/hgshelve/hgshelve.py
+
+[hostfingerprints]
+smooth.applied-tactical.org = 4b:0a:e3:a9:f5:09:d3:e0:dd:44:42:2d:d3:dc:da:ff:a8:1d:1f:4d
+bitbucket.org = 24:9c:45:8b:9c:aa:ba:55:4e:01:6d:58:ff:e4:28:7d:2a:14:ae:3b
+
+# [merge-tools]
+# changes.executable = chdiff
+# changes.args = --wait $local $other
+
+[progress]
+delay = 0
+
+[extdiff]
+cmd.chdiff =
+opts.chdiff = --wait

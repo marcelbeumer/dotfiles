@@ -1,0 +1,18 @@
+[user]
+	name = Marcel Beumer
+	email = marcel@marcelbeumer.com
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[alias]
+    addremove = !git add . && git ls-files --deleted | xargs git rm
+[core]
+	quotepath = false
+	excludesfile = /Users/marcel/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
