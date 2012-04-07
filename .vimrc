@@ -18,6 +18,8 @@ Bundle 'django.vim'
 Bundle 'Tagbar'
 Bundle 'tComment'
 Bundle 'vcscommand.vim'
+Bundle 'SearchComplete'
+Bundle 'ZoomWin'
 
 Bundle 'pangloss/vim-javascript'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -31,8 +33,10 @@ Bundle 'chrismetcalf/vim-yankring'
 Bundle 'bitc/vim-bad-whitespace'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'sjl/gundo.vim'
+Bundle 'gmarik/sudo-gui.vim'
 Bundle 'mrtazz/molokai.vim'
 Bundle 'marcelbeumer/twilight.vim'
+Bundle 'nanotech/jellybeans.vim'
 
 syntax enable
 filetype plugin indent on
@@ -131,7 +135,7 @@ endif
 " //////////////////////////////
 command Rc e ~/.vimrc
 command ClearUndo silent !rm ~/.vimundo/*
-command SudoWrite w !sudo tee % > /dev/null
+" command SudoWrite w !sudo tee % > /dev/null
 command JSHint !jshint % --show-non-errors
 command -range=% Xmltidy <line1>,<line2>!tidy -xml -indent -utf8 -q --indent-spaces 2
 command -range=% BeautifyJS <line1>,<line2>!js-beautify -i --indent-size=2
