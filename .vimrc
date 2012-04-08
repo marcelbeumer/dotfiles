@@ -18,10 +18,9 @@ Bundle 'django.vim'
 Bundle 'Tagbar'
 Bundle 'tComment'
 Bundle 'vcscommand.vim'
-Bundle 'SearchComplete'
 Bundle 'ZoomWin'
+Bundle 'JavaScript-syntax'
 
-Bundle 'pangloss/vim-javascript'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'ervandew/supertab'
 Bundle 'wincent/Command-T'
@@ -58,9 +57,9 @@ if flavour == "buzz"
   set shiftwidth=2
   set softtabstop=2
 else
-  set tabstop=4
-  set shiftwidth=4
-  set softtabstop=4
+  set tabstop=2
+  set shiftwidth=2
+  set softtabstop=2
 endif
 
 " automatically round << and >> to shiftwidth
@@ -75,7 +74,7 @@ set smartcase
 set nonumber
 set ruler
 set nolist
-set clipboard=unnamed
+" set clipboard=unnamed
 set foldmethod=indent
 set foldlevel=100
 set scrolloff=3
