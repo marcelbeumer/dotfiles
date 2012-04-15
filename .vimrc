@@ -20,9 +20,9 @@ Bundle 'tComment'
 Bundle 'vcscommand.vim'
 Bundle 'ZoomWin'
 Bundle 'JavaScript-syntax'
+Bundle 'Gundo'
 
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-Bundle 'ervandew/supertab'
 Bundle 'wincent/Command-T'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
@@ -167,8 +167,8 @@ if has('gui_running')
     set guioptions=aAce
     set guifont=Menlo:h12
     set vb " no bells; as macvim does not support visual bell
-    colorscheme molokai
 end
+colorscheme molokai
 
 " //////////////////////////////
 " highlighting

@@ -1,11 +1,10 @@
 
-# MacPorts Installer addition on 2011-09-30_at_23:03:32: adding an appropriate PATH variable for use with MacPorts.
-export PATH=~/Development/bin:/opt/local/bin:/opt/local/sbin:$PATH
-# Finished adapting your PATH environment variable for use with MacPorts.
-
+export PATH=~/Development/bin:$PATH
 export PATH=$PATH:/usr/local/mysql/bin
 
+# export TERM=screen-256color
 export CLICOLOR=true
+export EDITOR="mvim -v"
 export LSCOLORS=exfxcxdxbxegedabagacad
 export GREP_OPTIONS='--color=auto'
 export WORKON_HOME=~/Development/Envs
@@ -36,6 +35,9 @@ alias mysqldump="mysqldump5"
 # BuzzCapture
 alias buzztunnel="cd ~/Documents/Projects/BuzzCapture/scripts;./tunnelVBuzz.sh"
 
+# Tmux
+[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+
 mkdir -p $WORKON_HOME
 source /usr/local/bin/virtualenvwrapper.sh
 
@@ -45,10 +47,6 @@ unalias grep
 
 export DJANGO_DATABASE_TYPE=sqlite
 set -o vi
-
-export NODE_PATH=/opt/local/lib:$NODE_PATH
-export NODE_PATH=/opt/local/lib/node_modules:$NODE_PATH
-export NODE_PATH=/usr/local/lib/jsctags/:$NODE_PATH
 
 hgfind ()
 {
