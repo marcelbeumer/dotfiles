@@ -125,20 +125,23 @@ map <leader>a :Ack
 " filetype settings
 " //////////////////////////////
 autocmd BufWritePost *.coffee silent CoffeeMake! | cwindow
-if flavour == "buzz"
-  autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
-endif
+autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
+autocmd BufNewFile,BufRead *.md set filetype=markdown
 
 " //////////////////////////////
 " commands
 " //////////////////////////////
 command Rc e ~/.vimrc
+command CodingLog e ~/Documents/Journaling/coding.md
 command ClearUndo silent !rm ~/.vimundo/*
+command JournalDate silent r !date +\%a\ \%d\ \%B\ \%Y\ \%H:\%M
+
 " command SudoWrite w !sudo tee % > /dev/null
 command JSHint !jshint % --show-non-errors
 command -range=% Xmltidy <line1>,<line2>!tidy -xml -indent -utf8 -q --indent-spaces 2
 command -range=% BeautifyJS <line1>,<line2>!js-beautify -i --indent-size=2
 command -range=% UglifyJS <line1>,<line2>!uglifyjs
+command Marked silent !/Applications/Marked.app/Contents/MacOS/Marked % &
 
 " //////////////////////////////
 " plugin config
@@ -157,8 +160,10 @@ let NERDTreeBookmarksFile = $HOME . '/.vim_nerdtree_bookmarks'
 let NERDTreeWinSize=50
 let NERDTreeShowBookmarks=1
 let g:tagbar_compact=1
-let g:molokai_original=1
+let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+" let g:molokai_original=1
 let g:sparkupArgs = '--indent-spaces=2'
+
 
 " //////////////////////////////
 " gui

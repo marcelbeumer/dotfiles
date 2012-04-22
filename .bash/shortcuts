@@ -1,0 +1,17 @@
+export HTTPDCONF="/etc/apache2/httpd.conf"
+
+alias l="ls"
+alias la="ls -ahl"
+alias tree="find . -type d -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+alias vi="mvim -v"
+alias vim="mvim"
+alias jdate="date +%d\ %h\ %Y\ %H:%M" # journaling date
+alias vimdjango="cd \$VIRTUAL_ENV/lib/python2.6/site-packages/django; vim"
+alias vimfein="cd \$VIRTUAL_ENV/lib/python2.6/site-packages/feincms; vim"
+alias a2start="sudo apachectl start"
+alias a2restart="sudo apachectl restart"
+alias a2stop="sudo apachectl stop"
+alias a2="a2restart"
+alias vimhttpd="vim $HTTPDCONF"
+alias mysql_config="mysql_config5"
+alias mysqldump="mysqldump5"

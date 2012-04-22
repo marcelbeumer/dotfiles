@@ -11,8 +11,8 @@ style = gitweb
 verbose = True
 
 [hooks]
-commit.cleanup = [ -n "$PROJECT_ROOT" ] && removeemptydirs
-update.cleanup = [ -n "$PROJECT_ROOT" ] && removeemptydirs
+# commit.cleanup = [ -n "$PROJECT_ROOT" ] && removeemptydirs
+# update.cleanup = [ -n "$PROJECT_ROOT" ] && removeemptydirs
 
 [extensions]
 mq =

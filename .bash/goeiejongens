@@ -1,0 +1,8 @@
+export DOMAIN="local.goeiejongens.nl"
+export REPOS=$HOME/Development/Clones
+
+source $REPOS/gj-lib/bin/profile
+unalias ls
+unalias grep
+export DJANGO_DATABASE_TYPE=sqlite
+
