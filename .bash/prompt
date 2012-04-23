@@ -46,14 +46,16 @@ bash_prompt() {
   }
 
   function vcprompt_info {
+    # vcprompt is buggy; does not show the correct hg branch in some cases
     vcprompt --format-git "on ${VIOLET}%b${RESET} at ${YELLOW}%r ${GREEN}%u%m%a${RESET}" \
             --format-hg  "on ${VIOLET}%b${RESET} at ${YELLOW}%r ${GREEN}%u%m${RESET}" \
             --format    "on %s ${VIOLET}%b${RESET} at ${YELLOW}%r ${GREEN}%u%m${RESET}"
   }
 
   export LSCOLORS=Gxfxcxdxbxegedabagacad
-  PROMPT_COMMAND='PS1="${VIOLET}\u${RESET} at ${YELLOW}$(hostname -s)${RESET} in ${GREEN}\w${RESET} $(vcprompt_info)
-$(virtualenv_info)% "'
+#   PROMPT_COMMAND='PS1="${VIOLET}\u${RESET} at ${YELLOW}$(hostname -s)${RESET} in ${GREEN}\w${RESET} $(vcprompt_info)
+# $(virtualenv_info)% "'
+  PROMPT_COMMAND='PS1="${VIOLET}\u${RESET} at ${YELLOW}$(hostname -s)${RESET} in ${GREEN}\w${RESET} $(virtualenv_info)% "'
 }
 
 bash_prompt

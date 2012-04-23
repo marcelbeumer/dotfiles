@@ -1,2 +1,5 @@
 alias buzztunnel="cd ~/Documents/Projects/BuzzCapture/scripts;./tunnelVBuzz.sh"
+alias buzzrunserver="bin/django runserver_plus --threaded"
+alias buzzbuild="bin/buildout"
+alias buzzcss="cd src/BrandMonitor/stylesheets; compass watch;"
 
