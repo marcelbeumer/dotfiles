@@ -15,3 +15,8 @@ alias a2="a2restart"
 alias vimhttpd="vim $HTTPDCONF"
 alias mysql_config="mysql_config5"
 alias mysqldump="mysqldump5"
+
+#Notes
+alias cdnotes="cd ~/Development/Notes"
+alias notes="cdnotes; vim ."
+alias createnote="cdnotes; vim"
