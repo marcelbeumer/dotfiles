@@ -17,6 +17,6 @@ alias mysql_config="mysql_config5"
 alias mysqldump="mysqldump5"
 
 #Notes
-alias cdnotes="cd ~/Development/Notes"
+alias cdnotes="cd ~/Documents/Notes"
 alias notes="cdnotes; vim ."
-alias createnote="cdnotes; vim"
+alias note="cdnotes; vim"
