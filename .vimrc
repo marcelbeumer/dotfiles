@@ -141,7 +141,7 @@ command JSHint !jshint % --show-non-errors
 command -range=% Xmltidy <line1>,<line2>!tidy -xml -indent -utf8 -q --indent-spaces 2
 command -range=% BeautifyJS <line1>,<line2>!js-beautify -i --indent-size=2
 command -range=% UglifyJS <line1>,<line2>!uglifyjs
-command Marked silent !/Applications/Marked.app/Contents/MacOS/Marked % &
+command Marked silent !/Applications/Marked.app/Contents/MacOS/Marked "%" &
 
 " //////////////////////////////
 " plugin config
