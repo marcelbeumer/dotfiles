@@ -126,7 +126,7 @@ map <leader>a :Ack
 " //////////////////////////////
 autocmd BufWritePost *.coffee silent CoffeeMake! | cwindow
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
-autocmd BufNewFile,BufRead *.md set filetype=markdown
+autocmd BufNewFile,BufRead,BufWritePost *.md set filetype=markdown
 
 " //////////////////////////////
 " commands
@@ -178,6 +178,6 @@ colorscheme molokai
 " //////////////////////////////
 " highlighting
 " //////////////////////////////
-highlight LineOverflow ctermbg=red ctermfg=white guibg=#592929
-autocmd BufWinEnter * let w:m3=matchadd('LineOverflow', '\%>79v.\+', -1)
+" highlight LineOverflow ctermbg=red ctermfg=white guibg=#592929
+" autocmd BufWinEnter * let w:m3=matchadd('LineOverflow', '\%>79v.\+', -1)
 
