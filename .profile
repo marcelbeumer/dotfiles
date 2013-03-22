@@ -1,7 +1,8 @@
 
 export PATH=~/bin:$PATH
 export PATH=$PATH:/usr/local/mysql/bin
-export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+export PATH=/usr/local/share/npm/bin:$PATH
+## export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
 
 export CLICOLOR=true
 export EDITOR="mvim -v"
