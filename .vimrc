@@ -1,9 +1,6 @@
 " //////////////////////////////
 " # vim settings
 " //////////////////////////////
-
-" get vimrc flavour
-let flavour=$VIMRC_FLAVOUR
 set nocompatible
 filetype off
 
@@ -52,15 +49,10 @@ set undodir=~/.vimundo
 set autoindent
 set expandtab
 
-if flavour == "buzz"
-  set tabstop=2
-  set shiftwidth=2
-  set softtabstop=2
-else
-  set tabstop=2
-  set shiftwidth=2
-  set softtabstop=2
-endif
+" tab settings
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 
 " automatically round << and >> to shiftwidth
 set shiftround
