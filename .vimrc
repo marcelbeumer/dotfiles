@@ -186,3 +186,11 @@ colorscheme molokai
 " highlight LineOverflow ctermbg=red ctermfg=white guibg=#592929
 " autocmd BufWinEnter * let w:m3=matchadd('LineOverflow', '\%>79v.\+', -1)
 
+" Load local vimrc files
+" Based on http://www.vimninjas.com/2012/08/30/local-vimrc/
+if filereadable('.vimrc.local')
+  source .vimrc.local
+endif
+if filereadable('.vimrc.marcelbeumer.local')
+  source .vimrc.marcelbeumer.local
+endif
