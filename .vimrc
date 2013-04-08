@@ -170,6 +170,7 @@ if has('gui_running')
     set guifont=Menlo:h12
     set vb " no bells; as macvim does not support visual bell
 end
+
 colorscheme molokai
 
 " //////////////////////////////
