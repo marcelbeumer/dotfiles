@@ -6,6 +6,28 @@ alias tree="find . -type d -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 alias vi="mvim -v"
 alias vim="mvim"
 alias jdate="date +%d\ %h\ %Y\ %H:%M" # journaling date
+
+function m() {
+    mdfind -onlyin . $@ | lines
+}
+
+function mn() {
+    mdfind -onlyin . -name $@ | lines
+}
+
+function lines() {
+    n=1
+    while read line; do
+        (( n++ ))
+        echo $n: $line
+    done
+}
+
+function ml() {
+    cat - | sed -n "$1p" | awk '{ print $2 }'
+}
+
+# Dev
 alias vimdjango="cd \$VIRTUAL_ENV/lib/python2.6/site-packages/django; vim"
 alias vimfein="cd \$VIRTUAL_ENV/lib/python2.6/site-packages/feincms; vim"
 alias a2start="sudo apachectl start"

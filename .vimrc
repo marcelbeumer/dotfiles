@@ -131,7 +131,7 @@ command JournalDate silent r !date +\%a\ \%d\ \%B\ \%Y\ \%H:\%M
 " command SudoWrite w !sudo tee % > /dev/null
 command JSHint !jshint % --show-non-errors
 command -range=% Xmltidy <line1>,<line2>!tidy -xml -indent -utf8 -q --indent-spaces 2
-command -range=% BeautifyJS <line1>,<line2>!js-beautify -i --indent-size=2
+command -range=% BeautifyJS <line1>,<line2>!js-beautify --indent-size=4 -
 command -range=% UglifyJS <line1>,<line2>!uglifyjs
 command Marked silent !/Applications/Marked.app/Contents/MacOS/Marked "%" &
 

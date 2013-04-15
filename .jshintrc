@@ -5,6 +5,6 @@
   "browser":true,
   "node":true,
   "devel":true,
-  "newcap":true
-  globals": { "define": true }
+  "newcap":true,
+  "globals": { "define": true }
 }
