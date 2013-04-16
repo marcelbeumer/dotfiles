@@ -7,14 +7,17 @@ alias vi="mvim -v"
 alias vim="mvim"
 alias jdate="date +%d\ %h\ %Y\ %H:%M" # journaling date
 
+# mdfind from ., showing linenumbers
 function m() {
     mdfind -onlyin . $@ | lines
 }
 
+# mdfind by name from ., showing linenumbers
 function mn() {
     mdfind -onlyin . -name $@ | lines
 }
 
+# show line numbers for stdin
 function lines() {
     n=1
     while read line; do
@@ -23,8 +26,16 @@ function lines() {
     done
 }
 
+# get content of line number, use in combination with m or mn:
+# mn code.js | ml 2
 function ml() {
     cat - | sed -n "$1p" | awk '{ print $2 }'
+}
+
+# https://github.com/paulirish/dotfiles/commit/e67d1bc03
+# cd into whatever is the forefront Finder window.
+cdf() {  # short for cdfinder
+  cd "`osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)'`"
 }
 
 # Dev
