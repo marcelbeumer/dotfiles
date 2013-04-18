@@ -18,6 +18,7 @@ Bundle 'vcscommand.vim'
 Bundle 'ZoomWin'
 Bundle 'JavaScript-syntax'
 Bundle 'Gundo'
+Bundle 'kchmck/vim-coffee-script'
 
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'wincent/Command-T'
@@ -112,6 +113,9 @@ map <Leader>w :%s/^\s\+$//ge<cr>:%s/\(\S\)\s\+$/\1/ge<cr>
 map <silent><leader>z :set foldexpr=getline(v:lnum)!~@/ foldlevel=0 foldcolumn=0 foldmethod=expr<CR>
 " Ack search for pattern recursively
 map <leader>a :Ack
+" CoffeeScript
+vmap <leader>c <esc>:'<,'>:CoffeeCompile<CR>
+map <leader>c :CoffeeCompile<CR>
 
 " //////////////////////////////
 " filetype settings
@@ -127,6 +131,7 @@ command Rc e ~/.vimrc
 command CodingLog e ~/Documents/Journaling/coding.md
 command ClearUndo silent !rm ~/.vimundo/*
 command JournalDate silent r !date +\%a\ \%d\ \%B\ \%Y\ \%H:\%M
+command -nargs=1 C CoffeeCompile | :<args>
 
 " command SudoWrite w !sudo tee % > /dev/null
 command JSHint !jshint % --show-non-errors
