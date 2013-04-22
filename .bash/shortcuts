@@ -49,6 +49,7 @@ alias vimhttpd="vim $HTTPDCONF"
 alias mysql_config="mysql_config5"
 alias mysqldump="mysqldump5"
 alias serve="python -m SimpleHTTPServer"
+alias cdclones="cd ~/Development/Clones"
 
 #Notes
 alias cdnotes="cd ~/Documents/Notes"

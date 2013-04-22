@@ -17,8 +17,11 @@ Bundle 'tComment'
 Bundle 'vcscommand.vim'
 Bundle 'ZoomWin'
 Bundle 'JavaScript-syntax'
+Bundle 'altercation/vim-colors-solarized'
 Bundle 'Gundo'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'othree/coffee-check.vim'
+Bundle 'nono/vim-handlebars'
 
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'wincent/Command-T'
@@ -33,6 +36,7 @@ Bundle 'sjl/gundo.vim'
 Bundle 'gmarik/sudo-gui.vim'
 Bundle 'mrtazz/molokai.vim'
 Bundle 'marcelbeumer/twilight.vim'
+Bundle 'marcelbeumer/spacedust.vim'
 Bundle 'nanotech/jellybeans.vim'
 
 syntax enable
@@ -65,6 +69,7 @@ set ignorecase
 " ... unless when there is a uppercase in the search
 set smartcase
 set nonumber
+set numberwidth=5
 set ruler
 set nolist
 " set clipboard=unnamed
@@ -120,7 +125,8 @@ map <leader>c :CoffeeCompile<CR>
 " //////////////////////////////
 " filetype settings
 " //////////////////////////////
-autocmd BufWritePost *.coffee silent CoffeeMake! | cwindow
+" autocmd BufWritePost *.coffee silent CoffeeMake! | cwindow
+let coffee_make_options = '-o /tmp/'
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufNewFile,BufRead,BufWritePost *.md set filetype=markdown
 
@@ -172,11 +178,12 @@ let g:sparkupArgs = '--indent-spaces=2'
 " //////////////////////////////
 if has('gui_running')
     set guioptions=aAce
-    set guifont=Menlo:h12
+    " set guifont=Menlo:h12
+    set guifont=Meslo\ LG\ M\ DZ:h12
     set vb " no bells; as macvim does not support visual bell
 end
 
-colorscheme molokai
+colorscheme spacedust
 
 " //////////////////////////////
 " highlighting

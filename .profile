@@ -19,3 +19,6 @@ export LC_ALL=en_US.UTF-8
 . ~/.bash/prompt
 . ~/.bash/git
 . ~/.bash/hg
+
+# Most likely place I want to be
+cdclones
