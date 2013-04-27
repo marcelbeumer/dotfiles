@@ -17,7 +17,6 @@ Bundle 'nanotech/jellybeans.vim'
 Bundle 'marcelbeumer/spacedust.vim'
 
 " Language support
-Bundle 'python.vim--Vasiliev'
 Bundle 'django.vim'
 Bundle 'nono/vim-handlebars'
 Bundle 'scrooloose/syntastic'
