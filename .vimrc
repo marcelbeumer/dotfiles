@@ -10,19 +10,19 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " My bundles
+Bundle 'xolox/vim-reload'
 Bundle 'ack.vim'
 Bundle 'django.vim'
 Bundle 'Tagbar'
 Bundle 'tComment'
 Bundle 'vcscommand.vim'
 Bundle 'ZoomWin'
-Bundle 'JavaScript-syntax'
+Bundle 'python.vim--Vasiliev'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'Gundo'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'othree/coffee-check.vim'
 Bundle 'nono/vim-handlebars'
-
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'wincent/Command-T'
 Bundle 'scrooloose/nerdtree'
@@ -35,9 +35,10 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'sjl/gundo.vim'
 Bundle 'gmarik/sudo-gui.vim'
 Bundle 'mrtazz/molokai.vim'
+Bundle 'nanotech/jellybeans.vim'
 Bundle 'marcelbeumer/twilight.vim'
 Bundle 'marcelbeumer/spacedust.vim'
-Bundle 'nanotech/jellybeans.vim'
+Bundle 'marcelbeumer/vim-javascript-syntax'
 
 syntax enable
 filetype plugin indent on
