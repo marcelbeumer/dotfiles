@@ -22,7 +22,7 @@ Bundle 'nono/vim-handlebars'
 Bundle 'scrooloose/syntastic'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'othree/coffee-check.vim'
-Bundle 'marcelbeumer/vim-javascript-syntax'
+Bundle 'marcelbeumer/javascript-syntax.vim'
 
 " Text editing tools
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
