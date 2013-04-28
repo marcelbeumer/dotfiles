@@ -41,6 +41,8 @@ Bundle 'sjl/gundo.vim'
 Bundle 'wincent/Command-T'
 Bundle 'scrooloose/nerdtree'
 Bundle 'marcelbeumer/color-color.vim'
+Bundle 'kshenoy/vim-signature'
+Bundle 'xolox/vim-session'
 
 " Version conrol
 Bundle "fugitive.vim"
@@ -147,7 +149,7 @@ autocmd BufNewFile,BufRead,BufWritePost *.md set filetype=markdown
 " commands
 " //////////////////////////////
 command Rc e ~/.vimrc
-command CodingLog e ~/Documents/Journaling/coding.md
+" command CodingLog e ~/Documents/Journaling/coding.md
 command ClearUndo silent !rm ~/.vimundo/*
 command JournalDate silent r !date +\%a\ \%d\ \%B\ \%Y\ \%H:\%M
 command -nargs=1 C CoffeeCompile | :<args>
