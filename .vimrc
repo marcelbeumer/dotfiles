@@ -41,7 +41,6 @@ Bundle 'sjl/gundo.vim'
 Bundle 'wincent/Command-T'
 Bundle 'scrooloose/nerdtree'
 Bundle 'marcelbeumer/color-color.vim'
-Bundle 'kshenoy/vim-signature'
 Bundle 'xolox/vim-session'
 
 " Version conrol
@@ -186,6 +185,7 @@ let g:tagbar_compact=1
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 " let g:molokai_original=1
 let g:sparkupArgs = '--indent-spaces=2'
+let g:session_autosave = 'no'
 
 
 " //////////////////////////////
