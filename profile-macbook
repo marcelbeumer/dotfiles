@@ -21,4 +21,4 @@ export LC_ALL=en_US.UTF-8
 . ~/.bash/hg
 
 # Most likely place I want to be
-cdclones
+cd ~/Development/Clones
