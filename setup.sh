@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ALL=() # Will be set
 COMMON=("ackrc=.ackrc" "bash=.bash" "gitconfig=.gitconfig" "hgrc=.hgrc" "jshintrc=.jshintrc" "vimrc=.vimrc" "xvimrc=.xvimrc")

@@ -25,5 +25,8 @@ export HTTPDCONF="/etc/apache2/httpd.conf" #shortcuts
 . ~/.bash/git
 . ~/.bash/hg
 
+# Last minute hacks
+alias ls="ls --color"
+
 # Most likely place I want to be
 cd ~
