@@ -1,4 +1,6 @@
-export WORKON_HOME=~/Development/Envs
+[ -z "$WORKON_HOME" ] && \
+    echo "Please set WORKON_HOME"
+
 set -o vi
 mkdir -p $WORKON_HOME
 source /usr/local/bin/virtualenvwrapper.sh

@@ -11,14 +11,19 @@ export GREP_OPTIONS='--color=auto'
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
+# Plugin config
+export DOTFILES_ENV="server"
+export REPOS=/home/marcel/clones #goeiejongens
+export WORKON_HOME=~/.virtualenvs #virtualenv
+export HTTPDCONF="/etc/apache2/httpd.conf" #shortcuts
+
 # My bash "plugins"
 . ~/.bash/shortcuts
 . ~/.bash/virtualenv
 . ~/.bash/goeiejongens
-. ~/.bash/buzzcapture
 . ~/.bash/prompt
 . ~/.bash/git
 . ~/.bash/hg
 
 # Most likely place I want to be
-cd ~/Development/Clones
+cd ~

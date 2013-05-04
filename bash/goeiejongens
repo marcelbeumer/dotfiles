@@ -1,6 +1,7 @@
-export DOMAIN="local.goeiejongens.nl"
-export REPOS=$HOME/Development/Clones
+[ -z "$REPOS" ] && \
+    echo "Please set REPOS"
 
+export DOMAIN="local.goeiejongens.nl"
 source $REPOS/gj-lib/bin/profile
 unalias ls
 unalias grep

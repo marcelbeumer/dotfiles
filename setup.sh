@@ -1,10 +1,8 @@
 #!/bin/sh
 
-ENV="unknown"
-
 ALL=() # Will be set
 COMMON=("ackrc=.ackrc" "bash=.bash" "gitconfig=.gitconfig" "hgrc=.hgrc" "jshintrc=.jshintrc" "vimrc=.vimrc" "xvimrc=.xvimrc")
-MACBOOK_ONLY=("profile-macbook=.profile")
+MAC_ONLY=("profile-macbook=.profile")
 SERVER_ONLY=("profile-server=.profile")
 
 # Get environment (macbook/server)
@@ -14,12 +12,10 @@ PS3="Environment: "
 select option in macbook server
 do
     case $option in
-        macbook)
-            ENV="macbook"
-            ALL=("${COMMON[@]}" "${MACBOOK_ONLY[@]}")
+        mac)
+            ALL=("${COMMON[@]}" "${MAC_ONLY[@]}")
             break;;
         server)
-            ENV="server"
             ALL=("${COMMON[@]}" "${SERVER_ONLY[@]}")
             break;;
      esac

@@ -1,42 +1,13 @@
-export HTTPDCONF="/etc/apache2/httpd.conf"
+[ -z "$HTTPDCONF" ] && \
+    echo "Please set HTTPDCONF"
+
+[ -z "$DOTFILES_ENV" ] && \
+    echo "Please set DOTFILES_ENV"
 
 alias l="ls"
 alias la="ls -ahl"
 alias tree="find . -type d -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
-alias vi="mvim -v"
-alias vim="mvim"
 alias jdate="date +%d\ %h\ %Y\ %H:%M" # journaling date
-
-# mdfind from ., showing linenumbers
-function m() {
-    mdfind -onlyin . $@ | lines
-}
-
-# mdfind by name from ., showing linenumbers
-function mn() {
-    mdfind -onlyin . -name $@ | lines
-}
-
-# show line numbers for stdin
-function lines() {
-    n=1
-    while read line; do
-        (( n++ ))
-        echo $n: $line
-    done
-}
-
-# get content of line number, use in combination with m or mn:
-# mn code.js | ml 2
-function ml() {
-    cat - | sed -n "$1p" | awk '{ print $2 }'
-}
-
-# https://github.com/paulirish/dotfiles/commit/e67d1bc03
-# cd into whatever is the forefront Finder window.
-cdf() {  # short for cdfinder
-  cd "`osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)'`"
-}
 
 # Dev
 alias vimdjango="cd \$VIRTUAL_ENV/lib/python2.6/site-packages/django; vim"
@@ -49,9 +20,50 @@ alias vimhttpd="vim $HTTPDCONF"
 alias mysql_config="mysql_config5"
 alias mysqldump="mysqldump5"
 alias serve="python -m SimpleHTTPServer"
-alias cdclones="cd ~/Development/Clones"
 
-#Notes
-alias cdnotes="cd ~/Documents/Notes"
-alias notes="cdnotes; vim ."
-alias note="cdnotes; vim"
+# Mac only
+if [ "$DOTFILES_ENV" == "mac" ]; then
+    alias vi="mvim -v"
+    alias vim="mvim"
+
+    # mdfind from ., showing linenumbers
+    function m() {
+        mdfind -onlyin . $@ | lines
+    }
+
+    # mdfind by name from ., showing linenumbers
+    function mn() {
+        mdfind -onlyin . -name $@ | lines
+    }
+
+    # show line numbers for stdin
+    function lines() {
+        n=1
+        while read line; do
+            (( n++ ))
+            echo $n: $line
+        done
+    }
+
+    # get content of line number, use in combination with m or mn:
+    # mn code.js | ml 2
+    function ml() {
+        cat - | sed -n "$1p" | awk '{ print $2 }'
+    }
+
+    # https://github.com/paulirish/dotfiles/commit/e67d1bc03
+    # cd into whatever is the forefront Finder window.
+    cdf() {  # short for cdfinder
+    cd "`osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)'`"
+    }
+
+    #Notes
+    alias cdnotes="cd ~/Documents/Notes"
+    alias notes="cdnotes; vim ."
+    alias note="cdnotes; vim"
+fi
+
+# Server only
+if [ "$DOTFILES_ENV" == "server" ]; then
+    alias vi="vim"
+fi
