@@ -54,7 +54,7 @@ Bundle 'gmarik/sudo-gui.vim'
 syntax enable
 filetype plugin indent on
 
-set macmeta " Set left and right option/alt keys to be meta keys
+" set macmeta " Set left and right option/alt keys to be meta keys
 " be able to switch buffers without saving
 set hidden
 " no backups or swaps needed
@@ -163,10 +163,6 @@ command Marked silent !/Applications/Marked.app/Contents/MacOS/Marked "%" &
 " //////////////////////////////
 " plugin config
 " //////////////////////////////
-
-call pathogen#infect()
-call pathogen#helptags()
-
 let g:CommandTMaxHeight=25 " only show so many items
 let g:CommandTMatchWindowReverse=1 " best match down
 
