@@ -53,9 +53,14 @@ bash_prompt() {
   }
 
   export LSCOLORS=Gxfxcxdxbxegedabagacad
-#   PROMPT_COMMAND='PS1="${VIOLET}\u${RESET} at ${YELLOW}$(hostname -s)${RESET} in ${GREEN}\w${RESET} $(vcprompt_info)
-# $(virtualenv_info)% "'
-  PROMPT_COMMAND='PS1="${VIOLET}\u${RESET} at ${YELLOW}$(hostname -s)${RESET} in ${GREEN}\w${RESET} $(virtualenv_info)% "'
+
+  if [ "$DOTFILES_ENV" == "mac" ]; then
+    PROMPT_COMMAND='PS1="${VIOLET}\u${RESET} at ${YELLOW}$(hostname -s)${RESET} in ${GREEN}\w${RESET} $(virtualenv_info)% "'
+  fi
+
+  if [ "$DOTFILES_ENV" == "server" ]; then
+    PROMPT_COMMAND='PS1="${VIOLET}\u${RESET} at ${YELLOW}$(hostname -a)${RESET} in ${GREEN}\w${RESET} $(virtualenv_info)% "'
+  fi
 }
 
 bash_prompt
