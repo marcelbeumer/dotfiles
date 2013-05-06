@@ -182,7 +182,7 @@ let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 " let g:molokai_original=1
 let g:sparkupArgs = '--indent-spaces=2'
 let g:session_autosave = 'no'
-
+let g:session_autoload = 'no'
 
 " //////////////////////////////
 " gui
