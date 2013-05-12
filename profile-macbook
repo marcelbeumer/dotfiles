@@ -29,5 +29,10 @@ export HTTPDCONF="/etc/apache2/httpd.conf" #shortcuts
 # Homebrew / Xcode clash
 alias git=/usr/local/bin/git
 
+# Howbrew bash completion
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  . $(brew --prefix)/etc/bash_completion
+fi
+
 # Most likely place I want to be
 cd ~/Development/Clones
