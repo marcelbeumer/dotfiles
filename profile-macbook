@@ -26,5 +26,8 @@ export HTTPDCONF="/etc/apache2/httpd.conf" #shortcuts
 . ~/.bash/git
 . ~/.bash/hg
 
+# Homebrew / Xcode clash
+alias git=/usr/local/bin/git
+
 # Most likely place I want to be
 cd ~/Development/Clones

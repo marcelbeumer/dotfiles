@@ -7,12 +7,14 @@
 	branch = auto
 [alias]
     addremove = !git add . && git ls-files --deleted | xargs git rm
+	unstage = reset HEAD --
+	last = log -1 HEAD
 [core]
 	quotepath = false
 	excludesfile = /Users/marcel/.gitignore_global
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true

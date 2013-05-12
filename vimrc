@@ -23,6 +23,9 @@ Bundle 'scrooloose/syntastic'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'othree/coffee-check.vim'
 Bundle 'marcelbeumer/javascript-syntax.vim'
+Bundle 'hail2u/vim-css3-syntax'
+Bundle 'skammer/vim-css-color'
+Bundle 'groenewege/vim-less'
 
 " Text editing tools
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -34,7 +37,6 @@ Bundle 'bitc/vim-bad-whitespace'
 Bundle 'Lokaltog/vim-easymotion'
 
 " Navigation, search, GUI
-Bundle 'ack.vim'
 Bundle 'Tagbar'
 Bundle 'ZoomWin'
 Bundle 'sjl/gundo.vim'
@@ -42,6 +44,9 @@ Bundle 'wincent/Command-T'
 Bundle 'scrooloose/nerdtree'
 Bundle 'marcelbeumer/color-color.vim'
 Bundle 'xolox/vim-session'
+Bundle 'rizzatti/funcoo.vim'
+Bundle 'rizzatti/greper.vim'
+Bundle 'rizzatti/dash.vim'
 
 " Version conrol
 Bundle "fugitive.vim"
