@@ -160,7 +160,7 @@ command -nargs=1 C CoffeeCompile | :<args>
 
 " command SudoWrite w !sudo tee % > /dev/null
 command JSHint !jshint % --show-non-errors
-command -range=% Xmltidy <line1>,<line2>!tidy -xml -indent -utf8 -q --indent-spaces 2
+command -range=% Xmltidy <line1>,<line2>!tidy -xml -indent -utf8 -q --indent-spaces 4
 command -range=% BeautifyJS <line1>,<line2>!js-beautify --indent-size=4 -
 command -range=% UglifyJS <line1>,<line2>!uglifyjs
 command Marked silent !/Applications/Marked.app/Contents/MacOS/Marked "%" &
