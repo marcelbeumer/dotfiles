@@ -37,7 +37,7 @@ Bundle 'scrooloose/syntastic'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'tpope/vim-surround'
 Bundle 'tComment'
-Bundle 'chrismetcalf/vim-yankring'
+Bundle 'YankRing.vim'
 Bundle 'msanders/snipmate.vim'
 Bundle 'bitc/vim-bad-whitespace'
 Bundle 'Lokaltog/vim-easymotion'
