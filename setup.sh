@@ -12,7 +12,7 @@ PS3="Environment: "
 select option in macbook server
 do
     case $option in
-        mac)
+        macbook)
             ALL=("${COMMON[@]}" "${MAC_ONLY[@]}")
             break;;
         server)
