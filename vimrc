@@ -132,7 +132,6 @@ nnoremap <silent> <A-l> <C-w>>
 " # leader key mappings
 " //////////////////////////////
 let mapleader = ","
-map <Leader>u :GundoToggle<cr>
 map <Leader>d :TagbarToggle<cr>
 map <Leader>t :CommandT<cr>
 map <leader>; :NERDTreeToggle<cr>
@@ -145,8 +144,6 @@ map <Leader>r :%s/\r/\r/g<cr>gg<cr>:retab<cr>
 map <Leader>w :%s/^\s\+$//ge<cr>:%s/\(\S\)\s\+$/\1/ge<cr>
 " Easy folding on search expr
 map <silent><leader>z :set foldexpr=getline(v:lnum)!~@/ foldlevel=0 foldcolumn=0 foldmethod=expr<CR>
-" Ack search for pattern recursively
-map <leader>a :Ack
 " Colors
 map <Leader><leader>c :ColorColorToggle<cr>
 " CoffeeScript
@@ -160,9 +157,6 @@ map <leader>c :CoffeeCompile<CR>
 let coffee_make_options = '-o /tmp/'
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufNewFile,BufRead,BufWritePost *.md set filetype=markdown
-" autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-" autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-" autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 " //////////////////////////////
 " commands
@@ -171,7 +165,6 @@ command Rc e ~/.vimrc
 " command CodingLog e ~/Documents/Journaling/coding.md
 command ClearUndo silent !rm ~/.vimundo/*
 command JournalDate silent r !date +\%a\ \%d\ \%B\ \%Y\ \%H:\%M
-command -nargs=1 C CoffeeCompile | :<args>
 
 " command SudoWrite w !sudo tee % > /dev/null
 command JSHint !jshint % --show-non-errors
@@ -183,14 +176,14 @@ command Marked silent !/Applications/Marked.app/Contents/MacOS/Marked "%" &
 " //////////////////////////////
 " plugin config
 " //////////////////////////////
-let g:CommandTMaxHeight=25 " only show so many items
+let g:CommandTMaxHeight=10 " only show so many items
 let g:CommandTMatchWindowReverse=1 " best match down
 
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
 " example: let g:syntastic_php_checkers=['php', 'phpcs', 'phpmd']
 let g:syntastic_html_checkers=[]
-let g:syntastic_scss=[]
+let g:syntastic_scss_checkers=[]
 
 let g:yankring_history_file = '.yankring_history'
 let NERDTreeIgnore=['\.pyc$', '\~$']
@@ -199,8 +192,7 @@ let NERDTreeWinSize=50
 let NERDTreeShowBookmarks=1
 let g:tagbar_compact=1
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
-" let g:molokai_original=1
-let g:sparkupArgs = '--indent-spaces=2'
+let g:sparkupArgs = '--indent-spaces=4'
 let g:session_autosave = 'yes'
 let g:session_autoload = 'no'
 
@@ -212,23 +204,6 @@ if has('gui_running')
     " set guifont=Menlo:h12
     set guifont=Meslo\ LG\ M\ DZ:h12
     set vb " no bells; as macvim does not support visual bell
+    colorscheme spacedust
 end
 
-colorscheme spacedust
-
-" //////////////////////////////
-" highlighting
-" //////////////////////////////
-" highlight LineOverflow ctermbg=red ctermfg=white guibg=#592929
-" autocmd BufWinEnter * let w:m3=matchadd('LineOverflow', '\%>79v.\+', -1)
-
-" //////////////////////////////
-" Load local vimrc files
-" Based on http://www.vimninjas.com/2012/08/30/local-vimrc/
-" //////////////////////////////
-if filereadable('.vimrc.local')
-  source .vimrc.local
-endif
-if filereadable('.vimrc.marcelbeumer.local')
-  source .vimrc.marcelbeumer.local
-endif
