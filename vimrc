@@ -7,25 +7,31 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+" Enable matchit
+" runtime macros/matchit.vim
+
 Bundle 'gmarik/vundle'
 
 " Themes
-Bundle 'mrtazz/molokai.vim'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'marcelbeumer/twilight.vim'
-Bundle 'nanotech/jellybeans.vim'
+" Bundle 'mrtazz/molokai.vim'
+" Bundle 'altercation/vim-colors-solarized'
+" Bundle 'marcelbeumer/twilight.vim'
+" Bundle 'nanotech/jellybeans.vim'
 Bundle 'marcelbeumer/spacedust.vim'
 
 " Language support
 Bundle 'django.vim'
 Bundle 'nono/vim-handlebars'
-Bundle 'scrooloose/syntastic'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'othree/coffee-check.vim'
 Bundle 'marcelbeumer/javascript-syntax.vim'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'skammer/vim-css-color'
 Bundle 'groenewege/vim-less'
+Bundle 'marijnh/tern_for_vim'
+
+" General language tools
+Bundle 'scrooloose/syntastic'
 
 " Text editing tools
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -35,6 +41,7 @@ Bundle 'chrismetcalf/vim-yankring'
 Bundle 'msanders/snipmate.vim'
 Bundle 'bitc/vim-bad-whitespace'
 Bundle 'Lokaltog/vim-easymotion'
+Bundle 'Valloric/YouCompleteMe'
 
 " Navigation, search, GUI
 Bundle 'Tagbar'
@@ -58,6 +65,9 @@ Bundle 'gmarik/sudo-gui.vim'
 
 syntax enable
 filetype plugin indent on
+
+" Turn off Bram's message
+set shortmess=I
 
 " set macmeta " Set left and right option/alt keys to be meta keys
 " be able to switch buffers without saving
@@ -99,11 +109,13 @@ set wildmenu
 " ignore certain files
 set wildignore+=*.o,*.obj,.git,.hg,*.pyc
 set winminheight=0 " when we max a window, other can be 1 line
+set timeoutlen=500 " timeout of leader key
+set suffixesadd+=.js "suffix added when 'gf'
 
 " //////////////////////////////
 " # key mappings
 " //////////////////////////////
-nnoremap ; :
+" nnoremap ; :
 nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
@@ -148,6 +160,9 @@ map <leader>c :CoffeeCompile<CR>
 let coffee_make_options = '-o /tmp/'
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufNewFile,BufRead,BufWritePost *.md set filetype=markdown
+" autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+" autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+" autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 " //////////////////////////////
 " commands
@@ -186,7 +201,7 @@ let g:tagbar_compact=1
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 " let g:molokai_original=1
 let g:sparkupArgs = '--indent-spaces=2'
-let g:session_autosave = 'no'
+let g:session_autosave = 'yes'
 let g:session_autoload = 'no'
 
 " //////////////////////////////

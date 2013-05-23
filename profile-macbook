@@ -1,8 +1,6 @@
-
 export PATH=~/bin:$PATH
 export PATH=$PATH:/usr/local/mysql/bin
 export PATH=/usr/local/share/npm/bin:$PATH
-## export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
 
 export CLICOLOR=true
 export EDITOR="mvim -v"
@@ -25,11 +23,9 @@ export HTTPDCONF="/etc/apache2/httpd.conf" #shortcuts
 
 # Homebrew / Xcode clash
 alias git=/usr/local/bin/git
+alias python2=python
 
 # Howbrew bash completion
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
-
-# Most likely place I want to be
-cd ~/Development/Clones
