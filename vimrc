@@ -28,7 +28,7 @@ Bundle 'marcelbeumer/javascript-syntax.vim'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'skammer/vim-css-color'
 Bundle 'groenewege/vim-less'
-Bundle 'marijnh/tern_for_vim'
+" Bundle 'marijnh/tern_for_vim'
 
 " General language tools
 Bundle 'scrooloose/syntastic'
@@ -38,10 +38,11 @@ Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'tpope/vim-surround'
 Bundle 'tComment'
 Bundle 'YankRing.vim'
-Bundle 'msanders/snipmate.vim'
+" Bundle 'msanders/snipmate.vim'
+Bundle 'SirVer/ultisnips'
 Bundle 'bitc/vim-bad-whitespace'
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'Valloric/YouCompleteMe'
+" Bundle 'Valloric/YouCompleteMe'
 
 " Navigation, search, GUI
 Bundle 'Tagbar'
@@ -195,6 +196,9 @@ let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 let g:sparkupArgs = '--indent-spaces=4'
 let g:session_autosave = 'yes'
 let g:session_autoload = 'no'
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " //////////////////////////////
 " gui
