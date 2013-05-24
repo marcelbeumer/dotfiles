@@ -1,6 +1,7 @@
 export PATH=~/bin:$PATH
-export PATH=$PATH:/usr/local/mysql/bin
+export PATH=/usr/local/mysql/bin:$PATH
 export PATH=/usr/local/share/npm/bin:$PATH
+export PATH=/usr/local/php5/bin:$PATH
 
 export CLICOLOR=true
 export EDITOR="mvim -v"
