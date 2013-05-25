@@ -180,13 +180,10 @@ command Marked silent !/Applications/Marked.app/Contents/MacOS/Marked "%" &
 " //////////////////////////////
 let g:CommandTMaxHeight=10 " only show so many items
 let g:CommandTMatchWindowReverse=1 " best match down
-
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
-" example: let g:syntastic_php_checkers=['php', 'phpcs', 'phpmd']
 let g:syntastic_html_checkers=[]
 let g:syntastic_scss_checkers=[]
-
 let g:yankring_history_file = '.yankring_history'
 let NERDTreeIgnore=['\.pyc$', '\~$']
 let NERDTreeBookmarksFile = $HOME . '/.vim_nerdtree_bookmarks'
@@ -202,6 +199,8 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:ycm_key_list_select_completion = ['<enter>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<s-enter>', '<Up>']
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_filetype_specific_completion_to_disable = {
           \ 'javascript' : 1,
           \}
