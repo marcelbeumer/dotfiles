@@ -13,10 +13,10 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " Themes
-" Bundle 'mrtazz/molokai.vim'
 " Bundle 'altercation/vim-colors-solarized'
 " Bundle 'marcelbeumer/twilight.vim'
 " Bundle 'nanotech/jellybeans.vim'
+Bundle 'mrtazz/molokai.vim'
 Bundle 'marcelbeumer/spacedust.vim'
 
 " Language support
@@ -28,6 +28,8 @@ Bundle 'marcelbeumer/javascript-syntax.vim'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'skammer/vim-css-color'
 Bundle 'groenewege/vim-less'
+Bundle 'beyondwords/vim-twig'
+Bundle 'docteurklein/vim-symfony'
 " Bundle 'marijnh/tern_for_vim'
 
 " General language tools
@@ -38,11 +40,10 @@ Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'tpope/vim-surround'
 Bundle 'tComment'
 Bundle 'YankRing.vim'
-" Bundle 'msanders/snipmate.vim'
 Bundle 'SirVer/ultisnips'
 Bundle 'bitc/vim-bad-whitespace'
 Bundle 'Lokaltog/vim-easymotion'
-" Bundle 'Valloric/YouCompleteMe'
+Bundle 'Valloric/YouCompleteMe'
 
 " Navigation, search, GUI
 Bundle 'Tagbar'
@@ -199,6 +200,16 @@ let g:session_autoload = 'no'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:ycm_key_list_select_completion = ['<enter>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<s-enter>', '<Up>']
+let g:ycm_filetype_specific_completion_to_disable = {
+          \ 'javascript' : 1,
+          \}
+let g:ycm_filetype_blacklist = {
+          \ 'notes' : 1,
+          \ 'markdown' : 1,
+          \ 'text' : 1,
+          \}
 
 " //////////////////////////////
 " gui
