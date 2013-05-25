@@ -4,18 +4,13 @@
 set nocompatible
 filetype off
 
+runtime macros/matchit.vim
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-
-" Enable matchit
-" runtime macros/matchit.vim
 
 Bundle 'gmarik/vundle'
 
 " Themes
-" Bundle 'altercation/vim-colors-solarized'
-" Bundle 'marcelbeumer/twilight.vim'
-" Bundle 'nanotech/jellybeans.vim'
 Bundle 'mrtazz/molokai.vim'
 Bundle 'marcelbeumer/spacedust.vim'
 
