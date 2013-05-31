@@ -129,6 +129,7 @@ nnoremap <silent> <A-l> <C-w>>
 " # leader key mappings
 " //////////////////////////////
 let mapleader = ","
+noremap \ ,
 map <Leader>d :TagbarToggle<cr>
 map <Leader>t :CommandT<cr>
 map <leader>; :NERDTreeToggle<cr>
@@ -210,8 +211,7 @@ let g:ycm_filetype_blacklist = {
 " //////////////////////////////
 if has('gui_running')
     set guioptions=aAce
-    " set guifont=Menlo:h12
-    set guifont=Meslo\ LG\ M\ DZ:h12
+    set guifont=Meslo\ LG\ S\ DZ:h12
     set vb " no bells; as macvim does not support visual bell
     colorscheme spacedust
 end
