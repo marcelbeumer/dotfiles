@@ -25,7 +25,7 @@ Bundle 'skammer/vim-css-color'
 Bundle 'groenewege/vim-less'
 Bundle 'beyondwords/vim-twig'
 Bundle 'docteurklein/vim-symfony'
-" Bundle 'marijnh/tern_for_vim'
+Bundle 'sukima/xmledit'
 
 " General language tools
 Bundle 'scrooloose/syntastic'
@@ -53,7 +53,6 @@ Bundle 'rizzatti/greper.vim'
 Bundle 'rizzatti/dash.vim'
 
 " Version conrol
-Bundle "fugitive.vim"
 Bundle 'vcscommand.vim'
 
 " Misc
