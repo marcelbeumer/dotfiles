@@ -1,5 +1,9 @@
 --ignore-dir=generated
---type-add
-html=.haml
---type-add
-css=.sass,.scss
+--ignore-file=match:/tiny_mce\.js/
+--type-add=html=.haml
+--type-add=css=.sass,.scss
+--type-add=html=.twig
+--type-add=css=.less
+--type-add=js=.min.js
+--ignore-dir=tiny_mce
+--ignore-file=match:/interface.js/

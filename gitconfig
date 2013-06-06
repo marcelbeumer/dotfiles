@@ -1,23 +1,27 @@
+[color]
+    ui = true
 [user]
 	name = Marcel Beumer
 	email = marcel@marcelbeumer.com
-[color]
-	diff = auto
-	status = auto
-	branch = auto
-	ui = true
 [alias]
+    b = branch
+    f = fetch
+    co = checkout
+    ci = commit
+    pl = pull
+    psh = push
+    cp = cherry-pick
+    com = checkout master
+    rom = reset origin/master --hard
+    lp2 = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset - %C(purple)%cn%Creset' --abbrev-commit --date=relative
+    lp = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+    mav = !afplay ~/Music/Danger\\ Zone.mp3 & LASTPID=$! \ngit rebase -i $1 \nkill -9 $LASTPID\n true
     addremove = !git add . && git ls-files --deleted | xargs git rm
 	unstage = reset HEAD --
-	last = log -1 HEAD
-[core]
-	quotepath = false
-	excludesfile = /Users/marcel/.gitignore_global
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
-; [push]
-	; default = simple
+[http]
+#   proxy = http://tst-proxy:8888
+[credential]
+    helper = osxkeychain
+[pull]
+    # always add --rebase flag when pulling to avoid useless merges
+    rebase = true

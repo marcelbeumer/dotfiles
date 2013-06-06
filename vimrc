@@ -34,11 +34,11 @@ Bundle 'scrooloose/syntastic'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'tpope/vim-surround'
 Bundle 'tComment'
-Bundle 'YankRing.vim'
 Bundle 'SirVer/ultisnips'
 Bundle 'bitc/vim-bad-whitespace'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'godlygeek/tabular'
 
 " Navigation, search, GUI
 Bundle 'Tagbar'
@@ -187,7 +187,7 @@ let NERDTreeShowBookmarks=1
 let g:tagbar_compact=1
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 let g:sparkupArgs = '--indent-spaces=4'
-let g:session_autosave = 'yes'
+let g:session_autosave = 'no'
 let g:session_autoload = 'no'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
