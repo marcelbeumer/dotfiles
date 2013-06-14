@@ -16,13 +16,16 @@ bash_prompt() {
         [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
     }
 
-
     if [ "$DOTFILES_ENV" == "mac" ]; then
         PROMPT_COMMAND='PS1="\[$Purple\]\u\[$Color_Off\] at \[$Yellow\]$(hostname -s)\[$Color_Off\] in \[$Green\]\w\[$Color_Off\] $(virtualenv_info)% "'
     fi
 
     if [ "$DOTFILES_ENV" == "server" ]; then
         PROMPT_COMMAND='PS1="\[$Purple\]\u\[$Color_Off\] at \[$Yellow\]$(hostname -a)\[$Color_Off\] in \[$Green\]\w\[$Color_Off\] $(virtualenv_info)% "'
+    fi
+
+    if [ "$DOTFILES_ENV" == "invm" ]; then
+        PROMPT_COMMAND='PS1="\[$Purple\]\u\[$Color_Off\] at \[$Yellow\]$(hostname -s)\[$Color_Off\] in \[$Green\]\w\[$Color_Off\] $(virtualenv_info)% "'
     fi
 }
 

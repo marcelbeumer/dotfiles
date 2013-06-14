@@ -1,0 +1,24 @@
+export PATH=~/bin:$PATH
+export PATH=vendor/bin:$PATH
+
+export CLICOLOR=true
+export EDITOR="vim"
+export GREP_OPTIONS='--color=auto'
+
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+# Plugin config
+export DOTFILES_ENV="invm"
+export HTTPDCONF="UNDEFINED" #shortcuts
+
+# My bash "plugins"
+. ~/.bash/shortcuts
+. ~/.bash/prompt
+. ~/.bash/git
+. ~/.bash/invm
+
+# Last minute hacks
+alias ls="ls --color"
+
+MEMCACHED_SERVERS="127.0.0.1"

@@ -67,3 +67,8 @@ fi
 if [ "$DOTFILES_ENV" == "server" ]; then
     alias vi="vim"
 fi
+
+# invm
+if [ "$DOTFILES_ENV" == "server" ]; then
+    alias vi="vim"
+fi
