@@ -48,9 +48,10 @@ Bundle 'wincent/Command-T'
 Bundle 'scrooloose/nerdtree'
 Bundle 'marcelbeumer/color-color.vim'
 Bundle 'xolox/vim-session'
-Bundle 'rizzatti/funcoo.vim'
-Bundle 'rizzatti/greper.vim'
-Bundle 'rizzatti/dash.vim'
+Bundle 'ack.vim'
+" Bundle 'rizzatti/funcoo.vim'
+" Bundle 'rizzatti/greper.vim'
+" Bundle 'rizzatti/dash.vim'
 
 " Version conrol
 Bundle 'vcscommand.vim'
@@ -91,7 +92,7 @@ set hlsearch
 set ignorecase
 " ... unless when there is a uppercase in the search
 set smartcase
-set nonumber
+set number
 set numberwidth=5
 set ruler
 set nolist
