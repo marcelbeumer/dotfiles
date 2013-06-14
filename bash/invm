@@ -28,6 +28,9 @@ restart_servers() {
 }
 
 tail_php_log() {
-    tail -f /var/log/php.log 
+    tail -f /var/log/php.log
 }
 
+fix_in_caches() {
+    $(cd_in; chmod -R 777 app-new/cache/dev; chmod -R 777 cache);
+}
