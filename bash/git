@@ -21,4 +21,4 @@ alias gar='git add . && git ls-files --deleted | xargs git rm'
 alias gm='git merge'
 alias grh='git reset HEAD'
 alias grhh='git reset HEAD --hard'
-
+alias gbranch2ticket="git branch | sed -n '/\* /s///p' | sed -n '/.*\//s///p'"
