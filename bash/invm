@@ -1,5 +1,9 @@
 #!/bin/bash
 
+cd_in_oms() {
+    cd /code/in-oms;
+}
+
 cd_in() {
     cd /code/in;
 }
@@ -33,4 +37,9 @@ tail_php_log() {
 
 fix_in_caches() {
     $(cd_in; chmod -R 777 app-new/cache/dev; chmod -R 777 cache);
+}
+
+clear_magento_cache() {
+    cd_in_oms;
+    php magerun.phar cache:clean && php magerun.phar cache:flush && rm /tmp/wsdl-*
 }
