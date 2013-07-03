@@ -10,7 +10,7 @@ cd_in() {
 
 app_console() {
     cd_in
-    php app-new/console
+    php app-new/console $@
 }
 
 single_buster_test() {
