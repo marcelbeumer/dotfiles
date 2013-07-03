@@ -185,6 +185,7 @@ let NERDTreeIgnore=['\.pyc$', '\~$']
 let NERDTreeBookmarksFile = $HOME . '/.vim_nerdtree_bookmarks'
 let NERDTreeWinSize=50
 let NERDTreeShowBookmarks=1
+let NERDTreeMouseMode=3
 let g:tagbar_compact=1
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 let g:sparkupArgs = '--indent-spaces=4'
