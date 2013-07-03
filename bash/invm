@@ -8,6 +8,11 @@ cd_in() {
     cd /code/in;
 }
 
+app_console() {
+    cd_in
+    php app-new/console
+}
+
 single_buster_test() {
     cd_in
     buster-test --config static/javascript/test/buster.js --reporter specification -t static/javascript/test/$1_test.js
