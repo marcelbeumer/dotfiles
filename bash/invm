@@ -56,6 +56,7 @@ in_pull() {
 
 in_rebuild() {
     in_within_vm || return 1;
+    echo "Rebuild..."
     pwd=$PWD
     echo "Rebuilding frontend resources"
     echo "Copy assets:"
@@ -64,13 +65,14 @@ in_rebuild() {
     in_in && php app-new/console assets:install static && php app-new/console assetic:dump .
     echo "Ant:"
     in_in && ant
-    in_oms && ant
+    in_oms && ant clean setup
     in_solr && ant
     cd $pwd
 }
 
 in_clear_caches() {
     in_within_vm || return 1;
+    echo "Clear caches..."
     pwd=$PWD
     in_in
     rm -rf app-new/cache/dev/dev/*
@@ -84,6 +86,7 @@ in_clear_caches() {
 
 in_restart() {
     in_within_vm || return 1;
+    echo "Restarting servers..."
     # /etc/init.d/redis-server restart
     /etc/init.d/memcached restart
     /etc/init.d/nginx restart
@@ -93,6 +96,7 @@ in_restart() {
 
 in_refresh() {
     in_within_vm || return 1;
+    echo "Doing full refresh..."
     in_rebuild
     in_clear_caches
     in_restart
