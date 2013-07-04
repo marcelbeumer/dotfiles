@@ -100,6 +100,7 @@ in_refresh() {
     in_rebuild
     in_clear_caches
     in_restart
+    echo "Full refresh done."
 }
 
 in_watch() {
