@@ -13,7 +13,7 @@ in_env() {
 # but works for me
 in_within_vm() {
     if [ $(in_env) != "linux" ]; then
-        echo "(in_within_vm) Not within VM";
+        echo "Not within VM";
         return 1;
     fi
 }
@@ -22,60 +22,104 @@ in_within_vm() {
 # but works for me
 in_within_host() {
     if [ $(in_env) != "mac" ]; then
-        echo "(in_within_host) Not within mac"
+        echo "Not within host machine"
         return 1;
     fi
 }
 
 in_in() {
     cd $INREPOS/in;
-    echo "(in_in) Changed to $INREPOS/in"
 }
 
 in_oms() {
     cd $INREPOS/in-oms;
-    echo "(in_oms) Changed to $INREPOS/in-oms"
 }
 
 in_solr() {
     cd $INREPOS/in-solr;
-    echo "(in_solr) Changed to $INREPOS/in-solr"
 }
 
 # Git pull on all repos
 in_pull() {
     in_within_host || return 1;
     pwd=$PWD
-    echo "(in_pull) Pulling all repos"
+    echo "Pulling all repos..."
+    echo "Pulling in:"
     in_in && git pull;
+    echo "Pulling oms:"
     in_oms && git pull;
-    in_solr && git pull;
+    echo "Pulling solr:"
+    in_solr && git pull
+    echo "Done."
     cd $pwd
 }
 
 in_rebuild() {
     in_within_vm || return 1;
-    echo "TODO: ant, assets, ..."
+    pwd=$PWD
+    echo "Rebuilding frontend resources"
+    echo "Copy assets:"
+    php composer/copy-assets.php
+    echo "Assetic:"
+    in_in && php app-new/console assets:install static && php app-new/console assetic:dump .
+    echo "Ant:"
+    in_in && ant
+    in_oms && ant
+    in_solr && ant
+    cd $pwd
+}
+
+in_clear_caches() {
+    in_within_vm || return 1;
+    pwd=$PWD
+    in_in
+    rm -rf app-new/cache/dev/dev/*
+    rm -rf app-new/cache/dev/test/*
+    chmod -R 777 app-new/cache/dev;
+    chmod -R 777 cache;
+    in_oms;
+    php magerun.phar cache:clean && php magerun.phar cache:flush && rm /tmp/wsdl-*
+    cd $pwd;
+}
+
+in_restart() {
+    in_within_vm || return 1;
+    # /etc/init.d/redis-server restart
+    /etc/init.d/memcached restart
+    /etc/init.d/nginx restart
+    /etc/init.d/tomcat6 restart
+    /etc/init.d/php5-fpm restart
 }
 
 in_refresh() {
-    echo "TODO: ant (in/oms/solr), clear caches, rebuild,restart_servers"
-}
-
-in_full_update() {
-    in_pull && in_refresh
-}
-
-in_restart_all() {
-    echo "TODO:"
+    in_within_vm || return 1;
+    in_rebuild
+    in_clear_caches
+    in_restart
 }
 
 in_watch() {
-    echo "TODO:"
+    in_within_vm || return 1;
+    in_in
+    php app-new/console assetic:dump . --force --watch
 }
 
 in_console() {
-    echo "TODO: php console"
+    in_within_vm || return 1;
+    in_in
+    php app-new/console $@
+}
+
+in_logs() {
+    tail -f /var/log/php.log
+}
+
+# Rename
+in_single_buster_test() {
+    in_within_vm || return 1;
+    pwd=$PWD
+    in_in && buster-test --config static/javascript/test/buster.js --reporter specification -t static/javascript/test/$1_test.js
+    cd $pwd
 }
 
 export INREPOS_VM=/code
@@ -86,52 +130,3 @@ else
     export INREPOS=$INREPOS_VM
 fi
 # --------------
-
-cd_in_oms() {
-    cd /code/in-oms;
-}
-
-cd_in() {
-    cd /code/in;
-}
-
-app_console() {
-    cd_in
-    php app-new/console $@
-}
-
-single_buster_test() {
-    cd_in
-    buster-test --config static/javascript/test/buster.js --reporter specification -t static/javascript/test/$1_test.js
-}
-
-rebuild_frontend() {
-    cd_in
-    php app-new/console assets:install static && php app-new/console assetic:dump .
-}
-
-watch_frontend() {
-    cd_in
-    php app-new/console assetic:dump . --force --watch
-}
-
-restart_servers() {
-    # /etc/init.d/redis-server restart
-    /etc/init.d/memcached restart
-    /etc/init.d/nginx restart
-    /etc/init.d/tomcat6 restart
-    /etc/init.d/php5-fpm restart
-}
-
-tail_php_log() {
-    tail -f /var/log/php.log
-}
-
-fix_in_caches() {
-    $(cd_in; chmod -R 777 app-new/cache/dev; chmod -R 777 cache);
-}
-
-clear_magento_cache() {
-    cd_in_oms;
-    php magerun.phar cache:clean && php magerun.phar cache:flush && rm /tmp/wsdl-*
-}
