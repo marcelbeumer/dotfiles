@@ -1,5 +1,41 @@
 #!/bin/bash
 
+# --------------
+
+in_within_vm() {
+    echo "TODO: if within vm"
+}
+
+in_within_host() {
+    echo "TODO: if within host"
+}
+
+in_pull() {
+    echo "TODO: pull all repos";
+}
+
+in_rebuild() {
+    echo "TODO: ant, assets, ..."
+}
+
+in_refresh() {
+    echo "TODO: ant (in/oms/solr), clear caches, rebuild,restart_servers"
+}
+
+in_full_update() {
+    in_pull && in_refresh
+}
+
+in_restart_all() {
+    echo "TODO:"
+}
+
+in_watch() {
+    echo "TODO:"
+}
+
+# --------------
+
 cd_in_oms() {
     cd /code/in-oms;
 }
