@@ -19,6 +19,7 @@ export HTTPDCONF="/etc/apache2/httpd.conf" #shortcuts
 . ~/.bash/shortcuts
 . ~/.bash/virtualenv
 . ~/.bash/prompt
+. ~/.bash/invm
 . ~/.bash/git
 . ~/.bash/hg
 

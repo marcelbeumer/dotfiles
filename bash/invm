@@ -30,11 +30,15 @@ in_within_host() {
 }
 
 in_in() {
-    cd $INREPOS/in-oms;
+    return cd $INREPOS/in-oms;
 }
 
 in_oms() {
-    cd $INREPOS/in-oms;
+    return cd $INREPOS/in-oms;
+}
+
+in_solr() {
+    return cd $INREPOS/in-solr;
 }
 
 in_pull() {
