@@ -1,20 +1,49 @@
 #!/bin/bash
 
-# --------------
+export INREPOS=/code
 
-in_within_vm() {
-    echo "TODO: if within vm"
+# --------------
+in_env() {
+    if [ "$(uname)" == "Darwin" ]; then
+        echo "mac"
+    else
+        echo "linux"
+    fi
 }
 
+# Should probably be different check
+# but works for me
+in_within_vm() {
+    if [ $(in_env) != "linux" ]; then
+        echo "not within vm";
+        return 1;
+    fi
+}
+
+# Should probably be different check
+# but works for me
 in_within_host() {
-    echo "TODO: if within host"
+    if [ $(in_env) != "mac" ]; then
+        echo "not within mac"
+        return 1;
+    fi
+}
+
+in_in() {
+    cd $INREPOS/in-oms;
+}
+
+in_oms() {
+    cd $INREPOS/in-oms;
 }
 
 in_pull() {
+    in_within_host || return 1;
     echo "TODO: pull all repos";
 }
 
 in_rebuild() {
+    in_within_vm || return 1;
     echo "TODO: ant, assets, ..."
 }
 
@@ -33,7 +62,6 @@ in_restart_all() {
 in_watch() {
     echo "TODO:"
 }
-
 # --------------
 
 cd_in_oms() {
