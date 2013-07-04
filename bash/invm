@@ -1,6 +1,12 @@
 #!/bin/bash
 
-export INREPOS=/code
+export INREPOS_VM=/code
+export INREPOS_HOST=~/Development/Clones/Internations
+if [ "$(uname)" == "Darwin" ]; then
+    export INREPOS=$INREPOS_HOST
+else
+    export INREPOS=$INREPOS_Vm
+fi
 
 # --------------
 in_env() {
@@ -30,20 +36,29 @@ in_within_host() {
 }
 
 in_in() {
-    return cd $INREPOS/in-oms;
+    cd $INREPOS/in;
+    echo "(in_in) Changed to $INREPOS/in"
 }
 
 in_oms() {
-    return cd $INREPOS/in-oms;
+    cd $INREPOS/in-oms;
+    echo "(in_oms) Changed to $INREPOS/in-oms"
 }
 
 in_solr() {
-    return cd $INREPOS/in-solr;
+    cd $INREPOS/in-solr;
+    echo "(in_solr) Changed to $INREPOS/in-solr"
 }
 
+# Git pull on all repos
 in_pull() {
     in_within_host || return 1;
-    echo "TODO: pull all repos";
+    pwd=$PWD
+    echo "(in_pull) Pulling all repos"
+    in_in && git pull;
+    in_oms && git pull;
+    in_solr && git pull;
+    cd $pwd
 }
 
 in_rebuild() {
