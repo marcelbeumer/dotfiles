@@ -1,13 +1,5 @@
 #!/bin/bash
 
-export INREPOS_VM=/code
-export INREPOS_HOST=~/Development/Clones/Internations
-if [ "$(uname)" == "Darwin" ]; then
-    export INREPOS=$INREPOS_HOST
-else
-    export INREPOS=$INREPOS_Vm
-fi
-
 # --------------
 in_env() {
     if [ "$(uname)" == "Darwin" ]; then
@@ -21,7 +13,7 @@ in_env() {
 # but works for me
 in_within_vm() {
     if [ $(in_env) != "linux" ]; then
-        echo "not within vm";
+        echo "(in_within_vm) Not within VM";
         return 1;
     fi
 }
@@ -30,7 +22,7 @@ in_within_vm() {
 # but works for me
 in_within_host() {
     if [ $(in_env) != "mac" ]; then
-        echo "not within mac"
+        echo "(in_within_host) Not within mac"
         return 1;
     fi
 }
@@ -81,6 +73,18 @@ in_restart_all() {
 in_watch() {
     echo "TODO:"
 }
+
+in_console() {
+    echo "TODO: php console"
+}
+
+export INREPOS_VM=/code
+export INREPOS_HOST=~/Development/Clones/Internations
+if [ $(in_env) == "mac" ]; then
+    export INREPOS=$INREPOS_HOST
+else
+    export INREPOS=$INREPOS_VM
+fi
 # --------------
 
 cd_in_oms() {
