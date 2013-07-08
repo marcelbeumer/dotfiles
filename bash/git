@@ -1,6 +1,7 @@
 alias g='git'
 alias gst='git status'
 alias gl='git pull'
+alias glr='git pull --rebase'
 alias gf='git fetch'
 alias gup='git fetch && git rebase'
 alias gun='git reset HEAD --'

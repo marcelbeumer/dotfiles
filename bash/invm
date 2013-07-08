@@ -45,11 +45,11 @@ in_pull() {
     pwd=$PWD
     echo "Pulling all repos..."
     echo "Pulling in:"
-    in_in && git pull;
+    in_in && git pull --rebase
     echo "Pulling oms:"
-    in_oms && git pull;
+    in_oms && git pull --rebase
     echo "Pulling solr:"
-    in_solr && git pull
+    in_solr && git pull --rebase
     echo "Done."
     cd $pwd
 }

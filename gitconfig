@@ -9,9 +9,9 @@
 #   proxy = http://tst-proxy:8888
 [credential]
     helper = osxkeychain
-[pull]
-    # always add --rebase flag when pulling to avoid useless merges
-    rebase = true
+; [pull]
+;     # always add --rebase flag when pulling to avoid useless merges
+;     rebase = true
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
