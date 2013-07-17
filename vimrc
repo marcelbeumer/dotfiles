@@ -13,19 +13,20 @@ Bundle 'gmarik/vundle'
 " Themes
 Bundle 'mrtazz/molokai.vim'
 Bundle 'marcelbeumer/spacedust.vim'
+Bundle 'altercation/vim-colors-solarized'
 
 " Language support
-Bundle 'django.vim'
-Bundle 'nono/vim-handlebars'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'othree/coffee-check.vim'
+" Bundle 'django.vim'
+" Bundle 'nono/vim-handlebars'
+" Bundle 'kchmck/vim-coffee-script'
+" Bundle 'othree/coffee-check.vim'
 Bundle 'marcelbeumer/javascript-syntax.vim'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'skammer/vim-css-color'
 Bundle 'groenewege/vim-less'
 Bundle 'beyondwords/vim-twig'
 Bundle 'docteurklein/vim-symfony'
-Bundle 'sukima/xmledit'
+" Bundle 'sukima/xmledit'
 
 " General language tools
 Bundle 'scrooloose/syntastic'
@@ -37,11 +38,11 @@ Bundle 'tComment'
 Bundle 'SirVer/ultisnips'
 Bundle 'bitc/vim-bad-whitespace'
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'Valloric/YouCompleteMe'
+" Bundle 'Valloric/YouCompleteMe'
 Bundle 'godlygeek/tabular'
 
 " Navigation, search, GUI
-Bundle 'Tagbar'
+" Bundle 'Tagbar'
 Bundle 'ZoomWin'
 Bundle 'sjl/gundo.vim'
 Bundle 'wincent/Command-T'
@@ -185,7 +186,7 @@ let NERDTreeIgnore=['\.pyc$', '\~$']
 let NERDTreeBookmarksFile = $HOME . '/.vim_nerdtree_bookmarks'
 let NERDTreeWinSize=50
 let NERDTreeShowBookmarks=1
-let NERDTreeMouseMode=3
+" let NERDTreeMouseMode=3
 let g:tagbar_compact=1
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 let g:sparkupArgs = '--indent-spaces=4'
@@ -214,6 +215,9 @@ if has('gui_running')
     set guioptions=aAce
     set guifont=Meslo\ LG\ S\ DZ:h12
     set vb " no bells; as macvim does not support visual bell
-    colorscheme spacedust
+
+    set background=light
+    colorscheme solarized
+    " colorscheme spacedust
 end
 

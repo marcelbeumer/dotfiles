@@ -119,6 +119,18 @@ in_logs() {
     tail -f /var/log/php.log
 }
 
+in_phpunit() {
+    in_within_vm || return 1;
+    in_in
+    phpunit --verbose --colors --debug $@
+}
+
+in_phpcheckstyle() {
+    in_within_vm || return 1;
+    in_in
+    vendor/bin/phpcs --report=checkstyle --report-file=build/logs/php-checkstyle.xml --standard=ruleset.xml $@
+}
+
 # Rename
 in_single_buster_test() {
     in_within_vm || return 1;

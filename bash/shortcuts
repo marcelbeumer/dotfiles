@@ -4,6 +4,7 @@
 [ -z "$DOTFILES_ENV" ] && \
     echo "Please set DOTFILES_ENV"
 
+set -o vi
 alias l="ls"
 alias la="ls -ahl"
 alias tree="find . -type d -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
