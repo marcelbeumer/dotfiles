@@ -42,7 +42,7 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'godlygeek/tabular'
 
 " Navigation, search, GUI
-" Bundle 'Tagbar'
+Bundle 'Tagbar'
 Bundle 'ZoomWin'
 Bundle 'sjl/gundo.vim'
 Bundle 'wincent/Command-T'

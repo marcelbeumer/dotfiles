@@ -31,12 +31,24 @@ in_in() {
     cd $INREPOS/in;
 }
 
+in_src() {
+    cd $INREPOS/in/app-new/src;
+}
+
 in_oms() {
     cd $INREPOS/in-oms;
 }
 
 in_solr() {
     cd $INREPOS/in-solr;
+}
+
+in_tags() {
+    in_within_host || return 1;
+    pwd=$PWD
+    in_src
+    ctags -R .
+    cd $pwd
 }
 
 # Git pull on all repos
@@ -87,11 +99,12 @@ in_clear_caches() {
 in_restart() {
     in_within_vm || return 1;
     echo "Restarting servers..."
-    # /etc/init.d/redis-server restart
     /etc/init.d/memcached restart
+    /etc/init.d/redis-server restart
+    /etc/init.d/mysql restart
     /etc/init.d/nginx restart
-    /etc/init.d/tomcat6 restart
     /etc/init.d/php5-fpm restart
+    /etc/init.d/tomcat6 restart
 }
 
 in_refresh() {

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ALL=() # Will be set
-COMMON=("ackrc=.ackrc" "bash=.bash" "gitconfig=.gitconfig" "hgrc=.hgrc" "jshintrc=.jshintrc" "vimrc=.vimrc" "xvimrc=.xvimrc" "tmux.conf=.tmux.conf" "tmux.theme.conf=.tmux.theme.conf")
+COMMON=("ackrc=.ackrc" "bash=.bash" "gitconfig=.gitconfig" "hgrc=.hgrc" "jshintrc=.jshintrc" "vimrc=.vimrc" "xvimrc=.xvimrc" "tmux.conf=.tmux.conf" "tmux.theme.conf=.tmux.theme.conf" "ctags=.ctags")
 MAC_ONLY=("profile-macbook=.profile")
 SERVER_ONLY=("profile-server=.profile")
 INVM_ONLY=("profile-invm=.profile")
