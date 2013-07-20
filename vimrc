@@ -32,13 +32,13 @@ Bundle 'skammer/vim-css-color'
 Bundle 'scrooloose/syntastic'
 
 " Text editing tools
-Bundle 'Lokaltog/vim-easymotion'
 Bundle 'SirVer/ultisnips'
 Bundle 'bitc/vim-bad-whitespace'
 Bundle 'godlygeek/tabular'
 Bundle 'tComment'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
+" Bundle 'Lokaltog/vim-easymotion'
 " Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Bundle 'Valloric/YouCompleteMe'
 
