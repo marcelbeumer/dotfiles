@@ -47,7 +47,7 @@ in_tags() {
     in_within_host || return 1;
     pwd=$PWD
     in_src
-    ctags -R .
+    ctags -R --extra=+f .
     cd $pwd
 }
 

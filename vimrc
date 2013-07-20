@@ -11,45 +11,50 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " Themes
-Bundle 'mrtazz/molokai.vim'
-Bundle 'marcelbeumer/spacedust.vim'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'marcelbeumer/spacedust.vim'
+Bundle 'mrtazz/molokai.vim'
 
 " Language support
+Bundle 'beyondwords/vim-twig'
+Bundle 'docteurklein/vim-symfony'
+Bundle 'groenewege/vim-less'
+Bundle 'hail2u/vim-css3-syntax'
+Bundle 'marcelbeumer/javascript-syntax.vim'
+Bundle 'skammer/vim-css-color'
+" Bundle 'sukima/xmledit'
 " Bundle 'django.vim'
 " Bundle 'nono/vim-handlebars'
 " Bundle 'kchmck/vim-coffee-script'
 " Bundle 'othree/coffee-check.vim'
-Bundle 'marcelbeumer/javascript-syntax.vim'
-Bundle 'hail2u/vim-css3-syntax'
-Bundle 'skammer/vim-css-color'
-Bundle 'groenewege/vim-less'
-Bundle 'beyondwords/vim-twig'
-Bundle 'docteurklein/vim-symfony'
-" Bundle 'sukima/xmledit'
 
 " General language tools
 Bundle 'scrooloose/syntastic'
 
 " Text editing tools
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-Bundle 'tpope/vim-surround'
-Bundle 'tComment'
+Bundle 'Lokaltog/vim-easymotion'
 Bundle 'SirVer/ultisnips'
 Bundle 'bitc/vim-bad-whitespace'
-Bundle 'Lokaltog/vim-easymotion'
-" Bundle 'Valloric/YouCompleteMe'
 Bundle 'godlygeek/tabular'
+Bundle 'tComment'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-surround'
+" Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Bundle 'Valloric/YouCompleteMe'
 
 " Navigation, search, GUI
 Bundle 'Tagbar'
 Bundle 'ZoomWin'
+Bundle 'ack.vim'
+Bundle 'marcelbeumer/color-color.vim'
+Bundle 'marcelbeumer/genutils'
+Bundle 'marcelbeumer/gotofile'
+Bundle 'scrooloose/nerdtree'
 Bundle 'sjl/gundo.vim'
 Bundle 'wincent/Command-T'
-Bundle 'scrooloose/nerdtree'
-Bundle 'marcelbeumer/color-color.vim'
-Bundle 'xolox/vim-session'
-Bundle 'ack.vim'
+" Bundle 'lirazsiri/vim-smartopen', {'rtp': 'vimfiles/'}
+" Bundle 'gorkunov/smartgf.vim'
+" Bundle 'xolox/vim-session'
 " Bundle 'rizzatti/funcoo.vim'
 " Bundle 'rizzatti/greper.vim'
 " Bundle 'rizzatti/dash.vim'
@@ -150,6 +155,7 @@ map <Leader><leader>c :ColorColorToggle<cr>
 " CoffeeScript
 " vmap <leader>c <esc>:'<,'>:CoffeeCompile<CR>
 " map <leader>c :CoffeeCompile<CR>
+nmap <silent> gf :GotoFile<CR>
 
 " //////////////////////////////
 " filetype settings
