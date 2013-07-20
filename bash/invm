@@ -62,6 +62,8 @@ in_pull() {
     in_oms && git pull --rebase
     echo "Pulling solr:"
     in_solr && git pull --rebase
+    echo "Updating tags:"
+    in_tags
     echo "Done."
     cd $pwd
 }
