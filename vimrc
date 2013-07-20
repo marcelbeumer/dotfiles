@@ -58,7 +58,10 @@ Bundle 'ack.vim'
 Bundle 'vcscommand.vim'
 
 " Misc
-Bundle 'xolox/vim-reload'
+Bundle 'xolox/vim-misc'
+Bundle 'xolox/vim-notes'
+" Bundle 'xolox/vim-reload'
+" Bundle 'xolox/vim-easytags'
 Bundle 'gmarik/sudo-gui.vim'
 
 syntax enable
@@ -135,7 +138,7 @@ map <Leader>d :TagbarToggle<cr>
 map <Leader>t :CommandT<cr>
 map <leader>; :NERDTreeToggle<cr>
 map <leader>: :NERDTreeMirror<cr>
-map <Leader>y :YRShow<cr>
+map <Leader>a :Ack <cword><cr>
 map <Leader>n :set number!<cr>
 " convert newlines and retab
 map <Leader>r :%s/\r/\r/g<cr>gg<cr>:retab<cr>
@@ -146,8 +149,8 @@ map <silent><leader>z :set foldexpr=getline(v:lnum)!~@/ foldlevel=0 foldcolumn=0
 " Colors
 map <Leader><leader>c :ColorColorToggle<cr>
 " CoffeeScript
-vmap <leader>c <esc>:'<,'>:CoffeeCompile<CR>
-map <leader>c :CoffeeCompile<CR>
+" vmap <leader>c <esc>:'<,'>:CoffeeCompile<CR>
+" map <leader>c :CoffeeCompile<CR>
 
 " //////////////////////////////
 " filetype settings
@@ -207,6 +210,7 @@ let g:ycm_filetype_blacklist = {
           \ 'markdown' : 1,
           \ 'text' : 1,
           \}
+:let g:notes_directories = ['~/Documents/NotesVim']
 
 " //////////////////////////////
 " gui
