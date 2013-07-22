@@ -2,7 +2,7 @@
 
 ALL=() # Will be set
 COMMON=("ackrc=.ackrc" "bash=.bash" "gitconfig=.gitconfig" "hgrc=.hgrc" "jshintrc=.jshintrc" "vimrc=.vimrc" "xvimrc=.xvimrc" "tmux.conf=.tmux.conf" "tmux.theme.conf=.tmux.theme.conf" "ctags=.ctags")
-MAC_ONLY=("profile-macbook=.profile")
+MAC_ONLY=("profile-macbook=.profile" "gitignore_global_mac=.gitignore_global")
 SERVER_ONLY=("profile-server=.profile")
 INVM_ONLY=("profile-invm=.profile")
 

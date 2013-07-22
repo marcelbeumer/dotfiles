@@ -52,6 +52,7 @@ Bundle 'marcelbeumer/gotofile'
 Bundle 'scrooloose/nerdtree'
 Bundle 'sjl/gundo.vim'
 Bundle 'wincent/Command-T'
+" Bundle 'bling/vim-airline'
 " Bundle 'lirazsiri/vim-smartopen', {'rtp': 'vimfiles/'}
 " Bundle 'gorkunov/smartgf.vim'
 " Bundle 'xolox/vim-session'
@@ -179,6 +180,7 @@ command -range=% Xmltidy <line1>,<line2>!tidy -xml -indent -utf8 -q --indent-spa
 command -range=% BeautifyJS <line1>,<line2>!js-beautify --indent-size=4 -
 command -range=% UglifyJS <line1>,<line2>!uglifyjs
 command Marked silent !/Applications/Marked.app/Contents/MacOS/Marked "%" &
+command TechNote Note Internations Tech
 
 " //////////////////////////////
 " plugin config
@@ -215,7 +217,9 @@ let g:ycm_filetype_blacklist = {
           \ 'markdown' : 1,
           \ 'text' : 1,
           \}
-:let g:notes_directories = ['~/Documents/NotesVim']
+let g:notes_directories = ['~/Documents/Notes']
+let g:notes_title_sync = 'change_title'
+let g:notes_suffix = '.txt'
 
 " //////////////////////////////
 " gui
