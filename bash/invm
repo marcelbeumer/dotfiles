@@ -84,12 +84,18 @@ in_rebuild() {
     echo "Copy assets:"
     in_in && php composer/copy-assets.php
     echo "Assetic:"
+    in_clear_assetic
     in_in && php app-new/console assets:install static && php app-new/console assetic:dump .
     echo "Ant:"
     in_in && ant
     in_oms && ant clean setup
     in_solr && ant
     cd $pwd
+}
+
+in_clear_assetic() {
+    in_within_vm || return 1;
+    in_in && rm -rf static/assetic/*
 }
 
 in_clear_caches() {
@@ -120,8 +126,8 @@ in_restart() {
 in_refresh() {
     in_within_vm || return 1;
     echo "Doing full refresh..."
-    in_rebuild
     in_clear_caches
+    in_rebuild
     in_restart
     echo "Full refresh done."
 }
@@ -129,6 +135,7 @@ in_refresh() {
 in_watch() {
     in_within_vm || return 1;
     in_in
+    in_clear_assetic
     php app-new/console assetic:dump . --force --watch
 }
 
