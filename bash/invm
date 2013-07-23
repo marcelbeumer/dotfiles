@@ -27,6 +27,14 @@ in_within_host() {
     fi
 }
 
+in_staff() {
+    ssh root@staff.internations.org
+}
+
+in_vm() {
+    ssh root@internations.dev
+}
+
 in_in() {
     cd $INREPOS/in;
 }
@@ -74,7 +82,7 @@ in_rebuild() {
     pwd=$PWD
     echo "Rebuilding frontend resources"
     echo "Copy assets:"
-    php composer/copy-assets.php
+    in_in && php composer/copy-assets.php
     echo "Assetic:"
     in_in && php app-new/console assets:install static && php app-new/console assetic:dump .
     echo "Ant:"
