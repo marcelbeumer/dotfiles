@@ -169,6 +169,13 @@ in_single_buster_test() {
     cd $pwd
 }
 
+in_build_requirejs() {
+    in_within_vm || return 1;
+    pwd=$PWD
+    in_in && node util/requirejs/build-assets.js
+    cd $pwd
+}
+
 export INREPOS_VM=/code
 export INREPOS_HOST=~/Development/Clones/Internations
 if [ $(in_env) == "mac" ]; then
