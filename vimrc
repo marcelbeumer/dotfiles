@@ -29,9 +29,9 @@ Bundle 'scrooloose/syntastic'
 
 " Text editing tools
 Bundle 'SirVer/ultisnips'
-" Bundle 'bitc/vim-bad-whitespace'
-" Bundle 'godlygeek/tabular'
-Bundle 'tComment'
+Bundle 'bitc/vim-bad-whitespace'
+Bundle 'godlygeek/tabular'
+Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 
@@ -39,7 +39,6 @@ Bundle 'tpope/vim-surround'
 Bundle 'Tagbar'
 Bundle 'ZoomWin'
 Bundle 'ack.vim'
-Bundle 'tpope/vim-fugitive'
 Bundle 'nelstrom/vim-qargs'
 Bundle 'marcelbeumer/color-color.vim'
 Bundle 'marcelbeumer/genutils'
@@ -48,13 +47,13 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'sjl/gundo.vim'
 Bundle 'wincent/Command-T'
 
-" Version conrol
-" Bundle 'vcscommand.vim'
+" Version control
+Bundle 'tpope/vim-fugitive'
 
 " Misc
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-notes'
-" Bundle 'xolox/vim-reload'
+Bundle 'xolox/vim-reload'
 
 syntax enable
 filetype plugin indent on
@@ -159,16 +158,6 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:notes_directories = ['~/Documents/Notes']
 let g:notes_title_sync = 'change_title'
 let g:notes_suffix = '.txt'
-
-" Mac
-" ---
-if has('unix')
-    let s:uname = system('uname')
-    if s:uname == 'Darwin\n'
-        " Use same clipboard as OS
-        set clipboard=unnamed
-    endif
-endif
 
 " Gui
 " ---
