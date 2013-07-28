@@ -131,14 +131,13 @@ autocmd BufNewFile,BufRead,BufWritePost *.md set filetype=markdown
 command Rc e ~/.vimrc
 command ClearUndo silent !rm ~/.vimundo/*
 command JournalDate silent r !date +\%a\ \%d\ \%B\ \%Y\ \%H:\%M
-
 command SudoWrite w !sudo tee % > /dev/null
 command JSHint !jshint % --show-non-errors
 command -range=% Xmltidy <line1>,<line2>!tidy -xml -indent -utf8 -q --indent-spaces 4
 command -range=% BeautifyJS <line1>,<line2>!js-beautify --indent-size=4 -
 command -range=% UglifyJS <line1>,<line2>!uglifyjs
 command Marked silent !/Applications/Marked.app/Contents/MacOS/Marked "%" &
-command TechNote Note Internations Tech
+command InTechNote Note Internations Tech
 
 " Plugin config
 " -------------
