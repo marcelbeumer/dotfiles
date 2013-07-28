@@ -86,7 +86,6 @@ set softtabstop=4
 set shiftround
 
 set incsearch
-set hlsearch
 " ignore case when searching
 set ignorecase
 " ... unless when there is a uppercase in the search
@@ -110,19 +109,9 @@ set suffixesadd+=.js "suffix added when 'gf'
 " //////////////////////////////
 " # key mappings
 " //////////////////////////////
-inoremap jj <Esc>
-
-" //////////////////////////////
-" # leader key mappings
-" //////////////////////////////
-let mapleader = ","
-noremap \ ,
-map <Leader>d :TagbarToggle<cr>
 map <Leader>t :CommandT<cr>
 map <leader>; :NERDTreeToggle<cr>
 map <leader>: :NERDTreeMirror<cr>
-map <Leader>a :Ack <cword><cr>
-map <Leader>n :set number!<cr>
 " convert newlines and retab
 map <Leader>r :%s/\r/\r/g<cr>gg<cr>:retab<cr>
 " removed whitespace in empty lines, and remove trailing whitespace
@@ -134,7 +123,6 @@ map <Leader><leader>c :ColorColorToggle<cr>
 " CoffeeScript
 " vmap <leader>c <esc>:'<,'>:CoffeeCompile<CR>
 " map <leader>c :CoffeeCompile<CR>
-nmap <silent> gf :GotoFile<CR>
 
 " //////////////////////////////
 " filetype settings
@@ -186,10 +174,11 @@ let g:notes_suffix = '.txt'
 " mac
 " //////////////////////////////
 if has("unix")
-  let s:uname = system("uname")
-  if s:uname == "Darwin\n"
-    set clipboard=unnamed
-  endif
+    let s:uname = system("uname")
+    if s:uname == "Darwin\n"
+        " Use same clipboard as OS
+        set clipboard=unnamed
+    endif
 endif
 
 " //////////////////////////////
