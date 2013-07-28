@@ -22,53 +22,42 @@ Bundle 'groenewege/vim-less'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'marcelbeumer/javascript-syntax.vim'
 Bundle 'skammer/vim-css-color'
-" Bundle 'sukima/xmledit'
-" Bundle 'django.vim'
-" Bundle 'nono/vim-handlebars'
-" Bundle 'kchmck/vim-coffee-script'
-" Bundle 'othree/coffee-check.vim'
+Bundle 'django.vim'
+Bundle 'nono/vim-handlebars'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'othree/coffee-check.vim'
 
 " General language tools
 Bundle 'scrooloose/syntastic'
 
 " Text editing tools
 Bundle 'SirVer/ultisnips'
-Bundle 'bitc/vim-bad-whitespace'
-Bundle 'godlygeek/tabular'
+" Bundle 'bitc/vim-bad-whitespace'
+" Bundle 'godlygeek/tabular'
 Bundle 'tComment'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
-" Bundle 'Lokaltog/vim-easymotion'
-" Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Bundle 'Valloric/YouCompleteMe'
 
 " Navigation, search, GUI
 Bundle 'Tagbar'
 Bundle 'ZoomWin'
 Bundle 'ack.vim'
 Bundle 'tpope/vim-fugitive'
+Bundle 'nelstrom/vim-qargs'
 Bundle 'marcelbeumer/color-color.vim'
 Bundle 'marcelbeumer/genutils'
 Bundle 'marcelbeumer/gotofile'
 Bundle 'scrooloose/nerdtree'
 Bundle 'sjl/gundo.vim'
 Bundle 'wincent/Command-T'
-" Bundle 'bling/vim-airline'
-" Bundle 'lirazsiri/vim-smartopen', {'rtp': 'vimfiles/'}
-" Bundle 'gorkunov/smartgf.vim'
-" Bundle 'xolox/vim-session'
-" Bundle 'rizzatti/funcoo.vim'
-" Bundle 'rizzatti/greper.vim'
-" Bundle 'rizzatti/dash.vim'
 
 " Version conrol
-Bundle 'vcscommand.vim'
+" Bundle 'vcscommand.vim'
 
 " Misc
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-notes'
 " Bundle 'xolox/vim-reload'
-" Bundle 'xolox/vim-easytags'
 
 syntax enable
 filetype plugin indent on
@@ -106,7 +95,6 @@ set number
 set numberwidth=5
 set ruler
 set nolist
-" set clipboard=unnamed
 set foldmethod=indent
 set foldlevel=100
 set scrolloff=3
@@ -122,18 +110,7 @@ set suffixesadd+=.js "suffix added when 'gf'
 " //////////////////////////////
 " # key mappings
 " //////////////////////////////
-" nnoremap ; :
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
 inoremap jj <Esc>
-
-" remaps Alt-[h,j,k,l] to resizing a window split
-nnoremap <silent> <A-h> <C-w><
-nnoremap <silent> <A-j> <C-W>-
-nnoremap <silent> <A-k> <C-W>+
-nnoremap <silent> <A-l> <C-w>>
 
 " //////////////////////////////
 " # leader key mappings
@@ -171,7 +148,6 @@ autocmd BufNewFile,BufRead,BufWritePost *.md set filetype=markdown
 " commands
 " //////////////////////////////
 command Rc e ~/.vimrc
-" command CodingLog e ~/Documents/Journaling/coding.md
 command ClearUndo silent !rm ~/.vimundo/*
 command JournalDate silent r !date +\%a\ \%d\ \%B\ \%Y\ \%H:\%M
 
@@ -197,30 +173,24 @@ let NERDTreeIgnore=['\.pyc$', '\~$']
 let NERDTreeBookmarksFile = $HOME . '/.vim_nerdtree_bookmarks'
 let NERDTreeWinSize=50
 let NERDTreeShowBookmarks=1
-" let NERDTreeMouseMode=3
 let g:tagbar_compact=1
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
-let g:sparkupArgs = '--indent-spaces=4'
-let g:session_autosave = 'no'
-let g:session_autoload = 'no'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:ycm_key_list_select_completion = ['<enter>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<s-enter>', '<Up>']
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_filetype_specific_completion_to_disable = {
-          \ 'javascript' : 1,
-          \}
-let g:ycm_filetype_blacklist = {
-          \ 'notes' : 1,
-          \ 'markdown' : 1,
-          \ 'text' : 1,
-          \}
 let g:notes_directories = ['~/Documents/Notes']
 let g:notes_title_sync = 'change_title'
 let g:notes_suffix = '.txt'
+
+" //////////////////////////////
+" mac
+" //////////////////////////////
+if has("unix")
+  let s:uname = system("uname")
+  if s:uname == "Darwin\n"
+    set clipboard=unnamed
+  endif
+endif
 
 " //////////////////////////////
 " gui
@@ -229,9 +199,7 @@ if has('gui_running')
     set guioptions=aAce
     set guifont=Meslo\ LG\ S\ DZ:h12
     set vb " no bells; as macvim does not support visual bell
-
     set background=light
     colorscheme solarized
     " colorscheme spacedust
 end
-
