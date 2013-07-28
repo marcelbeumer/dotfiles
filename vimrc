@@ -1,6 +1,3 @@
-" //////////////////////////////
-" # vim settings
-" //////////////////////////////
 set nocompatible
 filetype off
 
@@ -106,15 +103,14 @@ set winminheight=0 " when we max a window, other can be 1 line
 set timeoutlen=500 " timeout of leader key
 set suffixesadd+=.js "suffix added when 'gf'
 
-" //////////////////////////////
-" # key mappings
-" //////////////////////////////
+" Key mappings
+" ------------
 map <Leader>t :CommandT<cr>
 map <leader>; :NERDTreeToggle<cr>
 map <leader>: :NERDTreeMirror<cr>
-" convert newlines and retab
+" Convert newlines and retab
 map <Leader>r :%s/\r/\r/g<cr>gg<cr>:retab<cr>
-" removed whitespace in empty lines, and remove trailing whitespace
+" Removed whitespace in empty lines, and remove trailing whitespace
 map <Leader>w :%s/^\s\+$//ge<cr>:%s/\(\S\)\s\+$/\1/ge<cr>
 " Easy folding on search expr
 map <silent><leader>z :set foldexpr=getline(v:lnum)!~@/ foldlevel=0 foldcolumn=0 foldmethod=expr<CR>
@@ -124,17 +120,14 @@ map <Leader><leader>c :ColorColorToggle<cr>
 " vmap <leader>c <esc>:'<,'>:CoffeeCompile<CR>
 " map <leader>c :CoffeeCompile<CR>
 
-" //////////////////////////////
-" filetype settings
-" //////////////////////////////
-" autocmd BufWritePost *.coffee silent CoffeeMake! | cwindow
+" Filetype settings
+" -----------------
 let coffee_make_options = '-o /tmp/'
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufNewFile,BufRead,BufWritePost *.md set filetype=markdown
 
-" //////////////////////////////
-" commands
-" //////////////////////////////
+" Commands
+" --------
 command Rc e ~/.vimrc
 command ClearUndo silent !rm ~/.vimundo/*
 command JournalDate silent r !date +\%a\ \%d\ \%B\ \%Y\ \%H:\%M
@@ -147,9 +140,8 @@ command -range=% UglifyJS <line1>,<line2>!uglifyjs
 command Marked silent !/Applications/Marked.app/Contents/MacOS/Marked "%" &
 command TechNote Note Internations Tech
 
-" //////////////////////////////
-" plugin config
-" //////////////////////////////
+" Plugin config
+" -------------
 let g:CommandTMaxHeight=10 " only show so many items
 let g:CommandTMatchWindowReverse=1 " best match down
 let g:syntastic_enable_signs=1
@@ -170,20 +162,18 @@ let g:notes_directories = ['~/Documents/Notes']
 let g:notes_title_sync = 'change_title'
 let g:notes_suffix = '.txt'
 
-" //////////////////////////////
-" mac
-" //////////////////////////////
-if has("unix")
-    let s:uname = system("uname")
-    if s:uname == "Darwin\n"
+" Mac
+" ---
+if has('unix')
+    let s:uname = system('uname')
+    if s:uname == 'Darwin\n'
         " Use same clipboard as OS
         set clipboard=unnamed
     endif
 endif
 
-" //////////////////////////////
-" gui
-" //////////////////////////////
+" Gui
+" ---
 if has('gui_running')
     set guioptions=aAce
     set guifont=Meslo\ LG\ S\ DZ:h12
