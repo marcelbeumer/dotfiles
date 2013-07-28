@@ -141,7 +141,6 @@ command InTechNote Note Internations Tech
 
 " Plugin config
 " -------------
-let g:CommandTMaxHeight=10 " only show so many items
 let g:CommandTMatchWindowReverse=1 " best match down
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
