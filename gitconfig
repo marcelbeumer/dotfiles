@@ -14,7 +14,7 @@
 ;     rebase = true
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
+	path = 
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
@@ -44,7 +44,7 @@
     lp = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
     ss = status -s
     a = add
-    ar = add . && git ls-files --deleted | xargs git rm
+    ar = !git add . && git ls-files --deleted | xargs git rm
     m = merge
     rh = reset HEAD
     rhh = reset HEAD --hard
