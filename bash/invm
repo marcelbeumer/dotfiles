@@ -3,16 +3,16 @@
 # --------------
 in_env() {
     if [ "$(uname)" == "Darwin" ]; then
-        echo "mac"
+        printf "host"
     else
-        echo "linux"
+        printf "vm"
     fi
 }
 
 # Should probably be different check
 # but works for me
 in_within_vm() {
-    if [ $(in_env) != "linux" ]; then
+    if [ $(in_env) != "vm" ]; then
         echo "Not within VM";
         return 1;
     fi
@@ -21,7 +21,7 @@ in_within_vm() {
 # Should probably be different check
 # but works for me
 in_within_host() {
-    if [ $(in_env) != "mac" ]; then
+    if [ $(in_env) != "host" ]; then
         echo "Not within host machine"
         return 1;
     fi
@@ -84,13 +84,18 @@ in_rebuild() {
     echo "Copy assets:"
     in_in && php composer/copy-assets.php
     echo "Assetic:"
-    in_clear_assetic
-    in_in && php app-new/console assets:install static && php app-new/console assetic:dump .
+    in_rebuild_assetic
     echo "Ant:"
     in_in && ant
     in_oms && ant clean setup
     in_solr && ant
     cd $pwd
+}
+
+in_rebuild_assetic() {
+    in_within_vm || return 1;
+    in_clear_assetic
+    in_in && php app-new/console assets:install static && php app-new/console assetic:dump . --force
 }
 
 in_clear_assetic() {
@@ -134,9 +139,7 @@ in_refresh() {
 
 in_watch() {
     in_within_vm || return 1;
-    in_in
-    in_clear_assetic
-    php app-new/console assetic:dump . --force --watch
+    in_in && php app-new/console assetic:dump . --force --watch
 }
 
 in_console() {
@@ -161,6 +164,18 @@ in_phpcheckstyle() {
     vendor/bin/phpcs --report=checkstyle --report-file=build/logs/php-checkstyle.xml --standard=ruleset.xml $@
 }
 
+in_behat() {
+    in_within_vm || return 1;
+    in_in && vendor/behat/behat/bin/behat $@
+}
+
+in_sahi() {
+    printf "Running sahi within %s...\n" "$(in_env)"
+    in_in
+    cd sahi/bin
+    ./sahi.sh
+}
+
 # Rename
 in_single_buster_test() {
     in_within_vm || return 1;
@@ -178,7 +193,7 @@ in_build_requirejs() {
 
 export INREPOS_VM=/code
 export INREPOS_HOST=~/Development/Clones/Internations
-if [ $(in_env) == "mac" ]; then
+if [ $(in_env) == "host" ]; then
     export INREPOS=$INREPOS_HOST
 else
     export INREPOS=$INREPOS_VM
