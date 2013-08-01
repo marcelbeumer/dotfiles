@@ -51,6 +51,29 @@ in_solr() {
     cd $INREPOS/in-solr;
 }
 
+in_fix_permissions() {
+    in_within_host || return 1;
+    echo "(Fixing permissions will use sudo)"
+    pwd=$PWD
+    in_in
+    echo "Setting permissions from in_in..."
+
+    echo "sudo chown -R marcel ."
+    sudo chown -R marcel .
+
+    echo "sudo chmod -R 777 app-new/cache/dev"
+    sudo chmod -R 777 app-new/cache/dev;
+
+    echo "sudo chmod -R 777 cache;"
+    sudo chmod -R 777 cache;
+
+    echo "sudo chmod -R 777 static/assetic"
+    sudo chmod -R 777 static/assetic
+
+    echo "Done."
+    cd $pwd
+}
+
 in_tags() {
     in_within_host || return 1;
     pwd=$PWD
@@ -108,10 +131,10 @@ in_clear_caches() {
     echo "Clear caches..."
     pwd=$PWD
     in_in
+    in_fix_permissions
     rm -rf app-new/cache/dev/dev/*
     rm -rf app-new/cache/dev/test/*
-    chmod -R 777 app-new/cache/dev;
-    chmod -R 777 cache;
+    rm -rf cache/*
     in_oms;
     php magerun.phar cache:clean && php magerun.phar cache:flush && rm /tmp/wsdl-*
     cd $pwd;
