@@ -45,7 +45,8 @@ Bundle 'marcelbeumer/genutils'
 Bundle 'marcelbeumer/gotofile'
 Bundle 'scrooloose/nerdtree'
 Bundle 'sjl/gundo.vim'
-Bundle 'wincent/Command-T'
+Bundle 'kien/ctrlp.vim'
+Bundle 'ivalkeen/vim-ctrlp-tjump'
 
 " Version control
 Bundle 'tpope/vim-fugitive'
@@ -104,7 +105,8 @@ set suffixesadd+=.js "suffix added when 'gf'
 
 " Key mappings
 " ------------
-map <Leader>t :CommandT<cr>
+nmap <silent> gf :GotoFile<CR>
+nnoremap <c-]> :CtrlPtjump<cr>
 map <leader>; :NERDTreeToggle<cr>
 map <leader>: :NERDTreeMirror<cr>
 " Convert newlines and retab
@@ -140,7 +142,6 @@ command InTechNote Note Internations Tech
 
 " Plugin config
 " -------------
-let g:CommandTMatchWindowReverse=1 " best match down
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
 let g:syntastic_html_checkers=[]
@@ -158,6 +159,11 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:notes_directories = ['~/Documents/Notes']
 let g:notes_title_sync = 'change_title'
 let g:notes_suffix = '.txt'
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP .'
+let g:ctrlp_by_filename = 0
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:40,results:40'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 
 " Gui
 " ---
