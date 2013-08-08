@@ -14,15 +14,16 @@ Bundle 'mrtazz/molokai.vim'
 
 " Language support
 Bundle 'beyondwords/vim-twig'
+Bundle 'django.vim'
 Bundle 'docteurklein/vim-symfony'
 Bundle 'groenewege/vim-less'
 Bundle 'hail2u/vim-css3-syntax'
-Bundle 'marcelbeumer/javascript-syntax.vim'
-Bundle 'skammer/vim-css-color'
-Bundle 'django.vim'
-Bundle 'nono/vim-handlebars'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'marcelbeumer/javascript-syntax.vim'
+Bundle 'nono/vim-handlebars'
 Bundle 'othree/coffee-check.vim'
+"Bundle 'shawncplus/phpcomplete.vim'
+Bundle 'skammer/vim-css-color'
 
 " General language tools
 Bundle 'scrooloose/syntastic'
@@ -32,6 +33,7 @@ Bundle 'SirVer/ultisnips'
 Bundle 'bitc/vim-bad-whitespace'
 Bundle 'godlygeek/tabular'
 Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-ragtag'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 
@@ -47,6 +49,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'sjl/gundo.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'ivalkeen/vim-ctrlp-tjump'
+Bundle 'neocomplcache'
 
 " Version control
 Bundle 'tpope/vim-fugitive'
@@ -162,8 +165,19 @@ let g:notes_suffix = '.txt'
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP .'
 let g:ctrlp_by_filename = 0
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:40,results:40'
+let g:ctrlp_lazy_update = 1
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+let g:ctrlp_extensions = ['tag']
+
+
+" Enable omni completion.
+set omnifunc=syntaxcomplete#Complete
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Gui
 " ---

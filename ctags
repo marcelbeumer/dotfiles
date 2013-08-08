@@ -1,5 +1,6 @@
---regex-javascript=/([A-Za-z0-9._$\(\)]+)[ \t]*[:=][ \t]*function[ \t]*\(/\1/m,method/
---regex-javascript=/([A-Za-z0-9._$\#\(\)]+)[ \t]*[:][ \t]*([A-Za-z0-9._\-\#\'\"]+)[ \t]*/\1/p,property/
---regex-javascript=/([A-Za-z0-9._$\#\(\)]+)[ \t]*[:][ \t]*([A-Za-z0-9\'\"._\-\#\(]+)[ \t]*\{/\1/p,property/
---regex-javascript=/var ([A-Za-z0-9._$\#]+)[ \t]*[=][ \t]*([A-Za-z0-9._'"\$\#\[\{]+)[,|;]/\1/v,variable/
---regex-javascript=/([A-Za-z0-9._$\#]+)[ \t]*[=][ \t]*([A-Za-z0-9._'"\$\#]+)extend\(/\1/c,class/
+--regex-javascript=/function[ \t]*([A-Za-z0-9_$]+)\(/\1/f,function/
+--regex-javascript=/var[ \t]*([A-Za-z0-9_$]+)[ \t]*=.*[,;]/\1/v,variable/
+--regex-javascript=/function[ \t]*([A-Z][A-Za-z0-9_$]+)\(/\1/c,class/
+--regex-javascript=/([A-Z][A-Za-z0-9_$]+)[ \t]*[=].*(function\(|extend\()/\1/c,class/
+--regex-javascript=/([a-z0-9._$]+)[ \t]*[:].*function[ \t]*\(/\1/m,method/
+--regex-javascript=/[A-Z0-9_$][a-za-z0-9._$]*.prototype.([a-za-z0-9._$]+)[ \t]*=.*function/\1/m,method/
