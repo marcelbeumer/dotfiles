@@ -1,6 +1,22 @@
---regex-javascript=/function[ \t]*([A-Za-z0-9_$]+)\(/\1/f,function/
---regex-javascript=/var[ \t]*([A-Za-z0-9_$]+)[ \t]*=.*[,;]/\1/v,variable/
---regex-javascript=/function[ \t]*([A-Z][A-Za-z0-9_$]+)\(/\1/c,class/
---regex-javascript=/([A-Z][A-Za-z0-9_$]+)[ \t]*[=].*(function\(|extend\()/\1/c,class/
---regex-javascript=/([a-z0-9._$]+)[ \t]*[:].*function[ \t]*\(/\1/m,method/
---regex-javascript=/[A-Z0-9_$][a-za-z0-9._$]*.prototype.([a-za-z0-9._$]+)[ \t]*=.*function/\1/m,method/
+--fields=+l
+--extra=+f
+
+--langdef=js
+--langmap=js:.js
+--regex-js=/^[ \t]*function[ \t]*([A-Za-z0-9_$]+)\(/\1/f,function/
+--regex-js=/^[ \t]*function[ \t]*([A-Z][A-Za-z0-9_$]+)\(/\1/c,class/
+--regex-js=/^[ \t]*([A-Z][A-Za-z0-9_$]+)[ \t]*[=].*(function\(|extend\()/\1/c,class/
+--regex-js=/^[ \t]*([a-zA-Z0-9._$]+)[ \t]*[:].*function[ \t]*\(/\1/m,method/
+--regex-js=/^[ \t]*[A-Z0-9_$][a-za-z0-9._$]*.prototype.([a-za-z0-9._$]+)[ \t]*=.*function/\1/m,method/
+
+--langdef=coffee
+--langmap=coffee:.coffee
+--regex-coffee=/(^|=[ \t])*class ([A-Za-z_][A-Za-z0-9_]+\.)*([A-Za-z_][A-Za-z0-9_]+)( extends ([A-Za-z][A-Za-z0-9_.]*)+)?$/\3/c,class/
+--regex-coffee=/^[ \t]*(module\.)?(exports\.)?@?(([A-Za-z][A-Za-z0-9_.]*)+):.*[-=]>.*$/\3/m,method/
+--regex-coffee=/^[ \t]*(module\.)?(exports\.)?(([A-Za-z][A-Za-z0-9_.]*)+)[ \t]*=.*[-=]>.*$/\3/f,function/
+--regex-coffee=/^[ \t]*(([A-Za-z][A-Za-z0-9_.]*)+)[ \t]*=[^->\n]*$/\1/v,variable/
+--regex-coffee=/^[ \t]*@(([A-Za-z][A-Za-z0-9_.]*)+)[ \t]*=[^->\n]*$/\1/f,field/
+--regex-coffee=/^[ \t]*@(([A-Za-z][A-Za-z0-9_.]*)+):[^->\n]*$/\1/f,static field/
+--regex-coffee=/^[ \t]*(([A-Za-z][A-Za-z0-9_.]*)+):[^->\n]*$/\1/f,field/
+
+--PHP-kinds=cf

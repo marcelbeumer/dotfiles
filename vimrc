@@ -22,7 +22,6 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'marcelbeumer/javascript-syntax.vim'
 Bundle 'nono/vim-handlebars'
 Bundle 'othree/coffee-check.vim'
-"Bundle 'shawncplus/phpcomplete.vim'
 Bundle 'skammer/vim-css-color'
 
 " General language tools
@@ -48,8 +47,8 @@ Bundle 'marcelbeumer/gotofile'
 Bundle 'scrooloose/nerdtree'
 Bundle 'sjl/gundo.vim'
 Bundle 'kien/ctrlp.vim'
-Bundle 'ivalkeen/vim-ctrlp-tjump'
-Bundle 'neocomplcache'
+Bundle 'ervandew/supertab'
+
 
 " Version control
 Bundle 'tpope/vim-fugitive'
@@ -86,10 +85,6 @@ set softtabstop=4
 set shiftround
 
 set incsearch
-" ignore case when searching
-set ignorecase
-" ... unless when there is a uppercase in the search
-set smartcase
 set number
 set numberwidth=5
 set ruler
@@ -109,9 +104,12 @@ set suffixesadd+=.js "suffix added when 'gf'
 " Key mappings
 " ------------
 nmap <silent> gf :GotoFile<CR>
-nnoremap <c-]> :CtrlPtjump<cr>
 map <leader>; :NERDTreeToggle<cr>
 map <leader>: :NERDTreeMirror<cr>
+map <leader>t :CtrlPTag<cr>
+map <leader>b :CtrlPBuffer<cr>
+map <leader>tb :TagbarToggle<cr>
+map <leader>tp :TagbarTogglePause<cr>
 " Convert newlines and retab
 map <Leader>r :%s/\r/\r/g<cr>gg<cr>:retab<cr>
 " Removed whitespace in empty lines, and remove trailing whitespace
@@ -129,6 +127,13 @@ map <Leader><leader>c :ColorColorToggle<cr>
 let coffee_make_options = '-o /tmp/'
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufNewFile,BufRead,BufWritePost *.md set filetype=markdown
+
+set omnifunc=syntaxcomplete#Complete
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Commands
 " --------
@@ -154,30 +159,20 @@ let NERDTreeIgnore=['\.pyc$', '\~$']
 let NERDTreeBookmarksFile = $HOME . '/.vim_nerdtree_bookmarks'
 let NERDTreeWinSize=50
 let NERDTreeShowBookmarks=1
-let g:tagbar_compact=1
-let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:notes_directories = ['~/Documents/Notes']
 let g:notes_title_sync = 'change_title'
 let g:notes_suffix = '.txt'
-let g:ctrlp_map = '<c-p>'
+let g:ctrlp_map = '<leader>p'
 let g:ctrlp_cmd = 'CtrlP .'
-let g:ctrlp_by_filename = 0
-let g:ctrlp_lazy_update = 1
+let g:ctrlp_regexp = 1
+let g:ctrlp_lazy_update = 500
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 let g:ctrlp_extensions = ['tag']
-
-
-" Enable omni completion.
-set omnifunc=syntaxcomplete#Complete
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " Gui
 " ---
