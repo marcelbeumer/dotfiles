@@ -8,11 +8,13 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " Themes
+" ------
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'marcelbeumer/spacedust.vim'
 Bundle 'mrtazz/molokai.vim'
 
 " Language support
+" ----------------
 Bundle 'beyondwords/vim-twig'
 Bundle 'django.vim'
 Bundle 'docteurklein/vim-symfony'
@@ -25,9 +27,11 @@ Bundle 'othree/coffee-check.vim'
 Bundle 'skammer/vim-css-color'
 
 " General language tools
+" ----------------------
 Bundle 'scrooloose/syntastic'
 
 " Text editing tools
+" ------------------
 Bundle 'SirVer/ultisnips'
 Bundle 'bitc/vim-bad-whitespace'
 Bundle 'godlygeek/tabular'
@@ -37,6 +41,7 @@ Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 
 " Navigation, search, GUI
+" -----------------------
 Bundle 'ZoomWin'
 Bundle 'ack.vim'
 Bundle 'nelstrom/vim-qargs'
@@ -48,11 +53,12 @@ Bundle 'sjl/gundo.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'ervandew/supertab'
 
-
 " Version control
+" ---------------
 Bundle 'tpope/vim-fugitive'
 
 " Misc
+" ----
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-notes'
 Bundle 'xolox/vim-reload'
@@ -60,9 +66,9 @@ Bundle 'xolox/vim-reload'
 syntax enable
 filetype plugin indent on
 
-" Turn off Bram's message
+" Options
+" -------
 set shortmess=I
-
 " set macmeta " Set left and right option/alt keys to be meta keys
 " be able to switch buffers without saving
 set hidden
@@ -74,15 +80,12 @@ set undofile
 set undodir=~/.vimundo
 set autoindent
 set expandtab
-
 " tab settings
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-
 " automatically round << and >> to shiftwidth
 set shiftround
-
 set incsearch
 set number
 set numberwidth=5
@@ -177,7 +180,7 @@ if has('gui_running')
     set guioptions=aAce
     set guifont=Meslo\ LG\ S\ DZ:h12
     set vb " no bells; as macvim does not support visual bell
-    set background=light
+    " set background=light
     colorscheme solarized
-    " colorscheme spacedust
+    colorscheme spacedust
 end
