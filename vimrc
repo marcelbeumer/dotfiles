@@ -69,37 +69,26 @@ filetype plugin indent on
 " Options
 " -------
 set shortmess=I
-" set macmeta " Set left and right option/alt keys to be meta keys
-" be able to switch buffers without saving
 set hidden
-" no backups or swaps needed
 set nobackup
 set noswapfile
-" undo
 set undofile
 set undodir=~/.vimundo
 set autoindent
 set expandtab
-" tab settings
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-" automatically round << and >> to shiftwidth
 set shiftround
 set incsearch
 set number
 set numberwidth=5
 set ruler
-set nolist
 set foldmethod=indent
 set foldlevel=100
-set scrolloff=3
-" command completion more verbose
-set wildmode=full
+set scrolloff=10
 set wildmenu
-" ignore certain files
 set wildignore+=*.o,*.obj,.git,.hg,*.pyc
-set winminheight=0 " when we max a window, other can be 1 line
 set timeoutlen=500 " timeout of leader key
 set suffixesadd+=.js "suffix added when 'gf'
 
