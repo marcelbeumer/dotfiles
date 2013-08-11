@@ -37,7 +37,6 @@ Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 
 " Navigation, search, GUI
-Bundle 'Tagbar'
 Bundle 'ZoomWin'
 Bundle 'ack.vim'
 Bundle 'nelstrom/vim-qargs'
@@ -104,20 +103,18 @@ set suffixesadd+=.js "suffix added when 'gf'
 " Key mappings
 " ------------
 nmap <silent> gf :GotoFile<CR>
-map <leader>; :NERDTreeToggle<cr>
-map <leader>: :NERDTreeMirror<cr>
-map <leader>t :CtrlPTag<cr>
-map <leader>b :CtrlPBuffer<cr>
-map <leader>tb :TagbarToggle<cr>
-map <leader>tp :TagbarTogglePause<cr>
+nmap <leader>; :NERDTreeToggle<cr>
+nmap <leader>: :NERDTreeMirror<cr>
+nmap <leader>t :CtrlPTag<cr>
+nmap <leader>b :CtrlPBuffer<cr>
 " Convert newlines and retab
-map <Leader>r :%s/\r/\r/g<cr>gg<cr>:retab<cr>
+nmap <Leader>r :%s/\r/\r/g<cr>gg<cr>:retab<cr>
 " Removed whitespace in empty lines, and remove trailing whitespace
-map <Leader>w :%s/^\s\+$//ge<cr>:%s/\(\S\)\s\+$/\1/ge<cr>
+nmap <Leader>w :%s/^\s\+$//ge<cr>:%s/\(\S\)\s\+$/\1/ge<cr>
 " Easy folding on search expr
-map <silent><leader>z :set foldexpr=getline(v:lnum)!~@/ foldlevel=0 foldcolumn=0 foldmethod=expr<CR>
+nmap <silent><leader>z :set foldexpr=getline(v:lnum)!~@/ foldlevel=0 foldcolumn=0 foldmethod=expr<CR>
 " Colors
-map <Leader><leader>c :ColorColorToggle<cr>
+nmap <Leader><leader>c :ColorColorToggle<cr>
 " CoffeeScript
 " vmap <leader>c <esc>:'<,'>:CoffeeCompile<CR>
 " map <leader>c :CoffeeCompile<CR>
