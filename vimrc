@@ -159,7 +159,7 @@ let g:ctrlp_cmd = 'CtrlP .'
 let g:ctrlp_regexp = 1
 let g:ctrlp_lazy_update = 500
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --exclude-standard', 'find %s -type f']
 let g:ctrlp_extensions = ['tag']
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
@@ -169,7 +169,34 @@ if has('gui_running')
     set guioptions=aAce
     set guifont=Meslo\ LG\ S\ DZ:h12
     set vb " no bells; as macvim does not support visual bell
-    " set background=light
-    colorscheme solarized
+    set background=light
+    " colorscheme solarized
     colorscheme spacedust
 end
+
+" Temporary stuff to removed or moved to plugins
+" ----------------------------------------------
+
+" http://vim.wikia.com/wiki/Auto_highlight_current_word_when_idle
+" Highlight all instances of word under cursor, when idle.
+" Useful when studying strange source code.
+" Type z/ to toggle highlighting on/off.
+nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
+function! AutoHighlightToggle()
+  let @/ = ''
+  if exists('#auto_highlight')
+    au! auto_highlight
+    augroup! auto_highlight
+    setl updatetime=4000
+    echo 'Highlight current word: off'
+    return 0
+  else
+    augroup auto_highlight
+      au!
+      au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+    augroup end
+    setl updatetime=500
+    echo 'Highlight current word: ON'
+    return 1
+  endif
+endfunction
