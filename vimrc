@@ -91,6 +91,7 @@ set wildmenu
 set wildignore+=*.o,*.obj,.git,.hg,*.pyc
 set timeoutlen=500 " timeout of leader key
 set suffixesadd+=.js "suffix added when 'gf'
+set clipboard=unnamed
 
 " Key mappings
 " ------------

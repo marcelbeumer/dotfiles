@@ -11,21 +11,20 @@ alias tree="find . -type d -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 alias jdate="date +%d\ %h\ %Y\ %H:%M" # journaling date
 
 # Dev
-alias vimdjango="cd \$VIRTUAL_ENV/lib/python2.6/site-packages/django; vim"
-alias vimfein="cd \$VIRTUAL_ENV/lib/python2.6/site-packages/feincms; vim"
+alias vimdjango="cd \$VIRTUAL_ENV/lib/python2.6/site-packages/django; mvim"
+alias vimfein="cd \$VIRTUAL_ENV/lib/python2.6/site-packages/feincms; mvim"
 alias a2start="sudo apachectl start"
 alias a2restart="sudo apachectl restart"
 alias a2stop="sudo apachectl stop"
 alias a2="a2restart"
-alias vimhttpd="vim $HTTPDCONF"
+alias vimhttpd="mvim $HTTPDCONF"
 alias mysql_config="mysql_config5"
 alias mysqldump="mysqldump5"
 alias serve="python -m SimpleHTTPServer"
 
 # Mac only
 if [ "$DOTFILES_ENV" == "mac" ]; then
-    alias vi="mvim -v"
-    alias vim="mvim"
+    alias vim="mvim -v"
 
     # mdfind from ., showing linenumbers
     function m() {
@@ -60,16 +59,6 @@ if [ "$DOTFILES_ENV" == "mac" ]; then
 
     #Notes
     alias cdnotes="cd ~/Documents/Notes"
-    alias notes="cdnotes; vim ."
-    alias note="cdnotes; vim"
-fi
-
-# Server only
-if [ "$DOTFILES_ENV" == "server" ]; then
-    alias vi="vim"
-fi
-
-# invm
-if [ "$DOTFILES_ENV" == "server" ]; then
-    alias vi="vim"
+    alias notes="cdnotes; mvim ."
+    alias note="cdnotes; mvim"
 fi

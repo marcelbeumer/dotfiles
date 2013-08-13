@@ -131,12 +131,21 @@ in_clear_caches() {
     echo "Clear caches..."
     pwd=$PWD
     in_in
-    in_fix_permissions
     rm -rf app-new/cache/dev/dev/*
     rm -rf app-new/cache/dev/test/*
     rm -rf cache/*
     in_oms;
     php magerun.phar cache:clean && php magerun.phar cache:flush && rm /tmp/wsdl-*
+    cd $pwd;
+}
+
+in_clear_logs() {
+    in_within_vm || return 1;
+    pwd=$PWD
+    in_in
+    rm app-new/logs/*.log
+    rm /var/log/mysql/*
+    rm /var/log/nginx/*
     cd $pwd;
 }
 
