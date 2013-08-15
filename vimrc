@@ -144,6 +144,7 @@ let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
 let g:syntastic_html_checkers=[]
 let g:syntastic_scss_checkers=[]
+let g:syntastic_php_checkers=['php'] ", 'phpcs']
 let g:yankring_history_file = '.yankring_history'
 let NERDTreeIgnore=['\.pyc$', '\~$']
 let NERDTreeBookmarksFile = $HOME . '/.vim_nerdtree_bookmarks'
