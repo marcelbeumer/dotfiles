@@ -137,15 +137,17 @@ command -range=% UglifyJS <line1>,<line2>!uglifyjs
 command Marked silent !/Applications/Marked.app/Contents/MacOS/Marked "%" &
 command InTechNote Note Internations Tech
 command Phpcs !vendor/bin/phpcs % --standard=ruleset.xml
-command WriterMode silent! call WritersMode()
+command WriterMode silent! call WriterMode()
 command CodingMode silent! call CodingMode()
 
-function! WritersMode()
+function! WriterMode()
     set linebreak
     set nonumber
     set guifont=Cousine:h18
     sleep 1
     set columns=80
+	set fuoptions=maxvert
+    set fullscreen
     nnoremap j gj
     nnoremap k gk
     vnoremap j gj
@@ -156,6 +158,7 @@ function! CodingMode()
     set nolinebreak
     set number
     set guifont=Meslo\ LG\ S\ DZ:h12
+    set nofu
     nunmap j
     nunmap k
     vunmap j
