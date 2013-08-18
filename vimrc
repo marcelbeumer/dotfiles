@@ -68,7 +68,7 @@ filetype plugin indent on
 
 " Options
 " -------
-set shortmess=I
+set shortmess=atI
 set hidden
 set nobackup
 set noswapfile
