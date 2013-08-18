@@ -174,10 +174,11 @@ function! WriterMode()
     set nonumber
     if has('gui_running')
         set guifont=Cousine:h18
-        sleep 2
+        sleep 0 " needed for rendering
         set columns=80
+        sleep 0 " needed for rendering
         set fuoptions=maxvert
-        set fullscreen
+        set fu
     endif
     nnoremap j gj
     nnoremap k gk
@@ -191,7 +192,11 @@ function! CodingMode()
     if has('gui_running')
         set guifont=Meslo\ LG\ S\ DZ:h12
     endif
-    set nofu
+    if &fu
+        set columns=120
+        sleep 0
+        set nofu
+    endif
     nunmap j
     nunmap k
     vunmap j
@@ -206,7 +211,7 @@ if has('gui_running')
 end
 
 " Default mode
-exec "CodingMode"
+silent! call CodingMode()
 
 " Temporary stuff to removed or moved to plugins
 " ----------------------------------------------
