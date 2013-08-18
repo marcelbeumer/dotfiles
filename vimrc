@@ -52,6 +52,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'sjl/gundo.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'ervandew/supertab'
+Bundle 'marcelbeumer/distraction-free-writing-vim'
 
 " Version control
 " ---------------
@@ -137,6 +138,8 @@ command -range=% BeautifyJS <line1>,<line2>!js-beautify --indent-size=4 -
 command -range=% UglifyJS <line1>,<line2>!uglifyjs
 command Marked silent !/Applications/Marked.app/Contents/MacOS/Marked "%" &
 command InTechNote Note Internations Tech
+command Phpcs !vendor/bin/phpcs % --standard=ruleset.xml
+command DistractionFreeWriting call ToggleDistractionFreeWriting()
 
 " Plugin config
 " -------------
@@ -168,12 +171,15 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 " Gui
 " ---
 if has('gui_running')
+    let g:fullscreen_colorscheme = "iawriter"
+    let g:fullscreen_font = "Cousine:h18"
+    let g:normal_colorscheme = "spacedust"
+    let g:normal_font="Meslo\ LG\ S\ DZ:h12"
     set guioptions=aAce
-    set guifont=Meslo\ LG\ S\ DZ:h12
     set vb " no bells; as macvim does not support visual bell
     set background=light
-    " colorscheme solarized
-    colorscheme spacedust
+    exec "set guifont=".escape(g:normal_font, ' ')
+    exec "colorscheme ".g:normal_colorscheme
 end
 
 " Temporary stuff to removed or moved to plugins
