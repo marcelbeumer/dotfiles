@@ -140,31 +140,6 @@ command Phpcs !vendor/bin/phpcs % --standard=ruleset.xml
 command WriterMode silent! call WriterMode()
 command CodingMode silent! call CodingMode()
 
-function! WriterMode()
-    set linebreak
-    set nonumber
-    set guifont=Cousine:h18
-    sleep 1
-    set columns=80
-	set fuoptions=maxvert
-    set fullscreen
-    nnoremap j gj
-    nnoremap k gk
-    vnoremap j gj
-    vnoremap k gk
-endfunction
-
-function! CodingMode()
-    set nolinebreak
-    set number
-    set guifont=Meslo\ LG\ S\ DZ:h12
-    set nofu
-    nunmap j
-    nunmap k
-    vunmap j
-    vunmap k
-endfunction
-
 " Plugin config
 " -------------
 let g:syntastic_enable_signs=1
@@ -192,15 +167,46 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --exclude-standard'
 let g:ctrlp_extensions = ['tag']
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
-" Gui
-" ---
+" Setup UI
+" --------
+function! WriterMode()
+    set linebreak
+    set nonumber
+    if has('gui_running')
+        set guifont=Cousine:h18
+        sleep 2
+        set columns=80
+        set fuoptions=maxvert
+        set fullscreen
+    endif
+    nnoremap j gj
+    nnoremap k gk
+    vnoremap j gj
+    vnoremap k gk
+endfunction
+
+function! CodingMode()
+    set nolinebreak
+    set number
+    if has('gui_running')
+        set guifont=Meslo\ LG\ S\ DZ:h12
+    endif
+    set nofu
+    nunmap j
+    nunmap k
+    vunmap j
+    vunmap k
+endfunction
+
 if has('gui_running')
     set vb " no bells; as macvim does not support visual bell
     set guioptions=aAce
     set background=light
     colorscheme spacedust
-    exec "CodingMode"
 end
+
+" Default mode
+exec "CodingMode"
 
 " Temporary stuff to removed or moved to plugins
 " ----------------------------------------------
