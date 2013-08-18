@@ -52,7 +52,6 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'sjl/gundo.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'ervandew/supertab'
-Bundle 'marcelbeumer/distraction-free-writing-vim'
 
 " Version control
 " ---------------
@@ -82,7 +81,6 @@ set shiftwidth=4
 set softtabstop=4
 set shiftround
 set incsearch
-set number
 set numberwidth=5
 set ruler
 set foldmethod=indent
@@ -139,7 +137,30 @@ command -range=% UglifyJS <line1>,<line2>!uglifyjs
 command Marked silent !/Applications/Marked.app/Contents/MacOS/Marked "%" &
 command InTechNote Note Internations Tech
 command Phpcs !vendor/bin/phpcs % --standard=ruleset.xml
-command DistractionFreeWriting call ToggleDistractionFreeWriting()
+command WriterMode silent! call WritersMode()
+command CodingMode silent! call CodingMode()
+
+function! WritersMode()
+    set linebreak
+    set nonumber
+    set guifont=Cousine:h18
+    sleep 1
+    set columns=80
+    nnoremap j gj
+    nnoremap k gk
+    vnoremap j gj
+    vnoremap k gk
+endfunction
+
+function! CodingMode()
+    set nolinebreak
+    set number
+    set guifont=Meslo\ LG\ S\ DZ:h12
+    nunmap j
+    nunmap k
+    vunmap j
+    vunmap k
+endfunction
 
 " Plugin config
 " -------------
@@ -171,15 +192,11 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 " Gui
 " ---
 if has('gui_running')
-    let g:fullscreen_colorscheme = "iawriter"
-    let g:fullscreen_font = "Cousine:h18"
-    let g:normal_colorscheme = "spacedust"
-    let g:normal_font="Meslo\ LG\ S\ DZ:h12"
-    set guioptions=aAce
     set vb " no bells; as macvim does not support visual bell
+    set guioptions=aAce
     set background=light
-    exec "set guifont=".escape(g:normal_font, ' ')
-    exec "colorscheme ".g:normal_colorscheme
+    colorscheme spacedust
+    exec "CodingMode"
 end
 
 " Temporary stuff to removed or moved to plugins
