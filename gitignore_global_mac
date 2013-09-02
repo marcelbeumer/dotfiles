@@ -1,4 +1,5 @@
 *~
 .DS_Store
 /app-new/src/tags
+/app-new/bootstrap.php.cache
 /tags

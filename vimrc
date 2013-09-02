@@ -17,7 +17,7 @@ Bundle 'mrtazz/molokai.vim'
 " ----------------
 Bundle 'beyondwords/vim-twig'
 Bundle 'django.vim'
-Bundle 'docteurklein/vim-symfony'
+" Bundle 'docteurklein/vim-symfony'
 Bundle 'groenewege/vim-less'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'kchmck/vim-coffee-script'
@@ -94,6 +94,10 @@ set clipboard=unnamed
 
 " Key mappings
 " ------------
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
 nmap <silent> gf :GotoFile<CR>
 nmap <leader>; :NERDTreeToggle<cr>
 nmap <leader>: :NERDTreeMirror<cr>
@@ -135,7 +139,9 @@ command -range=% Xmltidy <line1>,<line2>!tidy -xml -indent -utf8 -q --indent-spa
 command -range=% BeautifyJS <line1>,<line2>!js-beautify --indent-size=4 -
 command -range=% UglifyJS <line1>,<line2>!uglifyjs
 command Marked silent !/Applications/Marked.app/Contents/MacOS/Marked "%" &
-command InTechNote Note Internations Tech
+command INTech Note IN - Tech
+command INJournal Note IN - Journal
+command Nf NERDTreeFind
 command Phpcs !vendor/bin/phpcs % --standard=ruleset.xml
 command WriterMode silent! call WriterMode()
 command CodingMode silent! call CodingMode()
@@ -158,6 +164,7 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:notes_directories = ['~/Documents/Notes']
 let g:notes_title_sync = 'change_title'
 let g:notes_suffix = '.txt'
+let g:ackprg = 'ag --nogroup --column'
 let g:ctrlp_map = '<leader>p'
 let g:ctrlp_cmd = 'CtrlP .'
 let g:ctrlp_regexp = 1
@@ -166,6 +173,8 @@ let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --exclude-standard', 'find %s -type f']
 let g:ctrlp_extensions = ['tag']
 let g:SuperTabDefaultCompletionType = "<c-n>"
+"let g:symfony_app_console_caller='ssh root@internations.dev ". ~/.profile; in_in; php"'
+"let g:symfony_app_console_path= 'app-new/console'
 
 " Setup UI
 " --------
