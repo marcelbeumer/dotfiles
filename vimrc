@@ -12,12 +12,12 @@ Bundle 'gmarik/vundle'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'marcelbeumer/spacedust.vim'
 Bundle 'mrtazz/molokai.vim'
+Bundle 'flazz/vim-colorschemes'
 
 " Language support
 " ----------------
 Bundle 'beyondwords/vim-twig'
 Bundle 'django.vim'
-" Bundle 'docteurklein/vim-symfony'
 Bundle 'groenewege/vim-less'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'kchmck/vim-coffee-script'
@@ -35,6 +35,7 @@ Bundle 'scrooloose/syntastic'
 Bundle 'SirVer/ultisnips'
 Bundle 'bitc/vim-bad-whitespace'
 Bundle 'godlygeek/tabular'
+Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-ragtag'
 Bundle 'tpope/vim-repeat'
@@ -89,8 +90,9 @@ set scrolloff=10
 set wildmenu
 set wildignore+=*.o,*.obj,.git,.hg,*.pyc
 set timeoutlen=500 " timeout of leader key
-set suffixesadd+=.js "suffix added when 'gf'
 set clipboard=unnamed
+set suffixesadd+=.php
+set suffixesadd+=.js
 
 " Key mappings
 " ------------
@@ -98,7 +100,7 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
-nmap <silent> gf :GotoFile<CR>
+" nmap <silent> gf :GotoFile<CR>
 nmap <leader>; :NERDTreeToggle<cr>
 nmap <leader>: :NERDTreeMirror<cr>
 nmap <leader>t :CtrlPTag<cr>
@@ -112,12 +114,22 @@ nmap <silent><leader>z :set foldexpr=getline(v:lnum)!~@/ foldlevel=0 foldcolumn=
 " Colors
 nmap <Leader><leader>c :ColorColorToggle<cr>
 " CoffeeScript
-" vmap <leader>c <esc>:'<,'>:CoffeeCompile<CR>
-" map <leader>c :CoffeeCompile<CR>
+vmap <leader>c <esc>:'<,'>:CoffeeCompile<CR>
+map <leader>c :CoffeeCompile<CR>
 
 " Filetype settings
 " -----------------
-let coffee_make_options = '-o /tmp/'
+function! PHPSettings()
+    " TODO: add support for @Bundle/foo/bar syntax (might need to use other
+    " thing instead of substitute
+    setlocal includeexpr=substitute(v:fname,'\\\','/','g')
+    setlocal path+=app-new/src/**
+    setlocal path+=vendor/sensio/**
+    setlocal path+=vendor/twig/**
+    setlocal path+=vendor/symfony/**
+    setlocal path+=vendor/doctrine/**
+endfunction
+
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufNewFile,BufRead,BufWritePost *.md set filetype=markdown
 
@@ -127,6 +139,7 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php call PHPSettings()
 
 " Commands
 " --------
@@ -141,6 +154,7 @@ command -range=% UglifyJS <line1>,<line2>!uglifyjs
 command Marked silent !/Applications/Marked.app/Contents/MacOS/Marked "%" &
 command INTech Note IN - Tech
 command INJournal Note IN - Journal
+command IN e build.xml
 command Nf NERDTreeFind
 command Phpcs !vendor/bin/phpcs % --standard=ruleset.xml
 command WriterMode silent! call WriterMode()
@@ -148,6 +162,7 @@ command CodingMode silent! call CodingMode()
 
 " Plugin config
 " -------------
+let coffee_make_options = '-o /tmp/'
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
 let g:syntastic_html_checkers=[]

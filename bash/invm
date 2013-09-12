@@ -131,9 +131,10 @@ in_clear_caches() {
     echo "Clear caches..."
     pwd=$PWD
     in_in
-    rm -rf app-new/cache/dev/dev/*
-    rm -rf app-new/cache/dev/test/*
+    rm -rf app-new/cache/dev/*
+    rm -rf app-new/cache/test/*
     rm -rf cache/*
+    rm -rf /tmp/wsdl--*
     in_oms;
     php magerun.phar cache:clean && php magerun.phar cache:flush && rm /tmp/wsdl-*
     cd $pwd;
