@@ -130,6 +130,10 @@ function! PHPSettings()
     setlocal path+=vendor/doctrine/**
 endfunction
 
+function! JavaScriptSettings()
+    setlocal path+=app-new/src/**
+endfunction
+
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufNewFile,BufRead,BufWritePost *.md set filetype=markdown
 
@@ -140,6 +144,7 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php call PHPSettings()
+autocmd FileType javascript call JavaScriptSettings()
 
 " Commands
 " --------
