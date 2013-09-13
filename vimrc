@@ -137,7 +137,7 @@ function! EditIncludeOnLine()
     exec 'e ' . file
 endfunction
 
-function! EditIncludeSetup(pathResolver, lineParser)
+function! EditIncludeBufferSetup(pathResolver, lineParser)
     if strlen(a:lineParser) > 0
         exec 'let b:edit_include_line_parser=''' . a:lineParser . ''''
     endif
@@ -163,7 +163,7 @@ function! TwigEditIncludePathResolver(fname)
 endfunction
 
 function! PHPSettings()
-    call EditIncludeSetup('PHPEditIncludePathResolver', 'PHPEditIncludeLineParser')
+    call EditIncludeBufferSetup('PHPEditIncludePathResolver', 'PHPEditIncludeLineParser')
     setlocal path+=app-new/src/**
     setlocal path+=vendor/sensio/**
     setlocal path+=vendor/twig/**
@@ -172,7 +172,7 @@ function! PHPSettings()
 endfunction
 
 function! HTMLTwigSettings()
-    call EditIncludeSetup('TwigEditIncludePathResolver', '')
+    call EditIncludeBufferSetup('TwigEditIncludePathResolver', '')
     setlocal path+=app-new/src/**
 endfunction
 
