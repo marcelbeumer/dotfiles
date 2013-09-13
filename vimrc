@@ -47,12 +47,12 @@ Bundle 'ZoomWin'
 Bundle 'ack.vim'
 Bundle 'nelstrom/vim-qargs'
 Bundle 'marcelbeumer/color-color.vim'
-Bundle 'marcelbeumer/genutils'
-Bundle 'marcelbeumer/gotofile'
 Bundle 'scrooloose/nerdtree'
 Bundle 'sjl/gundo.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'ervandew/supertab'
+" Bundle 'marcelbeumer/genutils'
+" Bundle 'marcelbeumer/gotofile'
 
 " Version control
 " ---------------
@@ -116,13 +116,54 @@ nmap <Leader><leader>c :ColorColorToggle<cr>
 " CoffeeScript
 vmap <leader>c <esc>:'<,'>:CoffeeCompile<CR>
 map <leader>c :CoffeeCompile<CR>
+map <leader>g :call EditIncludeOnLine()<CR>
 
 " Filetype settings
 " -----------------
+function! EditIncludeOnLine()
+    let line = getline('.')
+    if exists("b:edit_include_line_parser")
+        let GrabFn = function(b:edit_include_line_parser)
+        let line = call(GrabFn, [line])
+    endif
+    let line = substitute(line, '.\{-}[''"]\(.\{-}\)[''"].*', '\1', 'g')
+    if exists("b:edit_include_path_resolver")
+        let ResolveFn = function(b:edit_include_path_resolver)
+        let file = call(ResolveFn, [line])
+    else
+        let file = line
+    endif
+    let file = findfile(file)
+    exec 'e ' . file
+endfunction
+
+function! EditIncludeSetup(pathResolver, lineParser)
+    if strlen(a:lineParser) > 0
+        exec 'let b:edit_include_line_parser=''' . a:lineParser . ''''
+    endif
+    if strlen(a:pathResolver) > 0
+        exec 'let b:edit_include_path_resolver=''' . a:pathResolver . ''''
+        exec 'setlocal includeexpr=' . a:pathResolver . '(v:fname)'
+    endif
+endfunction
+
+function! PHPEditIncludeLineParser(line)
+    return substitute(a:line, '.\{-}use\s\+\(\S*\);.*', '\1', 'g')
+endfunction
+
+function! PHPEditIncludePathResolver(fname)
+    return substitute(a:fname, '\', '/', 'g')
+endfunction
+
+function! TwigEditIncludePathResolver(fname)
+    let fname = a:fname
+    let fname = substitute(fname, ':', '/', 'g')
+    let fname = substitute(fname, '^InterNations\(.\{-}\)Bundle', '\1Bundle/Resources/views/', 'g')
+    return fname
+endfunction
+
 function! PHPSettings()
-    " TODO: add support for @Bundle/foo/bar syntax (might need to use other
-    " thing instead of substitute
-    setlocal includeexpr=substitute(v:fname,'\\\','/','g')
+    call EditIncludeSetup('PHPEditIncludePathResolver', 'PHPEditIncludeLineParser')
     setlocal path+=app-new/src/**
     setlocal path+=vendor/sensio/**
     setlocal path+=vendor/twig/**
@@ -130,9 +171,18 @@ function! PHPSettings()
     setlocal path+=vendor/doctrine/**
 endfunction
 
+function! HTMLTwigSettings()
+    call EditIncludeSetup('TwigEditIncludePathResolver', '')
+    setlocal path+=app-new/src/**
+endfunction
+
 function! JavaScriptSettings()
     setlocal path+=app-new/src/**
 endfunction
+
+autocmd FileType php call PHPSettings()
+autocmd FileType javascript call JavaScriptSettings()
+autocmd FileType html.twig call HTMLTwigSettings()
 
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufNewFile,BufRead,BufWritePost *.md set filetype=markdown
@@ -143,12 +193,11 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php call PHPSettings()
-autocmd FileType javascript call JavaScriptSettings()
 
 " Commands
 " --------
 command Rc e ~/.vimrc
+command Rr silent! so $MYVIMRC
 command ClearUndo silent !rm ~/.vimundo/*
 command JournalDate silent r !date +\%a\ \%d\ \%B\ \%Y\ \%H:\%M
 command SudoWrite w !sudo tee % > /dev/null
