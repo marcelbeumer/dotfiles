@@ -126,25 +126,29 @@ function! EditIncludeOnLine()
         let GrabFn = function(b:edit_include_line_parser)
         let line = call(GrabFn, [line])
     endif
-    let line = substitute(line, '.\{-}[''"]\(.\{-}\)[''"].*', '\1', 'g')
+    let path = line
     if exists("b:edit_include_path_resolver")
         let ResolveFn = function(b:edit_include_path_resolver)
-        let file = call(ResolveFn, [line])
-    else
-        let file = line
+        let path = call(ResolveFn, [line])
     endif
-    let file = findfile(file)
-    exec 'e ' . file
+    let path = findfile(path)
+    exec 'e ' . path
 endfunction
 
 function! EditIncludeBufferSetup(pathResolver, lineParser)
+    let lineParser = 'DefaultIncludeLineParser'
     if strlen(a:lineParser) > 0
-        exec 'let b:edit_include_line_parser=''' . a:lineParser . ''''
+        let lineParser = a:lineParser
     endif
+    exec 'let b:edit_include_line_parser=''' . lineParser . ''''
     if strlen(a:pathResolver) > 0
         exec 'let b:edit_include_path_resolver=''' . a:pathResolver . ''''
         exec 'setlocal includeexpr=' . a:pathResolver . '(v:fname)'
     endif
+endfunction
+
+function! DefaultIncludeLineParser(line)
+    return substitute(a:line, '.\{-}[''"]\(.\{-}\)[''"].*', '\1', 'g')
 endfunction
 
 function! PHPEditIncludeLineParser(line)
@@ -164,6 +168,7 @@ endfunction
 
 function! PHPSettings()
     call EditIncludeBufferSetup('PHPEditIncludePathResolver', 'PHPEditIncludeLineParser')
+    setlocal suffixesadd+=.php
     setlocal path+=app-new/src/**
     setlocal path+=vendor/sensio/**
     setlocal path+=vendor/twig/**
@@ -177,6 +182,8 @@ function! HTMLTwigSettings()
 endfunction
 
 function! JavaScriptSettings()
+    call EditIncludeBufferSetup('', '')
+    setlocal suffixesadd+=.js
     setlocal path+=app-new/src/**
 endfunction
 
