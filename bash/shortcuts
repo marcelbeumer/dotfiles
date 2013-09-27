@@ -9,6 +9,7 @@ alias l="ls"
 alias la="ls -ahl"
 alias tree="find . -type d -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 alias jdate="date +%d\ %h\ %Y\ %H:%M" # journaling date
+alias vi=vim
 
 # Dev
 alias vimdjango="cd \$VIRTUAL_ENV/lib/python2.6/site-packages/django; mvim"
@@ -24,7 +25,8 @@ alias serve="python -m SimpleHTTPServer"
 
 # Mac only
 if [ "$DOTFILES_ENV" == "mac" ]; then
-    alias vim="mvim -v"
+    alias vi="mvim -v"
+    alias vim="mvim"
 
     # mdfind from ., showing linenumbers
     function m() {

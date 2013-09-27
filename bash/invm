@@ -70,16 +70,36 @@ in_fix_permissions() {
     echo "sudo chmod -R 777 static/assetic"
     sudo chmod -R 777 static/assetic
 
+    echo "sudo chmod -R 777 /dev/shm/symfony"
+    sudo chmod -R 777 /dev/shm/symfony
+
     echo "Done."
+    cd $pwd
+}
+
+in_tags_vendor() {
+    in_within_host || return 1;
+    pwd=$PWD
+    in_in
+    ctags --languages=js -R -f tags.vendor.js vendor
+    ctags --languages=php -R -f tags.vendor.php vendor
+    cd $pwd
+}
+
+in_tags_app() {
+    in_within_host || return 1;
+    pwd=$PWD
+    in_in
+    ctags --languages=js,php -R -f tags app-new/src
+    ctags --languages=js -R -f tags.js app-new/src
+    ctags --languages=php -R -f tags.php app-new/src
     cd $pwd
 }
 
 in_tags() {
     in_within_host || return 1;
-    pwd=$PWD
-    in_in
-    ctags --languages=js,php -R app-new/src
-    cd $pwd
+    # in_tags_vendor
+    in_tags_app
 }
 
 # Git pull on all repos
@@ -94,8 +114,8 @@ in_pull() {
     echo "Pulling solr:"
     in_solr && git pull --rebase
     cd $pwd
-    echo "Updating tags:"
-    in_tags
+    echo "Updating tags (app only):"
+    in_tags_app
     echo "Done."
 }
 
@@ -128,15 +148,18 @@ in_clear_assetic() {
 
 in_clear_caches() {
     in_within_vm || return 1;
-    echo "Clear caches..."
     pwd=$PWD
     in_in
     rm -rf app-new/cache/dev/*
     rm -rf app-new/cache/test/*
+    rm -rf /dev/shm/symfony/*
+    chmod -R 777 /dev/shm/symfony
     rm -rf cache/*
     rm -rf /tmp/wsdl--*
     in_oms;
-    php magerun.phar cache:clean && php magerun.phar cache:flush && rm /tmp/wsdl-*
+    # php magerun.phar cache:clean
+    # php magerun.phar cache:flush
+    rm -f /tmp/wsdl-*
     cd $pwd;
 }
 
@@ -144,10 +167,23 @@ in_clear_logs() {
     in_within_vm || return 1;
     pwd=$PWD
     in_in
-    rm app-new/logs/*.log
-    rm /var/log/mysql/*
-    rm /var/log/nginx/*
+    rm -f app-new/logs/*.log
+    rm -f /var/log/mysql/*
+    rm -f /var/log/nginx/*
+    rm -f /var/log/php*
     cd $pwd;
+}
+
+in_clear() {
+    in_within_vm || return 1;
+    in_clear_logs
+    in_clear_assetic
+    in_clear_caches
+}
+
+in_restart_php() {
+    in_within_vm || return 1;
+    /etc/init.d/php5-fpm restart
 }
 
 in_restart() {
@@ -157,8 +193,8 @@ in_restart() {
     /etc/init.d/redis-server restart
     /etc/init.d/mysql restart
     /etc/init.d/nginx restart
-    /etc/init.d/php5-fpm restart
     /etc/init.d/tomcat6 restart
+    in_restart_php
 }
 
 in_refresh() {
@@ -207,14 +243,6 @@ in_sahi() {
     in_in
     cd sahi/bin
     ./sahi.sh
-}
-
-# Rename
-in_single_buster_test() {
-    in_within_vm || return 1;
-    pwd=$PWD
-    in_in && buster-test --config static/javascript/test/buster.js --reporter specification -t static/javascript/test/$1_test.js
-    cd $pwd
 }
 
 in_rebuild_requirejs() {

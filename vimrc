@@ -10,12 +10,13 @@ Bundle 'gmarik/vundle'
 " Themes
 " ------
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'flazz/vim-colorschemes'
 Bundle 'marcelbeumer/spacedust.vim'
 Bundle 'mrtazz/molokai.vim'
-Bundle 'flazz/vim-colorschemes'
 
 " Language support
 " ----------------
+Bundle 'arnaud-lb/vim-php-namespace'
 Bundle 'beyondwords/vim-twig'
 Bundle 'django.vim'
 Bundle 'groenewege/vim-less'
@@ -24,6 +25,7 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'marcelbeumer/javascript-syntax.vim'
 Bundle 'nono/vim-handlebars'
 Bundle 'othree/coffee-check.vim'
+Bundle 'shawncplus/phpcomplete.vim'
 Bundle 'skammer/vim-css-color'
 
 " General language tools
@@ -35,24 +37,22 @@ Bundle 'scrooloose/syntastic'
 Bundle 'SirVer/ultisnips'
 Bundle 'bitc/vim-bad-whitespace'
 Bundle 'godlygeek/tabular'
-Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-ragtag'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-unimpaired'
 
 " Navigation, search, GUI
 " -----------------------
 Bundle 'ZoomWin'
 Bundle 'ack.vim'
-Bundle 'nelstrom/vim-qargs'
+Bundle 'ervandew/supertab'
+Bundle 'kien/ctrlp.vim'
 Bundle 'marcelbeumer/color-color.vim'
+Bundle 'nelstrom/vim-qargs'
 Bundle 'scrooloose/nerdtree'
 Bundle 'sjl/gundo.vim'
-Bundle 'kien/ctrlp.vim'
-Bundle 'ervandew/supertab'
-" Bundle 'marcelbeumer/genutils'
-" Bundle 'marcelbeumer/gotofile'
 
 " Version control
 " ---------------
@@ -69,58 +69,71 @@ filetype plugin indent on
 
 " Options
 " -------
-set shortmess=atI
+set autoindent
+set clipboard=unnamed
+set expandtab
+set foldlevel=100
+set foldmethod=indent
 set hidden
+set incsearch
+set ignorecase
 set nobackup
 set noswapfile
-set undofile
-set undodir=~/.vimundo
-set autoindent
-set expandtab
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set shiftround
-set incsearch
 set numberwidth=5
 set ruler
-set foldmethod=indent
-set foldlevel=100
 set scrolloff=10
-set wildmenu
-set wildignore+=*.o,*.obj,.git,.hg,*.pyc
-set timeoutlen=500 " timeout of leader key
-set clipboard=unnamed
-set suffixesadd+=.php
+set shiftround
+set shiftwidth=4
+set shortmess=atI
+set softtabstop=4
 set suffixesadd+=.js
+set suffixesadd+=.php
+set tabstop=4
+set timeoutlen=500 " timeout of leader key
+set undodir=~/.vimundo
+set undofile
+set wildignore+=*.o,*.obj,.git,.hg,*.pyc
+set wildmenu
 
 " Key mappings
 " ------------
+
+" Window navigation
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
-" nmap <silent> gf :GotoFile<CR>
-nmap <leader>; :NERDTreeToggle<cr>
+
+" Tab navigation
+map <C-S-h> gT
+map <C-S-l> gt
+
+" Omnicomplet with C-Space
+inoremap <C-Space> <C-x><C-o>
+inoremap <C-@> <C-Space>
+
+" Plugin triggers
+map  <leader>c :CoffeeCompile<CR>
+map  <leader>g :call EditIncludeOnLine()<CR>
+nmap <Leader><leader>c :ColorColorToggle<cr>
 nmap <leader>: :NERDTreeMirror<cr>
-nmap <leader>t :CtrlPTag<cr>
+nmap <leader>; :NERDTreeToggle<cr>
 nmap <leader>b :CtrlPBuffer<cr>
+nmap <leader>t :CtrlPTag<cr>
+vmap <leader>c <esc>:'<,'>:CoffeeCompile<CR>
+
 " Convert newlines and retab
 nmap <Leader>r :%s/\r/\r/g<cr>gg<cr>:retab<cr>
+
 " Removed whitespace in empty lines, and remove trailing whitespace
 nmap <Leader>w :%s/^\s\+$//ge<cr>:%s/\(\S\)\s\+$/\1/ge<cr>
+
 " Easy folding on search expr
 nmap <silent><leader>z :set foldexpr=getline(v:lnum)!~@/ foldlevel=0 foldcolumn=0 foldmethod=expr<CR>
-" Colors
-nmap <Leader><leader>c :ColorColorToggle<cr>
-" CoffeeScript
-vmap <leader>c <esc>:'<,'>:CoffeeCompile<CR>
-map <leader>c :CoffeeCompile<CR>
-map <leader>g :call EditIncludeOnLine()<CR>
 
 " Filetype settings
 " -----------------
-"
+
 "  TODO
 "  - evaluate includeexpr, replacing v:fname with something else
 "  - come up with practical name for this thing instead of EditIncludeOnLine
@@ -169,7 +182,11 @@ function! PHPEditIncludeLineParser(line)
 endfunction
 
 function! PHPEditIncludePathResolver(fname)
-    return substitute(a:fname, '\', '/', 'g')
+    let fname = a:fname
+    if stridx(fname, ':') != -1
+        let fname = TwigEditIncludePathResolver(fname)
+    endif
+    return substitute(fname, '\', '/', 'g')
 endfunction
 
 function! TwigEditIncludePathResolver(fname)
@@ -187,6 +204,7 @@ function! PHPSettings()
     setlocal path+=vendor/twig/**
     setlocal path+=vendor/symfony/**
     setlocal path+=vendor/doctrine/**
+    setlocal tags=tags.php,tags.vendor.php
 endfunction
 
 " Ideally
@@ -199,10 +217,15 @@ endfunction
 "     setlocal path+=vendor/twig/**
 "     setlocal path+=vendor/symfony/**
 "     setlocal path+=vendor/doctrine/**
-" endfunction
+"  endfunction
 
 function! HTMLTwigSettings()
     call EditIncludeBufferSetup('TwigEditIncludePathResolver', '')
+    setlocal path+=app-new/src/**
+endfunction
+
+function! XMLSettings()
+    call EditIncludeBufferSetup('PHPEditIncludePathResolver', '')
     setlocal path+=app-new/src/**
 endfunction
 
@@ -210,11 +233,13 @@ function! JavaScriptSettings()
     call EditIncludeBufferSetup('', '')
     setlocal suffixesadd+=.js
     setlocal path+=app-new/src/**
+    setlocal tags=tags.js,tags.vendor.js
 endfunction
 
 autocmd FileType php call PHPSettings()
 autocmd FileType javascript call JavaScriptSettings()
 autocmd FileType html.twig call HTMLTwigSettings()
+autocmd FileType xml call XMLSettings()
 
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufNewFile,BufRead,BufWritePost *.md set filetype=markdown
@@ -228,54 +253,56 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Commands
 " --------
-command Rc e ~/.vimrc
-command Rr silent! so $MYVIMRC
-command ClearUndo silent !rm ~/.vimundo/*
-command JournalDate silent r !date +\%a\ \%d\ \%B\ \%Y\ \%H:\%M
-command SudoWrite w !sudo tee % > /dev/null
-command JSHint !jshint % --show-non-errors
-command -range=% Xmltidy <line1>,<line2>!tidy -xml -indent -utf8 -q --indent-spaces 4
 command -range=% BeautifyJS <line1>,<line2>!js-beautify --indent-size=4 -
 command -range=% UglifyJS <line1>,<line2>!uglifyjs
-command Marked silent !/Applications/Marked.app/Contents/MacOS/Marked "%" &
-command INTech Note IN - Tech
-command INJournal Note IN - Journal
-command IN e build.xml
-command Nf NERDTreeFind
-command Phpcs !vendor/bin/phpcs % --standard=ruleset.xml
-command WriterMode silent! call WriterMode()
+command -range=% Xmltidy <line1>,<line2>!tidy -xml -indent -utf8 -q --indent-spaces 4
+command ClearUndo silent !rm ~/.vimundo/*
 command CodingMode silent! call CodingMode()
+command IN e build.xml
+command INJournal Note IN - Journal
+command INTech Note IN - Tech
+command JSHint !jshint % --show-non-errors
+command JournalDate silent r !date +\%a\ \%d\ \%B\ \%Y\ \%Hh\%M
+command ConvertJournalDate silent %s/\(\d\{2\}\):\(\d\{2\}\)/\1h\2/g
+command Marked silent !/Applications/Marked.app/Contents/MacOS/Marked "%" &
+command Nf NERDTreeFind
+command PHPExpandClass call PhpExpandClass()
+command Phpcs !vendor/bin/phpcs % --standard=ruleset.xml
+command Rc e ~/.vimrc
+command Rr silent! so $MYVIMRC
+command SudoWrite w !sudo tee % > /dev/null
+command WriterMode silent! call WriterMode()
 
 " Plugin config
 " -------------
-let coffee_make_options = '-o /tmp/'
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_loc_list=1
-let g:syntastic_html_checkers=[]
-let g:syntastic_scss_checkers=[]
-let g:syntastic_php_checkers=['php'] ", 'phpcs']
-let g:yankring_history_file = '.yankring_history'
-let NERDTreeIgnore=['\.pyc$', '\~$']
-let NERDTreeBookmarksFile = $HOME . '/.vim_nerdtree_bookmarks'
-let NERDTreeWinSize=50
-let NERDTreeShowBookmarks=1
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:notes_directories = ['~/Documents/Notes']
-let g:notes_title_sync = 'change_title'
-let g:notes_suffix = '.txt'
-let g:ackprg = 'ag --nogroup --column'
-let g:ctrlp_map = '<leader>p'
-let g:ctrlp_cmd = 'CtrlP .'
-let g:ctrlp_regexp = 1
-let g:ctrlp_lazy_update = 500
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --exclude-standard', 'find %s -type f']
-let g:ctrlp_extensions = ['tag']
-let g:SuperTabDefaultCompletionType = "<c-n>"
 "let g:symfony_app_console_caller='ssh root@internations.dev ". ~/.profile; in_in; php"'
 "let g:symfony_app_console_path= 'app-new/console'
+let NERDTreeBookmarksFile = $HOME . '/.vim_nerdtree_bookmarks'
+let NERDTreeIgnore=['\.pyc$', '\~$']
+let NERDTreeShowBookmarks=1
+let NERDTreeWinSize=50
+let coffee_make_options = '-o /tmp/'
+let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:ackprg = 'ag --nogroup --column'
+let g:ctrlp_cmd = 'CtrlP .'
+let g:ctrlp_extensions = ['tag']
+let g:ctrlp_lazy_update = 500
+let g:ctrlp_map = '<leader>p'
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
+let g:ctrlp_regexp = 1
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --exclude-standard', 'find %s -type f']
+let g:notes_directories = ['~/Documents/Notes']
+let g:notes_suffix = '.txt'
+let g:notes_title_sync = 'change_title'
+let g:syntastic_auto_loc_list=1
+let g:syntastic_enable_signs=1
+let g:syntastic_html_checkers=[]
+let g:syntastic_php_checkers=['php'] ", 'phpcs']
+let g:syntastic_scss_checkers=[]
+let g:yankring_history_file = '.yankring_history'
 
 " Setup UI
 " --------
@@ -315,7 +342,7 @@ endfunction
 
 if has('gui_running')
     set vb " no bells; as macvim does not support visual bell
-    set guioptions=aAce
+    set guioptions=aAc "add 'e' for native tabs
     set background=light
     colorscheme spacedust
 end
