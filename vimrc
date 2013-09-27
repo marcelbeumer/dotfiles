@@ -104,10 +104,6 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
-" Tab navigation
-map <C-S-h> gT
-map <C-S-l> gt
-
 " Omnicomplet with C-Space
 inoremap <C-Space> <C-x><C-o>
 inoremap <C-@> <C-Space>
