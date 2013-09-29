@@ -253,7 +253,6 @@ command -range=% BeautifyJS <line1>,<line2>!js-beautify --indent-size=4 -
 command -range=% UglifyJS <line1>,<line2>!uglifyjs
 command -range=% Xmltidy <line1>,<line2>!tidy -xml -indent -utf8 -q --indent-spaces 4
 command ClearUndo silent !rm ~/.vimundo/*
-command CodingMode silent! call CodingMode()
 command IN e build.xml
 command INJournal Note IN - Journal
 command INTech Note IN - Tech
@@ -267,7 +266,10 @@ command Phpcs !vendor/bin/phpcs % --standard=ruleset.xml
 command Rc e ~/.vimrc
 command Rr silent! so $MYVIMRC
 command SudoWrite w !sudo tee % > /dev/null
+command CodingMode silent! call CodingMode()
 command WriterMode silent! call WriterMode()
+command DualWriterMode silent! call DualWriterMode()
+command -nargs=* Glp Glog --abbrev-commit --date=relative <args>
 
 " Plugin config
 " -------------
@@ -299,6 +301,7 @@ let g:syntastic_html_checkers=[]
 let g:syntastic_php_checkers=['php'] ", 'phpcs']
 let g:syntastic_scss_checkers=[]
 let g:yankring_history_file = '.yankring_history'
+let g:fugitive_summary_format = '%h - %d %s (%cr by %an)'
 
 " Setup UI
 " --------
@@ -317,6 +320,14 @@ function! WriterMode()
     nnoremap k gk
     vnoremap j gj
     vnoremap k gk
+endfunction
+
+function! DualWriterMode()
+    call WriterMode()
+    if has('gui_running')
+        set guifont=Cousine:h16
+        set columns=140
+    endif
 endfunction
 
 function! CodingMode()
@@ -341,6 +352,7 @@ if has('gui_running')
     set guioptions=aAc "add 'e' for native tabs
     set background=light
     colorscheme spacedust
+    " colorscheme solarized
 end
 
 " Default mode
