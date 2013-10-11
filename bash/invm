@@ -67,8 +67,8 @@ in_fix_permissions() {
     echo "sudo chmod -R 777 cache;"
     sudo chmod -R 777 cache;
 
-    echo "sudo chmod -R 777 static/assetic"
-    sudo chmod -R 777 static/assetic
+    echo "sudo chmod -R 777 web/static/assetic"
+    sudo chmod -R 777 web/static/assetic
 
     echo "sudo chmod -R 777 /dev/shm/symfony"
     sudo chmod -R 777 /dev/shm/symfony
@@ -138,12 +138,12 @@ in_rebuild() {
 in_rebuild_assetic() {
     in_within_vm || return 1;
     in_clear_assetic
-    in_in && php app-new/console assets:install static && php app-new/console assetic:dump . --force
+    in_in && php app-new/console assets:install web/static && php app-new/console assetic:dump web --force
 }
 
 in_clear_assetic() {
     in_within_vm || return 1;
-    in_in && rm -rf static/assetic/*
+    in_in && rm -rf web/static/assetic/*
 }
 
 in_clear_caches() {
@@ -208,7 +208,7 @@ in_refresh() {
 
 in_watch() {
     in_within_vm || return 1;
-    in_in && php app-new/console assetic:dump . --force --watch
+    in_in && php app-new/console assetic:dump web --force --watch
 }
 
 in_console() {
@@ -248,7 +248,7 @@ in_sahi() {
 in_rebuild_requirejs() {
     in_within_vm || return 1;
     pwd=$PWD
-    in_in && node util/requirejs/build-assets.js
+    in_in; cd web; node ../util/requirejs/build-assets.js
     cd $pwd
 }
 

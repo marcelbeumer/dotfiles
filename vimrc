@@ -53,6 +53,11 @@ Bundle 'marcelbeumer/color-color.vim'
 Bundle 'nelstrom/vim-qargs'
 Bundle 'scrooloose/nerdtree'
 Bundle 'sjl/gundo.vim'
+" Evaluating
+Bundle 'mattboehm/vim-accordion'
+" Evaluating (TODO: add PHP support)
+Bundle 'mattboehm/vim-unstack'
+Bundle 'gcmt/taboo.vim'
 
 " Version control
 " ---------------
@@ -334,7 +339,7 @@ function! CodingMode()
     set nolinebreak
     set number
     if has('gui_running')
-        set guifont=Meslo\ LG\ S\ DZ:h12
+        set guifont=Meslo\ LG\ S\ DZ:h14
     endif
     if &fu
         set columns=120
