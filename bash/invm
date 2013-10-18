@@ -27,10 +27,6 @@ in_within_host() {
     fi
 }
 
-in_staff() {
-    ssh root@staff.internations.org
-}
-
 # Log into my vm
 in_vm() {
     ssh root@internations.dev
