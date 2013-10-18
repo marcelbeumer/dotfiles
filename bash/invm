@@ -70,9 +70,6 @@ in_fix_permissions() {
     echo "sudo chmod -R 777 web/static/assetic"
     sudo chmod -R 777 web/static/assetic
 
-    echo "sudo chmod -R 777 /dev/shm/symfony"
-    sudo chmod -R 777 /dev/shm/symfony
-
     echo "Done."
     cd $pwd
 }
@@ -144,6 +141,7 @@ in_rebuild_assetic() {
 in_clear_assetic() {
     in_within_vm || return 1;
     in_in && rm -rf web/static/assetic/*
+    chmod -R 777 /dev/shm/symfony
 }
 
 in_clear_caches() {
