@@ -105,7 +105,7 @@ in_clear_assetic() {
 in_clear_caches() {
     in_within_vm || return 1;
     in_app
-    rm -rf /dev/shm/symfony/*
+    rm -rf /dev/shm/symfony/*/cache
     rm -rf /tmp/wsdl-*
 }
 
@@ -113,6 +113,7 @@ in_clear_caches() {
 in_clear_logs() {
     in_within_vm || return 1;
     in_app
+    rm -rf /dev/shm/symfony/*/logs
     rm -f app-new/logs/*.log
     rm -f /var/log/mysql/*
     rm -f /var/log/nginx/*
