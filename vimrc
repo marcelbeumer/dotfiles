@@ -205,7 +205,7 @@ function! PHPSettings()
     setlocal path+=vendor/twig/**
     setlocal path+=vendor/symfony/**
     setlocal path+=vendor/doctrine/**
-    setlocal tags=tags.php,tags.vendor.php
+    " setlocal tags=tags.php,tags.vendor.php
 endfunction
 
 " Ideally
@@ -234,7 +234,7 @@ function! JavaScriptSettings()
     call EditIncludeBufferSetup('', '')
     setlocal suffixesadd+=.js
     setlocal path+=app-new/src/**
-    setlocal tags=tags.js,tags.vendor.js
+    " setlocal tags=tags.js,tags.vendor.js
 endfunction
 
 autocmd FileType php call PHPSettings()

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# --------------
+# Prints which env we are currently in, the Mac host or inside the VM
 in_env() {
     if [ "$(uname)" == "Darwin" ]; then
         printf "host"
@@ -31,147 +31,95 @@ in_staff() {
     ssh root@staff.internations.org
 }
 
+# Log into my vm
 in_vm() {
     ssh root@internations.dev
 }
 
-in_in() {
+# Chdir into app repos
+in_app() {
     cd $INREPOS/in;
 }
 
+# Chdir app src dir
 in_src() {
     cd $INREPOS/in/app-new/src;
 }
 
+# Chdir in oms repos
 in_oms() {
     cd $INREPOS/in-oms;
 }
 
+# Chdir in solr repos
 in_solr() {
     cd $INREPOS/in-solr;
 }
 
-in_fix_permissions() {
-    in_within_host || return 1;
-    echo "(Fixing permissions will use sudo)"
-    pwd=$PWD
-    in_in
-    echo "Setting permissions from in_in..."
-
-    echo "sudo chown -R marcel ."
-    sudo chown -R marcel .
-
-    echo "sudo chmod -R 777 app-new/cache/dev"
-    sudo chmod -R 777 app-new/cache/dev;
-
-    echo "sudo chmod -R 777 cache;"
-    sudo chmod -R 777 cache;
-
-    echo "sudo chmod -R 777 web/static/assetic"
-    sudo chmod -R 777 web/static/assetic
-
-    echo "Done."
-    cd $pwd
-}
-
-in_tags_vendor() {
-    in_within_host || return 1;
-    pwd=$PWD
-    in_in
-    ctags --languages=js -R -f tags.vendor.js vendor
-    ctags --languages=php -R -f tags.vendor.php vendor
-    cd $pwd
-}
-
-in_tags_app() {
-    in_within_host || return 1;
-    pwd=$PWD
-    in_in
-    ctags --languages=js,php -R -f tags app-new/src
-    ctags --languages=js -R -f tags.js app-new/src
-    ctags --languages=php -R -f tags.php app-new/src
-    cd $pwd
-}
-
+# Rebuild ctags file
 in_tags() {
     in_within_host || return 1;
-    # in_tags_vendor
-    in_tags_app
+    in_app
+    ctags -R -f tags app-new/src
 }
 
 # Git pull on all repos
 in_pull() {
     in_within_host || return 1;
-    pwd=$PWD
-    echo "Pulling all repos..."
     echo "Pulling in:"
-    in_in && git pull --rebase
+    in_app && git pull --rebase
     echo "Pulling oms:"
     in_oms && git pull --rebase
     echo "Pulling solr:"
     in_solr && git pull --rebase
-    cd $pwd
-    echo "Updating tags (app only):"
-    in_tags_app
+    echo "Updating tags:"
+    in_tags
     echo "Done."
 }
 
+# Rebuild everything (assets, app, oms and solr)
 in_rebuild() {
     in_within_vm || return 1;
-    echo "Rebuild..."
-    pwd=$PWD
-    echo "Rebuilding frontend resources"
-    echo "Copy assets:"
-    in_in && php composer/copy-assets.php
-    echo "Assetic:"
     in_rebuild_assetic
-    echo "Ant:"
-    in_in && ant
+    in_app && ant
     in_oms && ant clean setup
     in_solr && ant
-    cd $pwd
 }
 
+# Clear and rebuild assetic
 in_rebuild_assetic() {
     in_within_vm || return 1;
     in_clear_assetic
-    in_in && php app-new/console assets:install web/static && php app-new/console assetic:dump web --force
+    in_app && php composer/copy-assets.php
+    in_app && php app-new/console assets:install web/static && php app-new/console assetic:dump web
 }
 
+# Clear assetic files
 in_clear_assetic() {
     in_within_vm || return 1;
-    in_in && rm -rf web/static/assetic/*
+    in_app && rm -rf web/static/assetic/*
     chmod -R 777 /dev/shm/symfony
 }
 
+# Clear all caches
 in_clear_caches() {
     in_within_vm || return 1;
-    pwd=$PWD
-    in_in
-    rm -rf app-new/cache/dev/*
-    rm -rf app-new/cache/test/*
+    in_app
     rm -rf /dev/shm/symfony/*
-    chmod -R 777 /dev/shm/symfony
-    rm -rf cache/*
-    rm -rf /tmp/wsdl--*
-    in_oms;
-    # php magerun.phar cache:clean
-    # php magerun.phar cache:flush
-    rm -f /tmp/wsdl-*
-    cd $pwd;
+    rm -rf /tmp/wsdl-*
 }
 
+# Clear all log files
 in_clear_logs() {
     in_within_vm || return 1;
-    pwd=$PWD
-    in_in
+    in_app
     rm -f app-new/logs/*.log
     rm -f /var/log/mysql/*
     rm -f /var/log/nginx/*
     rm -f /var/log/php*
-    cd $pwd;
 }
 
+# Clear all logs, assets and caches
 in_clear() {
     in_within_vm || return 1;
     in_clear_logs
@@ -179,22 +127,20 @@ in_clear() {
     in_clear_caches
 }
 
-in_restart_php() {
-    in_within_vm || return 1;
-    /etc/init.d/php5-fpm restart
-}
-
+# Restart all servers
 in_restart() {
     in_within_vm || return 1;
     echo "Restarting servers..."
+    /etc/init.d/php5-fpm restart
     /etc/init.d/memcached restart
-    /etc/init.d/redis-server restart
     /etc/init.d/mysql restart
     /etc/init.d/nginx restart
     /etc/init.d/tomcat6 restart
-    in_restart_php
+    /etc/init.d/redis-server restart
+    /etc/init.d/rabbitmq-server restart
 }
 
+# Clear, rebuild and restart all (complete refresh!)
 in_refresh() {
     in_within_vm || return 1;
     echo "Doing full refresh..."
@@ -204,57 +150,64 @@ in_refresh() {
     echo "Full refresh done."
 }
 
+# Start assetic watcher
 in_watch() {
     in_within_vm || return 1;
-    in_in && php app-new/console assetic:dump web --force --watch
+    in_app && php app-new/console assetic:dump web --force --watch
 }
 
+# Run new app console
 in_console() {
     in_within_vm || return 1;
-    in_in
+    in_app
     php app-new/console $@
 }
 
+# Tail php logs
 in_logs() {
     tail -f /var/log/php.log
 }
 
+# Run phpunit
 in_phpunit() {
     in_within_vm || return 1;
-    in_in
     phpunit --verbose --colors --debug $@
 }
 
+# Run phpcs on app
 in_phpcheckstyle() {
     in_within_vm || return 1;
-    in_in
+    in_app
     vendor/bin/phpcs --report=checkstyle --report-file=build/logs/php-checkstyle.xml --standard=ruleset.xml $@
 }
 
+# Run behat
 in_behat() {
     in_within_vm || return 1;
-    in_in && vendor/behat/behat/bin/behat $@
+    in_app && vendor/behat/behat/bin/behat $@
 }
 
+# Run sahi
 in_sahi() {
     printf "Running sahi within %s...\n" "$(in_env)"
-    in_in
+    in_app
     cd sahi/bin
     ./sahi.sh
 }
 
+# Rebuild requirejs optimized files
 in_rebuild_requirejs() {
     in_within_vm || return 1;
-    pwd=$PWD
-    in_in; cd web; node ../util/requirejs/build-assets.js
-    cd $pwd
+    in_app
+    cd web
+    node ../util/requirejs/build-assets.js
 }
 
 export INREPOS_VM=/code
 export INREPOS_HOST=~/Development/Clones/Internations
+
 if [ $(in_env) == "host" ]; then
     export INREPOS=$INREPOS_HOST
 else
     export INREPOS=$INREPOS_VM
 fi
-# --------------
