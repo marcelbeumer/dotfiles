@@ -42,6 +42,7 @@ Bundle 'tpope/vim-ragtag'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
+Bundle 'justinmk/vim-sneak'
 
 " Navigation, search, GUI
 " -----------------------
@@ -55,9 +56,8 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'sjl/gundo.vim'
 " Evaluating
 Bundle 'mattboehm/vim-accordion'
-" Evaluating (TODO: add PHP support)
-Bundle 'mattboehm/vim-unstack'
-Bundle 'gcmt/taboo.vim'
+" Bundle 'gcmt/taboo.vim'
+Bundle 'fisadev/vim-ctrlp-cmdpalette'
 
 " Version control
 " ---------------
@@ -289,10 +289,11 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:ackprg = 'ag --nogroup --column'
+let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:ctrlp_cmd = 'CtrlP .'
 let g:ctrlp_extensions = ['tag']
-let g:ctrlp_lazy_update = 500
+let g:ctrlp_lazy_update = 150
+let g:ctrlp_use_caching = 1
 let g:ctrlp_map = '<leader>p'
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
 let g:ctrlp_regexp = 1
