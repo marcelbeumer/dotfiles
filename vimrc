@@ -1,4 +1,5 @@
 set nocompatible
+set hls
 filetype off
 
 runtime macros/matchit.vim
@@ -42,7 +43,6 @@ Bundle 'tpope/vim-ragtag'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
-Bundle 'justinmk/vim-sneak'
 
 " Navigation, search, GUI
 " -----------------------
@@ -81,6 +81,7 @@ set foldlevel=100
 set foldmethod=indent
 set hidden
 set incsearch
+set hls
 set ignorecase
 set nobackup
 set noswapfile
