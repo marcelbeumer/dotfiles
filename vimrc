@@ -1,5 +1,4 @@
 set nocompatible
-set hls
 filetype off
 
 runtime macros/matchit.vim
@@ -10,10 +9,8 @@ Bundle 'gmarik/vundle'
 
 " Themes
 " ------
-Bundle 'altercation/vim-colors-solarized'
 Bundle 'flazz/vim-colorschemes'
 Bundle 'marcelbeumer/spacedust.vim'
-Bundle 'mrtazz/molokai.vim'
 
 " Language support
 " ----------------
@@ -27,11 +24,12 @@ Bundle 'marcelbeumer/javascript-syntax.vim'
 Bundle 'nono/vim-handlebars'
 Bundle 'othree/coffee-check.vim'
 Bundle 'shawncplus/phpcomplete.vim'
-Bundle 'skammer/vim-css-color'
+Bundle 'plasticboy/vim-markdown'
 
 " General language tools
 " ----------------------
 Bundle 'scrooloose/syntastic'
+Bundle 'beloglazov/vim-online-thesaurus'
 
 " Text editing tools
 " ------------------
@@ -43,6 +41,8 @@ Bundle 'tpope/vim-ragtag'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
+Bundle 'marcelbeumer/vis.vim'
+Bundle 'marcelbeumer/dragvisuals.vim'
 
 " Navigation, search, GUI
 " -----------------------
@@ -54,9 +54,7 @@ Bundle 'marcelbeumer/color-color.vim'
 Bundle 'nelstrom/vim-qargs'
 Bundle 'scrooloose/nerdtree'
 Bundle 'sjl/gundo.vim'
-" Evaluating
 Bundle 'mattboehm/vim-accordion'
-" Bundle 'gcmt/taboo.vim'
 Bundle 'fisadev/vim-ctrlp-cmdpalette'
 
 " Version control
@@ -65,9 +63,8 @@ Bundle 'tpope/vim-fugitive'
 
 " Misc
 " ----
-Bundle 'xolox/vim-misc'
-Bundle 'xolox/vim-notes'
-Bundle 'xolox/vim-reload'
+Bundle 'arecarn/crunch'
+Bundle 'marcelbeumer/vmath.vim'
 
 syntax enable
 filetype plugin indent on
@@ -123,6 +120,13 @@ nmap <leader>; :NERDTreeToggle<cr>
 nmap <leader>b :CtrlPBuffer<cr>
 nmap <leader>t :CtrlPTag<cr>
 vmap <leader>c <esc>:'<,'>:CoffeeCompile<CR>
+vmap <expr> <LEFT> DVB_Drag('left')
+vmap <expr> <RIGHT> DVB_Drag('right')
+vmap <expr> <DOWN> DVB_Drag('down')
+vmap <expr> <UP> DVB_Drag('up')
+vmap <expr> D DVB_Duplicate()
+vmap <expr> ++ VMATH_YankAndAnalyse()
+nmap ++ vip++
 
 " Convert newlines and retab
 nmap <Leader>r :%s/\r/\r/g<cr>gg<cr>:retab<cr>
@@ -206,7 +210,6 @@ function! PHPSettings()
     setlocal path+=vendor/twig/**
     setlocal path+=vendor/symfony/**
     setlocal path+=vendor/doctrine/**
-    " setlocal tags=tags.php,tags.vendor.php
 endfunction
 
 " Ideally
@@ -235,7 +238,6 @@ function! JavaScriptSettings()
     call EditIncludeBufferSetup('', '')
     setlocal suffixesadd+=.js
     setlocal path+=app-new/src/**
-    " setlocal tags=tags.js,tags.vendor.js
 endfunction
 
 autocmd FileType php call PHPSettings()
@@ -258,29 +260,25 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 command -range=% BeautifyJS <line1>,<line2>!js-beautify --indent-size=4 -
 command -range=% UglifyJS <line1>,<line2>!uglifyjs
 command -range=% Xmltidy <line1>,<line2>!tidy -xml -indent -utf8 -q --indent-spaces 4
-command ClearUndo silent !rm ~/.vimundo/*
-command IN e build.xml
-command INJournal Note IN - Journal
-command INTech Note IN - Tech
 command JSHint !jshint % --show-non-errors
-command JournalDate silent r !date +\%a\ \%d\ \%B\ \%Y\ \%Hh\%M
-command ConvertJournalDate silent %s/\(\d\{2\}\):\(\d\{2\}\)/\1h\2/g
-command Marked silent !/Applications/Marked.app/Contents/MacOS/Marked "%" &
-command Nf NERDTreeFind
 command PHPExpandClass call PhpExpandClass()
 command Phpcs !vendor/bin/phpcs % --standard=ruleset.xml
+command JournalDate silent r !date +\%a\ \%d\ \%B\ \%Y\ \%Hh\%M
+command Marked silent !/Applications/Marked.app/Contents/MacOS/Marked "%" &
+command Nf NERDTreeFind
 command Rc e ~/.vimrc
 command Rr silent! so $MYVIMRC
 command SudoWrite w !sudo tee % > /dev/null
 command CodingMode silent! call CodingMode()
 command WriterMode silent! call WriterMode()
 command DualWriterMode silent! call DualWriterMode()
+command GotoNotes lcd ~/Documents/Notes
+command GotoClones lcd ~/Development/Clones
+command GotoInApp lcd ~/Development/Clones/Internations/in
 command -nargs=* Glp Glog --abbrev-commit --date=relative <args>
 
 " Plugin config
 " -------------
-"let g:symfony_app_console_caller='ssh root@internations.dev ". ~/.profile; in_in; php"'
-"let g:symfony_app_console_path= 'app-new/console'
 let NERDTreeBookmarksFile = $HOME . '/.vim_nerdtree_bookmarks'
 let NERDTreeIgnore=['\.pyc$', '\~$']
 let NERDTreeShowBookmarks=1
@@ -307,8 +305,11 @@ let g:syntastic_enable_signs=1
 let g:syntastic_html_checkers=[]
 let g:syntastic_php_checkers=['php'] ", 'phpcs']
 let g:syntastic_scss_checkers=[]
-let g:yankring_history_file = '.yankring_history'
+let g:syntastic_less_checkers=[]
+let g:syntastic_yaml_checkers=[]
 let g:fugitive_summary_format = '%h - %d %s (%cr by %an)'
+let g:online_thesaurus_map_keys = 0
+let g:DVB_TrimWS = 0 " no trim whitespace after moving
 
 " Setup UI
 " --------

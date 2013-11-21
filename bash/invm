@@ -80,6 +80,7 @@ in_rebuild() {
     in_app && ant
     in_oms && ant clean setup
     in_solr && ant
+    chmod -R 777 /dev/shm/symfony
 }
 
 # Clear and rebuild assetic
@@ -158,6 +159,13 @@ in_console() {
     in_within_vm || return 1;
     in_app
     php app-new/console $@
+}
+
+# Show all available twig functions
+in_twig_functions() {
+    in_within_vm || return 1;
+    in_app
+    php app-new/console twig:debug:dump-functions
 }
 
 # Tail php logs

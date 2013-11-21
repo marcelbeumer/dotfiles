@@ -48,3 +48,4 @@
     m = merge
     rh = reset HEAD
     rhh = reset HEAD --hard
+    pick = cherry-pick
