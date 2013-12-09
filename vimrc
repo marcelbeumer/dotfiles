@@ -11,6 +11,7 @@ Bundle 'gmarik/vundle'
 " ------
 Bundle 'flazz/vim-colorschemes'
 Bundle 'marcelbeumer/spacedust.vim'
+Bundle 'marcelbeumer/spacedust-airline.vim'
 
 " Language support
 " ----------------
@@ -43,8 +44,19 @@ Bundle 'tpope/vim-unimpaired'
 Bundle 'marcelbeumer/vis.vim'
 Bundle 'marcelbeumer/dragvisuals.vim'
 
+" Version control
+" ---------------
+Bundle 'tpope/vim-fugitive'
+Bundle 'mhinz/vim-signify'
+
+" Math
+" ----
+Bundle 'arecarn/crunch'
+Bundle 'marcelbeumer/vmath.vim'
+
 " Navigation, search, GUI
 " -----------------------
+Bundle 'bling/vim-airline'
 Bundle 'ZoomWin'
 Bundle 'ack.vim'
 Bundle 'ervandew/supertab'
@@ -56,17 +68,10 @@ Bundle 'sjl/gundo.vim'
 Bundle 'mattboehm/vim-accordion'
 Bundle 'fisadev/vim-ctrlp-cmdpalette'
 
-" Version control
-" ---------------
-Bundle 'tpope/vim-fugitive'
-Bundle 'mhinz/vim-signify'
-
 " Misc
 " ----
-Bundle 'arecarn/crunch'
-Bundle 'marcelbeumer/vmath.vim'
-Bundle 'bling/vim-airline'
-Bundle 'marcelbeumer/spacedust-airline.vim'
+Bundle 'marcelbeumer/editing-modes.vim'
+Bundle 'marcelbeumer/filetype-magic.vim'
 
 syntax enable
 filetype plugin indent on
@@ -142,112 +147,6 @@ nmap <silent><leader>z :set foldexpr=getline(v:lnum)!~@/ foldlevel=0 foldcolumn=
 
 " Filetype settings
 " -----------------
-
-"  TODO
-"  - evaluate includeexpr, replacing v:fname with something else
-"  - come up with practical name for this thing instead of EditIncludeOnLine
-"  - move command (create it), function, setup and standard parsers and
-"  - remove setup function if includeexpr evel works, and simpy set the
-"  b:something or the g:something
-"  - Also check for g:..parser
-"  resolves, as well as default filetype handlers into a plugin, so
-"  right now the only thing that needs to be in this the setlocal stuff and
-"  the twig stuff
-
-function! EditIncludeOnLine()
-    let line = getline('.')
-    if exists("b:edit_include_line_parser")
-        let GrabFn = function(b:edit_include_line_parser)
-        let line = call(GrabFn, [line])
-    endif
-    let path = line
-    if exists("b:edit_include_path_resolver")
-        let ResolveFn = function(b:edit_include_path_resolver)
-        let path = call(ResolveFn, [line])
-    endif
-    let path = findfile(path)
-    exec 'e ' . path
-endfunction
-
-function! EditIncludeBufferSetup(pathResolver, lineParser)
-    let lineParser = 'DefaultIncludeLineParser'
-    if strlen(a:lineParser) > 0
-        let lineParser = a:lineParser
-    endif
-    exec 'let b:edit_include_line_parser=''' . lineParser . ''''
-    if strlen(a:pathResolver) > 0
-        exec 'let b:edit_include_path_resolver=''' . a:pathResolver . ''''
-        exec 'setlocal includeexpr=' . a:pathResolver . '(v:fname)'
-    endif
-endfunction
-
-function! DefaultIncludeLineParser(line)
-    return substitute(a:line, '.\{-}[''"]\(.\{-}\)[''"].*', '\1', 'g')
-endfunction
-
-function! PHPEditIncludeLineParser(line)
-    let line = substitute(a:line, '.\{-}use\s\+\(\S*\);.*', '\1', 'g')
-    return DefaultIncludeLineParser(line)
-endfunction
-
-function! PHPEditIncludePathResolver(fname)
-    let fname = a:fname
-    if stridx(fname, ':') != -1
-        let fname = TwigEditIncludePathResolver(fname)
-    endif
-    return substitute(fname, '\', '/', 'g')
-endfunction
-
-function! TwigEditIncludePathResolver(fname)
-    let fname = a:fname
-    let fname = substitute(fname, ':', '/', 'g')
-    let fname = substitute(fname, '^InterNations\(.\{-}\)Bundle', '\1Bundle/Resources/views/', 'g')
-    return fname
-endfunction
-
-function! PHPSettings()
-    call EditIncludeBufferSetup('PHPEditIncludePathResolver', 'PHPEditIncludeLineParser')
-    setlocal suffixesadd+=.php
-    setlocal path+=app-new/src/**
-    setlocal path+=vendor/sensio/**
-    setlocal path+=vendor/twig/**
-    setlocal path+=vendor/symfony/**
-    setlocal path+=vendor/doctrine/**
-endfunction
-
-" Ideally
-" function! PHPSettings()
-"     let b:edit_include_line_parser='PHPIncludeLineParser'
-"     setlocal includeexpr=PHPIncludeExpr(v:fname)
-"     setlocal suffixesadd+=.php
-"     setlocal path+=app-new/src/**
-"     setlocal path+=vendor/sensio/**
-"     setlocal path+=vendor/twig/**
-"     setlocal path+=vendor/symfony/**
-"     setlocal path+=vendor/doctrine/**
-"  endfunction
-
-function! HTMLTwigSettings()
-    call EditIncludeBufferSetup('TwigEditIncludePathResolver', '')
-    setlocal path+=app-new/src/**
-endfunction
-
-function! XMLSettings()
-    call EditIncludeBufferSetup('PHPEditIncludePathResolver', '')
-    setlocal path+=app-new/src/**
-endfunction
-
-function! JavaScriptSettings()
-    call EditIncludeBufferSetup('', '')
-    setlocal suffixesadd+=.js
-    setlocal path+=app-new/src/**
-endfunction
-
-autocmd FileType php call PHPSettings()
-autocmd FileType javascript call JavaScriptSettings()
-autocmd FileType html.twig call HTMLTwigSettings()
-autocmd FileType xml call XMLSettings()
-
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufNewFile,BufRead,BufWritePost *.md set filetype=markdown
 
@@ -272,9 +171,6 @@ command Nf NERDTreeFind
 command Rc e ~/.vimrc
 command Rr silent! so $MYVIMRC
 command SudoWrite w !sudo tee % > /dev/null
-command CodingMode silent! call CodingMode()
-command WriterMode silent! call WriterMode()
-command DualWriterMode silent! call DualWriterMode()
 command GotoNotes lcd ~/Documents/Notes
 command GotoClones lcd ~/Development/Clones
 command GotoInApp lcd ~/Development/Clones/Internations/in
@@ -322,48 +218,6 @@ let g:airline#extensions#tabline#show_buffers = 0
 
 " Setup UI
 " --------
-function! WriterMode()
-    set linebreak
-    set nonumber
-    if has('gui_running')
-        set guifont=Cousine:h18
-        sleep 0 " needed for rendering
-        set columns=80
-        sleep 0 " needed for rendering
-        set fuoptions=maxvert
-        set fu
-    endif
-    nnoremap j gj
-    nnoremap k gk
-    vnoremap j gj
-    vnoremap k gk
-endfunction
-
-function! DualWriterMode()
-    call WriterMode()
-    if has('gui_running')
-        set guifont=Cousine:h16
-        set columns=140
-    endif
-endfunction
-
-function! CodingMode()
-    set nolinebreak
-    set number
-    if has('gui_running')
-        set guifont=Meslo\ LG\ S\ DZ:h14
-    endif
-    if &fu
-        set columns=120
-        sleep 0
-        set nofu
-    endif
-    nunmap j
-    nunmap k
-    vunmap j
-    vunmap k
-endfunction
-
 if has('gui_running')
     set vb " no bells; as macvim does not support visual bell
     set guioptions=aAc "add 'e' for native tabs
@@ -373,31 +227,4 @@ if has('gui_running')
 end
 
 " Default mode
-silent! call CodingMode()
-
-" Temporary stuff to removed or moved to plugins
-" ----------------------------------------------
-
-" http://vim.wikia.com/wiki/Auto_highlight_current_word_when_idle
-" Highlight all instances of word under cursor, when idle.
-" Useful when studying strange source code.
-" Type z/ to toggle highlighting on/off.
-nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
-function! AutoHighlightToggle()
-  let @/ = ''
-  if exists('#auto_highlight')
-    au! auto_highlight
-    augroup! auto_highlight
-    setl updatetime=4000
-    echo 'Highlight current word: off'
-    return 0
-  else
-    augroup auto_highlight
-      au!
-      au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
-    augroup end
-    setl updatetime=500
-    echo 'Highlight current word: ON'
-    return 1
-  endif
-endfunction
+silent! call editing_modes#CodingMode()
