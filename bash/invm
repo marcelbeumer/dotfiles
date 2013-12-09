@@ -76,7 +76,7 @@ in_pull() {
 # Rebuild everything (assets, app, oms and solr)
 in_rebuild() {
     in_within_vm || return 1;
-    in_rebuild_assetic
+    # in_rebuild_assetic
     in_app && ant
     in_oms && ant clean setup
     in_solr && ant
@@ -88,7 +88,8 @@ in_rebuild_assetic() {
     in_within_vm || return 1;
     in_clear_assetic
     in_app && php composer/copy-assets.php
-    in_app && php app-new/console assets:install web/static && php app-new/console assetic:dump web
+    in_app && php app-new/console assets:install web/static
+    # in_app && php app-new/console assetic:dump web
 }
 
 # Clear assetic files

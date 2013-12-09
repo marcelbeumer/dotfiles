@@ -29,7 +29,6 @@ Bundle 'plasticboy/vim-markdown'
 " General language tools
 " ----------------------
 Bundle 'scrooloose/syntastic'
-Bundle 'beloglazov/vim-online-thesaurus'
 
 " Text editing tools
 " ------------------
@@ -60,11 +59,14 @@ Bundle 'fisadev/vim-ctrlp-cmdpalette'
 " Version control
 " ---------------
 Bundle 'tpope/vim-fugitive'
+Bundle 'mhinz/vim-signify'
 
 " Misc
 " ----
 Bundle 'arecarn/crunch'
 Bundle 'marcelbeumer/vmath.vim'
+Bundle 'bling/vim-airline'
+Bundle 'marcelbeumer/spacedust-airline.vim'
 
 syntax enable
 filetype plugin indent on
@@ -97,6 +99,7 @@ set undodir=~/.vimundo
 set undofile
 set wildignore+=*.o,*.obj,.git,.hg,*.pyc
 set wildmenu
+set laststatus=2 " always show status bar
 
 " Key mappings
 " ------------
@@ -300,16 +303,22 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --exclude-standard'
 let g:notes_directories = ['~/Documents/Notes']
 let g:notes_suffix = '.txt'
 let g:notes_title_sync = 'change_title'
-let g:syntastic_auto_loc_list=1
+let g:syntastic_auto_loc_list=2
 let g:syntastic_enable_signs=1
+let g:syntastic_javascript_checkers=['jshint']
 let g:syntastic_html_checkers=[]
 let g:syntastic_php_checkers=['php'] ", 'phpcs']
 let g:syntastic_scss_checkers=[]
 let g:syntastic_less_checkers=[]
 let g:syntastic_yaml_checkers=[]
 let g:fugitive_summary_format = '%h - %d %s (%cr by %an)'
-let g:online_thesaurus_map_keys = 0
-let g:DVB_TrimWS = 0 " no trim whitespace after moving
+let g:DVB_TrimWS=0 " no trim whitespace after moving
+let g:signify_disable_by_default = 0
+let g:airline_theme='spacedust'
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 0
 
 " Setup UI
 " --------
