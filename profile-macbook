@@ -4,6 +4,7 @@ export PATH=/usr/local/mysql/bin:$PATH
 export PATH=/usr/local/share/npm/bin:$PATH
 export PATH=/usr/local/php5/bin:$PATH
 export PATH=~/bin:$PATH
+export PATH=node_modules/.bin:$PATH
 
 export CLICOLOR=true
 export EDITOR="vim"

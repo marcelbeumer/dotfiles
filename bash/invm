@@ -87,8 +87,8 @@ in_rebuild() {
 in_rebuild_assetic() {
     in_within_vm || return 1;
     in_clear_assetic
-    in_app && php composer/copy-assets.php
-    in_app && php app-new/console assets:install web/static
+    # in_app && php composer/copy-assets.php
+    # in_app && php app-new/console assets:install web/static
     # in_app && php app-new/console assetic:dump web
 }
 
