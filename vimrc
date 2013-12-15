@@ -72,6 +72,7 @@ Bundle 'fisadev/vim-ctrlp-cmdpalette'
 " ----
 Bundle 'marcelbeumer/editing-modes.vim'
 Bundle 'marcelbeumer/filetype-magic.vim'
+" Bundle 'szw/vim-ctrlspace'
 
 syntax enable
 filetype plugin indent on
@@ -171,9 +172,9 @@ command Nf NERDTreeFind
 command Rc e ~/.vimrc
 command Rr silent! so $MYVIMRC
 command SudoWrite w !sudo tee % > /dev/null
-command GotoNotes lcd ~/Documents/Notes
-command GotoClones lcd ~/Development/Clones
-command GotoInApp lcd ~/Development/Clones/Internations/in
+command Notes lcd ~/Documents/Notes
+command Clones lcd ~/Development/Clones
+command InApp lcd ~/Development/Clones/Internations/in
 command -nargs=* Glp Glog --abbrev-commit --date=relative <args>
 
 " Plugin config
