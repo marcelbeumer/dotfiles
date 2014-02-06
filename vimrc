@@ -68,11 +68,10 @@ Bundle 'sjl/gundo.vim'
 Bundle 'mattboehm/vim-accordion'
 Bundle 'fisadev/vim-ctrlp-cmdpalette'
 
-" Misc
-" ----
+" " Misc
+" " ----
 Bundle 'marcelbeumer/editing-modes.vim'
 Bundle 'marcelbeumer/filetype-magic.vim'
-" Bundle 'szw/vim-ctrlspace'
 
 syntax enable
 filetype plugin indent on
@@ -226,3 +225,4 @@ end
 
 " Default mode
 silent! call editing_modes#CodingMode()
+set guifont=Meslo\ LG\ S\ DZ:h12

@@ -47,6 +47,11 @@ in_oms() {
     cd $INREPOS/in-oms;
 }
 
+# Chdir in cms repos
+in_cms() {
+    cd $INREPOS/in-cms;
+}
+
 # Chdir in solr repos
 in_solr() {
     cd $INREPOS/in-solr;
@@ -66,6 +71,8 @@ in_pull() {
     in_app && git pull --rebase
     echo "Pulling oms:"
     in_oms && git pull --rebase
+    echo "Pulling cms:"
+    in_cms && git pull --rebase
     echo "Pulling solr:"
     in_solr && git pull --rebase
     echo "Updating tags:"
@@ -83,20 +90,9 @@ in_rebuild() {
     chmod -R 777 /dev/shm/symfony
 }
 
-# Clear and rebuild assetic
-in_rebuild_assetic() {
+in_rebuild_assets() {
     in_within_vm || return 1;
-    in_clear_assetic
-    # in_app && php composer/copy-assets.php
-    # in_app && php app-new/console assets:install web/static
-    # in_app && php app-new/console assetic:dump web
-}
-
-# Clear assetic files
-in_clear_assetic() {
-    in_within_vm || return 1;
-    in_app && rm -rf web/static/assetic/*
-    chmod -R 777 /dev/shm/symfony
+    in_app && php app-new/console assets:install web/static
 }
 
 # Clear all caches
