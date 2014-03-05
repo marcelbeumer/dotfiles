@@ -148,6 +148,7 @@ nmap <silent><leader>z :set foldexpr=getline(v:lnum)!~@/ foldlevel=0 foldcolumn=
 " Filetype settings
 " -----------------
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
+autocmd FileType coffee setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufNewFile,BufRead,BufWritePost *.md set filetype=markdown
 
 set omnifunc=syntaxcomplete#Complete
