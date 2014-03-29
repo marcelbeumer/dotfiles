@@ -19,13 +19,13 @@ Bundle 'arnaud-lb/vim-php-namespace'
 Bundle 'beyondwords/vim-twig'
 Bundle 'django.vim'
 Bundle 'groenewege/vim-less'
-Bundle 'hail2u/vim-css3-syntax'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'marcelbeumer/javascript-syntax.vim'
 Bundle 'nono/vim-handlebars'
 Bundle 'othree/coffee-check.vim'
-Bundle 'shawncplus/phpcomplete.vim'
 Bundle 'plasticboy/vim-markdown'
+Bundle 'moll/vim-node'
+Bundle 'marijnh/tern_for_vim'
 
 " General language tools
 " ----------------------
@@ -33,7 +33,7 @@ Bundle 'scrooloose/syntastic'
 
 " Text editing tools
 " ------------------
-Bundle 'SirVer/ultisnips'
+Bundle 'Valloric/YouCompleteMe'
 Bundle 'bitc/vim-bad-whitespace'
 Bundle 'godlygeek/tabular'
 Bundle 'tpope/vim-commentary'
@@ -47,7 +47,6 @@ Bundle 'marcelbeumer/dragvisuals.vim'
 " Version control
 " ---------------
 Bundle 'tpope/vim-fugitive'
-Bundle 'mhinz/vim-signify'
 
 " Math
 " ----
@@ -59,7 +58,6 @@ Bundle 'marcelbeumer/vmath.vim'
 Bundle 'bling/vim-airline'
 Bundle 'ZoomWin'
 Bundle 'ack.vim'
-Bundle 'ervandew/supertab'
 Bundle 'kien/ctrlp.vim'
 Bundle 'marcelbeumer/color-color.vim'
 Bundle 'nelstrom/vim-qargs'
@@ -105,6 +103,9 @@ set undofile
 set wildignore+=*.o,*.obj,.git,.hg,*.pyc
 set wildmenu
 set laststatus=2 " always show status bar
+let &colorcolumn="80,".join(range(120,999),",")
+set splitbelow " so that preview window positions below
+set splitright
 
 " Key mappings
 " ------------
@@ -127,6 +128,9 @@ nmap <leader>: :NERDTreeMirror<cr>
 nmap <leader>; :NERDTreeToggle<cr>
 nmap <leader>b :CtrlPBuffer<cr>
 nmap <leader>t :CtrlPTag<cr>
+nmap <leader>m :CtrlPMRUFiles<cr>
+nmap <leader>f :let @*=@%<cr>
+nmap <leader>h :let @*=expand("%:h")<cr>
 vmap <leader>c <esc>:'<,'>:CoffeeCompile<CR>
 vmap <expr> <LEFT> DVB_Drag('left')
 vmap <expr> <RIGHT> DVB_Drag('right')
@@ -154,7 +158,7 @@ autocmd BufNewFile,BufRead,BufWritePost *.md set filetype=markdown
 set omnifunc=syntaxcomplete#Complete
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
@@ -176,6 +180,7 @@ command Notes lcd ~/Documents/Notes
 command Clones lcd ~/Development/Clones
 command InApp lcd ~/Development/Clones/Internations/in
 command -nargs=* Glp Glog --abbrev-commit --date=relative <args>
+command TernReset call tern#Disable() | call tern#Shutdown() | call tern#Enable()
 
 " Plugin config
 " -------------
@@ -184,10 +189,6 @@ let NERDTreeIgnore=['\.pyc$', '\~$']
 let NERDTreeShowBookmarks=1
 let NERDTreeWinSize=50
 let coffee_make_options = '-o /tmp/'
-let g:SuperTabDefaultCompletionType = "<c-n>"
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:ctrlp_cmd = 'CtrlP .'
 let g:ctrlp_extensions = ['tag']
@@ -207,7 +208,6 @@ let g:syntastic_less_checkers=[]
 let g:syntastic_yaml_checkers=[]
 let g:fugitive_summary_format = '%h - %d %s (%cr by %an)'
 let g:DVB_TrimWS=0 " no trim whitespace after moving
-let g:signify_disable_by_default = 1
 let g:airline_theme='spacedust'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
@@ -226,4 +226,3 @@ end
 
 " Default mode
 silent! call editing_modes#CodingMode()
-set guifont=Meslo\ LG\ S\ DZ:h12
