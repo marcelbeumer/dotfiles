@@ -7,6 +7,10 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 
+" General
+" -------
+Bundle 'Shougo/vimproc'
+
 " Themes
 " ------
 Bundle 'flazz/vim-colorschemes'
@@ -26,6 +30,7 @@ Bundle 'othree/coffee-check.vim'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'moll/vim-node'
 Bundle 'marijnh/tern_for_vim'
+" Bundle 'm2mdas/phpcomplete-extended'
 
 " General language tools
 " ----------------------
@@ -62,9 +67,8 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'marcelbeumer/color-color.vim'
 Bundle 'nelstrom/vim-qargs'
 Bundle 'scrooloose/nerdtree'
+Bundle 'tpope/vim-vinegar'
 Bundle 'sjl/gundo.vim'
-Bundle 'mattboehm/vim-accordion'
-Bundle 'fisadev/vim-ctrlp-cmdpalette'
 
 " " Misc
 " " ----
@@ -111,10 +115,10 @@ set splitright
 " ------------
 
 " Window navigation
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+" map <C-h> <C-w>h
+" map <C-j> <C-w>j
+" map <C-k> <C-w>k
+" map <C-l> <C-w>l
 
 " Omnicomplet with C-Space
 inoremap <C-Space> <C-x><C-o>
@@ -184,6 +188,7 @@ command TernReset call tern#Disable() | call tern#Shutdown() | call tern#Enable(
 
 " Plugin config
 " -------------
+let g:netrw_liststyle = 3
 let NERDTreeBookmarksFile = $HOME . '/.vim_nerdtree_bookmarks'
 let NERDTreeIgnore=['\.pyc$', '\~$']
 let NERDTreeShowBookmarks=1
@@ -214,6 +219,7 @@ let g:airline_right_sep=''
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:ycm_min_num_of_chars_for_completion = 99
+let g:ycm_filetype_specific_completion_to_disable = {'php': 1}
 
 " Setup UI
 " --------

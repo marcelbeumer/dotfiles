@@ -23,6 +23,26 @@ alias mysql_config="mysql_config5"
 alias mysqldump="mysqldump5"
 alias serve="python -m SimpleHTTPServer"
 
+function proxysocks() {
+    if [ -z "$3" ]; then
+        echo "usage: proxysocks \"<connection>\" <port> <country>"
+        return
+    fi
+    echo "Enabling proxysocks"
+    networksetup -setsocksfirewallproxy $1 localhost $2
+    ssh proxy-user@proxy-$3.marcelbeumer.com -ND $2
+    unproxysocks $1
+}
+
+function unproxysocks() {
+    if [ -z "$1" ]; then
+        echo "usage: unproxysocks \"<connection>\""
+        return
+    fi
+    echo "Disabling proxysocks"
+    networksetup -setsocksfirewallproxystate $1 off
+}
+
 # Mac only
 if [ "$DOTFILES_ENV" == "mac" ]; then
     alias vi="mvim -v"
