@@ -1,6 +1,8 @@
 set nocompatible
 filetype off
 
+set rtp+=~/.fzf
+
 runtime macros/matchit.vim
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -25,11 +27,12 @@ Bundle 'django.vim'
 Bundle 'groenewege/vim-less'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'marcelbeumer/javascript-syntax.vim'
-Bundle 'nono/vim-handlebars'
 Bundle 'othree/coffee-check.vim'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'moll/vim-node'
 Bundle 'marijnh/tern_for_vim'
+Bundle 'mustache/vim-mustache-handlebars'
+" Bundle 'mxw/vim-jsx'
 " Bundle 'm2mdas/phpcomplete-extended'
 
 " General language tools
@@ -95,12 +98,12 @@ set numberwidth=5
 set ruler
 set scrolloff=10
 set shiftround
-set shiftwidth=4
+set shiftwidth=2
 set shortmess=atI
-set softtabstop=4
+set softtabstop=2
 set suffixesadd+=.js
 set suffixesadd+=.php
-set tabstop=4
+set tabstop=2
 set timeoutlen=500 " timeout of leader key
 set undodir=~/.vimundo
 set undofile
@@ -110,6 +113,7 @@ set laststatus=2 " always show status bar
 let &colorcolumn="80,".join(range(120,999),",")
 set splitbelow " so that preview window positions below
 set splitright
+set nowritebackup " place nice with file watchers
 
 " Key mappings
 " ------------
@@ -125,6 +129,7 @@ inoremap <C-Space> <C-x><C-o>
 inoremap <C-@> <C-Space>
 
 " Plugin triggers
+map <leader>s :!webkitdev<cr>
 map  <leader>c :CoffeeCompile<CR>
 map  <leader>g :call EditIncludeOnLine()<CR>
 nmap <Leader><leader>c :ColorColorToggle<cr>
@@ -156,7 +161,8 @@ nmap <silent><leader>z :set foldexpr=getline(v:lnum)!~@/ foldlevel=0 foldcolumn=
 " Filetype settings
 " -----------------
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
-autocmd FileType coffee setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType coffee setlocal shiftwidth=4 tabstop=4 softtabstop=4
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufNewFile,BufRead,BufWritePost *.md set filetype=markdown
 
 set omnifunc=syntaxcomplete#Complete
@@ -205,7 +211,7 @@ let g:ctrlp_regexp = 1
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --exclude-standard', 'find %s -type f']
 let g:syntastic_auto_loc_list=2
 let g:syntastic_enable_signs=1
-let g:syntastic_javascript_checkers=['jshint']
+" let g:syntastic_javascript_checkers=['jsxhint']
 let g:syntastic_html_checkers=[]
 let g:syntastic_php_checkers=['php'] ", 'phpcs']
 let g:syntastic_scss_checkers=[]
@@ -233,3 +239,5 @@ end
 
 " Default mode
 silent! call editing_modes#CodingMode()
+
+let g:fzf_launcher = 'urxvt -geometry 120x30 -e sh -c %s'

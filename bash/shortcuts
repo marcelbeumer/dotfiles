@@ -80,7 +80,8 @@ if [ "$DOTFILES_ENV" == "mac" ]; then
     }
 
     #Notes
-    alias cdnotes="cd ~/Documents/Notes"
-    alias notes="cdnotes; mvim ."
-    alias note="cdnotes; mvim"
+    export WRITING_REPOS=~/Development/Clones/writing
+    alias create-journal="$WRITING_REPOS/bin/create-journal"
+    alias create-tech="$WRITING_REPOS/bin/create-tech"
+    alias create-stream="$WRITING_REPOS/bin/create-stream"
 fi
