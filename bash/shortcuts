@@ -81,7 +81,5 @@ if [ "$DOTFILES_ENV" == "mac" ]; then
 
     #Notes
     export WRITING_REPOS=~/Development/Clones/writing
-    alias create-journal="$WRITING_REPOS/bin/create-journal"
-    alias create-tech="$WRITING_REPOS/bin/create-tech"
-    alias create-stream="$WRITING_REPOS/bin/create-stream"
+    alias add-content="$WRITING_REPOS/bin/add-content"
 fi
