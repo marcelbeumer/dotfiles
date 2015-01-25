@@ -23,12 +23,15 @@ Bundle 'marcelbeumer/spacedust-airline.vim'
 " ----------------
 Bundle 'arnaud-lb/vim-php-namespace'
 Bundle 'beyondwords/vim-twig'
-Bundle 'django.vim'
+" Bundle 'django.vim'
 Bundle 'groenewege/vim-less'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'marcelbeumer/javascript-syntax.vim'
+" Bundle 'pangloss/vim-javascript'
+" Bundle 'mxw/vim-jsx'
+" Bundle 'JavaScript-Indent'
 Bundle 'othree/coffee-check.vim'
-Bundle 'plasticboy/vim-markdown'
+" Bundle 'plasticboy/vim-markdown'
 Bundle 'moll/vim-node'
 Bundle 'marijnh/tern_for_vim'
 Bundle 'mustache/vim-mustache-handlebars'
@@ -41,7 +44,7 @@ Bundle 'scrooloose/syntastic'
 
 " Text editing tools
 " ------------------
-Bundle 'Valloric/YouCompleteMe'
+" Bundle 'Valloric/YouCompleteMe'
 Bundle 'bitc/vim-bad-whitespace'
 Bundle 'godlygeek/tabular'
 Bundle 'tpope/vim-commentary'
@@ -72,6 +75,7 @@ Bundle 'nelstrom/vim-qargs'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-vinegar'
 Bundle 'sjl/gundo.vim'
+Bundle 'nathanaelkane/vim-indent-guides'
 
 " " Misc
 " " ----
@@ -164,6 +168,8 @@ autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType coffee setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufNewFile,BufRead,BufWritePost *.md set filetype=markdown
+autocmd BufNewFile,BufRead,BufWritePost *.html set filetype=html.twig
+autocmd BufNewFile,BufRead,BufWritePost *.html.swig set filetype=html.twig
 
 set omnifunc=syntaxcomplete#Complete
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -174,7 +180,7 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Commands
 " --------
-command -range=% BeautifyJS <line1>,<line2>!js-beautify --indent-size=4 -
+command -range=% BeautifyJS <line1>,<line2>!js-beautify --indent-size=2 -
 command -range=% UglifyJS <line1>,<line2>!uglifyjs
 command -range=% Xmltidy <line1>,<line2>!tidy -xml -indent -utf8 -q --indent-spaces 4
 command JSHint !jshint % --show-non-errors
@@ -196,9 +202,10 @@ command TernReset call tern#Disable() | call tern#Shutdown() | call tern#Enable(
 " -------------
 let g:netrw_liststyle = 3
 let NERDTreeBookmarksFile = $HOME . '/.vim_nerdtree_bookmarks'
-let NERDTreeIgnore=['\.pyc$', '\~$']
+let NERDTreeIgnore=['\.pyc$', '__pycache__', '\~$', 'npm-debug.log*']
 let NERDTreeShowBookmarks=1
 let NERDTreeWinSize=50
+" let NERDTreeWinPos='right'
 let coffee_make_options = '-o /tmp/'
 let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:ctrlp_cmd = 'CtrlP .'
@@ -211,7 +218,7 @@ let g:ctrlp_regexp = 1
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --exclude-standard', 'find %s -type f']
 let g:syntastic_auto_loc_list=2
 let g:syntastic_enable_signs=1
-" let g:syntastic_javascript_checkers=['jsxhint']
+let g:syntastic_javascript_checkers=['eslint']
 let g:syntastic_html_checkers=[]
 let g:syntastic_php_checkers=['php'] ", 'phpcs']
 let g:syntastic_scss_checkers=[]
@@ -226,6 +233,9 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:ycm_min_num_of_chars_for_completion = 99
 let g:ycm_filetype_specific_completion_to_disable = {'php': 1}
+let g:indent_guides_auto_colors = 0
+let g:jsx_ext_required = 0
+let g:jsx_pragma_required = 0
 
 " Setup UI
 " --------

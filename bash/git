@@ -1,4 +1,4 @@
-#alias g='git'
+alias g='git'
 #alias gbranch2ticket="git branch | sed -n '/\* /s///p' | sed -n '/.*\//s///p'"
 # alias gst='git status'
 # alias gl='git pull'

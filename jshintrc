@@ -1,10 +1,10 @@
 {
-  "undef": true,
-  "forin": false,
+  "esnext": true,
+  "camelcase" : true,
   "eqeqeq": true,
-  "browser":true,
-  "node":true,
-  "devel":true,
-  "newcap":true,
-  "globals": { "define": true }
+  "unused": true,
+  "latedef": true,
+  "undef": true,
+  "node": true,
+  "browser": true
 }

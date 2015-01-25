@@ -12,16 +12,13 @@ alias jdate="date +%d\ %h\ %Y\ %H:%M" # journaling date
 alias vi=vim
 
 # Dev
-alias vimdjango="cd \$VIRTUAL_ENV/lib/python2.6/site-packages/django; mvim"
-alias vimfein="cd \$VIRTUAL_ENV/lib/python2.6/site-packages/feincms; mvim"
 alias a2start="sudo apachectl start"
 alias a2restart="sudo apachectl restart"
 alias a2stop="sudo apachectl stop"
 alias a2="a2restart"
 alias vimhttpd="mvim $HTTPDCONF"
-alias mysql_config="mysql_config5"
-alias mysqldump="mysqldump5"
 alias serve="python -m SimpleHTTPServer"
+
 
 function proxysocks() {
     if [ -z "$3" ]; then
@@ -80,6 +77,11 @@ if [ "$DOTFILES_ENV" == "mac" ]; then
     }
 
     #Notes
+    export NOTES=~/Documents/Notes
     export WRITING_REPOS=~/Development/Clones/writing
+    alias start-writing="cd $WRITING_REPOS;  npm start -- --build=me"
+    alias start-tech-writing="cd $WRITING_REPOS;  npm start -- --build=me"
     alias add-content="$WRITING_REPOS/bin/add-content"
+    alias add-log="$WRITING_REPOS/bin/add-content --build=me --type=log"
+    alias add-tech-log="$WRITING_REPOS/bin/add-content --build=me --type=tech"
 fi
