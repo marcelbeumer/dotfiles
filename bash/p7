@@ -1,1 +1,5 @@
 alias start-tastyfy="cd ~/Development/Clones/smartchannel-core; workon tastyfy;"
+export TASTYFY_ADMIN_HOST=sc-admin.ctf.prosiebensat1.com
+export TASTYFY_NODE1_HOST=sc-tastyfy-1.ctf.prosiebensat1.com
+export TASTYFY_NODE2_HOST=sc-tastyfy-2.ctf.prosiebensat1.com
+export TASTYFY_CONS_HOST=cons.tastyfy.de

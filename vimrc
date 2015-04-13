@@ -26,9 +26,11 @@ Bundle 'beyondwords/vim-twig'
 " Bundle 'django.vim'
 Bundle 'groenewege/vim-less'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'gkz/vim-ls'
+" Bundle 'othree/yajs.vim'
 Bundle 'marcelbeumer/javascript-syntax.vim'
 " Bundle 'pangloss/vim-javascript'
-" Bundle 'mxw/vim-jsx'
+Bundle 'mxw/vim-jsx'
 " Bundle 'JavaScript-Indent'
 Bundle 'othree/coffee-check.vim'
 " Bundle 'plasticboy/vim-markdown'
@@ -44,7 +46,7 @@ Bundle 'scrooloose/syntastic'
 
 " Text editing tools
 " ------------------
-" Bundle 'Valloric/YouCompleteMe'
+Bundle 'Valloric/YouCompleteMe'
 Bundle 'bitc/vim-bad-whitespace'
 Bundle 'godlygeek/tabular'
 Bundle 'tpope/vim-commentary'
@@ -77,10 +79,22 @@ Bundle 'tpope/vim-vinegar'
 Bundle 'sjl/gundo.vim'
 Bundle 'nathanaelkane/vim-indent-guides'
 
+" Colors
+Bundle 'duythinht/inori'
+Bundle 'cdmedia/itg_flat_vim'
+Bundle 'benjaminwhite/Benokai'
+Bundle 'vyshane/vydark-vim-color'
+Bundle 'carlson-erik/wolfpack'
+Bundle 'gosukiwi/vim-atom-dark'
+Bundle 'vim-scripts/BusyBee'
+Bundle 'croaker/mustang-vim'
+
 " " Misc
 " " ----
 Bundle 'marcelbeumer/editing-modes.vim'
 Bundle 'marcelbeumer/filetype-magic.vim'
+Bundle 'xolox/vim-misc'
+Bundle 'xolox/vim-reload'
 
 syntax enable
 filetype plugin indent on
@@ -231,8 +245,8 @@ let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
-let g:ycm_min_num_of_chars_for_completion = 99
-let g:ycm_filetype_specific_completion_to_disable = {'php': 1}
+" let g:ycm_min_num_of_chars_for_completion = 99
+" let g:ycm_filetype_specific_completion_to_disable = {'php': 1}
 let g:indent_guides_auto_colors = 0
 let g:jsx_ext_required = 0
 let g:jsx_pragma_required = 0

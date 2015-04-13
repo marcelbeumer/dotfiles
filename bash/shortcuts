@@ -7,6 +7,7 @@
 set -o vi
 alias l="ls"
 alias la="ls -ahl"
+alias ll="ls -ahl"
 alias tree="find . -type d -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 alias jdate="date +%d\ %h\ %Y\ %H:%M" # journaling date
 alias vi=vim

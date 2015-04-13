@@ -3,9 +3,12 @@ export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/mysql/bin:$PATH
 export PATH=/usr/local/share/npm/bin:$PATH
 export PATH=/usr/local/php5/bin:$PATH
-export PATH=~/Library/Android/sdk/tools:$PATH
+# export PATH=~/Library/Android/sdk/tools:$PATH
+# export PATH=~/Library/Android/sdk/platform-tools:$PATH
 export PATH=~/bin:$PATH
 export PATH=node_modules/.bin:$PATH
+
+export ANDROID_HOME=/usr/local/opt/android-sdk
 
 export CLICOLOR=true
 export EDITOR="vim"
@@ -23,6 +26,9 @@ export HTTPDCONF="/etc/apache2/httpd.conf" #shortcuts
 export DOCKER_HOST=tcp://192.168.59.103:2376
 export DOCKER_CERT_PATH=/Users/marcel/.boot2docker/certs/boot2docker-vm
 export DOCKER_TLS_VERIFY=1
+
+
+#export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home
 
 # My bash "plugins"
 . ~/.bash/shortcuts
