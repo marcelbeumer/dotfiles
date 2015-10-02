@@ -21,6 +21,12 @@ alias vimhttpd="mvim $HTTPDCONF"
 alias serve="python -m SimpleHTTPServer"
 
 
+function search_and_replace() {
+  echo replacing $1 with $2
+  expr=s/$1/$2/g
+  ack -l $1 | xargs sed -i '' -e $expr
+}
+
 function proxysocks() {
     if [ -z "$3" ]; then
         echo "usage: proxysocks \"<connection>\" <port> <country>"
@@ -28,7 +34,8 @@ function proxysocks() {
     fi
     echo "Enabling proxysocks"
     networksetup -setsocksfirewallproxy $1 localhost $2
-    ssh proxy-user@proxy-$3.marcelbeumer.com -ND $2
+    #ssh proxy-user@proxy-$3.marcelbeumer.com -ND $2
+    ssh marcel@marcelbeumer.com -ND $2
     unproxysocks $1
 }
 
