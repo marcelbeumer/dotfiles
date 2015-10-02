@@ -1,6 +1,8 @@
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let g:python_host_prog = '/usr/bin/python2'
+
 set nocompatible
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.nvim/plugged')
 
 " General
 " -------
@@ -17,7 +19,7 @@ Plug 'beyondwords/vim-twig'
 
 " Text editing tools
 " ------------------
-Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', {'do': './install.sh'}
 Plug 'bitc/vim-bad-whitespace'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-commentary'
