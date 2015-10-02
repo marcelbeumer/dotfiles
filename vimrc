@@ -19,7 +19,7 @@ Plug 'beyondwords/vim-twig'
 
 " Text editing tools
 " ------------------
-Plug 'Valloric/YouCompleteMe', {'do': './install.sh'}
+" Plug 'Valloric/YouCompleteMe', {'do': './install.sh'}
 Plug 'bitc/vim-bad-whitespace'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-commentary'
