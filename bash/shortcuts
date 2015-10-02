@@ -10,14 +10,13 @@ alias la="ls -ahl"
 alias ll="ls -ahl"
 alias tree="find . -type d -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 alias jdate="date +%d\ %h\ %Y\ %H:%M" # journaling date
-alias vi=vim
 
 # Dev
 alias a2start="sudo apachectl start"
 alias a2restart="sudo apachectl restart"
 alias a2stop="sudo apachectl stop"
 alias a2="a2restart"
-alias vimhttpd="mvim $HTTPDCONF"
+alias vimhttpd="vim $HTTPDCONF"
 alias serve="python -m SimpleHTTPServer"
 
 
@@ -50,9 +49,6 @@ function unproxysocks() {
 
 # Mac only
 if [ "$DOTFILES_ENV" == "mac" ]; then
-    alias vi="mvim -v"
-    alias vim="mvim"
-
     # mdfind from ., showing linenumbers
     function m() {
         mdfind -onlyin . $@ | lines
