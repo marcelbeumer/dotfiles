@@ -7,6 +7,7 @@ call plug#begin('~/.nvim/plugged')
 " General
 " -------
 Plug 'editorconfig/editorconfig-vim'
+Plug 'benekastah/neomake'
 
 " Language support
 " ----------------
@@ -129,6 +130,8 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
+autocmd! BufWritePost * Neomake
+
 " Commands
 " --------
 command -range=% BeautifyJS <line1>,<line2>!js-beautify --indent-size=2 -f -
@@ -163,14 +166,7 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
   \ }
-let g:syntastic_auto_loc_list=2
-let g:syntastic_enable_signs=1
-let g:syntastic_javascript_checkers=['eslint']
-let g:syntastic_html_checkers=[]
-let g:syntastic_php_checkers=['php'] ", 'phpcs']
-let g:syntastic_scss_checkers=[]
-let g:syntastic_less_checkers=[]
-let g:syntastic_yaml_checkers=[]
+let g:neomake_javascript_enabled_makers = ['eslint']
 let g:fugitive_summary_format = '%h - %d %s (%cr by %an)'
 let g:indent_guides_auto_colors = 0
 
