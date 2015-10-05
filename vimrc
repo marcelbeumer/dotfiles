@@ -1,14 +1,20 @@
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let g:python_host_prog = '/usr/bin/python2'
+let g:python_host_prog = '/usr/local/bin/python2'
+let g:python3_host_prog = '/usr/local/bin/python3'
 
-set nocompatible
+" Support functions
+" -----------------
+
+" Plugins
+" -------
+
 call plug#begin('~/.nvim/plugged')
 
 " General
 " -------
 Plug 'editorconfig/editorconfig-vim'
 Plug 'benekastah/neomake'
-
+"
 " Language support
 " ----------------
 Plug 'groenewege/vim-less'
@@ -18,9 +24,9 @@ Plug 'gkz/vim-ls'
 Plug 'marcelbeumer/javascript-syntax.vim'
 Plug 'beyondwords/vim-twig'
 
-" Text editing tools
-" ------------------
-" Plug 'Valloric/YouCompleteMe', {'do': './install.sh'}
+" " Text editing tools
+" " ------------------
+Plug 'Valloric/YouCompleteMe', {'do': './install.sh'}
 Plug 'bitc/vim-bad-whitespace'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-commentary'
@@ -28,6 +34,7 @@ Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'mhinz/vim-grepper'
 
 " Version control
 " ---------------
@@ -46,10 +53,10 @@ Plug 'marcelbeumer/color-color.vim'
 Plug 'nelstrom/vim-qargs'
 Plug 'scrooloose/nerdtree'
 Plug 'sjl/gundo.vim'
-" Plug 'bling/vim-airline'
-
-" Colors
-" ------
+Plug 'bling/vim-airline'
+"
+" " Colors
+" " ------
 Plug 'flazz/vim-colorschemes'
 Plug 'marcelbeumer/spacedust.vim'
 Plug 'marcelbeumer/spacedust-airline.vim'
@@ -95,8 +102,12 @@ let &colorcolumn="80,".join(range(120,999),",")
 set splitbelow " so that preview window positions below
 set splitright
 set nowritebackup " place nice with file watchers
-2+2
-" Plugin triggers
+
+tnoremap <Leader>e <C-\><C-n>
+nnoremap th :tabprev<cr>
+nnoremap tl :tabnext<cr>
+nnoremap tn :tabnew<cr>
+nnoremap tc :tabclose<cr>
 nmap <Leader><leader>c :ColorColorToggle<cr>
 nmap <leader>: :NERDTreeMirror<cr>
 nmap <leader>; :NERDTreeToggle<cr>
@@ -105,13 +116,12 @@ nmap <leader>t :CtrlPTag<cr>
 nmap <leader>m :CtrlPMRUFiles<cr>
 nmap <leader>f :let @*=@%<cr>
 nmap <leader>h :let @*=expand("%:h")<cr>
-
+nnoremap <leader>git :Grepper! -tool git -open -switch
+nnoremap <leader>ag  :Grepper! -tool ag  -open -switch
 " Convert newlines and retab
 nmap <Leader>r :%s/\r/\r/g<cr>gg<cr>:retab<cr>
-
 " Removed whitespace in empty lines, and remove trailing whitespace
 nmap <Leader>w :%s/^\s\+$//ge<cr>:%s/\(\S\)\s\+$/\1/ge<cr>
-
 " Easy folding on search expr
 nmap <silent><leader>z :set foldexpr=getline(v:lnum)!~@/ foldlevel=0 foldcolumn=0 foldmethod=expr<CR>
 
@@ -134,6 +144,7 @@ autocmd! BufWritePost * Neomake
 
 " Commands
 " --------
+command W w
 command -range=% BeautifyJS <line1>,<line2>!js-beautify --indent-size=2 -f -
 command -range=% UglifyJS <line1>,<line2>!uglifyjs
 command -range=% Xmltidy <line1>,<line2>!tidy -xml -indent -utf8 -q --indent-spaces 4
