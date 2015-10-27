@@ -23,10 +23,12 @@ Plug 'othree/coffee-check.vim'
 Plug 'gkz/vim-ls'
 Plug 'marcelbeumer/javascript-syntax.vim'
 Plug 'beyondwords/vim-twig'
+Plug 'marcelbeumer/filetype-magic.vim'
 
 " " Text editing tools
 " " ------------------
 Plug 'Valloric/YouCompleteMe', {'do': './install.sh'}
+Plug 'SirVer/ultisnips'
 Plug 'bitc/vim-bad-whitespace'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-commentary'
@@ -46,8 +48,6 @@ Plug 'arecarn/crunch'
 
 " Navigation, search, GUI
 " -----------------------
-Plug 'ZoomWin'
-Plug 'ack.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'marcelbeumer/color-color.vim'
 Plug 'nelstrom/vim-qargs'
@@ -103,6 +103,8 @@ set splitbelow " so that preview window positions below
 set splitright
 set nowritebackup " place nice with file watchers
 
+map <C-s> :w<cr>
+imap <C-s> <Esc>:w<cr>
 tnoremap <Leader>e <C-\><C-n>
 nnoremap th :tabprev<cr>
 nnoremap tl :tabnext<cr>
@@ -154,6 +156,8 @@ command Rc e ~/.vimrc
 command Rr silent! so $MYVIMRC
 command SudoWrite w !sudo tee % > /dev/null
 command -nargs=* Glp Glog --abbrev-commit --date=relative <args>
+command Dark colorscheme spacedust | set background=dark
+command Light colorscheme solarized | set background=light
 
 " Plugin config
 " -------------
@@ -180,11 +184,14 @@ let g:ctrlp_custom_ignore = {
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:fugitive_summary_format = '%h - %d %s (%cr by %an)'
 let g:indent_guides_auto_colors = 0
+let g:UltiSnipsExpandTrigger = '<c-j>'
+let g:UltiSnipsJumpForwardTrigger = "<c-h>"
+let g:UltiSnipsJumpBackwardTrigger = '<c-l>'
 
 " Setup UI
 " --------
 set vb " no bells; as macvim does not support visual bell
 set guioptions=aAc "add 'e' for native tabs
-set guifont=Meslo\ LG\ S\ DZ:h12
+"set guifont=Meslo\ LG\ S\ DZ:h12
 set background=light
 colorscheme spacedust

@@ -16,7 +16,7 @@ export LC_ALL=en_US.UTF-8
 
 # Plugin config
 export DOTFILES_ENV="mac"
-export WORKON_HOME=~/Development/Envs # virtualenv
+export WORKON_HOME=~/dev/virtualenv # virtualenv
 export HTTPDCONF="/etc/apache2/httpd.conf" #shortcuts
 
 # Docker (TODO: move this somewhere else?)
@@ -47,3 +47,6 @@ fi
 if [ -f $(which npm) ]; then
   . <(npm completion)
 fi
+
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
