@@ -2,35 +2,26 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:python_host_prog = '/usr/local/bin/python2'
 let g:python3_host_prog = '/usr/local/bin/python3'
 
-" Support functions
-" -----------------
-
 " Plugins
 " -------
-
-call plug#begin('~/.nvim/plugged')
+call plug#begin('~/.vim/plugged')
 
 " General
 " -------
 Plug 'editorconfig/editorconfig-vim'
 Plug 'benekastah/neomake'
-"
+
 " Language support
 " ----------------
-Plug 'groenewege/vim-less'
-Plug 'kchmck/vim-coffee-script'
-Plug 'othree/coffee-check.vim'
-Plug 'gkz/vim-ls'
+Plug 'elzr/vim-json'
 Plug 'marcelbeumer/javascript-syntax.vim'
-Plug 'beyondwords/vim-twig'
-Plug 'marcelbeumer/filetype-magic.vim'
+Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
 
-" " Text editing tools
-" " ------------------
+" Text editing tools
+" ------------------
 Plug 'Valloric/YouCompleteMe', {'do': './install.sh'}
 Plug 'SirVer/ultisnips'
 Plug 'bitc/vim-bad-whitespace'
-Plug 'godlygeek/tabular'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-repeat'
@@ -49,10 +40,8 @@ Plug 'arecarn/crunch'
 " Navigation, search, GUI
 " -----------------------
 Plug 'kien/ctrlp.vim'
-Plug 'marcelbeumer/color-color.vim'
 Plug 'nelstrom/vim-qargs'
 Plug 'scrooloose/nerdtree'
-Plug 'sjl/gundo.vim'
 Plug 'bling/vim-airline'
 "
 " " Colors
@@ -60,11 +49,6 @@ Plug 'bling/vim-airline'
 Plug 'flazz/vim-colorschemes'
 Plug 'marcelbeumer/spacedust.vim'
 Plug 'marcelbeumer/spacedust-airline.vim'
-Plug 'morhetz/gruvbox'
-Plug 'carlson-erik/wolfpack'
-Plug 'gosukiwi/vim-atom-dark'
-Plug 'vim-scripts/BusyBee'
-Plug 'croaker/mustang-vim'
 
 call plug#end()
 runtime macros/matchit.vim
@@ -98,7 +82,7 @@ set undofile
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*        " Linux/MacOSX
 set wildmenu
 set laststatus=2 " always show status bar
-let &colorcolumn="80,".join(range(120,999),",")
+" let &colorcolumn="100,".join(range(120,999),",")
 set splitbelow " so that preview window positions below
 set splitright
 set nowritebackup " place nice with file watchers
@@ -111,7 +95,6 @@ nnoremap tl :tabnext<cr>
 nnoremap tn :tabnew<cr>
 nnoremap tc :tabclose<cr>
 nmap <Leader><leader>c :ColorColorToggle<cr>
-nmap <leader>: :NERDTreeMirror<cr>
 nmap <leader>; :NERDTreeToggle<cr>
 nmap <leader>b :CtrlPBuffer<cr>
 nmap <leader>t :CtrlPTag<cr>
@@ -139,9 +122,9 @@ autocmd BufNewFile,BufRead,BufWritePost *.html.swig set filetype=html.twig
 set omnifunc=syntaxcomplete#Complete
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=tern#Complete
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
 autocmd! BufWritePost * Neomake
 
 " Commands
@@ -157,16 +140,14 @@ command Rr silent! so $MYVIMRC
 command SudoWrite w !sudo tee % > /dev/null
 command -nargs=* Glp Glog --abbrev-commit --date=relative <args>
 command Dark colorscheme spacedust | set background=dark
+" command Dark colorscheme zazen | set background=dark
 command Light colorscheme solarized | set background=light
 
 " Plugin config
 " -------------
-let g:netrw_liststyle = 3
-let NERDTreeBookmarksFile = $HOME . '/.vim_nerdtree_bookmarks'
 let NERDTreeIgnore=['\.pyc$', '__pycache__', '\~$', 'npm-debug.log*']
-let NERDTreeShowBookmarks=1
+let NERDTreeShowBookmarks=0
 let NERDTreeWinSize=50
-let coffee_make_options = '-o /tmp/'
 let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:ctrlp_cmd = 'CtrlP .'
 let g:ctrlp_extensions = ['tag']
@@ -181,17 +162,25 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
   \ }
-let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_javascript_enabled_makers = ['eslint_d', 'flow']
 let g:fugitive_summary_format = '%h - %d %s (%cr by %an)'
-let g:indent_guides_auto_colors = 0
 let g:UltiSnipsExpandTrigger = '<c-j>'
 let g:UltiSnipsJumpForwardTrigger = "<c-h>"
 let g:UltiSnipsJumpBackwardTrigger = '<c-l>'
+
+" Modification removing 'check' arg
+function! neomake#makers#ft#javascript#flow()
+    let mapexpr = 'substitute(v:val, "\\\\n", " ", "g")'
+    return {
+        \ 'args': ['--old-output-format'],
+        \ 'errorformat': '%f:%l:%c\,%n: %m',
+        \ 'mapexpr': mapexpr,
+        \ }
+endfunction
 
 " Setup UI
 " --------
 set vb " no bells; as macvim does not support visual bell
 set guioptions=aAc "add 'e' for native tabs
-"set guifont=Meslo\ LG\ S\ DZ:h12
-set background=light
-colorscheme spacedust
+set guifont=Meslo\ LG\ S\ DZ:h12
+execute "Dark"

@@ -10,43 +10,19 @@ export ANDROID_HOME=/usr/local/opt/android-sdk
 export CLICOLOR=true
 export EDITOR="nvim"
 export GREP_OPTIONS='--color=auto'
+export PRJ=/dev/clone/react-blueprint
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-# Plugin config
 export DOTFILES_ENV="mac"
 export WORKON_HOME=~/dev/virtualenv # virtualenv
 export HTTPDCONF="/etc/apache2/httpd.conf" #shortcuts
 
-# Docker (TODO: move this somewhere else?)
-export DOCKER_HOST=tcp://192.168.59.103:2376
-export DOCKER_CERT_PATH=/Users/marcel/.boot2docker/certs/boot2docker-vm
-export DOCKER_TLS_VERIFY=1
-
-
-# My bash "plugins"
 . ~/.bash/shortcuts
 . ~/.bash/virtualenv
 . ~/.bash/prompt
-. ~/.bash/invm
 . ~/.bash/git
-. ~/.bash/hg
-. ~/.bash/p7
 
-# Homebrew / Xcode clash
-alias git=/usr/local/bin/git
-alias python2=python
-
-# Howbrew bash completion
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
-fi
-
-# NPM completion
-if [ -f $(which npm) ]; then
-  . <(npm completion)
-fi
-
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"

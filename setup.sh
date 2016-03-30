@@ -4,13 +4,12 @@ ALL=() # Will be set
 COMMON=("ackrc=.ackrc" "bash=.bash" "gitconfig=.gitconfig" "hgrc=.hgrc" "jshintrc=.jshintrc" "vimrc=.vimrc" "xvimrc=.xvimrc" "tmux.conf=.tmux.conf" "tmux.theme.conf=.tmux.theme.conf" "ctags=.ctags")
 MAC_ONLY=("profile-macbook=.profile" "gitignore_global_mac=.gitignore_global")
 SERVER_ONLY=("profile-server=.profile")
-INVM_ONLY=("profile-invm=.profile")
 
 # Get environment (macbook/server)
 echo "Please choose which environment you are in:"
 PS3="Environment: "
 
-select option in macbook server invm
+select option in macbook server
 do
     case $option in
         macbook)
@@ -18,9 +17,6 @@ do
             break;;
         server)
             ALL=("${COMMON[@]}" "${SERVER_ONLY[@]}")
-            break;;
-        invm)
-            ALL=("${COMMON[@]}" "${INVM_ONLY[@]}")
             break;;
      esac
 done
