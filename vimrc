@@ -124,12 +124,12 @@ let g:ctrlp_custom_ignore = {
 
 " Modification removing 'check' arg
 function! neomake#makers#ft#javascript#flow()
-    let mapexpr = 'substitute(v:val, "\\\\n", " ", "g")'
-    return {
-        \ 'args': ['--old-output-format'],
-        \ 'errorformat': '%f:%l:%c\,%n: %m',
-        \ 'mapexpr': mapexpr,
-        \ }
+  let mapexpr = 'substitute(v:val, "\\\\n", " ", "g")'
+  return {
+    \ 'args': ['--old-output-format'],
+    \ 'errorformat': '%f:%l:%c\,%n: %m',
+    \ 'mapexpr': mapexpr,
+    \ }
 endfunction
 
 " Setup UI
