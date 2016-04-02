@@ -15,6 +15,7 @@ Plug 'benekastah/neomake'
 " ----------------
 Plug 'elzr/vim-json'
 Plug 'marcelbeumer/javascript-syntax.vim'
+Plug 'gavocanov/vim-js-indent'
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
 
 " Text editing tools
@@ -76,6 +77,7 @@ nnoremap tl :tabnext<cr>
 nnoremap tn :tabnew<cr>
 nnoremap tc :tabclose<cr>
 nmap <leader>; :NERDTreeToggle<cr>
+nmap <leader>b :CtrlPBuffer<cr>
 nmap <leader>f :let @*=@%<cr>
 nmap <leader>h :let @*=expand("%:h")<cr>
 nnoremap <leader>git :Grepper -tool git -open -switch
@@ -93,7 +95,7 @@ nmap <silent><leader>z :set foldexpr=getline(v:lnum)!~@/ foldlevel=0 foldcolumn=
 set omnifunc=syntaxcomplete#Complete
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType javascript setlocal omnifunc=tern#Complete
-autocmd! BufWritePost * Neomake
+autocmd! BufReadPost,BufWritePost * Neomake
 
 " Commands
 " --------
