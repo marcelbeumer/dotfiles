@@ -17,6 +17,7 @@ Plug 'elzr/vim-json'
 Plug 'marcelbeumer/javascript-syntax.vim'
 Plug 'gavocanov/vim-js-indent'
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
+" Plug 'flowtype/vim-flow'
 
 " Text editing tools
 " ------------------
@@ -51,6 +52,14 @@ Plug 'marcelbeumer/spacedust-airline.vim'
 call plug#end()
 runtime macros/matchit.vim
 
+
+" Functions
+" ---------
+function! FlowCheck()
+  let output = system('flow > /tmp/flow_output')
+  silent pedit /tmp/flow_output
+endfunction
+
 " Options
 " -------
 set shiftwidth=2
@@ -78,8 +87,8 @@ nnoremap tn :tabnew<cr>
 nnoremap tc :tabclose<cr>
 nmap <leader>; :NERDTreeToggle<cr>
 nmap <leader>b :CtrlPBuffer<cr>
-nmap <leader>f :let @*=@%<cr>
-nmap <leader>h :let @*=expand("%:h")<cr>
+nmap <leader>f :call FlowCheck()<cr>
+nmap <leader>c :pclose<cr>
 nnoremap <leader>git :Grepper -tool git -open -switch
 nnoremap <leader>ag  :Grepper -tool ag  -open -switch
 nnoremap <leader>*   :Grepper -tool ag -cword -noprompt<cr>
@@ -108,6 +117,8 @@ command Nf NERDTreeFind
 command Rc e ~/.vimrc
 command Rr silent! so $MYVIMRC
 command SudoWrite w !sudo tee % > /dev/null
+command FilePath let @*=@%
+command DirPath let @*=expand("%:h")
 command Dark colorscheme spacedust | set background=dark
 command Light colorscheme solarized | set background=light
 
@@ -122,15 +133,12 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ }
 
-" Modification removing 'check' arg
-function! neomake#makers#ft#javascript#flow()
-  let mapexpr = 'substitute(v:val, "\\\\n", " ", "g")'
-  return {
-    \ 'args': ['--old-output-format'],
-    \ 'errorformat': '%f:%l:%c\,%n: %m',
-    \ 'mapexpr': mapexpr,
-    \ }
-endfunction
+let flow_mapexpr = 'substitute(v:val, "\\\\n", " ", "g")'
+let g:neomake_javascript_flow_maker = {
+\ 'args': ['--old-output-format'],
+\ 'errorformat': '%f:%l:%c\,%n: %m',
+\ 'mapexpr': flow_mapexpr,
+\ }
 
 " Setup UI
 " --------
