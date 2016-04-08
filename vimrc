@@ -22,6 +22,7 @@ Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
 " ------------------
 Plug 'Valloric/YouCompleteMe', {'do': './install.sh'}
 Plug 'SirVer/ultisnips'
+Plug 'marcelbeumer/vim-snippets'
 Plug 'bitc/vim-bad-whitespace'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-ragtag'
@@ -131,6 +132,9 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --exclude-standard'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ }
+let g:UltiSnipsExpandTrigger="<c-space>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 let flow_mapexpr = 'substitute(v:val, "\\\\n", " ", "g")'
 let g:neomake_javascript_flow_maker = {
