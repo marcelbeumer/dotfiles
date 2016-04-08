@@ -17,7 +17,6 @@ Plug 'elzr/vim-json'
 Plug 'marcelbeumer/javascript-syntax.vim'
 Plug 'gavocanov/vim-js-indent'
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
-" Plug 'flowtype/vim-flow'
 
 " Text editing tools
 " ------------------
@@ -81,17 +80,16 @@ set clipboard=unnamed
 
 map <C-s> :w<cr>
 imap <C-s> <Esc>:w<cr>
-nnoremap th :tabprev<cr>
-nnoremap tl :tabnext<cr>
-nnoremap tn :tabnew<cr>
-nnoremap tc :tabclose<cr>
+nmap th :tabprev<cr>
+nmap tl :tabnext<cr>
+nmap tn :tabnew<cr>
+nmap tc :tabclose<cr>
 nmap <leader>; :NERDTreeToggle<cr>
 nmap <leader>b :CtrlPBuffer<cr>
-nmap <leader>f :call FlowCheck()<cr>
-nmap <leader>c :pclose<cr>
-nnoremap <leader>git :Grepper -tool git -open -switch
-nnoremap <leader>ag  :Grepper -tool ag  -open -switch
-nnoremap <leader>*   :Grepper -tool ag -cword -noprompt<cr>
+nmap <leader>x :pclose<cr>
+nmap <leader>git :Grepper -tool git -open -switch
+nmap <leader>ag  :Grepper -tool ag  -open -switch
+nmap <leader>*   :Grepper -tool ag -cword -noprompt<cr>
 " Convert newlines and retab
 nmap <Leader>r :%s/\r/\r/g<cr>gg<cr>:retab<cr>
 " Removed whitespace in empty lines, and remove trailing whitespace
@@ -104,7 +102,8 @@ nmap <silent><leader>z :set foldexpr=getline(v:lnum)!~@/ foldlevel=0 foldcolumn=
 set omnifunc=syntaxcomplete#Complete
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType javascript setlocal omnifunc=tern#Complete
-autocmd! BufReadPost,BufWritePost * Neomake
+autocmd Filetype javascript nmap <leader>t :call FlowCheck()<cr>
+autocmd! BufWritePost * Neomake
 
 " Commands
 " --------
