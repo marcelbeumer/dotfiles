@@ -20,6 +20,9 @@ export DOTFILES_ENV="mac"
 export WORKON_HOME=~/dev/virtualenv # virtualenv
 export HTTPDCONF="/etc/apache2/httpd.conf" #shortcuts
 
+export IN_SRC="app-new/src/"
+export IN_JS="app-new/src/InterNations/Bundle/LayoutBundle/Resources/public/frontend/js/"
+
 . ~/.bash/shortcuts
 . ~/.bash/virtualenv
 . ~/.bash/prompt
@@ -28,3 +31,5 @@ export HTTPDCONF="/etc/apache2/httpd.conf" #shortcuts
 # eval "$(pyenv init -)"
 # eval "$(pyenv virtualenv-init -)"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+alias in_tail="tail -f /var/log/php.log /dev/shm/symfony/632636088/logs/dev.log"

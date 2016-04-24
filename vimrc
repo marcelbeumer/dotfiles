@@ -16,11 +16,11 @@ Plug 'benekastah/neomake'
 Plug 'elzr/vim-json'
 Plug 'marcelbeumer/javascript-syntax.vim'
 Plug 'gavocanov/vim-js-indent'
-Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
+Plug 'lepture/vim-jinja'
 
 " Text editing tools
 " ------------------
-Plug 'Valloric/YouCompleteMe', {'do': './install.sh'}
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --tern-completer'}
 Plug 'SirVer/ultisnips'
 Plug 'marcelbeumer/vim-snippets'
 Plug 'bitc/vim-bad-whitespace'
@@ -39,15 +39,20 @@ Plug 'tpope/vim-fugitive'
 
 " Navigation, search, GUI
 " -----------------------
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'bling/vim-airline'
-"
-" " Colors
-" " ------
+
+" Colors
+" ------
 Plug 'flazz/vim-colorschemes'
+Plug 'chriskempson/base16-vim'
 Plug 'marcelbeumer/spacedust.vim'
 Plug 'marcelbeumer/spacedust-airline.vim'
+
+" Misc
+" ----
+Plug 'marcelbeumer/internations.vim'
 
 call plug#end()
 runtime macros/matchit.vim
@@ -97,13 +102,17 @@ nmap <Leader>r :%s/\r/\r/g<cr>gg<cr>:retab<cr>
 nmap <Leader>w :%s/^\s\+$//ge<cr>:%s/\(\S\)\s\+$/\1/ge<cr>
 " Easy folding on search expr
 nmap <silent><leader>z :set foldexpr=getline(v:lnum)!~@/ foldlevel=0 foldcolumn=0 foldmethod=expr<CR>
+noremap <c-j> 15gj
+noremap <c-k> 15gk
 
 " Filetype settings
 " -----------------
 set omnifunc=syntaxcomplete#Complete
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType javascript setlocal omnifunc=tern#Complete
-autocmd Filetype javascript nmap <leader>t :call FlowCheck()<cr>
+autocmd Filetype javascript nmap <leader>t :call FlowCheck()<cr> | setlocal path+=node_modules/
+autocmd Filetype html nmap <leader>t :call FlowCheck()<cr>
+autocmd Filetype twig set ft=jinja
 autocmd! BufWritePost * Neomake
 
 " Commands
@@ -125,16 +134,16 @@ command Light colorscheme solarized | set background=light
 " Plugin config
 " -------------
 let g:neomake_javascript_enabled_makers = ['eslint_d', 'flow']
+let g:internations_root = '/Users/marcel/dev/clone/in/in'
 let g:vim_json_syntax_conceal = 0
 let NERDTreeIgnore=['\.pyc$', '__pycache__', '\~$', 'npm-debug.log*']
 let g:ctrlp_map = '<leader>p'
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --exclude-standard', 'find %s -type f']
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ }
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_user_command = ['.git', 'git ls-files %s --exclude-standard', 'find %s -type f']
+let g:ctrlp_match_window = 'max:20,results:50'
 let g:UltiSnipsExpandTrigger="<c-space>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpBackwardTrigger="<c-shift-b>"
 
 let flow_mapexpr = 'substitute(v:val, "\\\\n", " ", "g")'
 let g:neomake_javascript_flow_maker = {
