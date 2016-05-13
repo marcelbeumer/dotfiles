@@ -10,6 +10,7 @@ call plug#begin('~/.vim/plugged')
 " -------
 Plug 'editorconfig/editorconfig-vim'
 Plug 'benekastah/neomake'
+Plug 'gcmt/taboo.vim'
 
 " Language support
 " ----------------
@@ -139,6 +140,7 @@ let g:vim_json_syntax_conceal = 0
 let NERDTreeIgnore=['\.pyc$', '__pycache__', '\~$', 'npm-debug.log*']
 let g:ctrlp_map = '<leader>p'
 let g:ctrlp_working_path_mode = 0
+let g:ctrlp_match_current_file = 1
 let g:ctrlp_user_command = ['.git', 'git ls-files %s --exclude-standard', 'find %s -type f']
 let g:ctrlp_match_window = 'max:20,results:50'
 let g:UltiSnipsExpandTrigger="<c-space>"
