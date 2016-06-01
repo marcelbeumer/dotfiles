@@ -27,9 +27,10 @@ export IN_JS="app-new/src/InterNations/Bundle/LayoutBundle/Resources/public/fron
 . ~/.bash/virtualenv
 . ~/.bash/prompt
 . ~/.bash/git
+. ~/.bash/internations
 
-# eval "$(pyenv init -)"
-# eval "$(pyenv virtualenv-init -)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 alias in_tail="tail -f /var/log/php.log /dev/shm/symfony/632636088/logs/dev.log"

@@ -33,7 +33,7 @@ purge =
 
 [hostfingerprints]
 smooth.applied-tactical.org = 4b:0a:e3:a9:f5:09:d3:e0:dd:44:42:2d:d3:dc:da:ff:a8:1d:1f:4d
-bitbucket.org = 45:AD:AE:1A:CF:0E:73:47:06:07:E0:88:F5:CC:10:E5:FA:1C:F7:99
+bitbucket.org = 3f:d3:c5:17:23:3c:cd:f5:2d:17:76:06:93:7e:ee:97:42:21:14:aa
 
 # [merge-tools]
 # changes.executable = chdiff
