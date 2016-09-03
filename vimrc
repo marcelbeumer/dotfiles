@@ -21,7 +21,8 @@ Plug 'lepture/vim-jinja'
 
 " Text editing tools
 " ------------------
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --tern-completer'}
+Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
+" Plug 'Valloric/YouCompleteMe', {'do': './install.py --tern-completer'}
 Plug 'SirVer/ultisnips'
 Plug 'marcelbeumer/vim-snippets'
 Plug 'bitc/vim-bad-whitespace'
