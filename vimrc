@@ -1,3 +1,4 @@
+set termguicolors
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:python_host_prog = '/usr/local/bin/python2'
 let g:python3_host_prog = '/usr/local/bin/python3'
@@ -15,14 +16,14 @@ Plug 'gcmt/taboo.vim'
 " Language support
 " ----------------
 Plug 'elzr/vim-json'
-Plug 'marcelbeumer/javascript-syntax.vim'
-Plug 'gavocanov/vim-js-indent'
-Plug 'lepture/vim-jinja'
+Plug 'pangloss/vim-javascript'
+Plug 'vim-scripts/JavaScript-Indent'
+Plug 'mxw/vim-jsx'
 
 " Text editing tools
 " ------------------
+Plug 'flowtype/vim-flow', {'filetypes': 'javascript'}
 Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
-" Plug 'Valloric/YouCompleteMe', {'do': './install.py --tern-completer'}
 Plug 'SirVer/ultisnips'
 Plug 'marcelbeumer/vim-snippets'
 Plug 'bitc/vim-bad-whitespace'
@@ -47,14 +48,13 @@ Plug 'bling/vim-airline'
 
 " Colors
 " ------
-Plug 'flazz/vim-colorschemes'
-Plug 'chriskempson/base16-vim'
 Plug 'marcelbeumer/spacedust.vim'
-Plug 'marcelbeumer/spacedust-airline.vim'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'jordwalke/VimCleanColors'
+Plug 'jordwalke/vim-one'
 
 " Misc
 " ----
-Plug 'marcelbeumer/internations.vim'
 
 call plug#end()
 runtime macros/matchit.vim
@@ -111,7 +111,8 @@ noremap <c-k> 15gk
 " -----------------
 set omnifunc=syntaxcomplete#Complete
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType javascript setlocal omnifunc=tern#Complete
+" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+" autocmd FileType javascript setlocal omnifunc=tern#Complete
 autocmd Filetype javascript nmap <leader>t :call FlowCheck()<cr> | setlocal path+=node_modules/
 autocmd Filetype html nmap <leader>t :call FlowCheck()<cr>
 autocmd Filetype twig set ft=jinja
@@ -136,7 +137,6 @@ command Light colorscheme solarized | set background=light
 " Plugin config
 " -------------
 let g:neomake_javascript_enabled_makers = ['eslint_d', 'flow']
-let g:internations_root = '/Users/marcel/dev/clone/in/in'
 let g:vim_json_syntax_conceal = 0
 let NERDTreeIgnore=['\.pyc$', '__pycache__', '\~$', 'npm-debug.log*']
 let g:ctrlp_map = '<leader>p'
@@ -147,15 +147,13 @@ let g:ctrlp_match_window = 'max:20,results:50'
 let g:UltiSnipsExpandTrigger="<c-space>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-shift-b>"
-
-let flow_mapexpr = 'substitute(v:val, "\\\\n", " ", "g")'
-let g:neomake_javascript_flow_maker = {
-\ 'args': ['--old-output-format'],
-\ 'errorformat': '%f:%l:%c\,%n: %m',
-\ 'mapexpr': flow_mapexpr,
-\ }
+let g:flow#enable = 0 " Only want the autocomplete
+let g:jsx_ext_required = 0
 
 " Setup UI
 " --------
-set guifont=Meslo\ LG\ S\ DZ:h12
-execute "Dark"
+set guioptions-=rL
+set guifont=Menlo:h14
+set background=dark
+colorscheme spacegray
+" colorscheme one
