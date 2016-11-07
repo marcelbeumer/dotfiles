@@ -19,7 +19,7 @@
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [core]
-	excludesfile = /Users/marcel/.gitignore_global
+	excludesfile = /Users/robotx/.gitignore_global
 [grep]
 	extendRegexp = true
 	lineNumber = true
@@ -49,3 +49,5 @@
     rh = reset HEAD
     rhh = reset HEAD --hard
     pick = cherry-pick
+[commit]
+	template = /Users/robotx/.stCommitMsg
