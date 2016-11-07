@@ -76,7 +76,6 @@ set expandtab
 set hidden
 set foldmethod=indent
 set foldlevel=100
-set number
 set ignorecase
 set noswapfile
 set shortmess=atI
@@ -95,6 +94,8 @@ nmap tc :tabclose<cr>
 nmap <leader>; :NERDTreeToggle<cr>
 nmap <leader>b :CtrlPBuffer<cr>
 nmap <leader>x :pclose<cr>
+" Line number toggle
+nmap <leader>n :set number! <cr>
 nmap <leader>git :Grepper -tool git -open -switch
 nmap <leader>ag  :Grepper -tool ag  -open -switch
 nmap <leader>*   :Grepper -tool ag -cword -noprompt<cr>
@@ -143,7 +144,7 @@ let g:ctrlp_map = '<leader>p'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_current_file = 1
 let g:ctrlp_user_command = ['.git', 'git ls-files %s --exclude-standard', 'find %s -type f']
-let g:ctrlp_match_window = 'max:20,results:50'
+let g:ctrlp_match_window = 'max:50,results:50'
 let g:UltiSnipsExpandTrigger="<c-space>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-shift-b>"
@@ -153,7 +154,9 @@ let g:jsx_ext_required = 0
 " Setup UI
 " --------
 set guioptions-=rL
-set guifont=Menlo:h14
+" set guifont=Menlo:h13
+set guifont=Inconsolata-dz\ for\ Powerline:h12
+" set guifont=SF\ Mono:h12
 set background=dark
 colorscheme spacegray
 " colorscheme one
