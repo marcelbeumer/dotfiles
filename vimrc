@@ -137,7 +137,13 @@ command Light colorscheme solarized | set background=light
 
 " Plugin config
 " -------------
+let g:airline_powerline_fonts = 0
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
 let g:neomake_javascript_enabled_makers = ['eslint_d', 'flow']
+let g:neomake_jsx_enabled_makers = ['eslint_d', 'flow']
 let g:vim_json_syntax_conceal = 0
 let NERDTreeIgnore=['\.pyc$', '__pycache__', '\~$', 'npm-debug.log*']
 let g:ctrlp_map = '<leader>p'
