@@ -84,6 +84,7 @@ set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 set laststatus=2 " always show status bar
 set nowritebackup " place nice with file watchers
 set clipboard=unnamed
+set hlsearch
 
 map <C-s> :w<cr>
 imap <C-s> <Esc>:w<cr>
@@ -137,6 +138,7 @@ command Light colorscheme solarized | set background=light
 
 " Plugin config
 " -------------
+let g:javascript_plugin_flow = 1
 let g:airline_powerline_fonts = 0
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''

@@ -18,6 +18,7 @@ alias a2stop="sudo apachectl stop"
 alias a2="a2restart"
 alias vimhttpd="vim $HTTPDCONF"
 alias serve="python -m SimpleHTTPServer"
+alias huetimer="cd ~/dev/clone/hue-timer-app/"
 
 
 function search_and_replace() {
