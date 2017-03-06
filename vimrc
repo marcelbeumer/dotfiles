@@ -69,6 +69,7 @@ endfunction
 
 " Options
 " -------
+set autoread " automatically read changed files
 set shiftwidth=2
 set softtabstop=2
 set tabstop=2
@@ -85,6 +86,7 @@ set laststatus=2 " always show status bar
 set nowritebackup " place nice with file watchers
 set clipboard=unnamed
 set hlsearch
+set number
 
 map <C-s> :w<cr>
 imap <C-s> <Esc>:w<cr>
@@ -170,5 +172,5 @@ set guioptions-=rL
 set guifont=Inconsolata-dz\ for\ Powerline:h12
 " set guifont=SF\ Mono:h12
 set background=dark
-colorscheme spacegray
-" colorscheme one
+" colorscheme spacegray
+colorscheme one
