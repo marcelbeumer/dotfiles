@@ -115,9 +115,8 @@ noremap <c-k> 15gk
 " -----------------
 set omnifunc=syntaxcomplete#Complete
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-" autocmd FileType javascript setlocal omnifunc=tern#Complete
 autocmd Filetype javascript nmap <leader>t :call FlowCheck()<cr> | setlocal path+=node_modules/
+autocmd FileType javascript.jsx,javascript setlocal formatprg=prettier\ --stdin
 autocmd Filetype html nmap <leader>t :call FlowCheck()<cr>
 autocmd Filetype twig set ft=jinja
 autocmd! BufWritePost * Neomake
@@ -138,9 +137,14 @@ command DirPath let @*=expand("%:h")
 command Dark colorscheme spacedust | set background=dark
 command Light colorscheme solarized | set background=light
 
+" Macros
+" ------
+let @c='yiwoconsole.log('''', );bblplllp'
+
 " Plugin config
 " -------------
 let g:javascript_plugin_flow = 1
+let g:airline_theme='one'
 let g:airline_powerline_fonts = 0
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
