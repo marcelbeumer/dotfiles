@@ -116,7 +116,7 @@ noremap <c-k> 15gk
 set omnifunc=syntaxcomplete#Complete
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd Filetype javascript nmap <leader>t :call FlowCheck()<cr> | setlocal path+=node_modules/
-autocmd FileType javascript.jsx,javascript setlocal formatprg=prettier\ --stdin
+autocmd FileType javascript.jsx,javascript setlocal formatprg=prettier\ --stdin\ --single-quote
 autocmd Filetype html nmap <leader>t :call FlowCheck()<cr>
 autocmd Filetype twig set ft=jinja
 autocmd! BufWritePost * Neomake
@@ -136,6 +136,7 @@ command FilePath let @*=@%
 command DirPath let @*=expand("%:h")
 command Dark colorscheme spacedust | set background=dark
 command Light colorscheme solarized | set background=light
+command Prettier exe "normal! gggqG\<C-o>\<C-o>"
 
 " Macros
 " ------
