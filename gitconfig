@@ -8,7 +8,7 @@
 [http]
 #   proxy = http://tst-proxy:8888
 [credential]
-    helper = osxkeychain
+	helper = osxkeychain
 ; [pull]
 ;     # always add --rebase flag when pulling to avoid useless merges
 ;     rebase = true

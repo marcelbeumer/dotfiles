@@ -19,6 +19,7 @@ Plug 'elzr/vim-json'
 Plug 'pangloss/vim-javascript'
 Plug 'vim-scripts/JavaScript-Indent'
 Plug 'mxw/vim-jsx'
+Plug 'reasonml-editor/vim-reason'
 
 " Text editing tools
 " ------------------
@@ -52,6 +53,7 @@ Plug 'marcelbeumer/spacedust.vim'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jordwalke/VimCleanColors'
 Plug 'jordwalke/vim-one'
+Plug 'tyrannicaltoucan/vim-deep-space'
 
 " Misc
 " ----
@@ -94,6 +96,7 @@ nmap th :tabprev<cr>
 nmap tl :tabnext<cr>
 nmap tn :tabnew<cr>
 nmap tc :tabclose<cr>
+nmap <leader>f :Prettier<cr>
 nmap <leader>; :NERDTreeToggle<cr>
 nmap <leader>b :CtrlPBuffer<cr>
 nmap <leader>x :pclose<cr>
@@ -117,6 +120,7 @@ set omnifunc=syntaxcomplete#Complete
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd Filetype javascript nmap <leader>t :call FlowCheck()<cr> | setlocal path+=node_modules/
 autocmd FileType javascript.jsx,javascript setlocal formatprg=prettier\ --stdin\ --single-quote
+" autocmd FileType javascript.jsx,javascript setlocal formatprg=prettier\ --stdin\ --single-quote\ --trailing-comma\ es5
 autocmd Filetype html nmap <leader>t :call FlowCheck()<cr>
 autocmd Filetype twig set ft=jinja
 autocmd! BufWritePost * Neomake

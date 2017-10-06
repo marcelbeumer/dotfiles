@@ -19,7 +19,16 @@ alias a2="a2restart"
 alias vimhttpd="vim $HTTPDCONF"
 alias serve="python -m SimpleHTTPServer"
 alias huetimer="cd ~/dev/clone/hue-timer-app/"
+alias npm_convert_peers="sed 's/[\{\},]//g ; s/: /@/g'"
+alias journal_date="date +\%a\ \%d\ \%B\ \%Y\ \%Hh\%M"
 
+function npm_get_peers() {
+  npm info $1 peerDependencies --json
+}
+
+function glomexprj() {
+  cd ~/dev/glomex/vvs-$1/ && tabset --title
+}
 
 function search_and_replace() {
   echo replacing $1 with $2

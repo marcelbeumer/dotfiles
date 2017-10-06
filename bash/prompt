@@ -17,7 +17,8 @@ bash_prompt() {
     }
 
     if [ "$DOTFILES_ENV" == "mac" ]; then
-        PROMPT_COMMAND='PS1="\[$Green\]\w\[$Color_Off\] $(virtualenv_info)♥ "'
+        # PROMPT_COMMAND='PS1="\[$Green\]\w\[$Color_Off\] $(virtualenv_info)♥ "'
+        PROMPT_COMMAND='PS1="\w ♥ "'
     fi
 
     if [ "$DOTFILES_ENV" == "server" ]; then
