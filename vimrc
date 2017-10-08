@@ -124,6 +124,7 @@ autocmd FileType javascript.jsx,javascript setlocal formatprg=prettier\ --stdin\
 autocmd Filetype html nmap <leader>t :call FlowCheck()<cr>
 autocmd Filetype twig set ft=jinja
 autocmd! BufWritePost * Neomake
+" Set transparent background for use in terminal
 au ColorScheme * hi Normal ctermbg=none guibg=none
 au ColorScheme * hi NonText ctermbg=none guibg=none
 
@@ -185,4 +186,3 @@ set guifont=Inconsolata-dz\ for\ Powerline:h12
 set background=dark
 colorscheme spacegray
 colorscheme one
-
