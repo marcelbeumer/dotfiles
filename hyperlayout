@@ -1,0 +1,30 @@
+{
+  "default": {
+    "entry": "horizontal",
+    "layout": ["echo Hello", "echo World"]
+  },
+  "mockingbird": {
+    "entry": "horizontal",
+    "layout": [
+      "glomexprj mockingbird; git status",
+      "glomexprj mockingbird; npm run watch",
+      "glomexprj mockingbird; npm test -- --watch"
+    ]
+  },
+  "kraken": {
+    "entry": "horizontal",
+    "layout": [
+      "glomexprj kraken",
+      "glomexprj kraken; npm run watch",
+      "glomexprj kraken; npm test -- --watch"
+    ]
+  },
+  "orca": {
+    "entry": "horizontal",
+    "layout": [
+      "glomexprj orca",
+      "glomexprj orca; npm run watch",
+      "glomexprj orca; npm test -- --watch"
+    ]
+  }
+}
