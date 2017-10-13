@@ -1,9 +1,0 @@
-[ -z "$REPOS" ] && \
-    echo "Please set REPOS"
-
-export DOMAIN="local.goeiejongens.nl"
-source $REPOS/gj-lib/bin/profile
-unalias ls
-unalias grep
-export DJANGO_DATABASE_TYPE=mysql
-

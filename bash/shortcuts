@@ -1,14 +1,9 @@
-[ -z "$HTTPDCONF" ] && \
-    echo "Please set HTTPDCONF"
-
 [ -z "$DOTFILES_ENV" ] && \
     echo "Please set DOTFILES_ENV"
 
 set -o vi
 alias l="ls"
-alias la="ls -ahl"
 alias ll="ls -ahl"
-alias tree="find . -type d -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 alias jdate="date +%d\ %h\ %Y\ %H:%M" # journaling date
 
 # Dev
@@ -17,14 +12,7 @@ alias a2restart="sudo apachectl restart"
 alias a2stop="sudo apachectl stop"
 alias a2="a2restart"
 alias vimhttpd="vim $HTTPDCONF"
-alias serve="python -m SimpleHTTPServer"
-alias huetimer="cd ~/dev/clone/hue-timer-app/"
-alias npm_convert_peers="sed 's/[\{\},]//g ; s/: /@/g'"
 alias journal_date="date +\%a\ \%d\ \%B\ \%Y\ \%Hh\%M"
-
-function npm_get_peers() {
-  npm info $1 peerDependencies --json
-}
 
 function glomexprj() {
   cd ~/dev/glomex/vvs-$1/ && tabset --title
@@ -56,46 +44,3 @@ function unproxysocks() {
     echo "Disabling proxysocks"
     networksetup -setsocksfirewallproxystate $1 off
 }
-
-# Mac only
-if [ "$DOTFILES_ENV" == "mac" ]; then
-    # mdfind from ., showing linenumbers
-    function m() {
-        mdfind -onlyin . $@ | lines
-    }
-
-    # mdfind by name from ., showing linenumbers
-    function mn() {
-        mdfind -onlyin . -name $@ | lines
-    }
-
-    # show line numbers for stdin
-    function lines() {
-        n=1
-        while read line; do
-            (( n++ ))
-            echo $n: $line
-        done
-    }
-
-    # get content of line number, use in combination with m or mn:
-    # mn code.js | ml 2
-    function ml() {
-        cat - | sed -n "$1p" | awk '{ print $2 }'
-    }
-
-    # https://github.com/paulirish/dotfiles/commit/e67d1bc03
-    # cd into whatever is the forefront Finder window.
-    cdf() {  # short for cdfinder
-    cd "`osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)'`"
-    }
-
-    #Notes
-    export NOTES=~/Documents/Notes
-    export WRITING_REPOS=~/Development/Clones/writing
-    alias start-writing="cd $WRITING_REPOS;  npm start -- --build=me"
-    alias start-tech-writing="cd $WRITING_REPOS;  npm start -- --build=me"
-    alias add-content="$WRITING_REPOS/bin/add-content"
-    alias add-log="$WRITING_REPOS/bin/add-content --build=me --type=log"
-    alias add-tech-log="$WRITING_REPOS/bin/add-content --build=me --type=tech"
-fi

@@ -1,9 +1,0 @@
---ignore-dir=generated
---ignore-dir=tiny_mce
---ignore-file=match:/tiny_mce\.js/
---ignore-file=match:/^tags$/
---type-add=html=.haml
---type-add=css=.sass,.scss
---type-add=html=.twig
---type-add=css=.less
---type-add=js=.min.js

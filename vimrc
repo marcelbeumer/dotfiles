@@ -24,7 +24,7 @@ Plug 'reasonml-editor/vim-reason'
 " Text editing tools
 " ------------------
 Plug 'flowtype/vim-flow', {'filetypes': 'javascript'}
-Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
+" Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
 Plug 'SirVer/ultisnips'
 Plug 'marcelbeumer/vim-snippets'
 Plug 'bitc/vim-bad-whitespace'

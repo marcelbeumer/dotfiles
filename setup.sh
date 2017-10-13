@@ -2,7 +2,7 @@
 
 ALL=() # Will be set
 COMMON=("editorconfig=.editorconfig" "ackrc=.ackrc" "bash=.bash" "gitconfig=.gitconfig" "hgrc=.hgrc" "vimrc=.vimrc" "xvimrc=.xvimrc")
-MAC_ONLY=("profile-macbook=.profile" "gitignore_global_mac=.gitignore_global hyperlayout=.hyperlayout")
+MAC_ONLY=("profile-macbook=.profile" "gitignore_global_mac=.gitignore_global" "hyper.js=.hyper.js" "hyperlayout=.hyperlayout")
 SERVER_ONLY=("profile-server=.profile")
 
 # Get environment (macbook/server)
