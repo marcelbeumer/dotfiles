@@ -25,23 +25,15 @@ function search_and_replace() {
   ack -l $1 | xargs sed -i '' -e $expr
 }
 
-function proxysocks() {
-    if [ -z "$3" ]; then
-        echo "usage: proxysocks \"<connection>\" <port> <country>"
-        return
-    fi
-    echo "Enabling proxysocks"
-    networksetup -setsocksfirewallproxy $1 localhost $2
-    #ssh proxy-user@proxy-$3.marcelbeumer.com -ND $2
-    ssh marcel@marcelbeumer.com -ND $2
-    unproxysocks $1
+function proxy_us() {
+  echo "Going through US proxy `cat ~/.proxy_us`"
+  networksetup -setsocksfirewallproxy Wi-Fi localhost 9123
+  ssh `cat ~/.proxy_us` -ND 9123
+  unproxy
 }
 
-function unproxysocks() {
-    if [ -z "$1" ]; then
-        echo "usage: unproxysocks \"<connection>\""
-        return
-    fi
-    echo "Disabling proxysocks"
-    networksetup -setsocksfirewallproxystate $1 off
+function unproxy() {
+  echo "Disabling proxy"
+  networksetup -setsocksfirewallproxystate Wi-Fi off
+  echo "Done"
 }
