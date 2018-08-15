@@ -14,9 +14,17 @@ alias a2stop="sudo apachectl stop"
 alias a2="a2restart"
 alias vimhttpd="vim $HTTPDCONF"
 alias journal_date="date +\%a\ \%d\ \%B\ \%Y\ \%Hh\%M"
+alias language_server_typescript="node ~/dev/clone/javascript-typescript-langserver/lib/language-server-stdio.js"
+alias notes="code ~/dev/notes.md"
+alias hours="code ~/dev/hours.md"
+alias todo="code ~/dev/todo.md"
 
 function glomexprj() {
   cd ~/dev/glomex/vvs-$1/ && tabset --title
+}
+
+function psd() {
+  cd ~/dev/psd/$1/ && tabset --title
 }
 
 function search_and_replace() {

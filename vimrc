@@ -1,3 +1,4 @@
+" set encoding=utf-8
 set termguicolors
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:python_host_prog = '/usr/local/bin/python2'
@@ -10,7 +11,12 @@ call plug#begin('~/.vim/plugged')
 " General
 " -------
 Plug 'editorconfig/editorconfig-vim'
-Plug 'benekastah/neomake'
+" Plug 'roxma/vim-hug-neovim-rpc'
+" Plug 'roxma/nvim-yarp'
+" Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/denite.nvim'
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'benekastah/neomake'
 Plug 'gcmt/taboo.vim'
 
 " Language support
@@ -25,8 +31,8 @@ Plug 'reasonml-editor/vim-reason'
 " ------------------
 Plug 'flowtype/vim-flow', {'filetypes': 'javascript'}
 " Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
-Plug 'SirVer/ultisnips'
-Plug 'marcelbeumer/vim-snippets'
+" Plug 'SirVer/ultisnips'
+" Plug 'marcelbeumer/vim-snippets'
 Plug 'bitc/vim-bad-whitespace'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-ragtag'
@@ -125,8 +131,8 @@ autocmd Filetype html nmap <leader>t :call FlowCheck()<cr>
 autocmd Filetype twig set ft=jinja
 autocmd! BufWritePost * Neomake
 " Set transparent background for use in terminal
-au ColorScheme * hi Normal ctermbg=none guibg=none
-au ColorScheme * hi NonText ctermbg=none guibg=none
+" au ColorScheme * hi Normal ctermbg=none guibg=none
+" au ColorScheme * hi NonText ctermbg=none guibg=none
 
 " Commands
 " --------
@@ -151,6 +157,7 @@ let @c='yiwoconsole.log('''', );bblplllp'
 
 " Plugin config
 " -------------
+let g:deoplete#enable_at_startup = 1
 let g:javascript_plugin_flow = 1
 let g:airline_theme='one'
 let g:airline_powerline_fonts = 0
@@ -176,12 +183,19 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-shift-b>"
 let g:flow#enable = 0 " Only want the autocomplete
 let g:jsx_ext_required = 0
+let g:LanguageClient_serverCommands = {
+    \ 'javascript': ['language_server_typescript'],
+    \ 'javascript.jsx': ['language_server_typescript'],
+    \ }
+
+" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
 
 " Setup UI
 " --------
 set guioptions-=rL
-" set guifont=Menlo:h13
-set guifont=Inconsolata-dz\ for\ Powerline:h12
+set guifont=Menlo:h12
+" set guifont=Inconsolata-dz\ for\ Powerline:h12
 " set guifont=SF\ Mono:h12
 set background=dark
 colorscheme spacegray

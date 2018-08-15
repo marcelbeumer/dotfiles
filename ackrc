@@ -1,0 +1,3 @@
+--ignore-dir=dist
+--ignore-dir=release
+--ignore-dir=release-latest
