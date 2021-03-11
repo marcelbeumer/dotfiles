@@ -1,0 +1,3 @@
+source ~/.vim/config/vimrc-coc.vim
+" source ~/.vim/config/vimrc-vim-lsp.vim
+

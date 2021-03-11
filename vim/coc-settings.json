@@ -1,0 +1,6 @@
+{
+  "suggest.autoTrigger": "always",
+  "signature.enable": false,
+  "signature.target": "float",
+  "coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact"]
+}

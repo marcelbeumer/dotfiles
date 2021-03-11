@@ -1,4 +1,4 @@
 Dotfiles
 ========
 
-Marcel's dotfiles for macbook and server.
+Marcel's dotfiles 

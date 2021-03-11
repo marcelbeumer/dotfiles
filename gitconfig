@@ -1,8 +1,6 @@
-[color]
-  ui = true
 [user]
-	name = Marcel Beumer
 	email = marcel@marcelbeumer.com
+	name = Marcel Beumer
 [alias]
 	ack = grep --break --heading --line-number
   st = status
