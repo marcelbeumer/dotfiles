@@ -33,12 +33,12 @@ function M.setup_lsp_buffer(lsp_client, bufnr)
   if lsp_client.resolved_capabilities.document_range_formatting then
     buf_set_keymap("v", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
   end
-
 end
 
 function M.setup_global()
   vim.api.nvim_exec([[
-    nnoremap <silent><leader>w :w<CR>
+    nnoremap <silent><space>s :w<CR>
+    nnoremap <silent><leader>s :w<CR>
     nnoremap <silent><leader>; :NERDTreeToggle<CR>
     nnoremap <silent><leader>' :NERDTreeFind<CR>
     nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
@@ -65,9 +65,9 @@ function M.tab_complete()
   local check_back_space = function()
     local col = vim.fn.col('.') - 1
     if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-        return true
+      return true
     else
-        return false
+      return false
     end
   end
   if vim.fn.pumvisible() == 1 then

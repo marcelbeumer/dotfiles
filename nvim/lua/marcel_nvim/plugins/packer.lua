@@ -22,8 +22,9 @@ function M.setup()
     -- use 'tpope/vim-surround'
     -- Support different commentstring settings within same filetype
     use 'JoosepAlviste/nvim-ts-context-commentstring'
-    -- Colorscheme
+    -- Colorschemes
     use {'dracula/vim', as = 'dracula'}
+    use 'ishan9299/nvim-solarized-lua'
     -- File explorer (TODO: explore nvim options)
     use 'scrooloose/nerdtree'
     -- Fuzzy finder
