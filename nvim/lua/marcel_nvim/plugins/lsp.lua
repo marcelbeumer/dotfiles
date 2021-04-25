@@ -31,6 +31,7 @@ local function setup_lua()
   local sumneko_binary = sumneko_root_path.."/bin/macOS/lua-language-server"
 
   nvim_lsp.sumneko_lua.setup {
+    on_attach = on_attach_common,
     cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
     filetypes = {"lua"},
     settings = {
@@ -72,9 +73,16 @@ local function setup_tsserver()
   }
 end
 
+local function setup_pyls()
+  require'lspconfig'.pyls.setup{
+    on_attach = on_attach_common
+  }
+end
+
 function M.setup()
   setup_tsserver()
   setup_lua()
+  setup_pyls()
   -- setup_efm()
 end
 

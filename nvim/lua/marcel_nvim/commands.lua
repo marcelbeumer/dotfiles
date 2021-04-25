@@ -1,12 +1,6 @@
 local M = {}
 
 function M.setup_lsp_buffer(lsp_client, bufnr)
-  vim.api.nvim_exec([[
-    augroup fmt
-      autocmd!
-      autocmd BufWritePre * silent! undojoin | Neoformat
-    augroup END
-  ]], false)
 end
 
 function M.setup_global()
@@ -18,6 +12,11 @@ function M.setup_global()
     command Commands e ~/.config/nvim/lua/marcel_nvim/commands.lua
     command Bindings e ~/.config/nvim/lua/marcel_nvim/bindings.lua
     command Settings e ~/.config/nvim/lua/marcel_nvim/settings.lua
+
+    augroup fmt
+      autocmd!
+      autocmd BufWritePre *.ts,*.tsx silent! undojoin | Neoformat
+    augroup END
   ]], false)
 end
 
