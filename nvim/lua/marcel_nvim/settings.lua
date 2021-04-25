@@ -24,6 +24,7 @@ function M.setup_global()
     set laststatus=2
     " set linespace=1
     colorscheme dracula
+    " colorscheme tokyonight
 
     " Editing
     set clipboard=unnamed

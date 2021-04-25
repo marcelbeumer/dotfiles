@@ -25,6 +25,9 @@ function M.setup()
     -- Colorschemes
     use {'dracula/vim', as = 'dracula'}
     use 'ishan9299/nvim-solarized-lua'
+    use 'folke/tokyonight.nvim'
+    -- Add missing highlight groups in colorschemes
+    use 'folke/lsp-colors.nvim'
     -- File explorer (TODO: explore nvim options)
     use 'scrooloose/nerdtree'
     -- Fuzzy finder
@@ -40,9 +43,9 @@ function M.setup()
     -- Issue with LSP formatting and treesitter:
     -- https://github.com/neovim/neovim/issues/12861
     use 'sbdchd/neoformat'
-    -- TODO:
-    -- * snippets with vsnip?
-    -- * debugging with nvim-dap?
+    -- Snippets
+    use 'hrsh7th/vim-vsnip'
+    use 'hrsh7th/vim-vsnip-integ'
   end)
 end
 
