@@ -36,6 +36,10 @@ function M.setup()
     use 'jremmen/vim-ripgrep'
     -- Editor config support
     use 'editorconfig/editorconfig-vim'
+    -- Formatting 
+    -- Issue with LSP formatting and treesitter:
+    -- https://github.com/neovim/neovim/issues/12861
+    use 'sbdchd/neoformat'
     -- TODO:
     -- * snippets with vsnip?
     -- * debugging with nvim-dap?

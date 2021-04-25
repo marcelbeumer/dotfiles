@@ -72,8 +72,8 @@ function M.tab_complete()
   end
   if vim.fn.pumvisible() == 1 then
     return replace_termcodes "<C-n>"
-  -- elseif vim.fn.call("vsnip#available", {1}) == 1 then
-  --   return replace_termcodes "<Plug>(vsnip-expand-or-jump)"
+  elseif vim.fn.call("vsnip#available", {1}) == 1 then
+    return replace_termcodes "<Plug>(vsnip-expand-or-jump)"
   elseif check_back_space() then
     return replace_termcodes "<Tab>"
   else
@@ -84,8 +84,8 @@ end
 function M.s_tab_complete()
   if vim.fn.pumvisible() == 1 then
     return replace_termcodes "<C-p>"
-  -- elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
-  --   return replace_termcodes "<Plug>(vsnip-jump-prev)"
+  elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
+    return replace_termcodes "<Plug>(vsnip-jump-prev)"
   else
     return replace_termcodes "<S-Tab>"
   end

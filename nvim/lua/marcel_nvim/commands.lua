@@ -1,18 +1,12 @@
 local M = {}
 
 function M.setup_lsp_buffer(lsp_client, bufnr)
-  --- FIXME: sometimes formatting does nothing
-  -- * issue with multiple language servers?
- 
-  --- FIXME: sometimes treesitter breaks
-  -- * issue with efm specifically?
- 
-  -- vim.api.nvim_exec([[
-  --   augroup format_on_save
-  --     au!
-  --     au BufWritePre *.ts,*.tsx lua vim.lsp.buf.formatting()
-  --   augroup end
-  -- ]], false)
+  vim.api.nvim_exec([[
+    augroup fmt
+      autocmd!
+      autocmd BufWritePre * silent! undojoin | Neoformat
+    augroup END
+  ]], false)
 end
 
 function M.setup_global()
