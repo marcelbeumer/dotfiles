@@ -30,7 +30,7 @@ local function setup_lua()
   local sumneko_root_path = vim.env.HOME .. '/dev/clone/lua-language-server'
   local sumneko_binary = sumneko_root_path.."/bin/macOS/lua-language-server"
 
-  require'lspconfig'.sumneko_lua.setup {
+  nvim_lsp.sumneko_lua.setup {
     cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
     filetypes = {"lua"},
     settings = {
