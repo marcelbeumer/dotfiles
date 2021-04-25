@@ -1,5 +1,5 @@
 local M = {}
-local nvim_lsp = require('lspconfig')
+local lspconfig = require('lspconfig')
 
 local on_attach_common = function(lsp_client, bufnr)
   require('marcel_nvim.bindings').setup_lsp_buffer(lsp_client, bufnr)
@@ -11,7 +11,7 @@ local function setup_efm()
   local deno_fmt = {formatCommand = "deno fmt -", formatStdin = true}
   local lua_fmt = {formatCommand = "lua-format -i", formatStdin = true}
 
-  nvim_lsp.efm.setup {
+  lspconfig.efm.setup {
     on_attach = on_attach_common,
     init_options = {documentFormatting = true},
     filetypes = {"typescript", "typescriptreact" },
@@ -30,7 +30,7 @@ local function setup_lua()
   local sumneko_root_path = vim.env.HOME .. '/dev/clone/lua-language-server'
   local sumneko_binary = sumneko_root_path.."/bin/macOS/lua-language-server"
 
-  nvim_lsp.sumneko_lua.setup {
+  lspconfig.sumneko_lua.setup {
     on_attach = on_attach_common,
     cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
     filetypes = {"lua"},
@@ -63,7 +63,7 @@ local function setup_lua()
 end
 
 local function setup_tsserver()
-  nvim_lsp.tsserver.setup {
+  lspconfig.tsserver.setup {
     on_attach = function(lsp_client, bufnr)
       -- Not sure if setting resolved_capabilities works
       lsp_client.resolved_capabilities.document_formatting = false
@@ -73,8 +73,33 @@ local function setup_tsserver()
   }
 end
 
+local function setup_jsonl()
+  lspconfig.jsonls.setup {
+    on_attach = on_attach_common,
+    commands = {
+      Format = {
+        function()
+          vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
+        end
+      }
+    }
+  }
+end
+
 local function setup_pyls()
-  require'lspconfig'.pyls.setup{
+  lspconfig.pyls.setup{
+    on_attach = on_attach_common
+  }
+end
+
+local function setup_vimls()
+  lspconfig.vimls.setup {
+    on_attach = on_attach_common
+  }
+end
+
+local function setup_rust_analyzer()
+  lspconfig.rust_analyzer.setup {
     on_attach = on_attach_common
   }
 end
@@ -83,6 +108,9 @@ function M.setup()
   setup_tsserver()
   setup_lua()
   setup_pyls()
+  setup_jsonl()
+  setup_vimls()
+  setup_rust_analyzer()
   -- setup_efm()
 end
 
