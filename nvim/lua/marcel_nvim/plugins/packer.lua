@@ -9,8 +9,8 @@ function M.setup()
 
   vim.cmd 'packadd packer.nvim'
 
-  require('packer').startup(function()
-    -- Autocompletion 
+  require('packer').startup(function(use)
+    -- Autocompletion
     use 'hrsh7th/nvim-compe'
     -- Treesitter tools
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
@@ -39,7 +39,7 @@ function M.setup()
     use 'jremmen/vim-ripgrep'
     -- Editor config support
     use 'editorconfig/editorconfig-vim'
-    -- Formatting 
+    -- Formatting
     -- Issue with LSP formatting and treesitter:
     -- https://github.com/neovim/neovim/issues/12861
     use 'sbdchd/neoformat'
