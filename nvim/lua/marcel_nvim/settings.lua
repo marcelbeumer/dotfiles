@@ -32,6 +32,7 @@ function M.setup_global()
     set shortmess+=c 
     set signcolumn=yes
     set updatetime=1000 " for CursorHold event
+    set mouse=nv " nice for window sizing
 
     " set autoindent
     set expandtab
