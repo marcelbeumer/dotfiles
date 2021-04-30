@@ -11,6 +11,7 @@ mkdir -p ~/.config
 
 rm -rf ~/.config/nvim && ln -s $dirname/nvim ~/.config/nvim
 rm -rf ~/.config/alacritty && ln -s $dirname/alacritty ~/.config/alacritty
+rm -rf ~/.config/karabiner && ln -s $dirname/karabiner ~/.config/karabiner
 
 mkdir -p ~/.vim
 mkdir -p ~/.vim/swp-vimrc-coc
