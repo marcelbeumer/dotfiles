@@ -10,6 +10,9 @@ function M.setup()
   vim.cmd 'packadd packer.nvim'
 
   require('packer').startup(function(use)
+    -- Welcome screen and session mgmt
+    use 'mhinz/vim-startify'
+
     -- Autocompletion
     use 'hrsh7th/nvim-compe'
 
@@ -60,9 +63,6 @@ function M.setup()
     -- Snippets
     use 'hrsh7th/vim-vsnip'
     use 'hrsh7th/vim-vsnip-integ'
-
-    -- Welcome screen and session mgmt
-    use 'mhinz/vim-startify'
   end)
 end
 
