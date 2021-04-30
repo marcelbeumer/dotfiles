@@ -23,8 +23,8 @@ function M.setup_global()
     set guifont=Jetbrains\ Mono:h14
     set laststatus=2
     " set linespace=1
-    colorscheme dracula
-    " colorscheme tokyonight
+    " colorscheme dracula
+    colorscheme tokyonight
 
     " Editing
     set clipboard=unnamed

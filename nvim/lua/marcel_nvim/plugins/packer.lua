@@ -12,40 +12,57 @@ function M.setup()
   require('packer').startup(function(use)
     -- Autocompletion
     use 'hrsh7th/nvim-compe'
+
     -- Treesitter tools
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+
     -- LSP config helpers
     use 'neovim/nvim-lspconfig'
+
     --- Comment
     use 'tpope/vim-commentary'
+
+    -- Git
+    use 'tpope/vim-fugitive'
+
     --- Surround bindings (TODO: did I really use this?)
     -- use 'tpope/vim-surround'
     -- Support different commentstring settings within same filetype
     use 'JoosepAlviste/nvim-ts-context-commentstring'
+
     -- Colorschemes
     use {'dracula/vim', as = 'dracula'}
     use 'ishan9299/nvim-solarized-lua'
     use 'folke/tokyonight.nvim'
-    -- Add missing highlight groups in colorschemes
-    use 'folke/lsp-colors.nvim'
+    use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
+    use 'folke/lsp-colors.nvim' -- Add missing highlight groups in colorschemes
+
     -- File explorer (TODO: explore nvim options)
     use 'kyazdani42/nvim-tree.lua'
+
     -- Fuzzy finder
     use {
       'nvim-telescope/telescope.nvim',
       requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
     }
+
     -- Rg command for fast searching
     use 'jremmen/vim-ripgrep'
+
     -- Editor config support
     use 'editorconfig/editorconfig-vim'
+
     -- Formatting
     -- Issue with LSP formatting and treesitter:
     -- https://github.com/neovim/neovim/issues/12861
     use 'sbdchd/neoformat'
+
     -- Snippets
     use 'hrsh7th/vim-vsnip'
     use 'hrsh7th/vim-vsnip-integ'
+
+    -- Welcome screen and session mgmt
+    use 'mhinz/vim-startify'
   end)
 end
 
