@@ -39,8 +39,8 @@ function M.setup_global()
   vim.api.nvim_exec([[
     nnoremap <silent><space>s :w<CR>
     nnoremap <silent><leader>s :w<CR>
-    nnoremap <silent><leader>; :NERDTreeToggle<CR>
-    nnoremap <silent><leader>' :NERDTreeFind<CR>
+    nnoremap <silent><leader>; :NvimTreeToggle<CR>
+    nnoremap <silent><leader>' :NvimTreeFindFile<CR>
     nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
     nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
     nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>

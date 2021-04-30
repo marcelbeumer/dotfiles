@@ -29,7 +29,7 @@ function M.setup()
     -- Add missing highlight groups in colorschemes
     use 'folke/lsp-colors.nvim'
     -- File explorer (TODO: explore nvim options)
-    use 'scrooloose/nerdtree'
+    use 'kyazdani42/nvim-tree.lua'
     -- Fuzzy finder
     use {
       'nvim-telescope/telescope.nvim',

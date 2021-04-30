@@ -43,8 +43,6 @@ function M.setup_global()
 
     set ignorecase 
     set joinspaces
-    set splitright
-    set splitbelow
     set linebreak
     set completeopt=menuone,noselect
   ]], false)
