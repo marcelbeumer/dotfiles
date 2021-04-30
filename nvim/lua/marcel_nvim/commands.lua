@@ -7,6 +7,7 @@ function M.setup_global()
   vim.api.nvim_exec([[
     command W w
     command Todo e ~/Notes/content/todo.md
+    command Scratch e ~/Notes/content/scratch.md
     command Bookmarks e ~/Notes/content/bookmarks.md
     command ReadingList e ~/Notes/content/reading_list.md
     command Commands e ~/.config/nvim/lua/marcel_nvim/commands.lua

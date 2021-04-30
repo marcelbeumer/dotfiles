@@ -63,13 +63,27 @@ local function setup_lua()
 end
 
 local function setup_tsserver()
+  local function organize_imports()
+    vim.lsp.buf.execute_command({
+      command = "_typescript.organizeImports",
+      arguments = {vim.api.nvim_buf_get_name(0)},
+      title = ""
+    })
+  end
+
   lspconfig.tsserver.setup {
     on_attach = function(lsp_client, bufnr)
       -- Not sure if setting resolved_capabilities works
       lsp_client.resolved_capabilities.document_formatting = false
       lsp_client.resolved_capabilities.document_range_formatting = false
       on_attach_common(lsp_client, bufnr)
-    end
+    end,
+    commands = {
+      OrganizeImports = {
+        organize_imports,
+        description = "Organize Imports"
+      }
+    }
   }
 end
 
