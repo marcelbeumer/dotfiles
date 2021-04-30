@@ -8,7 +8,9 @@ rm -f ~/.gitconfig && ln -s $dirname/gitconfig ~/.gitconfig
 rm -f ~/.zshrc && ln -s $dirname/zshrc ~/.zshrc
 
 mkdir -p ~/.config
-rm -f ~/.config/nvim && ln -s $dirname/nvim ~/.config/nvim
+
+rm -rf ~/.config/nvim && ln -s $dirname/nvim ~/.config/nvim
+rm -rf ~/.config/alacritty && ln -s $dirname/alacritty ~/.config/alacritty
 
 mkdir -p ~/.vim
 mkdir -p ~/.vim/swp-vimrc-coc
