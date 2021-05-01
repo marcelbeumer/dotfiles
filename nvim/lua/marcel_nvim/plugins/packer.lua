@@ -40,8 +40,8 @@ function M.setup()
     use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
     use 'folke/lsp-colors.nvim' -- Add missing highlight groups in colorschemes
 
-    -- File explorer (TODO: explore nvim options)
-    use 'kyazdani42/nvim-tree.lua'
+    -- File explorer
+    use {'kyazdani42/nvim-tree.lua', requires = {'kyazdani42/nvim-web-devicons'}}
 
     -- Fuzzy finder
     use {
