@@ -41,7 +41,7 @@ function M.setup()
     use 'folke/lsp-colors.nvim' -- Add missing highlight groups in colorschemes
 
     -- File explorer
-    use {'kyazdani42/nvim-tree.lua', requires = {'kyazdani42/nvim-web-devicons'}}
+    use 'preservim/nerdtree'
 
     -- Fuzzy finder
     use {
