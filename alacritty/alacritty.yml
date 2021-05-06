@@ -2,8 +2,8 @@ font:
   # The normal (roman) font face to use.
   # Style can be specified to pick a specific face.
   normal:
-    # family: Jetbrains Mono
-    family: JetbrainsMonoNL NF
+    family: Jetbrains Mono
+    # family: JetbrainsMonoNL NF
     style: Regular
     # family: "Fira Code"
     # family: "Source Code Pro"
@@ -11,16 +11,16 @@ font:
 
   # The bold font face
   bold:
-    # family: Jetbrains Mono
-    family: JetbrainsMonoNL NF
+    family: Jetbrains Mono
+    # family: JetbrainsMonoNL NF
     style: Bold
     # family: "Fira Code"
     # family: "Source Code Pro"
 
   # The italic font face
   italic:
-    # family: Jetbrains Mono
-    family: JetbrainsMonoNL NF
+    family: Jetbrains Mono
+    # family: JetbrainsMonoNL NF
     style: Regular
     # style: "Light Oblique"
     # family: "Fira Code"
