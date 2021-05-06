@@ -22,6 +22,9 @@ function M.setup()
     -- LSP config helpers
     use 'neovim/nvim-lspconfig'
 
+    -- LSP enhancements for TS
+    use { 'jose-elias-alvarez/nvim-lsp-ts-utils', branch = 'develop' }
+
     --- Comment
     use 'tpope/vim-commentary'
 
