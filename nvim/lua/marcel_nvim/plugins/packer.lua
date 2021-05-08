@@ -31,8 +31,9 @@ function M.setup()
     -- Git
     use 'tpope/vim-fugitive'
 
-    --- Surround bindings (TODO: did I really use this?)
-    -- use 'tpope/vim-surround'
+    --- Surround bindings
+    use 'tpope/vim-surround'
+
     -- Support different commentstring settings within same filetype
     use 'JoosepAlviste/nvim-ts-context-commentstring'
 
@@ -51,6 +52,9 @@ function M.setup()
       'nvim-telescope/telescope.nvim',
       requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
     }
+
+    -- Highlight colors
+    use 'norcalli/nvim-colorizer.lua'
 
     -- Rg command for fast searching
     use 'jremmen/vim-ripgrep'
