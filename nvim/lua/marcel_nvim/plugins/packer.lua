@@ -42,7 +42,7 @@ function M.setup()
     use 'ishan9299/nvim-solarized-lua'
     use 'folke/tokyonight.nvim'
     use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
-    use 'folke/lsp-colors.nvim' -- Add missing highlight groups in colorschemes
+    -- use 'folke/lsp-colors.nvim' -- Add missing highlight groups in colorschemes
 
     -- File explorer
     use 'preservim/nerdtree'
