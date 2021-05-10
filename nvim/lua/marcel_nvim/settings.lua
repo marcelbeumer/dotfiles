@@ -17,30 +17,32 @@ end
 
 function M.setup_global()
   vim.api.nvim_exec([[
+    " Visuals
     set termguicolors
     set guioptions-=rL
     set guicursor+=a:blinkon0
     set guifont=Jetbrains\ Mono:h14
     set laststatus=2
-    " set linespace=1
-    " colorscheme dracula
+    set signcolumn=yes
     colorscheme tokyonight
+
+    " Backup, swap
+    " set nobackup
+    " set nowritebackup
+    set noswapfile
 
     " Editing
     set clipboard=unnamed
     set hidden 
     set shortmess+=c 
-    set signcolumn=yes
     set updatetime=1000 " for CursorHold event
     set mouse=nv " nice for window sizing
-
     " set autoindent
     set expandtab
     set shiftwidth=2
     set softtabstop=2
     set tabstop=2
     set smartindent
-
     set ignorecase 
     set joinspaces
     set linebreak

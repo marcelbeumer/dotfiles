@@ -120,7 +120,7 @@ function M.setup()
   setup_jsonl()
   setup_vimls()
   setup_rust_analyzer()
-  -- setup_efm()
+  setup_efm()
 end
 
 return M
