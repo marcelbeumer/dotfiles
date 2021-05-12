@@ -10,6 +10,9 @@ function M.setup()
   vim.cmd 'packadd packer.nvim'
 
   require('packer').startup(function(use)
+    -- Terminal colors
+    use 'norcalli/nvim-terminal.lua'
+
     -- Welcome screen and session mgmt
     use 'mhinz/vim-startify'
 
