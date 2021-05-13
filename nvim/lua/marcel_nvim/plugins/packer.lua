@@ -56,6 +56,9 @@ function M.setup()
       requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
     }
 
+    -- Native sorter for perf
+    use { 'nvim-telescope/telescope-fzy-native.nvim' }
+
     -- Highlight colors
     use 'norcalli/nvim-colorizer.lua'
 
