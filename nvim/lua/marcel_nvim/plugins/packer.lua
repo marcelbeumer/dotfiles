@@ -68,9 +68,7 @@ function M.setup()
     -- Editor config support
     use 'editorconfig/editorconfig-vim'
 
-    -- Formatting
-    -- Issue with LSP formatting and treesitter:
-    -- https://github.com/neovim/neovim/issues/12861
+    -- Formatter fallback for when I can't with LSP
     use 'sbdchd/neoformat'
 
     -- Snippets

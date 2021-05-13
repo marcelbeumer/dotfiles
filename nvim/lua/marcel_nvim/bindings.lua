@@ -37,14 +37,27 @@ end
 
 function M.setup_global()
   vim.api.nvim_exec([[
+    nnoremap <silent>]q :cnext<CR>
+    nnoremap <silent>[q :cprev<CR>
+    nnoremap <silent>]Q :lnext<CR>
+    nnoremap <silent>[Q :lprev<CR>
+    nnoremap <silent>]t :tabnext<CR>
+    nnoremap <silent>[t :tabprev<CR>
+
     nnoremap <silent><space>s :w<CR>
+
     nnoremap <silent><leader>s :w<CR>
+    nnoremap <silent><leader>tn :tabnew<CR>
+    nnoremap <silent><leader>tc :tabclose<CR>
     nnoremap <silent><leader>; :NERDTreeToggle<CR>
     nnoremap <silent><leader>' :NERDTreeFind<CR>
     nnoremap <silent><leader>bx :BufferDeleteHidden<CR>
+
+    nnoremap <leader>fx <cmd>lua require('telescope.builtin').builtin()<cr>
     nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
     nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
     nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+    nnoremap <leader>f/ <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
     nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
     nnoremap <leader>flr <cmd>lua require('telescope.builtin').lsp_references()<cr>
     nnoremap <leader>fls <cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>
