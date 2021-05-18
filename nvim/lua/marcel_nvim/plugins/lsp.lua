@@ -1,6 +1,8 @@
 local M = {}
 local lspconfig = require('lspconfig')
 
+local flags_common = { debounce_text_changes = 500 }
+
 local on_attach_common = function(lsp_client, bufnr)
   require('marcel_nvim.bindings').setup_lsp_buffer(lsp_client, bufnr)
   require('marcel_nvim.settings').setup_lsp_buffer(lsp_client, bufnr)
@@ -22,7 +24,10 @@ local function setup_efm()
         typescript = { deno_fmt },
         typescriptreact = { deno_fmt },
       }
-    }
+    },
+    flags = {
+      debounce_text_changes = 5000,
+    },
   }
 end
 
@@ -32,6 +37,7 @@ local function setup_lua()
 
   lspconfig.sumneko_lua.setup {
     on_attach = on_attach_common,
+    flags = flags_common,
     cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
     filetypes = {"lua"},
     settings = {
@@ -64,6 +70,7 @@ end
 
 local function setup_tsserver()
   lspconfig.tsserver.setup {
+    flags = flags_common,
     on_attach = function(lsp_client, bufnr)
       -- Not sure if setting resolved_capabilities works
       lsp_client.resolved_capabilities.document_formatting = false
@@ -79,12 +86,13 @@ local function setup_tsserver()
       lsp_ts_utils.setup_client(lsp_client)
 
       on_attach_common(lsp_client, bufnr)
-    end
+    end,
   }
 end
 
 local function setup_jsonl()
   lspconfig.jsonls.setup {
+    flags = flags_common,
     on_attach = on_attach_common,
     commands = {
       Format = {
@@ -98,18 +106,21 @@ end
 
 local function setup_pyls()
   lspconfig.pyls.setup{
+    flags = flags_common,
     on_attach = on_attach_common
   }
 end
 
 local function setup_vimls()
   lspconfig.vimls.setup {
+    flags = flags_common,
     on_attach = on_attach_common
   }
 end
 
 local function setup_rust_analyzer()
   lspconfig.rust_analyzer.setup {
+    flags = flags_common,
     on_attach = on_attach_common
   }
 end
