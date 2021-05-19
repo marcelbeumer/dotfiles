@@ -1,7 +1,7 @@
 local M = {}
 local lspconfig = require('lspconfig')
 
-local flags_common = { debounce_text_changes = 500 }
+local flags_common = { debounce_text_changes = 200 }
 
 local on_attach_common = function(lsp_client, bufnr)
   require('marcel_nvim.bindings').setup_lsp_buffer(lsp_client, bufnr)
@@ -126,6 +126,7 @@ local function setup_rust_analyzer()
 end
 
 function M.setup()
+  -- vim.lsp.set_log_level("debug")
   setup_tsserver()
   setup_lua()
   setup_pyls()
