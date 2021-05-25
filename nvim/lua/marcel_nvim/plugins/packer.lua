@@ -57,7 +57,8 @@ function M.setup()
     }
 
     -- Native sorter for perf
-    use { 'nvim-telescope/telescope-fzy-native.nvim' }
+    -- use { 'nvim-telescope/telescope-fzy-native.nvim' }
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
     -- Highlight colors
     use 'norcalli/nvim-colorizer.lua'
@@ -70,6 +71,9 @@ function M.setup()
 
     -- Formatter fallback for when I can't with LSP
     use 'sbdchd/neoformat'
+
+    -- Lua syntax
+    use 'euclidianAce/BetterLua.vim'
 
     -- Snippets
     use 'hrsh7th/vim-vsnip'

@@ -13,13 +13,20 @@ function M.setup()
       }
     },
     extensions = {
-      fzy_native = {
+      -- fzy_native = {
+      --   override_generic_sorter = false,
+      --   override_file_sorter = true,
+      -- },
+      fzf = {
+        fuzzy = true,
         override_generic_sorter = false,
         override_file_sorter = true,
+        case_mode = "smart_case",
       }
     }
   })
-  require('telescope').load_extension('fzy_native')
+  -- require('telescope').load_extension('fzy_native')
+  require('telescope').load_extension('fzy')
 end
 
 return M
