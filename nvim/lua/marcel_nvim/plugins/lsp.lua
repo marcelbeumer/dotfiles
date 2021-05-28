@@ -90,7 +90,7 @@ local function setup_tsserver()
   }
 end
 
-local function setup_jsonl()
+local function setup_jsonls()
   lspconfig.jsonls.setup {
     flags = flags_common,
     on_attach = on_attach_common,
@@ -130,7 +130,7 @@ function M.setup()
   setup_tsserver()
   setup_lua()
   setup_pyls()
-  setup_jsonl()
+  setup_jsonls()
   setup_vimls()
   setup_rust_analyzer()
   setup_efm()
