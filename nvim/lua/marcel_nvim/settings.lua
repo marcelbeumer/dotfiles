@@ -24,6 +24,7 @@ function M.setup_global()
     set guifont=Jetbrains\ Mono:h14
     set laststatus=2
     set signcolumn=yes
+    " set background=light
     colorscheme tokyonight
 
     " Backup, swap

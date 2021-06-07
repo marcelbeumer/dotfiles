@@ -6,9 +6,9 @@ end
 
 function M.setup_lsp_buffer(lsp_client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-
-  -- Mappings.
   local opts = { noremap=true, silent=true }
+
+  -- built-in lsp
   buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
@@ -66,6 +66,14 @@ function M.setup_global()
     nnoremap <leader>fla <cmd>lua require('telescope.builtin').lsp_code_actions()<cr>
     nnoremap <leader>flq <cmd>lua require('telescope.builtin').lsp_document_diagnostics()<cr>
     nnoremap <leader>flQ <cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>
+
+    " lsp-trouble global bindings because also needs to work in trouble buffer itself
+    nnoremap <leader>xx <cmd>TroubleToggle<cr>
+    nnoremap <leader>xw <cmd>TroubleToggle lsp_workspace_diagnostics<cr>
+    nnoremap <leader>xd <cmd>TroubleToggle lsp_document_diagnostics<cr>
+    nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
+    nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
+    nnoremap gR <cmd>TroubleToggle lsp_references<cr>
 
     inoremap <silent><expr> <C-Space> compe#complete()
     inoremap <silent><expr> <CR>      compe#confirm('<CR>')

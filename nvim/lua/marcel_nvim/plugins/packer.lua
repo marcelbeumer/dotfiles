@@ -58,6 +58,9 @@ function M.setup()
     -- use { 'nvim-telescope/telescope-fzy-native.nvim' }
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
+    -- Pretty LSP diagnostics, loc list or qf list
+    use "folke/trouble.nvim"
+
     -- Highlight colors
     use 'norcalli/nvim-colorizer.lua'
 

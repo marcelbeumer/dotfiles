@@ -2,14 +2,17 @@ local M =  {}
 
 function M.setup()
   local actions = require('telescope.actions')
+  -- local trouble = require("trouble.providers.telescope")
+
   require('telescope').setup({
     defaults = {
       file_sorter = require'telescope.sorters'.get_fzy_sorter,
       generic_sorter = require'telescope.sorters'.get_fzy_sorter,
       mappings = {
         i = {
-          ["<C-q>"] = actions.send_to_qflist
-        }
+          ["<C-q>"] = actions.send_to_qflist,
+          -- ["<C-t>"] = trouble.open_with_trouble, - conflicts but also doesnt work with other binding
+        },
       }
     },
     extensions = {
