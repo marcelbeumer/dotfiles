@@ -43,6 +43,8 @@ function M.setup_global()
     nnoremap <silent>[Q :lprev<CR>
     nnoremap <silent>]t :tabnext<CR>
     nnoremap <silent>[t :tabprev<CR>
+    nnoremap <silent><C-L> :tabnext<CR>
+    nnoremap <silent><C-H> :tabprev<CR>
 
     nnoremap <silent><space>s :w<CR>
 
