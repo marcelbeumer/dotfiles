@@ -43,7 +43,7 @@ function M.setup()
     -- Colorschemes
     use {'dracula/vim', as = 'dracula'}
     use 'ishan9299/nvim-solarized-lua'
-    use 'folke/tokyonight.nvim'
+    use 'marcelbeumer/tokyonight.nvim'
 
     -- File explorer
     use 'preservim/nerdtree'
