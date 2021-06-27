@@ -79,7 +79,6 @@ local function setup_tsserver()
       local lsp_ts_utils = require("nvim-lsp-ts-utils")
       lsp_ts_utils.setup {
         eslint_enable_code_actions = false,
-        eslint_bin = "eslint_d",
         update_imports_on_move = true,
         require_confirmation_on_move = true
       }

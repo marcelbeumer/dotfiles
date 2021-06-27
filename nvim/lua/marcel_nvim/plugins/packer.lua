@@ -77,8 +77,8 @@ function M.setup()
     use 'euclidianAce/BetterLua.vim'
 
     -- Snippets
-    use 'hrsh7th/vim-vsnip'
-    use 'hrsh7th/vim-vsnip-integ'
+    -- use 'hrsh7th/vim-vsnip'
+    -- use 'hrsh7th/vim-vsnip-integ'
   end)
 end
 
