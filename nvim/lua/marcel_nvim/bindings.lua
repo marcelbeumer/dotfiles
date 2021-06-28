@@ -46,7 +46,8 @@ function M.setup_global()
     nnoremap <silent><C-L> :tabnext<CR>
     nnoremap <silent><C-H> :tabprev<CR>
 
-    nnoremap <silent><space>s :w<CR>
+    nnoremap <silent><C-s> :w<CR>
+    nnoremap <silent><C-w>N :vnew<CR>
 
     nnoremap <silent><leader>s :w<CR>
     nnoremap <silent><leader>tn :tabnew<CR>
