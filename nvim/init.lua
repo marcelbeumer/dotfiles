@@ -1,3 +1,4 @@
+require('marcel_nvim.dev').setup()
 require('marcel_nvim.plugins.packer').setup()
 require('marcel_nvim.plugins.lsp').setup()
 require('marcel_nvim.plugins.compe').setup()

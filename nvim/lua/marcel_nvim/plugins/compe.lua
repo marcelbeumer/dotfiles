@@ -8,12 +8,12 @@ function M.setup()
     min_length = 1;
     preselect = 'enable';
     throttle_time = 80;
-    source_timeout = 2000;
-    resolve_timeout = 2000;
-    incomplete_delay = 400;
-    max_abbr_width = 100;
-    max_kind_width = 100;
-    max_menu_width = 100;
+    source_timeout = 20000;
+    resolve_timeout = 20000;
+    incomplete_delay = 40000;
+    max_abbr_width = 1000;
+    max_kind_width = 1000;
+    max_menu_width = 1000;
     documentation = true;
 
     source = {

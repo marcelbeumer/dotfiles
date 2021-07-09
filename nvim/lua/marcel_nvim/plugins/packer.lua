@@ -18,6 +18,7 @@ function M.setup()
 
     -- Autocompletion
     use 'hrsh7th/nvim-compe'
+    -- use 'marcelbeumer/nvim-compe'
 
     -- Treesitter tools
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
