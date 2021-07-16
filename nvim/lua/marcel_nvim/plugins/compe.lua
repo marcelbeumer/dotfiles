@@ -6,7 +6,7 @@ function M.setup()
     autocomplete = false;
     debug = false;
     min_length = 1;
-    preselect = 'enable';
+    preselect = 'disable';
     throttle_time = 80;
     source_timeout = 20000;
     resolve_timeout = 20000;
@@ -22,7 +22,7 @@ function M.setup()
       -- calc = true;
       nvim_lsp = true;
       -- nvim_lua = true;
-      -- vsnip = true;
+      vsnip = true;
       -- ultisnips = true;
     };
   }

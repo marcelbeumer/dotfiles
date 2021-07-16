@@ -76,6 +76,9 @@ local function setup_tsserver()
       lsp_client.resolved_capabilities.document_formatting = false
       lsp_client.resolved_capabilities.document_range_formatting = false
 
+      -- required by lsp_ts_utils: https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils
+      require("null-ls").setup {}
+
       local lsp_ts_utils = require("nvim-lsp-ts-utils")
       lsp_ts_utils.setup {
         eslint_enable_code_actions = false,
@@ -128,7 +131,7 @@ function M.setup()
   -- vim.lsp.set_log_level("debug")
   setup_tsserver()
   setup_lua()
-  setup_pyls()
+  -- setup_pyls()
   setup_jsonls()
   setup_vimls()
   setup_rust_analyzer()

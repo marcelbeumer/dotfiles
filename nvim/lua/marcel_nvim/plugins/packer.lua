@@ -10,6 +10,10 @@ function M.setup()
   vim.cmd 'packadd packer.nvim'
 
   require('packer').startup(function(use)
+    -- Auto pair support
+    -- use 'windwp/nvim-autopairs'
+    -- use 'windwp/nvim-ts-autotag'
+
     -- Terminal colors
     use 'norcalli/nvim-terminal.lua'
 
@@ -17,7 +21,8 @@ function M.setup()
     use 'mhinz/vim-startify'
 
     -- Autocompletion
-    use 'hrsh7th/nvim-compe'
+    -- use { 'hrsh7th/nvim-compe', commit = '8024ea3b44db0e90b1048dfbf14cfb97439dd9c0' }
+    use { 'hrsh7th/nvim-compe' }
     -- use 'marcelbeumer/nvim-compe'
 
     -- Treesitter tools
@@ -27,7 +32,9 @@ function M.setup()
     use 'neovim/nvim-lspconfig'
 
     -- LSP enhancements for TS
-    use { 'jose-elias-alvarez/nvim-lsp-ts-utils' }
+    use { 'jose-elias-alvarez/nvim-lsp-ts-utils',
+      requires = {{'nvim-lua/plenary.nvim'}, {'jose-elias-alvarez/null-ls.nvim'}}
+    }
 
     --- Comment
     use 'tpope/vim-commentary'
@@ -44,7 +51,9 @@ function M.setup()
     -- Colorschemes
     use {'dracula/vim', as = 'dracula'}
     use 'ishan9299/nvim-solarized-lua'
-    use 'marcelbeumer/tokyonight.nvim'
+    -- use 'marcelbeumer/tokyonight.nvim'
+    use 'folke/tokyonight.nvim'
+    use 'projekt0n/github-nvim-theme'
 
     -- File explorer
     use 'preservim/nerdtree'
@@ -78,8 +87,8 @@ function M.setup()
     use 'euclidianAce/BetterLua.vim'
 
     -- Snippets
-    -- use 'hrsh7th/vim-vsnip'
-    -- use 'hrsh7th/vim-vsnip-integ'
+    use 'hrsh7th/vim-vsnip'
+    use 'hrsh7th/vim-vsnip-integ'
   end)
 end
 
