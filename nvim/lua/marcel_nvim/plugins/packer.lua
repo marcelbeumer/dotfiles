@@ -14,9 +14,6 @@ function M.setup()
     use 'windwp/nvim-autopairs'
     use 'windwp/nvim-ts-autotag'
 
-    -- Welcome screen and session mgmt
-    use 'mhinz/vim-startify'
-
     -- Autocompletion
     -- use { 'hrsh7th/nvim-compe', commit = '8024ea3b44db0e90b1048dfbf14cfb97439dd9c0' }
     use { 'hrsh7th/nvim-compe' }

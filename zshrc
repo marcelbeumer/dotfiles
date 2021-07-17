@@ -16,6 +16,11 @@ eval "$(fnm env)"
 
 bindkey -v
 
+source_if_exists () {
+  [[ -f "$1" ]] && source "$1"
+}
+
+source_if_exists ~/.other
 
 # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/common-aliases/common-aliases.plugin.zsh
 # ls, the common ones I use a lot shortened for rapid fire usage

@@ -169,10 +169,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/robotx/.local/share/nvim/site/pack/packer/start/vim-ripgrep"
   },
-  ["vim-startify"] = {
-    loaded = true,
-    path = "/Users/robotx/.local/share/nvim/site/pack/packer/start/vim-startify"
-  },
   ["vim-surround"] = {
     loaded = true,
     path = "/Users/robotx/.local/share/nvim/site/pack/packer/start/vim-surround"
