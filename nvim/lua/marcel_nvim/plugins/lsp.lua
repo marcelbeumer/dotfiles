@@ -1,7 +1,7 @@
 local M = {}
 local lspconfig = require('lspconfig')
 
-local flags_common = { debounce_text_changes = nil }
+local flags_common = { debounce_text_changes = 300 }
 
 local on_attach_common = function(lsp_client, bufnr)
   require('marcel_nvim.bindings').setup_lsp_buffer(lsp_client, bufnr)
@@ -106,8 +106,8 @@ local function setup_jsonls()
   }
 end
 
-local function setup_pyls()
-  lspconfig.pyls.setup{
+local function setup_pylsp()
+  lspconfig.pylsp.setup{
     flags = flags_common,
     on_attach = on_attach_common
   }
@@ -127,11 +127,24 @@ local function setup_rust_analyzer()
   }
 end
 
+local function setup_common()
+  vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics,
+    {
+      underline = true,
+      virtual_text = false,
+      update_in_insert = true,
+      severity_sort = true
+    }
+  )
+end
+
 function M.setup()
-  -- vim.lsp.set_log_level("debug")
+  setup_common()
+  vim.lsp.set_log_level("debug")
   setup_tsserver()
   setup_lua()
-  -- setup_pyls()
+  setup_pylsp()
   setup_jsonls()
   setup_vimls()
   setup_rust_analyzer()

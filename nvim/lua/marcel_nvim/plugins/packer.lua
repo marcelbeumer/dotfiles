@@ -11,11 +11,8 @@ function M.setup()
 
   require('packer').startup(function(use)
     -- Auto pair support
-    -- use 'windwp/nvim-autopairs'
-    -- use 'windwp/nvim-ts-autotag'
-
-    -- Terminal colors
-    use 'norcalli/nvim-terminal.lua'
+    use 'windwp/nvim-autopairs'
+    use 'windwp/nvim-ts-autotag'
 
     -- Welcome screen and session mgmt
     use 'mhinz/vim-startify'

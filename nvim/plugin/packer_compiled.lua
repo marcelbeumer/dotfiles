@@ -121,10 +121,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/robotx/.local/share/nvim/site/pack/packer/start/nvim-solarized-lua"
   },
-  ["nvim-terminal.lua"] = {
-    loaded = true,
-    path = "/Users/robotx/.local/share/nvim/site/pack/packer/start/nvim-terminal.lua"
-  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/Users/robotx/.local/share/nvim/site/pack/packer/start/nvim-treesitter"

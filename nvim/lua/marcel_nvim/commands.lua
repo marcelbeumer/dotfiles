@@ -53,6 +53,7 @@ function M.setup_global()
     command Scratch e ~/Notes/content/scratch.md
     command Bookmarks e ~/Notes/content/bookmarks.md
     command ReadingList e ~/Notes/content/reading_list.md
+    command Inbox e ~/Notes/content/inbox.md
     command Commands e ~/.config/nvim/lua/marcel_nvim/commands.lua
     command Bindings e ~/.config/nvim/lua/marcel_nvim/bindings.lua
     command Settings e ~/.config/nvim/lua/marcel_nvim/settings.lua
