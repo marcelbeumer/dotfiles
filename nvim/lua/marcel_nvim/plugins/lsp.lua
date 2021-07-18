@@ -4,6 +4,14 @@ local lspconfig = require('lspconfig')
 local flags_common = { debounce_text_changes = 300 }
 
 local on_attach_common = function(lsp_client, bufnr)
+  require("lsp_signature").on_attach({
+    bind = true,
+    floating_window = true, -- false for virtual_text
+    hint_enable = false,
+    handler_opts = {
+      border = "none"
+    }
+  })
   require('marcel_nvim.bindings').setup_lsp_buffer(lsp_client, bufnr)
   require('marcel_nvim.settings').setup_lsp_buffer(lsp_client, bufnr)
   require('marcel_nvim.commands').setup_lsp_buffer(lsp_client, bufnr)

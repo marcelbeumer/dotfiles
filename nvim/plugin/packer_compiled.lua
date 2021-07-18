@@ -73,6 +73,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/robotx/.local/share/nvim/site/pack/packer/start/BetterLua.vim"
   },
+  ["auto-session"] = {
+    loaded = true,
+    path = "/Users/robotx/.local/share/nvim/site/pack/packer/start/auto-session"
+  },
   dracula = {
     loaded = true,
     path = "/Users/robotx/.local/share/nvim/site/pack/packer/start/dracula"
@@ -84,6 +88,14 @@ _G.packer_plugins = {
   ["github-nvim-theme"] = {
     loaded = true,
     path = "/Users/robotx/.local/share/nvim/site/pack/packer/start/github-nvim-theme"
+  },
+  ["gitsigns.nvim"] = {
+    loaded = true,
+    path = "/Users/robotx/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
+  },
+  ["lsp_signature.nvim"] = {
+    loaded = true,
+    path = "/Users/robotx/.local/share/nvim/site/pack/packer/start/lsp_signature.nvim"
   },
   neoformat = {
     loaded = true,
@@ -140,6 +152,10 @@ _G.packer_plugins = {
   ["popup.nvim"] = {
     loaded = true,
     path = "/Users/robotx/.local/share/nvim/site/pack/packer/start/popup.nvim"
+  },
+  ["session-lens"] = {
+    loaded = true,
+    path = "/Users/robotx/.local/share/nvim/site/pack/packer/start/session-lens"
   },
   ["telescope-fzf-native.nvim"] = {
     loaded = true,

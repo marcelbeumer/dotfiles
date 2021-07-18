@@ -51,7 +51,7 @@ function M.setup_global()
     command FilePathTail let @*=expand("%:t")
     command Todo e ~/Notes/content/todo.md
     command Scratch e ~/Notes/content/scratch.md
-    command Bookmarks e ~/Notes/content/bookmarks.md
+    command MyBookmarks e ~/Notes/content/bookmarks.md
     command ReadingList e ~/Notes/content/reading_list.md
     command Inbox e ~/Notes/content/inbox.md
     command Commands e ~/.config/nvim/lua/marcel_nvim/commands.lua
@@ -59,6 +59,7 @@ function M.setup_global()
     command Settings e ~/.config/nvim/lua/marcel_nvim/settings.lua
     command! -nargs=* -complete=file TelescopeLiveGrep lua __marcel_nvim__telescope_live_grep(<q-args>)
     command! -nargs=* -complete=file TelescopeFindFiles lua __marcel_nvim__telescope_find_files(<q-args>)
+    au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=200, on_visual=true}
   ]], false)
 end
 

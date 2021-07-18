@@ -62,6 +62,7 @@ function M.setup_global()
     nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
     nnoremap <leader>f/ <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
     nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+    nnoremap <leader>fs <cmd>lua require('session-lens').search_session()<cr>
     nnoremap <leader>flr <cmd>lua require('telescope.builtin').lsp_references()<cr>
     nnoremap <leader>fls <cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>
     nnoremap <leader>flS <cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>

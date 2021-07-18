@@ -1,5 +1,7 @@
 require('marcel_nvim.dev').setup()
 require('marcel_nvim.plugins.packer').setup()
+require('marcel_nvim.plugins.auto-session').setup()
+require('marcel_nvim.plugins.gitsigns').setup()
 require('marcel_nvim.plugins.autopairs').setup()
 require('marcel_nvim.plugins.autotag').setup()
 require('marcel_nvim.plugins.lsp').setup()

@@ -10,6 +10,24 @@ function M.setup()
   vim.cmd 'packadd packer.nvim'
 
   require('packer').startup(function(use)
+    -- Automatic session management
+    use 'rmagatti/auto-session'
+
+    -- File explorer
+    use 'preservim/nerdtree'
+
+    -- Fuzzy finder
+    use {
+      'nvim-telescope/telescope.nvim',
+      requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+    }
+
+    -- Sessions in telescope
+    use 'rmagatti/session-lens'
+
+    --- Git status in buffer (gutter, virtual_text)
+    use { 'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim' }}
+
     -- Auto pair support
     use 'windwp/nvim-autopairs'
     use 'windwp/nvim-ts-autotag'
@@ -30,6 +48,9 @@ function M.setup()
       requires = {{'nvim-lua/plenary.nvim'}, {'jose-elias-alvarez/null-ls.nvim'}}
     }
 
+    -- LSP fn signature help
+    use { "ray-x/lsp_signature.nvim" }
+
     --- Comment
     use 'tpope/vim-commentary'
 
@@ -48,15 +69,6 @@ function M.setup()
     -- use 'marcelbeumer/tokyonight.nvim'
     use 'folke/tokyonight.nvim'
     use 'projekt0n/github-nvim-theme'
-
-    -- File explorer
-    use 'preservim/nerdtree'
-
-    -- Fuzzy finder
-    use {
-      'nvim-telescope/telescope.nvim',
-      requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
-    }
 
     -- Native sorter for perf
     -- use { 'nvim-telescope/telescope-fzy-native.nvim' }
