@@ -59,7 +59,31 @@ function M.setup_global()
     command Settings e ~/.config/nvim/lua/marcel_nvim/settings.lua
     command! -nargs=* -complete=file TelescopeLiveGrep lua __marcel_nvim__telescope_live_grep(<q-args>)
     command! -nargs=* -complete=file TelescopeFindFiles lua __marcel_nvim__telescope_find_files(<q-args>)
+
     au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=200, on_visual=true}
+
+    " https://vi.stackexchange.com/questions/21254/visual-delete-items-from-quickfix-list
+    " using range-aware function
+    function! QFdelete(bufnr) range
+        " get current qflist
+        let l:qfl = getqflist()
+        " no need for filter() and such; just drop the items in range
+        call remove(l:qfl, a:firstline - 1, a:lastline - 1)
+        " replace items in the current list, do not make a new copy of it;
+        " this also preserves the list title
+        call setqflist([], 'r', {'items': l:qfl})
+        " restore current line
+        call setpos('.', [a:bufnr, a:firstline, 1, 0])
+    endfunction
+
+    " using buffer-local mappings
+    " note: still have to check &bt value to filter out `:e quickfix` and such
+    augroup QFList | au!
+        autocmd BufWinEnter quickfix if &bt ==# 'quickfix'
+        autocmd BufWinEnter quickfix    nnoremap <silent><buffer>dd :call QFdelete(bufnr())<CR>
+        autocmd BufWinEnter quickfix    vnoremap <silent><buffer>d  :call QFdelete(bufnr())<CR>
+        autocmd BufWinEnter quickfix endif
+    augroup end
   ]], false)
 end
 
