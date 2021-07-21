@@ -10,8 +10,6 @@ function M.setup()
   vim.cmd 'packadd packer.nvim'
 
   require('packer').startup(function(use)
-    -- Automatic session management
-    use 'rmagatti/auto-session'
 
     use {
       "folke/zen-mode.nvim",
