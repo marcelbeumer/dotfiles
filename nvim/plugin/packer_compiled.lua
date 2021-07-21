@@ -77,6 +77,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/robotx/.local/share/nvim/site/pack/packer/start/auto-session"
   },
+  ["color-converter.nvim"] = {
+    loaded = true,
+    path = "/Users/robotx/.local/share/nvim/site/pack/packer/start/color-converter.nvim"
+  },
   dracula = {
     loaded = true,
     path = "/Users/robotx/.local/share/nvim/site/pack/packer/start/dracula"

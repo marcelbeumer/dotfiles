@@ -35,6 +35,9 @@ function M.setup()
       end
     }
 
+    -- Convert color codes easily
+    use 'NTBBloodbath/color-converter.nvim'
+
     -- File explorer
     use 'preservim/nerdtree'
 
