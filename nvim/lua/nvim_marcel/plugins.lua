@@ -142,7 +142,11 @@ return require('packer').startup(function(use)
   use {
     "folke/zen-mode.nvim",
     config = function()
-      require("zen-mode").setup {}
+      require("zen-mode").setup {
+        plugins = {
+          gitsigns = { enabled = true }
+        }
+      }
     end
   }
 
