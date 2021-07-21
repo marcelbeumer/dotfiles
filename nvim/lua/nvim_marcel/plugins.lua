@@ -75,6 +75,7 @@ return require('packer').startup(function(use)
       'nvim-lua/plenary.nvim', -- nvim-lsp-ts-utils
       "jose-elias-alvarez/nvim-lsp-ts-utils",
       "jose-elias-alvarez/null-ls.nvim",
+      "folke/lua-dev.nvim"
     },
     config = function()
       require("nvim_marcel.config.lsp")
