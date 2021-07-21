@@ -26,7 +26,7 @@ local function split_str(v)
   return args
 end
 
-function _G.__marcel_nvim__telescope_live_grep(v)
+function _G.__nvim_marcel__telescope_live_grep(v)
   local opts = {}
   if #v > 0 then
    opts.search_dirs = split_str(v)
@@ -34,7 +34,7 @@ function _G.__marcel_nvim__telescope_live_grep(v)
   require'telescope.builtin'.live_grep(opts)
 end
 
-function _G.__marcel_nvim__telescope_find_files(v)
+function _G.__nvim_marcel__telescope_find_files(v)
   local opts = {}
   if #v > 0 then
    opts.search_dirs = split_str(v)
@@ -43,8 +43,8 @@ function _G.__marcel_nvim__telescope_find_files(v)
 end
 
 vim.api.nvim_exec([[
-  command! -nargs=* -complete=file TelescopeLiveGrep lua __marcel_nvim__telescope_live_grep(<q-args>)
-  command! -nargs=* -complete=file TelescopeFindFiles lua __marcel_nvim__telescope_find_files(<q-args>)
+  command! -nargs=* -complete=file TelescopeLiveGrep lua __nvim_marcel__telescope_live_grep(<q-args>)
+  command! -nargs=* -complete=file TelescopeFindFiles lua __nvim_marcel__telescope_find_files(<q-args>)
 
   nnoremap <leader>fx <cmd>lua require('telescope.builtin').builtin()<cr>
   nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>

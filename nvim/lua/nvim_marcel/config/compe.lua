@@ -34,6 +34,11 @@ vim.api.nvim_exec([[
   inoremap <silent><expr> <C-d> compe#scroll({ 'delta': -4 })
 ]], false)
 
+vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.__nvim_marcel__tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.__nvim_marcel__tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.__nvim_marcel__s_tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.__nvim_marcel__s_tab_complete()", {expr = true})
+
 local replace_termcodes = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
@@ -68,6 +73,6 @@ local function s_tab_complete()
   end
 end
 
-_G.__marcel_nvim__tab_complete = function() return tab_complete() end
-_G.__marcel_nvim__s_tab_complete = function() return s_tab_complete() end
+_G.__nvim_marcel__tab_complete = function() return tab_complete() end
+_G.__nvim_marcel__s_tab_complete = function() return s_tab_complete() end
 
