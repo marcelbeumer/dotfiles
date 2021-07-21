@@ -45,9 +45,6 @@ function M.setup()
       requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
     }
 
-    -- Sessions in telescope
-    use 'rmagatti/session-lens'
-
     --- Git status in buffer (gutter, virtual_text)
     use { 'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim' }}
 
