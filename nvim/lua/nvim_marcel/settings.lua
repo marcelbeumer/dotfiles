@@ -26,7 +26,6 @@ vim.api.nvim_exec([[
   set tabstop=2
   set autoindent
   set smartindent
-  set cindent
   set ignorecase 
   set joinspaces
   set linebreak
