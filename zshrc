@@ -1,18 +1,18 @@
 autoload -Uz compinit
 compinit
 
+# autoload -Uz compinit && compinit
+eval "$(fnm env)"
+
+export PATH="node_modules/.bin:$PATH"
 export PATH=$HOME/bin:$PATH
+export PATH=$HOME/.fnm:$PATH
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export PATH="$PATH:/Users/robotx/Library/Python/3.9/bin"
 export PATH="$PATH:/Applications/MacVim.app/Contents/bin"
-export PATH="$PATH:node_modules/.bin"
-export PATH=$HOME/.fnm:$PATH
 
 export GIT_EDITOR=vim
 PROMPT='%2~ %# '
-
-# autoload -Uz compinit && compinit
-eval "$(fnm env)"
 
 bindkey -v
 

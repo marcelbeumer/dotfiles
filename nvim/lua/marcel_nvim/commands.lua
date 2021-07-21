@@ -62,6 +62,16 @@ function M.setup_global()
 
     au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=200, on_visual=true}
 
+    " WIP: idea is to add something to the quickfix list with for example <leader>qa and have a <leader>qq to toggle list
+    function! QFadd() range
+        " get current qflist
+        let l:qfl = getqflist()
+        let newItems = [{'filename' : 'a.txt', 'lnum' : 10, 'text' : "Apple"}]
+        call setqflist([], 'a', {'items': newItems})
+    endfunction
+
+    " TODO: move to bindings
+
     " https://vi.stackexchange.com/questions/21254/visual-delete-items-from-quickfix-list
     " using range-aware function
     function! QFdelete(bufnr) range
@@ -86,5 +96,11 @@ function M.setup_global()
     augroup end
   ]], false)
 end
+
+    -- qfid can be 0 for current?
+    -- " add items to the quickfix list specified by an identifier
+    -- :let newItems = [{'filename' : 'a.txt', 'lnum' : 10, 'text' : "Apple"},
+		    -- \ {'filename' : 'b.txt', 'lnum' : 20, 'text' : "Orange"}]
+    -- :call setqflist([], 'a', {'id' : qfid, 'items' : newItems})
 
 return M
