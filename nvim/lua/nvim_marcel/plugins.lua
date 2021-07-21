@@ -1,23 +1,24 @@
 return require('packer').startup(function(use)
+    -- Packer can manage itself
+    use 'wbthomason/packer.nvim'
 
-    -- Special mode: zen mode writing
+    -- Editor config support
+    use 'editorconfig/editorconfig-vim'
+
+    -- Treesitter
     use {
-      "folke/zen-mode.nvim",
+      'nvim-treesitter/nvim-treesitter',
+      run = ':TSUpdate',
+      requires = { 'JoosepAlviste/nvim-ts-context-commentstring' },
       config = function()
-        require("zen-mode").setup {}
+        require'nvim-treesitter.configs'.setup {
+          ensure_installed = "maintained",
+          indent = { enable = true },
+          context_commentstring = { enable = true },
+          highlight = { enable = true, },
+        }
       end
     }
-
-    -- Special mode: focus on current editing
-    use {
-      "folke/twilight.nvim",
-      config = function()
-        require("twilight").setup {}
-      end
-    }
-
-    -- Convert color codes easily
-    use 'NTBBloodbath/color-converter.nvim'
 
     -- File explorer
     use {
@@ -30,10 +31,65 @@ return require('packer').startup(function(use)
       end
     }
 
+    --- Comment
+    use 'tpope/vim-commentary'
+
+    -- Git
+    use 'tpope/vim-fugitive'
+
+    --- Surround bindings
+    use 'tpope/vim-surround'
+
+    -- Formatter fallback for when I can't with LSP
+    use {
+      'sbdchd/neoformat',
+      config = function()
+        vim.api.nvim_exec([[
+          let g:neoformat_enabled_typescript = ['denofmt']
+          let g:neoformat_enabled_typescriptreact = ['denofmt']
+        ]], false)
+      end
+    }
+
+    -- Snippets
+    use {
+      'hrsh7th/vim-vsnip',
+      requires = { 'hrsh7th/vim-vsnip-integ' },
+      config = function()
+        vim.api.nvim_exec([[
+          let g:vsnip_filetypes = {}
+          let g:vsnip_filetypes.javascriptreact = ['javascript']
+          let g:vsnip_filetypes.typescriptreact = ['typescript']
+          let g:vsnip_snippet_dir = expand('~/.config/nvim/vsnip')
+        ]], false)
+      end
+    }
+
+    -- LSP config helpers
+    use {
+      'neovim/nvim-lspconfig',
+      requires = {
+        "ray-x/lsp_signature.nvim",
+        'nvim-lua/plenary.nvim', -- nvim-lsp-ts-utils
+        "jose-elias-alvarez/nvim-lsp-ts-utils",
+        "jose-elias-alvarez/null-ls.nvim",
+      },
+      config = function()
+        require("nvim_marcel.config.lsp")
+      end
+    }
+
+    -- Pretty LSP diagnostics, loc list or qf list
+    use "folke/trouble.nvim"
+
     -- Fuzzy finder and more
     use {
       'nvim-telescope/telescope.nvim',
-      requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
+      requires = {
+        {'nvim-lua/popup.nvim'},
+        {'nvim-lua/plenary.nvim'},
+        {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'},
+      },
       config = function()
         require("nvim_marcel.config.telescope")
       end
@@ -75,4 +131,31 @@ return require('packer').startup(function(use)
       end
     }
 
+    -- Special mode: zen mode writing
+    use {
+      "folke/zen-mode.nvim",
+      config = function()
+        require("zen-mode").setup {}
+      end
+    }
+
+    -- Special mode: focus on current editing
+    use {
+      "folke/twilight.nvim",
+      config = function()
+        require("twilight").setup {}
+      end
+    }
+
+    -- Highlight colors
+    use 'norcalli/nvim-colorizer.lua'
+
+    -- Convert color codes easily
+    use 'NTBBloodbath/color-converter.nvim'
+
+    -- Color schemes
+    use {'dracula/vim', as = 'dracula'}
+    use 'ishan9299/nvim-solarized-lua'
+    use 'folke/tokyonight.nvim'
+    use 'projekt0n/github-nvim-theme'
 end)
