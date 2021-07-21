@@ -37,6 +37,12 @@ local on_attach_common = function(lsp_client, bufnr)
   -- Set some keybinds conditional on server capabilities
   if lsp_client.resolved_capabilities.document_formatting then
     buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+    vim.api.nvim_exec([[
+      augroup lsp_buffer_formatting
+        autocmd! * <buffer>
+        autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+      augroup END
+    ]], false)
   end
   if lsp_client.resolved_capabilities.document_range_formatting then
     buf_set_keymap("v", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
@@ -46,62 +52,42 @@ local on_attach_common = function(lsp_client, bufnr)
 
   if lsp_client.resolved_capabilities.document_highlight then
     vim.api.nvim_exec([[
-      augroup lsp_buffer
+      augroup lsp_buffer_highlight
         autocmd! * <buffer>
         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-        autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
       augroup END
     ]], false)
   end
 end
 
-local function setup_efm()
-  local deno_fmt = {formatCommand = "deno fmt -", formatStdin = true}
-  local lua_fmt = {formatCommand = "lua-format -i", formatStdin = true}
-
-  lspconfig.efm.setup {
-    on_attach = on_attach_common,
-    init_options = {documentFormatting = true},
+local function setup_null_ls()
+  local null_ls = require('null-ls');
+  local deno_fmt = {
+    method = null_ls.methods.FORMATTING,
     filetypes = {"typescript", "typescriptreact" },
-    settings = {
-      rootMarkers = {".git/"},
-      languages = {
-        lua = { lua_fmt },
-        typescript = { deno_fmt },
-        typescriptreact = { deno_fmt },
-      }
-    },
-    flags = {
-      debounce_text_changes = 5000,
-    },
+    generator = null_ls.formatter({
+      command = "deno",
+      args = { "fmt", "-"},
+      to_stdin = true
+    }),
   }
-end
-
-local function setup_lua()
-  local sumneko_root_path = vim.env.HOME .. '/dev/clone/lua-language-server'
-  local sumneko_binary = sumneko_root_path.."/bin/macOS/lua-language-server"
-  local luadev = require("lua-dev").setup({
-    lspconfig = {
-      -- cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
-      cmd = {"lua-langserver"},
-      on_attach = on_attach_common,
-    }
-  })
-  lspconfig.sumneko_lua.setup(luadev)
+  require("null-ls").config {
+    debounce = 150,
+    save_after_format = false,
+    sources = { deno_fmt }
+  }
+  lspconfig["null-ls"].setup {
+    on_attach = on_attach_common,
+  }
 end
 
 local function setup_tsserver()
   lspconfig.tsserver.setup {
     flags = flags_common,
     on_attach = function(lsp_client, bufnr)
-      -- Not sure if setting resolved_capabilities works
       lsp_client.resolved_capabilities.document_formatting = false
       lsp_client.resolved_capabilities.document_range_formatting = false
-
-      -- required by lsp_ts_utils: https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils
-      require("null-ls").config {}
-      lspconfig["null-ls"].setup {}
 
       local lsp_ts_utils = require("nvim-lsp-ts-utils")
       lsp_ts_utils.setup {
@@ -118,6 +104,16 @@ local function setup_tsserver()
       on_attach_common(lsp_client, bufnr)
     end,
   }
+end
+
+local function setup_lua()
+  local luadev = require("lua-dev").setup({
+    lspconfig = {
+      cmd = {"lua-langserver"},
+      on_attach = on_attach_common,
+    }
+  })
+  lspconfig.sumneko_lua.setup(luadev)
 end
 
 local function setup_jsonls()
@@ -166,10 +162,10 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
 )
 
 -- vim.lsp.set_log_level("debug")
+setup_null_ls()
 setup_tsserver()
 setup_lua()
 setup_pylsp()
 setup_jsonls()
 setup_vimls()
 setup_rust_analyzer()
-setup_efm()
