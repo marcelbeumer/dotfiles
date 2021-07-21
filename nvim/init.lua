@@ -1,1 +1,1 @@
-require('marcel_nvim').setup()
+require('nvim_marcel')
