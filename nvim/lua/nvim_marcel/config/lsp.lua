@@ -123,7 +123,7 @@ local function setup_tsserver()
       lsp_ts_utils.setup_client(lsp_client)
 
       vim.api.nvim_exec([[
-        command -buffer OrganizeImports TSLspOrganize
+        command! -buffer OrganizeImports TSLspOrganize
       ]], false)
 
       on_attach_common(lsp_client, bufnr)
