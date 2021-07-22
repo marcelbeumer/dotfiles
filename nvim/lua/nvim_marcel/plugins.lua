@@ -69,6 +69,7 @@ return require('packer').startup(function(use)
   -- Formatter fallback for when I can't with LSP
   use {
     'sbdchd/neoformat',
+    cmd = 'Neoformat',
     config = function()
       vim.api.nvim_exec([[
         let g:neoformat_enabled_typescript = ['denofmt']
@@ -190,9 +191,9 @@ return require('packer').startup(function(use)
   use 'NTBBloodbath/color-converter.nvim'
 
   -- Color schemes
-  use {'dracula/vim', as = 'dracula'}
-  use 'ishan9299/nvim-solarized-lua'
-  use 'projekt0n/github-nvim-theme'
+  -- use {'dracula/vim', as = 'dracula'}
+  -- use 'ishan9299/nvim-solarized-lua'
+  -- use 'projekt0n/github-nvim-theme'
   use {
     'folke/tokyonight.nvim',
     config = function()
