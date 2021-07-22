@@ -61,7 +61,32 @@ local on_attach_common = function(lsp_client, bufnr)
   end
 end
 
+local function setup_efm()
+  local deno_fmt = {formatCommand = "deno fmt -", formatStdin = true}
+  local lua_fmt = {formatCommand = "lua-format -i", formatStdin = true}
+
+  lspconfig.efm.setup {
+    on_attach = on_attach_common,
+    init_options = {documentFormatting = true},
+    filetypes = {"typescript", "typescriptreact" },
+    settings = {
+      rootMarkers = {".git/"},
+      languages = {
+        lua = { lua_fmt },
+        typescript = { deno_fmt },
+        typescriptreact = { deno_fmt },
+      }
+    },
+    flags = {
+      debounce_text_changes = 5000,
+    },
+  }
+end
+
 local function setup_null_ls()
+  -- FIXME: have issue when tryingt o format invalid document
+  -- there is a long timeout before I can continue typing
+  -- I don't have this with efm
   local null_ls = require('null-ls');
   local deno_fmt = {
     method = null_ls.methods.FORMATTING,
@@ -162,7 +187,8 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
 )
 
 -- vim.lsp.set_log_level("debug")
-setup_null_ls()
+-- setup_null_ls()
+setup_efm()
 setup_tsserver()
 setup_lua()
 setup_pylsp()
