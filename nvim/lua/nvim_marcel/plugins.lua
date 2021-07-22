@@ -5,8 +5,18 @@ return require('packer').startup(function(use)
   --  Sessions
   use {
     "folke/persistence.nvim",
+    module = 'persistence',
     config = function()
-      require("nvim_marcel.config.persistence")
+      require("persistence").setup({
+        dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"),
+      });
+    end,
+    setup = function()
+      vim.api.nvim_exec([[
+        command LoadSession lua require("persistence").load()<cr>
+        command StopSession lua require("persistence").stop()<cr>
+        command VimLeavePre NerdTreeClose
+      ]], false)
     end
   }
 
@@ -31,10 +41,16 @@ return require('packer').startup(function(use)
   -- File explorer
   use {
     'preservim/nerdtree',
+    opt = true,
+    cmd = {'NERDTreeFind', 'NERDTreeToggle'},
     config = function()
       vim.api.nvim_exec([[
         let NERDTreeShowHidden=1
         let NERDTreeWinSize=35
+      ]], false)
+    end,
+    setup = function()
+      vim.api.nvim_exec([[
         nnoremap <silent><leader>; :NERDTreeToggle<CR>
         nnoremap <silent><leader>' :NERDTreeFind<CR>
       ]], false)
@@ -177,7 +193,8 @@ return require('packer').startup(function(use)
   use {'dracula/vim', as = 'dracula'}
   use 'ishan9299/nvim-solarized-lua'
   use 'projekt0n/github-nvim-theme'
-  use { 'folke/tokyonight.nvim',
+  use {
+    'folke/tokyonight.nvim',
     config = function()
       vim.api.nvim_exec([[
         let g:tokyonight_italic_comments = 0
