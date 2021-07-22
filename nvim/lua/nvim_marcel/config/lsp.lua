@@ -84,23 +84,23 @@ local function setup_efm()
 end
 
 local function setup_null_ls()
+  local null_ls = require('null-ls');
   -- FIXME: have issue when tryingt o format invalid document
   -- there is a long timeout before I can continue typing
   -- I don't have this with efm
-  local null_ls = require('null-ls');
-  local deno_fmt = {
-    method = null_ls.methods.FORMATTING,
-    filetypes = {"typescript", "typescriptreact" },
-    generator = null_ls.formatter({
-      command = "deno",
-      args = { "fmt", "-"},
-      to_stdin = true
-    }),
-  }
-  require("null-ls").config {
+  -- local deno_fmt = {
+  --   method = null_ls.methods.FORMATTING,
+  --   filetypes = {"typescript", "typescriptreact" },
+  --   generator = null_ls.formatter({
+  --     command = "deno",
+  --     args = { "fmt", "-"},
+  --     to_stdin = true
+  --   }),
+  -- }
+  null_ls.config {
     debounce = 150,
     save_after_format = false,
-    sources = { deno_fmt }
+    -- sources = { deno_fmt }
   }
   lspconfig["null-ls"].setup {
     on_attach = on_attach_common,
@@ -187,7 +187,7 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
 )
 
 -- vim.lsp.set_log_level("debug")
--- setup_null_ls()
+setup_null_ls()
 setup_efm()
 setup_tsserver()
 setup_lua()
