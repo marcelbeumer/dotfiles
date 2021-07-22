@@ -2,6 +2,14 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
+  --  Sessions
+  use {
+    "folke/persistence.nvim",
+    config = function()
+      require("nvim_marcel.config.persistence")
+    end
+  }
+
   -- Editor config support
   use 'editorconfig/editorconfig-vim'
 
