@@ -5,6 +5,7 @@ return require('packer').startup(function(use)
   --  Sessions
   use {
     "folke/persistence.nvim",
+    event = "BufReadPre",
     module = 'persistence',
     config = function()
       require("persistence").setup({
@@ -14,6 +15,7 @@ return require('packer').startup(function(use)
     setup = function()
       vim.api.nvim_exec([[
         command LoadSession lua require("persistence").load()<cr>
+        command SaveSession lua require("persistence").save()<cr>
         command StopSession lua require("persistence").stop()<cr>
         command VimLeavePre NerdTreeClose
       ]], false)
