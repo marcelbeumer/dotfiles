@@ -14,10 +14,10 @@ return require('packer').startup(function(use)
     end,
     setup = function()
       vim.api.nvim_exec([[
-        command LoadSession lua require("persistence").load()<cr>
-        command SaveSession lua require("persistence").save()<cr>
-        command StopSession lua require("persistence").stop()<cr>
-        command VimLeavePre NerdTreeClose
+        command! LoadSession lua require("persistence").load()<cr>
+        command! SaveSession lua require("persistence").save()<cr>
+        command! StopSession lua require("persistence").stop()<cr>
+        " VimLeavePre NerdTreeClose
       ]], false)
     end
   }
@@ -190,7 +190,17 @@ return require('packer').startup(function(use)
   use 'norcalli/nvim-colorizer.lua'
 
   -- Convert color codes easily
-  use 'NTBBloodbath/color-converter.nvim'
+  use {
+    'NTBBloodbath/color-converter.nvim',
+    module = 'color-converter',
+    setup = function()
+      vim.api.nvim_exec([[
+        command! ColorConvertHEX lua require('color-converter').to_hex()<CR>
+        command! ColorConvertRGB lua require('color-converter').to_rgb()<CR>
+        command! ColorConvertHSL lua require('color-converter').to_hsl()<CR>
+      ]], false)
+    end
+  }
 
   -- Color schemes
   -- use {'dracula/vim', as = 'dracula'}
