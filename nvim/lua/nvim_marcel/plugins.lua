@@ -5,6 +5,7 @@ return require('packer').startup(function(use)
   --  Sessions
   use {
     "folke/persistence.nvim",
+    opt = true,
     event = "BufReadPre",
     module = 'persistence',
     config = function()
@@ -71,6 +72,7 @@ return require('packer').startup(function(use)
   -- Formatter fallback for when I can't with LSP
   use {
     'sbdchd/neoformat',
+    opt = true,
     cmd = 'Neoformat',
     config = function()
       vim.api.nvim_exec([[
@@ -169,6 +171,8 @@ return require('packer').startup(function(use)
   -- Special mode: zen mode writing
   use {
     "folke/zen-mode.nvim",
+    opt = true,
+    cmd = 'ZenMode',
     config = function()
       require("zen-mode").setup {
         plugins = {
@@ -181,17 +185,24 @@ return require('packer').startup(function(use)
   -- Special mode: focus on current editing
   use {
     "folke/twilight.nvim",
+    opt = true,
+    cmd = {'Twilight', 'TwilightEnable', 'TwilightDisable'},
     config = function()
       require("twilight").setup {}
     end
   }
 
   -- Highlight colors
-  use 'norcalli/nvim-colorizer.lua'
+  use {
+    'norcalli/nvim-colorizer.lua',
+    opt = true,
+    cmd = {'ColorizerAttachToBuffer', 'ColorizerToggle'}
+  }
 
   -- Convert color codes easily
   use {
     'NTBBloodbath/color-converter.nvim',
+    opt = true,
     module = 'color-converter',
     setup = function()
       vim.api.nvim_exec([[
@@ -203,9 +214,6 @@ return require('packer').startup(function(use)
   }
 
   -- Color schemes
-  -- use {'dracula/vim', as = 'dracula'}
-  -- use 'ishan9299/nvim-solarized-lua'
-  -- use 'projekt0n/github-nvim-theme'
   use {
     'folke/tokyonight.nvim',
     config = function()
