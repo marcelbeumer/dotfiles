@@ -10,6 +10,7 @@ rm -f ~/.zshrc && ln -s $dirname/zshrc ~/.zshrc
 mkdir -p ~/.config
 
 rm -rf ~/.config/nvim && ln -s $dirname/nvim ~/.config/nvim
+rm -rf ~/.config/kitty && ln -s $dirname/kitty ~/.config/kitty
 rm -rf ~/.config/alacritty && ln -s $dirname/alacritty ~/.config/alacritty
 rm -rf ~/.config/karabiner && ln -s $dirname/karabiner ~/.config/karabiner
 
