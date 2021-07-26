@@ -16,8 +16,8 @@ require'compe'.setup {
   documentation = true;
 
   source = {
-    -- path = true;
-    -- buffer = true;
+    path = true;
+    buffer = true;
     -- calc = true;
     nvim_lsp = true;
     -- nvim_lua = true;
