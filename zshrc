@@ -11,7 +11,9 @@ export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/b
 export PATH="$PATH:/Users/robotx/Library/Python/3.9/bin"
 export PATH="$PATH:/Applications/MacVim.app/Contents/bin"
 
+export EDITOR="/usr/local/bin/nvim"
 export GIT_EDITOR=vim
+
 PROMPT='%2~ %# '
 
 bindkey -v
