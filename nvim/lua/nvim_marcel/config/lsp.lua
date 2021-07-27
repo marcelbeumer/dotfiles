@@ -69,10 +69,10 @@ local function setup_efm()
     on_attach = on_attach_common,
     init_options = {documentFormatting = true},
     filetypes = {
-      "typescript", 
-      "typescriptreact", 
-      "javascript", 
-      "javascriptreact" 
+      "typescript",
+      "typescriptreact",
+      "javascript",
+      "javascriptreact"
     },
     settings = {
       rootMarkers = {".git/"},
