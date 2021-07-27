@@ -68,13 +68,20 @@ local function setup_efm()
   lspconfig.efm.setup {
     on_attach = on_attach_common,
     init_options = {documentFormatting = true},
-    filetypes = {"typescript", "typescriptreact" },
+    filetypes = {
+      "typescript", 
+      "typescriptreact", 
+      "javascript", 
+      "javascriptreact" 
+    },
     settings = {
       rootMarkers = {".git/"},
       languages = {
         lua = { lua_fmt },
         typescript = { deno_fmt },
         typescriptreact = { deno_fmt },
+        javascript = { deno_fmt },
+        javascriptreact = { deno_fmt },
       }
     },
     flags = {
