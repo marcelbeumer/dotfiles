@@ -1,4 +1,4 @@
-vim.api.nvim_exec([[
+vim.cmd([[
   " WIP: idea is to add something to the quickfix list with for example <leader>qa and have a <leader>qq to toggle list
   function! QFadd() range
       " get current qflist
@@ -29,4 +29,4 @@ vim.api.nvim_exec([[
       autocmd BufWinEnter quickfix    vnoremap <silent><buffer>d  :call QFdelete(bufnr())<CR>
       autocmd BufWinEnter quickfix endif
   augroup end
-]], false)
+]])

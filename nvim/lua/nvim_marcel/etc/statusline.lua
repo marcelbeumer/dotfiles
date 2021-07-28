@@ -14,6 +14,6 @@ function _G.__nvim_marcel__get_lsp_status()
 end
 
 -- based on https://unix.stackexchange.com/a/518439
-vim.api.nvim_exec([[
+vim.cmd([[
   set statusline=%f\ %h%w%m%r%=%-8.(%{v:lua.__nvim_marcel__get_lsp_status()}%)%-14.(%l,%c%V%)\ %P
-]], false)
+]])

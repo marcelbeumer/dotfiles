@@ -14,12 +14,12 @@ return require('packer').startup(function(use)
       });
     end,
     setup = function()
-      vim.api.nvim_exec([[
+      vim.cmd([[
         command! LoadSession lua require("persistence").load()<cr>
         command! SaveSession lua require("persistence").save()<cr>
         command! StopSession lua require("persistence").stop()<cr>
         " VimLeavePre NerdTreeClose
-      ]], false)
+      ]])
     end
   }
 
@@ -47,16 +47,16 @@ return require('packer').startup(function(use)
     opt = true,
     cmd = {'NERDTreeFind', 'NERDTreeToggle'},
     config = function()
-      vim.api.nvim_exec([[
+      vim.cmd([[
         let NERDTreeShowHidden=1
         let NERDTreeWinSize=35
-      ]], false)
+      ]])
     end,
     setup = function()
-      vim.api.nvim_exec([[
+      vim.cmd([[
         nnoremap <silent><leader>; :NERDTreeToggle<CR>
         nnoremap <silent><leader>' :NERDTreeFind<CR>
-      ]], false)
+      ]])
     end
   }
 
@@ -75,10 +75,10 @@ return require('packer').startup(function(use)
     opt = true,
     cmd = 'Neoformat',
     config = function()
-      vim.api.nvim_exec([[
+      vim.cmd([[
         let g:neoformat_enabled_typescript = ['denofmt']
         let g:neoformat_enabled_typescriptreact = ['denofmt']
-      ]], false)
+      ]])
     end
   }
 
@@ -87,12 +87,12 @@ return require('packer').startup(function(use)
     'hrsh7th/vim-vsnip',
     requires = { 'hrsh7th/vim-vsnip-integ' },
     config = function()
-      vim.api.nvim_exec([[
+      vim.cmd([[
         let g:vsnip_filetypes = {}
         let g:vsnip_filetypes.javascriptreact = ['javascript']
         let g:vsnip_filetypes.typescriptreact = ['typescript']
         let g:vsnip_snippet_dir = expand('~/.config/nvim/vsnip')
-      ]], false)
+      ]])
     end
   }
 
@@ -205,11 +205,11 @@ return require('packer').startup(function(use)
     opt = true,
     module = 'color-converter',
     setup = function()
-      vim.api.nvim_exec([[
+      vim.cmd([[
         command! ColorConvertHEX lua require('color-converter').to_hex()<CR>
         command! ColorConvertRGB lua require('color-converter').to_rgb()<CR>
         command! ColorConvertHSL lua require('color-converter').to_hsl()<CR>
-      ]], false)
+      ]])
     end
   }
 
@@ -217,10 +217,10 @@ return require('packer').startup(function(use)
   use {
     'folke/tokyonight.nvim',
     config = function()
-      vim.api.nvim_exec([[
+      vim.cmd([[
         let g:tokyonight_italic_comments = 0
         let g:tokyonight_italic_keywords = 0
-      ]], false)
+      ]])
     end
   }
 end)

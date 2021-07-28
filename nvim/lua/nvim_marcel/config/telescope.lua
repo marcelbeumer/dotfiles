@@ -42,7 +42,7 @@ function _G.__nvim_marcel__telescope_find_files(v)
   require'telescope.builtin'.find_files(opts)
 end
 
-vim.api.nvim_exec([[
+vim.cmd([[
   command! -nargs=* -complete=file TelescopeLiveGrep lua __nvim_marcel__telescope_live_grep(<q-args>)
   command! -nargs=* -complete=file TelescopeFindFiles lua __nvim_marcel__telescope_find_files(<q-args>)
 
@@ -59,4 +59,4 @@ vim.api.nvim_exec([[
   nnoremap <leader>fla <cmd>lua require('telescope.builtin').lsp_code_actions()<cr>
   nnoremap <leader>flq <cmd>lua require('telescope.builtin').lsp_document_diagnostics()<cr>
   nnoremap <leader>flQ <cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>
-]], false)
+]])

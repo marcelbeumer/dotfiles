@@ -26,13 +26,13 @@ require'compe'.setup {
   };
 }
 
-vim.api.nvim_exec([[
+vim.cmd([[
   inoremap <silent><expr> <C-Space> compe#complete()
   inoremap <silent><expr> <CR> compe#confirm(luaeval("require 'nvim-autopairs'.autopairs_cr()"))
   inoremap <silent><expr> <C-e> compe#close('<C-e>')
   inoremap <silent><expr> <C-f> compe#scroll({ 'delta': +4 })
   inoremap <silent><expr> <C-d> compe#scroll({ 'delta': -4 })
-]], false)
+]])
 
 vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.__nvim_marcel__tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.__nvim_marcel__tab_complete()", {expr = true})

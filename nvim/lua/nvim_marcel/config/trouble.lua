@@ -12,7 +12,7 @@ require('trouble').setup({
   use_lsp_diagnostic_signs = false
 })
 
-vim.api.nvim_exec([[
+vim.cmd([[
   " lsp-trouble global bindings because also needs to work in trouble buffer itself
   nnoremap <leader>xx <cmd>TroubleToggle<cr>
   nnoremap <leader>xw <cmd>TroubleToggle lsp_workspace_diagnostics<cr>
@@ -20,4 +20,4 @@ vim.api.nvim_exec([[
   nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
   nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
   nnoremap gR <cmd>TroubleToggle lsp_references<cr>
-]], false)
+]])
