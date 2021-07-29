@@ -120,41 +120,6 @@ local function setup_lua()
   lspconfig.sumneko_lua.setup(luadev)
 end
 
-local function setup_jsonls()
-  lspconfig.jsonls.setup {
-    flags = flags_common,
-    on_attach = on_attach_common,
-    commands = {
-      Format = {
-        function()
-          vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
-        end
-      }
-    }
-  }
-end
-
-local function setup_pylsp()
-  lspconfig.pylsp.setup{
-    flags = flags_common,
-    on_attach = on_attach_common
-  }
-end
-
-local function setup_vimls()
-  lspconfig.vimls.setup {
-    flags = flags_common,
-    on_attach = on_attach_common
-  }
-end
-
-local function setup_rust_analyzer()
-  lspconfig.rust_analyzer.setup {
-    flags = flags_common,
-    on_attach = on_attach_common
-  }
-end
-
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics,
   {
@@ -169,7 +134,3 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
 setup_null_ls()
 setup_tsserver()
 setup_lua()
-setup_pylsp()
-setup_jsonls()
-setup_vimls()
-setup_rust_analyzer()
