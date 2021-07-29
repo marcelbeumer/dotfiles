@@ -111,9 +111,6 @@ return require('packer').startup(function(use)
     end
   }
 
-  -- General purpose lang server
-  use "jose-elias-alvarez/null-ls.nvim"
-
   -- Pretty LSP diagnostics, loc list or qf list
   use {
     "folke/trouble.nvim",
