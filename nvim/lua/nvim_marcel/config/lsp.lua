@@ -120,17 +120,42 @@ local function setup_lua()
   lspconfig.sumneko_lua.setup(luadev)
 end
 
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics,
-  {
-    underline = true,
-    virtual_text = false,
-    update_in_insert = true,
-    severity_sort = true
-  }
-)
+local diagnostic_noise_level = 2;
+
+local function setup_diagnostics()
+  vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics,
+    {
+      signs = diagnostic_noise_level >= 1,
+      underline = diagnostic_noise_level >= 2,
+      virtual_text = diagnostic_noise_level >= 3,
+      update_in_insert = true,
+      severity_sort = true
+    }
+  )
+end
+
+local M = {}
+
+function M.command_diagnostic_noise_level(level)
+  if level == nil then
+    print(diagnostic_noise_level)
+    return
+  end
+  diagnostic_noise_level = tonumber(level)
+  setup_diagnostics()
+  vim.lsp.diagnostic.redraw()
+end
 
 -- vim.lsp.set_log_level("debug")
 setup_null_ls()
 setup_tsserver()
 setup_lua()
+setup_diagnostics()
+
+vim.cmd(
+  [[command! -nargs=? DiagnosticNoiseLevel ]] ..
+  [[lua require("nvim_marcel.config.lsp").command_diagnostic_noise_level(<args>)<CR>]]
+)
+
+return M
