@@ -34,6 +34,7 @@ vim.cmd([[command FilePathTail let @*=expand("%:t")]])
 vim.cmd([[command Todo e ~/Notes/content/todo.md]])
 vim.cmd([[command Scratch e ~/Notes/content/scratch.md]])
 vim.cmd([[command Inbox e ~/Notes/content/inbox.md]])
+vim.cmd([[command Garc !git ar && git c -am "..."]])
 vim.cmd([[au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=200, on_visual=true}]])
 
 -- Bindings
