@@ -1,44 +1,41 @@
-local lspconfig = require('lspconfig')
+local lspconfig = require("lspconfig")
 
-local flags_common = { debounce_text_changes = 300 };
+local flags_common = { debounce_text_changes = 300 }
 
 local on_attach_common = function(lsp_client, bufnr)
   -- Setup omnicomplete (nice to have on the side)
-  vim.opt_local.omnifunc = 'v:lua.vim.lsp.omnifunc'
+  vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
 
   require("lsp_signature").on_attach({
     bind = true,
     floating_window = true, -- false for virtual_text
     hint_enable = false,
     handler_opts = {
-      border = "none"
-    }
+      border = "none",
+    },
   })
 
   local function bufmap(mode, lhs, rhs)
-    vim.api.nvim_buf_set_keymap(
-      bufnr, mode, lhs, rhs,
-      { noremap=true, silent=true }
-    )
+    vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, { noremap = true, silent = true })
   end
 
   -- Built-in lsp
-  bufmap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>')
-  bufmap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>')
-  bufmap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
-  bufmap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
-  bufmap('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
-  bufmap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>')
-  bufmap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
-  bufmap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>')
-  bufmap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>')
-  bufmap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>')
-  bufmap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
-  bufmap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
-  bufmap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>')
-  bufmap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
-  bufmap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
-  bufmap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>')
+  bufmap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>")
+  bufmap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>")
+  bufmap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
+  bufmap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
+  bufmap("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
+  bufmap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>")
+  bufmap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
+  bufmap("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>")
+  bufmap("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>")
+  bufmap("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>")
+  bufmap("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
+  bufmap("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
+  bufmap("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>")
+  bufmap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>")
+  bufmap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>")
+  bufmap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>")
 
   if lsp_client.resolved_capabilities.document_formatting then
     bufmap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
@@ -66,77 +63,74 @@ local on_attach_common = function(lsp_client, bufnr)
 end
 
 local function setup_null_ls()
-  local null_ls = require('null-ls');
+  local null_ls = require("null-ls")
   local deno_fmt = {
     method = null_ls.methods.FORMATTING,
     filetypes = {
       "typescript",
       "typescriptreact",
       "javascript",
-      "javascriptreact"
+      "javascriptreact",
     },
     generator = null_ls.formatter({
       command = "deno",
-      args = { "fmt", "-"},
-      to_stdin = true
+      args = { "fmt", "-" },
+      to_stdin = true,
     }),
   }
-  null_ls.config {
+  null_ls.config({
     debounce = 150,
     save_after_format = false,
     sources = {
       deno_fmt,
       null_ls.builtins.formatting.stylua,
-      null_ls.builtins.diagnostics.selene
-    }
-  }
-  lspconfig["null-ls"].setup {
+      null_ls.builtins.diagnostics.selene,
+    },
+  })
+  lspconfig["null-ls"].setup({
     on_attach = on_attach_common,
-  }
+  })
 end
 
 local function setup_tsserver()
-  lspconfig.tsserver.setup {
+  lspconfig.tsserver.setup({
     flags = flags_common,
     on_attach = function(lsp_client, bufnr)
       lsp_client.resolved_capabilities.document_formatting = false
       lsp_client.resolved_capabilities.document_range_formatting = false
       local lsp_ts_utils = require("nvim-lsp-ts-utils")
-      lsp_ts_utils.setup {
+      lsp_ts_utils.setup({
         eslint_enable_code_actions = false,
         update_imports_on_move = true,
-        require_confirmation_on_move = true
-      }
+        require_confirmation_on_move = true,
+      })
       lsp_ts_utils.setup_client(lsp_client)
       vim.cmd([[command! -buffer OrganizeImports TSLspOrganize]])
       on_attach_common(lsp_client, bufnr)
     end,
-  }
+  })
 end
 
 local function setup_lua()
   local luadev = require("lua-dev").setup({
     lspconfig = {
-      cmd = {"lua-langserver"},
+      cmd = { "lua-langserver" },
       on_attach = on_attach_common,
-    }
+    },
   })
   lspconfig.sumneko_lua.setup(luadev)
 end
 
-local diagnostic_noise_level = 2;
+local diagnostic_noise_level = 2
 
 local function setup_diagnostics()
-  vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics,
-    {
-      signs = diagnostic_noise_level >= 1,
-      underline = diagnostic_noise_level >= 2,
-      virtual_text = diagnostic_noise_level >= 3,
-      update_in_insert = true,
-      severity_sort = true
-    }
-  )
+  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+    signs = diagnostic_noise_level >= 1,
+    underline = diagnostic_noise_level >= 2,
+    virtual_text = diagnostic_noise_level >= 3,
+    update_in_insert = true,
+    severity_sort = true,
+  })
 end
 
 local M = {}
@@ -158,8 +152,8 @@ setup_lua()
 setup_diagnostics()
 
 vim.cmd(
-  [[command! -nargs=? DiagnosticNoiseLevel ]] ..
-  [[lua require("nvim_marcel.config.lsp").command_diagnostic_noise_level(<args>)<CR>]]
+  [[command! -nargs=? DiagnosticNoiseLevel ]]
+    .. [[lua require("nvim_marcel.config.lsp").command_diagnostic_noise_level(<args>)<CR>]]
 )
 
 return M

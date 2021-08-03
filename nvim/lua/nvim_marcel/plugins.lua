@@ -1,17 +1,17 @@
-return require('packer').startup(function(use)
+return require("packer").startup(function(use)
   -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
+  use("wbthomason/packer.nvim")
 
   --  Sessions
-  use {
+  use({
     "folke/persistence.nvim",
     opt = true,
     event = "BufReadPre",
-    module = 'persistence',
+    module = "persistence",
     config = function()
       require("persistence").setup({
         dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"),
-      });
+      })
     end,
     setup = function()
       vim.cmd([[
@@ -20,32 +20,32 @@ return require('packer').startup(function(use)
         command! StopSession lua require("persistence").stop()<cr>
         " VimLeavePre NerdTreeClose
       ]])
-    end
-  }
+    end,
+  })
 
   -- Editor config support
-  use 'editorconfig/editorconfig-vim'
+  use("editorconfig/editorconfig-vim")
 
   -- Treesitter
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate',
-    requires = { 'JoosepAlviste/nvim-ts-context-commentstring' },
+  use({
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+    requires = { "JoosepAlviste/nvim-ts-context-commentstring" },
     config = function()
-      require'nvim-treesitter.configs'.setup {
+      require("nvim-treesitter.configs").setup({
         ensure_installed = "maintained",
         indent = { enable = true },
         context_commentstring = { enable = true },
-        highlight = { enable = true, },
-      }
-    end
-  }
+        highlight = { enable = true },
+      })
+    end,
+  })
 
   -- File explorer
-  use {
-    'preservim/nerdtree',
+  use({
+    "preservim/nerdtree",
     opt = true,
-    cmd = {'NERDTreeFind', 'NERDTreeToggle'},
+    cmd = { "NERDTreeFind", "NERDTreeToggle" },
     config = function()
       vim.cmd([[
         let NERDTreeShowHidden=1
@@ -57,35 +57,35 @@ return require('packer').startup(function(use)
         nnoremap <silent><leader>; :NERDTreeToggle<CR>
         nnoremap <silent><leader>' :NERDTreeFind<CR>
       ]])
-    end
-  }
+    end,
+  })
 
   --- Comment
-  use 'tpope/vim-commentary'
+  use("tpope/vim-commentary")
 
   -- Git
-  use 'tpope/vim-fugitive'
+  use("tpope/vim-fugitive")
 
   --- Surround bindings
-  use 'tpope/vim-surround'
+  use("tpope/vim-surround")
 
   -- Formatter fallback for when I can't with LSP
-  use {
-    'sbdchd/neoformat',
+  use({
+    "sbdchd/neoformat",
     opt = true,
-    cmd = 'Neoformat',
+    cmd = "Neoformat",
     config = function()
       vim.cmd([[
         let g:neoformat_enabled_typescript = ['denofmt']
         let g:neoformat_enabled_typescriptreact = ['denofmt']
       ]])
-    end
-  }
+    end,
+  })
 
   -- Snippets
-  use {
-    'hrsh7th/vim-vsnip',
-    requires = { 'hrsh7th/vim-vsnip-integ' },
+  use({
+    "hrsh7th/vim-vsnip",
+    requires = { "hrsh7th/vim-vsnip-integ" },
     config = function()
       vim.cmd([[
         let g:vsnip_filetypes = {}
@@ -93,134 +93,134 @@ return require('packer').startup(function(use)
         let g:vsnip_filetypes.typescriptreact = ['typescript']
         let g:vsnip_snippet_dir = expand('~/.config/nvim/vsnip')
       ]])
-    end
-  }
+    end,
+  })
 
   -- LSP config helpers
-  use {
-    'neovim/nvim-lspconfig',
+  use({
+    "neovim/nvim-lspconfig",
     requires = {
       "ray-x/lsp_signature.nvim",
-      'nvim-lua/plenary.nvim', -- nvim-lsp-ts-utils
+      "nvim-lua/plenary.nvim", -- nvim-lsp-ts-utils
       "jose-elias-alvarez/nvim-lsp-ts-utils",
       "jose-elias-alvarez/null-ls.nvim",
-      "folke/lua-dev.nvim"
+      "folke/lua-dev.nvim",
     },
     config = function()
       require("nvim_marcel.config.lsp")
-    end
-  }
+    end,
+  })
 
   -- Pretty LSP diagnostics, loc list or qf list
-  use {
+  use({
     "folke/trouble.nvim",
     config = function()
       require("nvim_marcel.config.trouble")
-    end
-  }
+    end,
+  })
 
   -- Fuzzy finder and more
-  use {
-    'nvim-telescope/telescope.nvim',
+  use({
+    "nvim-telescope/telescope.nvim",
     requires = {
-      {'nvim-lua/popup.nvim'},
-      {'nvim-lua/plenary.nvim'},
-      {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'},
+      { "nvim-lua/popup.nvim" },
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
     },
     config = function()
       require("nvim_marcel.config.telescope")
-    end
-  }
+    end,
+  })
 
   --- Git status in buffer (gutter, virtual_text)
-  use {
-    'lewis6991/gitsigns.nvim',
-    requires = {'nvim-lua/plenary.nvim' },
+  use({
+    "lewis6991/gitsigns.nvim",
+    requires = { "nvim-lua/plenary.nvim" },
     config = function()
-      require('gitsigns').setup()
-    end
-  }
+      require("gitsigns").setup()
+    end,
+  })
 
   -- Auto pair support
-  use {
-    'windwp/nvim-autopairs',
+  use({
+    "windwp/nvim-autopairs",
     config = function()
-      require('nvim-autopairs').setup({
-        disable_filetype = { "TelescopePrompt" , "vim", "markdown" }
+      require("nvim-autopairs").setup({
+        disable_filetype = { "TelescopePrompt", "vim", "markdown" },
       })
-    end
-  }
+    end,
+  })
 
   -- Auto close xml-like tag support
-  use {
-    'windwp/nvim-ts-autotag',
+  use({
+    "windwp/nvim-ts-autotag",
     config = function()
-      require('nvim-ts-autotag').setup()
-    end
-  }
+      require("nvim-ts-autotag").setup()
+    end,
+  })
 
   -- Autocompletion
-  use {
-    'hrsh7th/nvim-compe',
-    wants = {'nvim-autopairs'},
+  use({
+    "hrsh7th/nvim-compe",
+    wants = { "nvim-autopairs" },
     config = function()
       require("nvim_marcel.config.compe")
-    end
-  }
+    end,
+  })
 
   -- Special mode: zen mode writing
-  use {
+  use({
     "folke/zen-mode.nvim",
     opt = true,
-    cmd = 'ZenMode',
+    cmd = "ZenMode",
     config = function()
-      require("zen-mode").setup {
+      require("zen-mode").setup({
         plugins = {
-          gitsigns = { enabled = true }
-        }
-      }
-    end
-  }
+          gitsigns = { enabled = true },
+        },
+      })
+    end,
+  })
 
   -- Special mode: focus on current editing
-  use {
+  use({
     "folke/twilight.nvim",
     opt = true,
-    cmd = {'Twilight', 'TwilightEnable', 'TwilightDisable'},
+    cmd = { "Twilight", "TwilightEnable", "TwilightDisable" },
     config = function()
-      require("twilight").setup {}
-    end
-  }
+      require("twilight").setup({})
+    end,
+  })
 
   -- Highlight colors
-  use {
-    'norcalli/nvim-colorizer.lua',
+  use({
+    "norcalli/nvim-colorizer.lua",
     opt = true,
-    cmd = {'ColorizerAttachToBuffer', 'ColorizerToggle'}
-  }
+    cmd = { "ColorizerAttachToBuffer", "ColorizerToggle" },
+  })
 
   -- Convert color codes easily
-  use {
-    'NTBBloodbath/color-converter.nvim',
+  use({
+    "NTBBloodbath/color-converter.nvim",
     opt = true,
-    module = 'color-converter',
+    module = "color-converter",
     setup = function()
       vim.cmd([[
         command! ColorConvertHEX lua require('color-converter').to_hex()<CR>
         command! ColorConvertRGB lua require('color-converter').to_rgb()<CR>
         command! ColorConvertHSL lua require('color-converter').to_hsl()<CR>
       ]])
-    end
-  }
+    end,
+  })
 
   -- Color schemes
-  use {
-    'folke/tokyonight.nvim',
+  use({
+    "folke/tokyonight.nvim",
     config = function()
       vim.cmd([[
         let g:tokyonight_italic_comments = 0
         let g:tokyonight_italic_keywords = 0
       ]])
-    end
-  }
+    end,
+  })
 end)

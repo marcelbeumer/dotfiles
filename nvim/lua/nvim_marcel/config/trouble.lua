@@ -1,4 +1,4 @@
-require('trouble').setup({
+require("trouble").setup({
   icons = false,
   fold_open = "v",
   fold_closed = ">",
@@ -7,9 +7,9 @@ require('trouble').setup({
     error = "error",
     warning = "warn",
     hint = "hint",
-    information = "info"
+    information = "info",
   },
-  use_lsp_diagnostic_signs = false
+  use_lsp_diagnostic_signs = false,
 })
 
 vim.cmd([[

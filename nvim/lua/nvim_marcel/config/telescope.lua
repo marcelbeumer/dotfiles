@@ -1,12 +1,12 @@
-require('telescope').setup({
+require("telescope").setup({
   defaults = {
-    file_sorter = require'telescope.sorters'.get_fzy_sorter,
-    generic_sorter = require'telescope.sorters'.get_fzy_sorter,
+    file_sorter = require("telescope.sorters").get_fzy_sorter,
+    generic_sorter = require("telescope.sorters").get_fzy_sorter,
     mappings = {
       i = {
         ["<C-q>"] = require("telescope.actions").send_to_qflist,
       },
-    }
+    },
   },
   extensions = {
     fzf = {
@@ -14,8 +14,8 @@ require('telescope').setup({
       override_generic_sorter = false,
       override_file_sorter = true,
       case_mode = "smart_case",
-    }
-  }
+    },
+  },
 })
 
 local function split_str(v)
@@ -29,17 +29,17 @@ end
 function _G.__nvim_marcel__telescope_live_grep(v)
   local opts = {}
   if #v > 0 then
-   opts.search_dirs = split_str(v)
+    opts.search_dirs = split_str(v)
   end
-  require'telescope.builtin'.live_grep(opts)
+  require("telescope.builtin").live_grep(opts)
 end
 
 function _G.__nvim_marcel__telescope_find_files(v)
   local opts = {}
   if #v > 0 then
-   opts.search_dirs = split_str(v)
+    opts.search_dirs = split_str(v)
   end
-  require'telescope.builtin'.find_files(opts)
+  require("telescope.builtin").find_files(opts)
 end
 
 vim.cmd([[
