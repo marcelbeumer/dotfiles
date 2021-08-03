@@ -84,7 +84,11 @@ local function setup_null_ls()
   null_ls.config {
     debounce = 150,
     save_after_format = false,
-    sources = { deno_fmt }
+    sources = {
+      deno_fmt,
+      null_ls.builtins.formatting.stylua,
+      null_ls.builtins.diagnostics.selene
+    }
   }
   lspconfig["null-ls"].setup {
     on_attach = on_attach_common,
