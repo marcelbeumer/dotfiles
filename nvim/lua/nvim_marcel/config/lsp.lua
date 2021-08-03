@@ -64,25 +64,11 @@ end
 
 local function setup_null_ls()
   local null_ls = require("null-ls")
-  local deno_fmt = {
-    method = null_ls.methods.FORMATTING,
-    filetypes = {
-      "typescript",
-      "typescriptreact",
-      "javascript",
-      "javascriptreact",
-    },
-    generator = null_ls.formatter({
-      command = "deno",
-      args = { "fmt", "-" },
-      to_stdin = true,
-    }),
-  }
   null_ls.config({
     debounce = 150,
     save_after_format = false,
     sources = {
-      deno_fmt,
+      null_ls.builtins.formatting.deno_fmt,
       null_ls.builtins.formatting.stylua,
       null_ls.builtins.diagnostics.selene,
     },
