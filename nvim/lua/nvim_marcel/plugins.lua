@@ -103,8 +103,7 @@ return require("packer").startup(function(use)
       "ray-x/lsp_signature.nvim",
       "nvim-lua/plenary.nvim", -- nvim-lsp-ts-utils
       "jose-elias-alvarez/nvim-lsp-ts-utils",
-      { "marcelbeumer/null-ls.nvim", branch = "deno_fmt" },
-      -- "jose-elias-alvarez/null-ls.nvim",
+      "jose-elias-alvarez/null-ls.nvim",
       "folke/lua-dev.nvim",
     },
     config = function()
