@@ -93,6 +93,12 @@ local function setup_tsserver()
       lsp_ts_utils.setup_client(lsp_client)
       vim.cmd([[command! -buffer OrganizeImports TSLspOrganize]])
       on_attach_common(lsp_client, bufnr)
+      -- vim.cmd("TSLspOrganizeSync")
+      -- vim.lsp.buf.formatting_sync()
+      -- vim.cmd("up")
+      -- vim.defer_fn(function()
+      --   vim.cmd("next")
+      -- end, 100)
     end,
   })
 end
