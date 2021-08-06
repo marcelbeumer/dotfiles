@@ -6,14 +6,14 @@ local on_attach_common = function(lsp_client, bufnr)
   -- Setup omnicomplete (nice to have on the side)
   vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
 
-  require("lsp_signature").on_attach({
-    bind = true,
-    floating_window = true, -- false for virtual_text
-    hint_enable = false,
-    handler_opts = {
-      border = "none",
-    },
-  })
+  -- require("lsp_signature").on_attach({
+  --   bind = true,
+  --   floating_window = true, -- false for virtual_text
+  --   hint_enable = false,
+  --   handler_opts = {
+  --     border = "none",
+  --   },
+  -- })
 
   local function bufmap(mode, lhs, rhs)
     vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, { noremap = true, silent = true })
