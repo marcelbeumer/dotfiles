@@ -66,7 +66,6 @@ local function setup_null_ls()
   local null_ls = require("null-ls")
   null_ls.config({
     debounce = 150,
-    save_after_format = false,
     sources = {
       null_ls.builtins.formatting.deno_fmt,
       null_ls.builtins.formatting.stylua,
