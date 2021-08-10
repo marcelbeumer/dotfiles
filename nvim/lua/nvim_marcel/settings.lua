@@ -50,6 +50,3 @@ nmap("<C-w>N", ":vnew<CR>")
 nmap("<leader>s", ":w<CR>")
 nmap("<leader>tn", ":tabnew<CR>")
 nmap("<leader>tc", ":tabclose<CR>")
-
--- Colorscheme
-vim.cmd([[colorscheme tokyonight]])
