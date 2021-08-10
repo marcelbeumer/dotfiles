@@ -225,11 +225,9 @@ return require("packer").startup(function(use)
   use({
     "folke/tokyonight.nvim",
     config = function()
-      vim.cmd([[
-        let g:tokyonight_italic_comments = 0
-        let g:tokyonight_italic_keywords = 0
-        colorscheme tokyonight
-      ]])
+      vim.g.tokyonight_italic_comments = false
+      vim.g.tokyonight_italic_keywords = false
+      vim.cmd([[colorscheme tokyonight]])
     end,
   })
 end)
