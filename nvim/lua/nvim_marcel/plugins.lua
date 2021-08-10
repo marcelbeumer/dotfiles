@@ -3,7 +3,12 @@ return require("packer").startup(function(use)
   use("wbthomason/packer.nvim")
 
   -- Delete buffer helpers
-  use("kazhala/close-buffers.nvim")
+  use({
+    "kazhala/close-buffers.nvim",
+    opt = true,
+    module = "close-buffers",
+    cmd = { "BDelete", "BWipeout" },
+  })
 
   --  Sessions
   use({
