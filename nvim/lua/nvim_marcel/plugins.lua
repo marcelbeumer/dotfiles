@@ -2,6 +2,9 @@ return require("packer").startup(function(use)
   -- Packer can manage itself
   use("wbthomason/packer.nvim")
 
+  -- Delete buffer helpers
+  use("kazhala/close-buffers.nvim")
+
   --  Sessions
   use({
     "folke/persistence.nvim",

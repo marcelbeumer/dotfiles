@@ -12,12 +12,12 @@ vim.opt.swapfile = false
 vim.opt.clipboard = "unnamed"
 vim.opt.hidden = true
 vim.opt.shortmess:append("c")
-vim.opt.updatetime = 800  -- for CursorHold event
+vim.opt.updatetime = 800 -- for CursorHold event
 vim.opt.mouse = "nv" -- nice for window sizing
 vim.opt.expandtab = true
-vim.opt.shiftwidth= 2
-vim.opt.softtabstop= 2
-vim.opt.tabstop= 2
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
+vim.opt.tabstop = 2
 vim.opt.smartindent = true
 vim.opt.ignorecase = true
 vim.opt.joinspaces = true
@@ -25,8 +25,6 @@ vim.opt.linebreak = true
 
 -- Commands
 vim.cmd([[command W w]])
--- %bd all buffers, e# open previous, bd# delete previous (no name buffer)
-vim.cmd([[command BD %bd|e#|bd#]])
 vim.cmd([[command FilePath let @*=expand("%")]])
 vim.cmd([[command FilePathAbs let @*=expand("%:p")]])
 vim.cmd([[command FilePathHead let @*=expand("%:h")]])
@@ -38,7 +36,7 @@ vim.cmd([[command Garc !git ar && git c -am "..."]])
 vim.cmd([[au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=200, on_visual=true}]])
 
 -- Bindings
-nmap(']q', ':cnext')
+nmap("]q", ":cnext")
 nmap("]q", ":cnext<CR>")
 nmap("[q", ":cprev<CR>")
 nmap("]Q", ":lnext<CR>")
