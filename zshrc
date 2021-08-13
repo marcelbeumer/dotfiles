@@ -45,6 +45,8 @@ alias gdalb='git branch | grep -v "master" | xargs git branch -D'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source /usr/local/opt/asdf/asdf.sh
 
+source $HOME/.cargo/env
+
 ###-begin-cli-completions-###
 #
 # yargs command completion script
