@@ -26,14 +26,15 @@ require("compe").setup({
 })
 
 vim.cmd([[
-  inoremap <silent><expr> <C-Space> compe#complete()
   " inoremap <silent><expr> <CR> compe#confirm(luaeval("require 'nvim-autopairs'.autopairs_cr()"))
-  inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+  " inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+  inoremap <silent><expr> <C-Space> compe#complete()
   inoremap <silent><expr> <C-e> compe#close('<C-e>')
   inoremap <silent><expr> <C-f> compe#scroll({ 'delta': +4 })
   inoremap <silent><expr> <C-d> compe#scroll({ 'delta': -4 })
 ]])
 
+vim.api.nvim_set_keymap("i", "<CR>", "v:lua.__nvim_marcel__cr_complete()", { expr = true })
 vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.__nvim_marcel__tab_complete()", { expr = true })
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.__nvim_marcel__tab_complete()", { expr = true })
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.__nvim_marcel__s_tab_complete()", { expr = true })
@@ -41,6 +42,14 @@ vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.__nvim_marcel__s_tab_complete()",
 
 local replace_termcodes = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+local function cr_complete()
+  if vim.fn.pumvisible() == 1 then
+    return vim.fn["compe#confirm"]("<CR>")
+  else
+    return require("nvim-autopairs").autopairs_cr()
+  end
 end
 
 local function tab_complete()
@@ -73,9 +82,14 @@ local function s_tab_complete()
   end
 end
 
+_G.__nvim_marcel__cr_complete = function()
+  return cr_complete()
+end
+
 _G.__nvim_marcel__tab_complete = function()
   return tab_complete()
 end
+
 _G.__nvim_marcel__s_tab_complete = function()
   return s_tab_complete()
 end

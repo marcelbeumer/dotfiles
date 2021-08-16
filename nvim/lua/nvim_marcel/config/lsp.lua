@@ -6,15 +6,6 @@ local on_attach_common = function(lsp_client, bufnr)
   -- Setup omnicomplete (nice to have on the side)
   vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
 
-  require("lsp_signature").on_attach({
-    bind = true,
-    floating_window = true, -- false for virtual_text
-    hint_enable = false,
-    handler_opts = {
-      border = "none",
-    },
-  })
-
   local function bufmap(mode, lhs, rhs)
     vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, { noremap = true, silent = true })
   end
@@ -27,6 +18,7 @@ local on_attach_common = function(lsp_client, bufnr)
   bufmap("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
   bufmap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>")
   bufmap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
+  bufmap("i", "<C-y>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
   bufmap("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>")
   bufmap("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>")
   bufmap("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>")

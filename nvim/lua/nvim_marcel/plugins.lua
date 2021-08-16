@@ -108,7 +108,6 @@ return require("packer").startup(function(use)
   use({
     "neovim/nvim-lspconfig",
     requires = {
-      "ray-x/lsp_signature.nvim",
       "nvim-lua/plenary.nvim", -- nvim-lsp-ts-utils
       "jose-elias-alvarez/nvim-lsp-ts-utils",
       "jose-elias-alvarez/null-ls.nvim",
