@@ -108,7 +108,7 @@ return require("packer").startup(function(use)
   use({
     "neovim/nvim-lspconfig",
     requires = {
-      { "ray-x/lsp_signature.nvim", commit = "91d6747" },
+      "ray-x/lsp_signature.nvim",
       "nvim-lua/plenary.nvim", -- nvim-lsp-ts-utils
       "jose-elias-alvarez/nvim-lsp-ts-utils",
       "jose-elias-alvarez/null-ls.nvim",
@@ -183,6 +183,9 @@ return require("packer").startup(function(use)
     cmd = "ZenMode",
     config = function()
       require("zen-mode").setup({
+        window = {
+          width = 80,
+        },
         plugins = {
           gitsigns = { enabled = true },
         },
@@ -227,7 +230,16 @@ return require("packer").startup(function(use)
     config = function()
       vim.g.tokyonight_italic_comments = false
       vim.g.tokyonight_italic_keywords = false
-      vim.cmd([[colorscheme tokyonight]])
+      -- vim.cmd([[colorscheme tokyonight]])
+    end,
+  })
+
+  use({
+    "rose-pine/neovim",
+    as = "rose-pine",
+    config = function()
+      vim.g.rose_pine_variant = "moon"
+      vim.cmd([[colorscheme rose-pine]])
     end,
   })
 end)
