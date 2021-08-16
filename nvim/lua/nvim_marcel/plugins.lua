@@ -230,7 +230,7 @@ return require("packer").startup(function(use)
     config = function()
       vim.g.tokyonight_italic_comments = false
       vim.g.tokyonight_italic_keywords = false
-      -- vim.cmd([[colorscheme tokyonight]])
+      vim.cmd([[colorscheme tokyonight]])
     end,
   })
 
@@ -239,7 +239,7 @@ return require("packer").startup(function(use)
     as = "rose-pine",
     config = function()
       vim.g.rose_pine_variant = "moon"
-      vim.cmd([[colorscheme rose-pine]])
+      -- vim.cmd([[colorscheme rose-pine]])
     end,
   })
 end)
