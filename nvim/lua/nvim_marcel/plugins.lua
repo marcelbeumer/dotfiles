@@ -168,10 +168,15 @@ return require("packer").startup(function(use)
 
   -- Autocompletion
   use({
-    "hrsh7th/nvim-compe",
+    "hrsh7th/nvim-cmp",
+    requires = {
+      "hrsh7th/vim-vsnip",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-nvim-lsp",
+    },
     wants = { "nvim-autopairs" },
     config = function()
-      require("nvim_marcel.config.compe")
+      require("nvim_marcel.config.cmp")
     end,
   })
 

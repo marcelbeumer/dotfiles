@@ -71,6 +71,7 @@ end
 
 local function setup_tsserver()
   lspconfig.tsserver.setup({
+    capabilities = require("nvim_marcel.config.cmp").get_lsp_capabilities(),
     flags = flags_common,
     on_attach = function(lsp_client, bufnr)
       lsp_client.resolved_capabilities.document_formatting = false
