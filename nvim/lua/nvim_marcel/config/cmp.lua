@@ -37,6 +37,7 @@ cmp.setup({
       elseif vim.fn["vsnip#available"]() == 1 then
         vim.fn.feedkeys(t("<Plug>(vsnip-expand-or-jump)"), "")
       else
+        -- do <S-Tab> to enter tab when char on backspace
         cmp.complete()
       end
     end,
