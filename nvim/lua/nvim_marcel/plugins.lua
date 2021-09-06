@@ -91,18 +91,18 @@ return require("packer").startup(function(use)
   })
 
   -- Snippets
-  use({
-    "hrsh7th/vim-vsnip",
-    requires = { "hrsh7th/vim-vsnip-integ" },
-    config = function()
-      vim.cmd([[
-        let g:vsnip_filetypes = {}
-        let g:vsnip_filetypes.javascriptreact = ['javascript']
-        let g:vsnip_filetypes.typescriptreact = ['typescript']
-        let g:vsnip_snippet_dir = expand('~/.config/nvim/vsnip')
-      ]])
-    end,
-  })
+  -- use({
+  --   "hrsh7th/vim-vsnip",
+  --   requires = { "hrsh7th/vim-vsnip-integ" },
+  --   config = function()
+  --     vim.cmd([[
+  --       let g:vsnip_filetypes = {}
+  --       let g:vsnip_filetypes.javascriptreact = ['javascript']
+  --       let g:vsnip_filetypes.typescriptreact = ['typescript']
+  --       let g:vsnip_snippet_dir = expand('~/.config/nvim/vsnip')
+  --     ]])
+  --   end,
+  -- })
 
   -- LSP config helpers
   use({
@@ -170,7 +170,7 @@ return require("packer").startup(function(use)
   use({
     "hrsh7th/nvim-cmp",
     requires = {
-      "hrsh7th/vim-vsnip",
+      -- "hrsh7th/vim-vsnip",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-nvim-lsp",
     },
