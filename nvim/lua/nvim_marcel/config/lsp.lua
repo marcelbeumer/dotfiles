@@ -34,7 +34,8 @@ local on_attach_common = function(lsp_client, bufnr)
     vim.cmd([[
       augroup lsp_buffer_formatting
         autocmd! * <buffer>
-        autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+        " autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+        autocmd BufWritePre <buffer> Neoformat eslint_d
       augroup END
     ]])
   end
@@ -59,9 +60,9 @@ local function setup_null_ls()
   null_ls.config({
     debounce = 150,
     sources = {
-      null_ls.builtins.formatting.deno_fmt,
+      -- null_ls.builtins.formatting.deno_fmt,
       -- null_ls.builtins.formatting.eslint_d,
-      -- null_ls.builtins.diagnostics.eslint_d,
+      null_ls.builtins.diagnostics.eslint_d,
       null_ls.builtins.formatting.stylua,
       -- null_ls.builtins.diagnostics.selene,
     },
