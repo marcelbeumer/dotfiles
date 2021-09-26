@@ -1,6 +1,7 @@
 local cmp = require("cmp")
 
 vim.o.completeopt = "menuone,noselect"
+vim.o.pumheight = 10
 
 local check_back_space = function()
   local col = vim.fn.col(".") - 1
@@ -13,7 +14,7 @@ end
 
 cmp.setup({
   completion = {
-    autocomplete = false,
+    autocomplete = true,
   },
   snippet = {
     expand = function(args)
