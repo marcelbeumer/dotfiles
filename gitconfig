@@ -26,3 +26,9 @@
   rh = reset HEAD
   rhh = reset HEAD --hard
   pick = cherry-pick
+[mergetool "nvim"]
+  cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+[merge]
+  tool = nvim
+[mergetool]
+  prompt = false
