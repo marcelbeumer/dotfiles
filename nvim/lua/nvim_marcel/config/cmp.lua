@@ -25,6 +25,7 @@ cmp.setup({
   },
   sorting = {
     comparators = {
+      cmp.config.compare.exact,
       cmp.config.compare.sort_text,
 
       -- defaults:
