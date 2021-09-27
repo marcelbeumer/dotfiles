@@ -2,6 +2,9 @@ local lspconfig = require("lspconfig")
 
 local flags_common = { debounce_text_changes = 300 }
 
+-- local type_script_mode = "deno_fmt"
+local type_script_mode = "eslint_d"
+
 local on_attach_common = function(lsp_client, bufnr)
   -- Setup omnicomplete (nice to have on the side)
   vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
@@ -31,13 +34,24 @@ local on_attach_common = function(lsp_client, bufnr)
 
   if lsp_client.resolved_capabilities.document_formatting then
     bufmap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
-    vim.cmd([[
-      augroup lsp_buffer_formatting
-        autocmd! * <buffer>
-        autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
-        " autocmd BufWritePre <buffer> Neoformat eslint_d
-      augroup END
-    ]])
+
+    if type_script_mode == "deno_fmt" then
+      vim.cmd([[
+        augroup lsp_buffer_formatting
+          autocmd! * <buffer>
+          autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+        augroup END
+      ]])
+    end
+
+    if type_script_mode == "eslint_d" then
+      vim.cmd([[
+        augroup lsp_buffer_formatting
+          autocmd! * <buffer>
+          autocmd BufWritePre <buffer> Neoformat eslint_d
+        augroup END
+      ]])
+    end
   end
 
   if lsp_client.resolved_capabilities.document_range_formatting then
@@ -57,15 +71,25 @@ end
 
 local function setup_null_ls()
   local null_ls = require("null-ls")
+  local sources = {
+    null_ls.builtins.formatting.stylua,
+  }
+  if type_script_mode == "deno_fmt" then
+    vim.list_extend(sources, {
+      null_ls.builtins.formatting.deno_fmt,
+    })
+  end
+
+  if type_script_mode == "eslint_d" then
+    vim.list_extend(sources, {
+      null_ls.builtins.formatting.eslint_d,
+      -- null_ls.builtins.diagnostics.eslint_d,
+    })
+  end
+
   null_ls.config({
     debounce = 150,
-    sources = {
-      null_ls.builtins.formatting.deno_fmt,
-      -- null_ls.builtins.formatting.eslint_d,
-      -- null_ls.builtins.diagnostics.eslint_d,
-      null_ls.builtins.formatting.stylua,
-      -- null_ls.builtins.diagnostics.selene,
-    },
+    sources = sources,
   })
   lspconfig["null-ls"].setup({
     on_attach = on_attach_common,
