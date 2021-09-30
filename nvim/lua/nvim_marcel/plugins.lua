@@ -159,12 +159,14 @@ return require("packer").startup(function(use)
   })
 
   -- Auto close xml-like tag support
-  use({
-    "windwp/nvim-ts-autotag",
-    config = function()
-      require("nvim-ts-autotag").setup()
-    end,
-  })
+  -- use({
+  --   "windwp/nvim-ts-autotag",
+  --   config = function()
+  --     require("nvim-ts-autotag").setup({
+  --       enable_rename = false,
+  --     })
+  --   end,
+  -- })
 
   -- Autocompletion
   use({
@@ -233,21 +235,27 @@ return require("packer").startup(function(use)
     end,
   })
 
+  -- vim.g.tokyonight_style = "night"
+  vim.g.tokyonight_italic_comments = false
+  vim.g.tokyonight_italic_keywords = false
+
   -- Color schemes
   use({
     "folke/tokyonight.nvim",
     config = function()
-      vim.g.tokyonight_italic_comments = false
-      vim.g.tokyonight_italic_keywords = false
       vim.cmd([[colorscheme tokyonight]])
     end,
   })
+
+  use("tomasiser/vim-code-dark")
+
+  vim.g.rose_pine_variant = "moon"
+  vim.g.rose_pine_disable_italics = true
 
   use({
     "rose-pine/neovim",
     as = "rose-pine",
     config = function()
-      vim.g.rose_pine_variant = "moon"
       -- vim.cmd([[colorscheme rose-pine]])
     end,
   })
