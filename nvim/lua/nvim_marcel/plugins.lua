@@ -247,8 +247,6 @@ return require("packer").startup(function(use)
     end,
   })
 
-  use("tomasiser/vim-code-dark")
-
   vim.g.rose_pine_variant = "moon"
   vim.g.rose_pine_disable_italics = true
 
