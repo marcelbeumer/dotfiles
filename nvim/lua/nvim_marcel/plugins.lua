@@ -217,15 +217,4 @@ return require("packer").startup(function(use)
       vim.cmd([[colorscheme tokyonight]])
     end,
   })
-
-  vim.g.rose_pine_variant = "moon"
-  vim.g.rose_pine_disable_italics = true
-
-  use({
-    "rose-pine/neovim",
-    as = "rose-pine",
-    config = function()
-      -- vim.cmd([[colorscheme rose-pine]])
-    end,
-  })
 end)
