@@ -2,8 +2,8 @@ local lspconfig = require("lspconfig")
 
 local flags_common = { debounce_text_changes = 300 }
 
--- local type_script_mode = "deno_fmt"
-local type_script_mode = "eslint_d"
+local type_script_mode = "deno_fmt"
+-- local type_script_mode = "eslint_d"
 
 local on_attach_common = function(lsp_client, bufnr)
   -- Setup omnicomplete (nice to have on the side)

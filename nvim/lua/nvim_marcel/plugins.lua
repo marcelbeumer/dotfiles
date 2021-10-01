@@ -173,6 +173,7 @@ return require("packer").startup(function(use)
     "hrsh7th/nvim-cmp",
     requires = {
       "hrsh7th/vim-vsnip",
+      "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-nvim-lsp",
     },
     wants = { "nvim-autopairs" },
