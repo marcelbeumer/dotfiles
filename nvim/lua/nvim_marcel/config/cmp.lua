@@ -29,9 +29,9 @@ cmp.setup({
     end,
   },
   sources = {
-    { name = 'vsnip' },
+    { name = "vsnip" },
     { name = "nvim_lsp" },
-    { name = 'buffer' },
+    { name = "buffer" },
   },
   sorting = {
     comparators = {
@@ -68,7 +68,10 @@ cmp.setup({
       else
         fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
       end
-    end, { "i", "s" }),
+    end, {
+      "i",
+      "s",
+    }),
 
     ["<S-Tab>"] = cmp.mapping(function()
       if vim.fn.pumvisible() == 1 then
@@ -76,7 +79,10 @@ cmp.setup({
       elseif vim.fn["vsnip#jumpable"](-1) == 1 then
         feedkey("<Plug>(vsnip-jump-prev)", "")
       end
-    end, { "i", "s" }),
+    end, {
+      "i",
+      "s",
+    }),
   },
 })
 
