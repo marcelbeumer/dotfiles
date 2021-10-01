@@ -17,6 +17,9 @@ local feedkey = function(key, mode)
 end
 
 cmp.setup({
+  -- experimental = {
+  --   ghost_text = true
+  -- },
   completion = {
     autocomplete = true,
   },
@@ -80,7 +83,7 @@ cmp.setup({
 require("nvim-autopairs.completion.cmp").setup({
   map_cr = true, --  map <CR> on insert mode
   map_complete = false, -- it will auto insert `(` after select function or method item
-  -- auto_select = true, -- automatically select the first item
+  auto_select = true, -- automatically select the first item
 })
 
 local M = {}
