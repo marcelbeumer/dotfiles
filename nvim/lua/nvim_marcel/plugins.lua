@@ -149,16 +149,6 @@ return require("packer").startup(function(use)
     end,
   })
 
-  -- Auto close xml-like tag support
-  -- use({
-  --   "windwp/nvim-ts-autotag",
-  --   config = function()
-  --     require("nvim-ts-autotag").setup({
-  --       enable_rename = false,
-  --     })
-  --   end,
-  -- })
-
   -- Autocompletion
   use({
     "hrsh7th/nvim-cmp",
