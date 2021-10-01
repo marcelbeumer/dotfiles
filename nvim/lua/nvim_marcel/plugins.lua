@@ -131,6 +131,8 @@ return require("packer").startup(function(use)
     config = function()
       require("nvim-autopairs").setup({
         disable_filetype = { "TelescopePrompt", "vim", "markdown" },
+        -- added open parentheses ( to the default value
+        ignored_next_char = string.gsub([[ [%w%%%'%[%(%"%.] ]], "%s+", ""),
       })
     end,
   })
@@ -139,8 +141,8 @@ return require("packer").startup(function(use)
   use({
     "hrsh7th/nvim-cmp",
     requires = {
-      'hrsh7th/vim-vsnip',
-      'hrsh7th/cmp-vsnip',
+      "hrsh7th/vim-vsnip",
+      "hrsh7th/cmp-vsnip",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-nvim-lsp",
     },
