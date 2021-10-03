@@ -38,13 +38,23 @@ return require("packer").startup(function(use)
   use({
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
-    requires = { "JoosepAlviste/nvim-ts-context-commentstring" },
+    requires = {
+      "JoosepAlviste/nvim-ts-context-commentstring",
+      "RRethy/nvim-treesitter-textsubjects",
+    },
     config = function()
       require("nvim-treesitter.configs").setup({
         ensure_installed = "maintained",
         indent = { enable = true },
         context_commentstring = { enable = true },
         highlight = { enable = true },
+        textsubjects = {
+          enable = true,
+          keymaps = {
+            ["."] = "textsubjects-smart",
+            [";"] = "textsubjects-container-outer",
+          },
+        },
       })
       vim.cmd([[
         set foldmethod=expr
