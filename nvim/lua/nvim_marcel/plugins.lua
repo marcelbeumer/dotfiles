@@ -46,7 +46,10 @@ return require("packer").startup(function(use)
       require("nvim-treesitter.configs").setup({
         ensure_installed = "maintained",
         indent = { enable = true },
-        context_commentstring = { enable = true },
+        context_commentstring = {
+          enable = true,
+          enable_autocmd = false,
+        },
         highlight = { enable = true },
         textsubjects = {
           enable = true,
@@ -84,7 +87,16 @@ return require("packer").startup(function(use)
   })
 
   --- Comment
-  use("tpope/vim-commentary")
+  use({
+    "terrortylor/nvim-comment",
+    config = function()
+      require("nvim_comment").setup({
+        hook = function()
+          require("ts_context_commentstring.internal").update_commentstring()
+        end
+      })
+    end
+  })
 
   -- Git
   use("tpope/vim-fugitive")
