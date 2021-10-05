@@ -56,7 +56,9 @@ cmp.setup({
   mapping = {
     ["<C-Space>"] = cmp.mapping.complete(),
 
-    ["<CR>"] = cmp.mapping.confirm(),
+    ["<CR>"] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Insert,
+    }),
 
     ["<Tab>"] = cmp.mapping(function(fallback)
       if vim.fn.pumvisible() == 1 then
