@@ -1,33 +1,4 @@
-local action_set = require("telescope.actions.set")
-
-require("telescope").setup({
-  defaults = {
-    mappings = {
-      i = {
-        ["<C-q>"] = require("telescope.actions").send_to_qflist,
-      },
-    },
-  },
-  pickers = {
-    find_files = {
-      hidden = true,
-      -- workaround for folds not working when opening a file
-      -- https://github.com/nvim-telescope/telescope.nvim/issues/559
-      attach_mappings = function()
-        action_set.select:enhance({
-          post = function()
-            vim.cmd(":normal! zx")
-          end,
-        })
-        return true
-      end,
-    },
-  },
-})
-
--- https://github.com/nvim-telescope/telescope-fzf-native.nvim
--- require("telescope").load_extension("fzf")
-require('telescope').load_extension('fzy_native')
+local M = {}
 
 local function split_str(v)
   local args = {}
@@ -53,21 +24,66 @@ function _G.__nvim_marcel__telescope_find_files(v)
   require("telescope.builtin").find_files(opts)
 end
 
-vim.cmd([[
-  command! -nargs=* -complete=file TelescopeLiveGrep lua __nvim_marcel__telescope_live_grep(<q-args>)
-  command! -nargs=* -complete=file TelescopeFindFiles lua __nvim_marcel__telescope_find_files(<q-args>)
+-- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#falling-back-to-find_files-if-git_files-cant-find-a-git-directory
+M.project_files = function()
+  local opts = {
+    previewer = false,
+    layout_strategy = 'vertical',
+    layout_config = { width = 0.5, height = 20, prompt_position = 'top' },
+  }
+  local ok = pcall(require'telescope.builtin'.git_files, opts)
+  if not ok then require'telescope.builtin'.find_files(opts) end
+end
 
-  nnoremap <leader>fx <cmd>lua require('telescope.builtin').builtin()<cr>
-  nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-  nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-  nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-  nnoremap <leader>f/ <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
-  nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-  nnoremap <leader>flr <cmd>lua require('telescope.builtin').lsp_references()<cr>
-  nnoremap <leader>fls <cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>
-  nnoremap <leader>flS <cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>
-  nnoremap <leader>fld <cmd>lua require('telescope.builtin').lsp_definitions()<cr>
-  nnoremap <leader>fla <cmd>lua require('telescope.builtin').lsp_code_actions()<cr>
-  nnoremap <leader>flq <cmd>lua require('telescope.builtin').lsp_document_diagnostics()<cr>
-  nnoremap <leader>flQ <cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>
-]])
+M.setup = function()
+  local action_set = require("telescope.actions.set")
+  require("telescope").setup({
+    defaults = {
+      layout_config = {
+        prompt_position = "top",
+      },
+      mappings = {
+        i = {
+          ["<C-q>"] = require("telescope.actions").send_to_qflist,
+        },
+      },
+    },
+    pickers = {
+      find_files = {
+        -- workaround for folds not working when opening a file
+        -- https://github.com/nvim-telescope/telescope.nvim/issues/559
+        attach_mappings = function()
+          action_set.select:enhance({
+            post = function()
+              vim.cmd(":normal! zx")
+            end,
+          })
+          return true
+        end,
+      },
+    },
+  })
+
+  require('telescope').load_extension('fzy_native')
+
+  vim.cmd([[
+    command! -nargs=* -complete=file TelescopeLiveGrep lua __nvim_marcel__telescope_live_grep(<q-args>)
+    command! -nargs=* -complete=file TelescopeFindFiles lua __nvim_marcel__telescope_find_files(<q-args>)
+
+    nnoremap <leader>fx <cmd>lua require('telescope.builtin').builtin()<cr>
+    nnoremap <leader>ff <cmd>lua require('nvim_marcel.config.telescope').project_files()<cr>
+    nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+    nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+    nnoremap <leader>f/ <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
+    nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+    nnoremap <leader>flr <cmd>lua require('telescope.builtin').lsp_references()<cr>
+    nnoremap <leader>fls <cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>
+    nnoremap <leader>flS <cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>
+    nnoremap <leader>fld <cmd>lua require('telescope.builtin').lsp_definitions()<cr>
+    nnoremap <leader>fla <cmd>lua require('telescope.builtin').lsp_code_actions()<cr>
+    nnoremap <leader>flq <cmd>lua require('telescope.builtin').lsp_document_diagnostics()<cr>
+    nnoremap <leader>flQ <cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>
+  ]])
+end
+
+return M
