@@ -35,6 +35,15 @@ M.project_files = function()
   if not ok then require'telescope.builtin'.find_files(opts) end
 end
 
+M.buffers = function ()
+  local opts = {
+    previewer = false,
+    layout_strategy = 'vertical',
+    layout_config = { width = 0.5, height = 20, prompt_position = 'top' },
+  }
+  require('telescope.builtin').buffers(opts)
+end
+
 M.setup = function()
   local action_set = require("telescope.actions.set")
   require("telescope").setup({
@@ -72,8 +81,8 @@ M.setup = function()
 
     nnoremap <leader>fx <cmd>lua require('telescope.builtin').builtin()<cr>
     nnoremap <leader>ff <cmd>lua require('nvim_marcel.config.telescope').project_files()<cr>
+    nnoremap <leader>fb <cmd>lua require('nvim_marcel.config.telescope').buffers()<cr>
     nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-    nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
     nnoremap <leader>f/ <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
     nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
     nnoremap <leader>flr <cmd>lua require('telescope.builtin').lsp_references()<cr>
