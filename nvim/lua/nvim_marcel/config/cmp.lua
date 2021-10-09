@@ -17,11 +17,8 @@ local feedkey = function(key, mode)
 end
 
 cmp.setup({
-  -- experimental = {
-  --   ghost_text = true
-  -- },
-  completion = {
-    autocomplete = true,
+  experimental = {
+    ghost_text = true
   },
   snippet = {
     expand = function(args)
@@ -58,11 +55,12 @@ cmp.setup({
 
     ["<CR>"] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Insert,
+      select = true
     }),
 
     ["<Tab>"] = cmp.mapping(function(fallback)
-      if vim.fn.pumvisible() == 1 then
-        feedkey("<C-n>", "n")
+      if cmp.visible() then
+        cmp.select_next_item()
       elseif vim.fn["vsnip#available"]() == 1 then
         feedkey("<Plug>(vsnip-expand-or-jump)", "")
       elseif has_words_before() then
@@ -76,8 +74,8 @@ cmp.setup({
     }),
 
     ["<S-Tab>"] = cmp.mapping(function()
-      if vim.fn.pumvisible() == 1 then
-        feedkey("<C-p>", "n")
+      if cmp.visible() then
+        cmp.select_prev_item()
       elseif vim.fn["vsnip#jumpable"](-1) == 1 then
         feedkey("<Plug>(vsnip-jump-prev)", "")
       end
