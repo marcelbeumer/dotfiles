@@ -122,6 +122,16 @@ local function setup_tsserver()
   })
 end
 
+local function setup_denols()
+  lspconfig.denols.setup({
+    capabilities = require("nvim_marcel.config.cmp").get_lsp_capabilities(),
+    flags = flags_common,
+    on_attach = function(lsp_client, bufnr)
+      on_attach_common(lsp_client, bufnr)
+    end,
+  })
+end
+
 local function setup_lua()
   local luadev = require("lua-dev").setup({
     lspconfig = {
@@ -159,6 +169,7 @@ end
 -- vim.lsp.set_log_level("debug")
 setup_null_ls()
 setup_tsserver()
+-- setup_denols()
 setup_lua()
 setup_diagnostics()
 
