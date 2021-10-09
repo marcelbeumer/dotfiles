@@ -2,10 +2,10 @@
 function _G.__nvim_marcel__get_lsp_status()
   local space = " "
   local diagnostics = ""
-  local e = vim.lsp.diagnostic.get_count(0, [[Error]])
-  local w = vim.lsp.diagnostic.get_count(0, [[Warning]])
-  local i = vim.lsp.diagnostic.get_count(0, [[Information]])
-  local h = vim.lsp.diagnostic.get_count(0, [[Hint]])
+  local e = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+  local w = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
+  local h = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
+  local i = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
   diagnostics = e ~= 0 and diagnostics .. "E" .. e .. space or diagnostics
   diagnostics = w ~= 0 and diagnostics .. "W" .. w .. space or diagnostics
   diagnostics = i ~= 0 and diagnostics .. "I" .. i .. space or diagnostics
