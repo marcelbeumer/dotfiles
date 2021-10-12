@@ -2,9 +2,9 @@ local lspconfig = require("lspconfig")
 
 local flags_common = { debounce_text_changes = 300 }
 
-local type_script_mode = "deno_fmt"
+-- local type_script_mode = "deno_fmt"
 -- local type_script_mode = "prettierd"
--- local type_script_mode = "eslint_d"
+local type_script_mode = "eslint_d"
 
 local on_attach_common = function(lsp_client, bufnr)
   -- Setup omnicomplete (nice to have on the side)
@@ -139,6 +139,17 @@ local function setup_lua()
   lspconfig.sumneko_lua.setup(luadev)
 end
 
+local function setup_omnisharp()
+  local pid = vim.fn.getpid()
+  -- On linux/darwin if using a release build, otherwise under scripts/OmniSharp(.Core)(.cmd)
+  local omnisharp_bin = vim.loop.os_homedir() .. "/dev/omnisharp-osx/run"
+  -- on Windows
+  -- local omnisharp_bin = "/path/to/omnisharp/OmniSharp.exe"
+  lspconfig.omnisharp.setup({
+    cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) },
+  })
+end
+
 local diagnostic_noise_level = 2
 
 local function setup_diagnostics()
@@ -167,6 +178,7 @@ end
 setup_null_ls()
 setup_tsserver()
 -- setup_denols()
+setup_omnisharp()
 setup_lua()
 setup_diagnostics()
 
