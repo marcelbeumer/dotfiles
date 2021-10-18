@@ -1,6 +1,9 @@
 [user]
 	email = marcel@marcelbeumer.com
 	name = Marcel Beumer
+[core]
+  tabwidth = 4
+	pager = less -x2
 [alias]
 	ack = grep --break --heading --line-number
   st = status
@@ -32,3 +35,9 @@
   tool = nvim
 [mergetool]
   prompt = false
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

@@ -41,6 +41,7 @@ alias lrt='ls -1Fcrt'
 # my aliases
 alias c='bin/cli'
 alias g='git'
+alias k='kubectl'
 alias nr='npm run'
 alias gdalb='git branch | grep -v "master" | xargs git branch -D'
 
@@ -68,3 +69,6 @@ _cli_yargs_completions()
 compdef _cli_yargs_completions cli
 compdef _cli_yargs_completions c
 ###-end-cli-completions-###
+
+source <(kubectl completion zsh)
+complete -F __start_kubectl k
