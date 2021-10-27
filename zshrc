@@ -70,5 +70,13 @@ compdef _cli_yargs_completions cli
 compdef _cli_yargs_completions c
 ###-end-cli-completions-###
 
-# source <(kubectl completion zsh)
-# complete -F __start_kubectl k
+k8s_kubectl_completion()
+{
+  source <(kubectl completion zsh)
+  complete -F __start_kubectl k
+}
+
+k8s_minikube_docker()
+{
+  eval $(minikube -p minikube docker-env)
+}
