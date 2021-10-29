@@ -75,6 +75,7 @@ local function setup_null_ls()
   if type_script_mode == "deno_fmt" then
     vim.list_extend(sources, {
       null_ls.builtins.formatting.deno_fmt,
+      null_ls.builtins.diagnostics.eslint_d,
     })
   end
 
