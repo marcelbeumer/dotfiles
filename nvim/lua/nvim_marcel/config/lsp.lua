@@ -2,8 +2,8 @@ local lspconfig = require("lspconfig")
 
 local flags_common = { debounce_text_changes = 300 }
 
--- local type_script_mode = "deno_fmt"
-local type_script_mode = "prettierd"
+local type_script_mode = "deno_fmt"
+-- local type_script_mode = "prettierd"
 -- local type_script_mode = "eslint_d"
 
 local on_attach_common = function(lsp_client, bufnr)
@@ -75,7 +75,7 @@ local function setup_null_ls()
   if type_script_mode == "deno_fmt" then
     vim.list_extend(sources, {
       null_ls.builtins.formatting.deno_fmt,
-      null_ls.builtins.diagnostics.eslint_d,
+      -- null_ls.builtins.diagnostics.eslint_d,
     })
   end
 

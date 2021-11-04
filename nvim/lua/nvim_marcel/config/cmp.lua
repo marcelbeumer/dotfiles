@@ -58,6 +58,10 @@ cmp.setup({
   },
 })
 
+vim.cmd([[
+  autocmd FileType markdown,text lua require('cmp').setup.buffer { enabled = false }
+]])
+
 local M = {}
 
 M.get_lsp_capabilities = function()

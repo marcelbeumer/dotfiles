@@ -173,6 +173,7 @@ return require("packer").startup(function(use)
   -- Autocompletion
   use({
     "hrsh7th/nvim-cmp",
+    -- commit = "baa39271b2f6b52d8bc6a9789e795dfd662a8f2a",
     requires = {
       "hrsh7th/vim-vsnip",
       "hrsh7th/cmp-vsnip",
