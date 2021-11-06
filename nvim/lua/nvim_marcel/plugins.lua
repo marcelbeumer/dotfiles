@@ -251,4 +251,21 @@ return require("packer").startup(function(use)
       vim.cmd([[colorscheme tokyonight]])
     end,
   })
+
+  vim.g.vscode_style = "dark"
+
+  use({
+    "Mofiqul/vscode.nvim",
+    config = function()
+      -- vim.cmd([[colorscheme vscode]])
+    end,
+  })
+
+  use({
+    "mcchrish/zenbones.nvim",
+    requires = "rktjmp/lush.nvim",
+    config = function()
+      -- vim.cmd([[colorscheme zenbones]])
+    end,
+  })
 end)
