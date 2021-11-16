@@ -2,9 +2,41 @@ local lspconfig = require("lspconfig")
 
 local flags_common = { debounce_text_changes = 300 }
 
--- local type_script_mode = "deno_fmt"
-local type_script_mode = "prettierd"
+-- local type_script_mode = "dprint"
+local type_script_mode = "deno_fmt"
+-- local type_script_mode = "prettierd"
 -- local type_script_mode = "eslint_d"
+
+local h = require("null-ls.helpers")
+local methods = require("null-ls.methods")
+
+local FORMATTING = methods.internal.FORMATTING
+
+local dprint = h.make_builtin({
+  method = FORMATTING,
+  -- filetypes = { "*" },
+  filetypes = {
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "css",
+    "scss",
+    "less",
+    "html",
+    "json",
+    "yaml",
+    "markdown",
+    "graphql",
+  },
+  generator_opts = {
+    command = "dprint",
+    args = h.range_formatting_args_factory({ "fmt", "--stdin", "$FILENAME" }),
+    to_stdin = true,
+  },
+  factory = h.formatter_factory,
+})
 
 local on_attach_common = function(lsp_client, bufnr)
   -- Setup omnicomplete (nice to have on the side)
@@ -69,6 +101,13 @@ local function setup_null_ls()
     vim.list_extend(sources, {
       null_ls.builtins.formatting.prettierd,
       null_ls.builtins.diagnostics.eslint_d,
+    })
+  end
+
+  if type_script_mode == "dprint" then
+    vim.list_extend(sources, {
+      dprint,
+      -- null_ls.builtins.diagnostics.eslint_d,
     })
   end
 
