@@ -2,8 +2,8 @@ local lspconfig = require("lspconfig")
 
 local flags_common = { debounce_text_changes = 300 }
 
--- local type_script_mode = "dprint"
-local type_script_mode = "deno_fmt"
+local type_script_mode = "dprint"
+-- local type_script_mode = "deno_fmt"
 -- local type_script_mode = "prettierd"
 -- local type_script_mode = "eslint_d"
 
@@ -14,22 +14,7 @@ local FORMATTING = methods.internal.FORMATTING
 
 local dprint = h.make_builtin({
   method = FORMATTING,
-  -- filetypes = { "*" },
-  filetypes = {
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "vue",
-    "css",
-    "scss",
-    "less",
-    "html",
-    "json",
-    "yaml",
-    "markdown",
-    "graphql",
-  },
+  filetypes = {},
   generator_opts = {
     command = "dprint",
     args = h.range_formatting_args_factory({ "fmt", "--stdin", "$FILENAME" }),
