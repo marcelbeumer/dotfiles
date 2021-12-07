@@ -132,14 +132,6 @@ return require("packer").startup(function(use)
     end,
   })
 
-  -- Pretty LSP diagnostics, loc list or qf list
-  use({
-    "folke/trouble.nvim",
-    config = function()
-      require("nvim_marcel.config.trouble")
-    end,
-  })
-
   -- Fuzzy finder and more
   use({
     "nvim-telescope/telescope.nvim",
