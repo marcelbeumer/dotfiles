@@ -110,11 +110,9 @@ local function setup_null_ls()
     })
   end
 
-  null_ls.config({
+  null_ls.setup({
     debounce = 150,
     sources = sources,
-  })
-  lspconfig["null-ls"].setup({
     on_attach = on_attach_common,
   })
 end
