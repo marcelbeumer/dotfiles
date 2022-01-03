@@ -49,6 +49,9 @@ local on_attach_common = function(lsp_client, bufnr)
   bufmap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>")
   bufmap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>")
   bufmap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>")
+  -- Goto-preview
+  bufmap("n", "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>")
+  bufmap("n", "gP", "<cmd>lua require('goto-preview').close_all_win()<CR>")
 
   if lsp_client.resolved_capabilities.document_formatting then
     bufmap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
@@ -65,15 +68,16 @@ local on_attach_common = function(lsp_client, bufnr)
     bufmap("v", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>")
   end
 
-  if lsp_client.resolved_capabilities.document_highlight then
-    vim.cmd([[
-      augroup lsp_buffer_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        " autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]])
-  end
+  -- FIXME: is broken with nvim nightly "expected lua number" error on clear_references()
+  -- if lsp_client.resolved_capabilities.document_highlight then
+  --   vim.cmd([[
+  --     augroup lsp_buffer_highlight
+  --       autocmd! * <buffer>
+  --       autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+  --       autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+  --     augroup END
+  --   ]])
+  -- end
 end
 
 local function setup_null_ls()
@@ -203,6 +207,8 @@ function M.command_diagnostic_noise_level(level)
   setup_diagnostics()
   vim.lsp.diagnostic.redraw()
 end
+
+require("goto-preview").setup({})
 
 -- vim.lsp.set_log_level("debug")
 setup_null_ls()
