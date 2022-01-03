@@ -70,7 +70,7 @@ local on_attach_common = function(lsp_client, bufnr)
       augroup lsp_buffer_highlight
         autocmd! * <buffer>
         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+        " autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
       augroup END
     ]])
   end
@@ -174,6 +174,12 @@ local function setup_omnisharp()
   })
 end
 
+local function setup_gopls()
+  lspconfig.gopls.setup({
+    on_attach = on_attach_common,
+  })
+end
+
 local diagnostic_noise_level = 2
 
 local function setup_diagnostics()
@@ -203,6 +209,7 @@ setup_null_ls()
 setup_tsserver()
 -- setup_denols()
 setup_omnisharp()
+setup_gopls()
 setup_lua()
 setup_diagnostics()
 

@@ -7,6 +7,7 @@ eval "$(fnm env)"
 export PATH="node_modules/.bin:$PATH"
 export PATH=$HOME/bin:$PATH
 export PATH=$HOME/.fnm:$PATH
+export PATH=$HOME/go/bin:$PATH
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export PATH="$PATH:/Users/robotx/Library/Python/3.9/bin"
 export PATH="$PATH:/Applications/MacVim.app/Contents/bin"
