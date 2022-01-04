@@ -84,6 +84,8 @@ local function setup_null_ls()
   local null_ls = require("null-ls")
   local sources = {
     null_ls.builtins.formatting.stylua,
+    -- null_ls.builtins.formatting.gofmt,
+    null_ls.builtins.formatting.goimports,
   }
 
   if type_script_mode == "prettierd" then
@@ -180,7 +182,11 @@ end
 
 local function setup_gopls()
   lspconfig.gopls.setup({
-    on_attach = on_attach_common,
+    on_attach = function(lsp_client, bufnr)
+      lsp_client.resolved_capabilities.document_formatting = false
+      lsp_client.resolved_capabilities.document_range_formatting = false
+      on_attach_common(lsp_client, bufnr)
+    end,
   })
 end
 
