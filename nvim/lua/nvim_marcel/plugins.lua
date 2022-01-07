@@ -133,6 +133,15 @@ return require("packer").startup(function(use)
     end,
   })
 
+  -- use({
+  --   "mfussenegger/nvim-lint",
+  --   config = function()
+  --     require("lint").linters_by_ft = {
+  --       go = { "golangcilint" },
+  --     }
+  --   end,
+  -- })
+
   -- Fuzzy finder and more
   use({
     "nvim-telescope/telescope.nvim",

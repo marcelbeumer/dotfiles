@@ -86,6 +86,7 @@ local function setup_null_ls()
     null_ls.builtins.formatting.stylua,
     -- null_ls.builtins.formatting.gofmt,
     null_ls.builtins.formatting.goimports,
+    null_ls.builtins.diagnostics.golangci_lint,
   }
 
   if type_script_mode == "prettierd" then
@@ -211,7 +212,8 @@ function M.command_diagnostic_noise_level(level)
   end
   diagnostic_noise_level = tonumber(level)
   setup_diagnostics()
-  vim.lsp.diagnostic.redraw()
+  -- vim.lsp.diagnostic.redraw()
+  vim.diagnostic.show()
 end
 
 require("goto-preview").setup({})
