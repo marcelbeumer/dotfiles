@@ -195,33 +195,6 @@ return require("packer").startup(function(use)
     end,
   })
 
-  -- Special mode: zen mode writing
-  use({
-    "folke/zen-mode.nvim",
-    opt = true,
-    cmd = "ZenMode",
-    config = function()
-      require("zen-mode").setup({
-        window = {
-          width = 80,
-        },
-        plugins = {
-          gitsigns = { enabled = true },
-        },
-      })
-    end,
-  })
-
-  -- Special mode: focus on current editing
-  use({
-    "folke/twilight.nvim",
-    opt = true,
-    cmd = { "Twilight", "TwilightEnable", "TwilightDisable" },
-    config = function()
-      require("twilight").setup({})
-    end,
-  })
-
   -- Highlight colors
   use({
     "norcalli/nvim-colorizer.lua",
