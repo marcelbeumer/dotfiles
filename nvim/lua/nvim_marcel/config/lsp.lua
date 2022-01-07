@@ -194,7 +194,7 @@ end
 local diagnostic_noise_level = 2
 
 local function setup_diagnostics()
-  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+  vim.diagnostic.config({
     signs = diagnostic_noise_level >= 1,
     underline = diagnostic_noise_level >= 2,
     virtual_text = diagnostic_noise_level >= 3,
@@ -212,7 +212,7 @@ function M.command_diagnostic_noise_level(level)
   end
   diagnostic_noise_level = tonumber(level)
   setup_diagnostics()
-  -- vim.lsp.diagnostic.redraw()
+  vim.diagnostic.hide()
   vim.diagnostic.show()
 end
 
