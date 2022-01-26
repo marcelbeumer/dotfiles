@@ -45,7 +45,7 @@ return require("packer").startup(function(use)
     config = function()
       require("nvim-treesitter.configs").setup({
         ensure_installed = "maintained",
-        indent = { enable = true },
+        indent = { enable = false }, -- indenting is too quirky still
         context_commentstring = {
           enable = true,
           enable_autocmd = false,
