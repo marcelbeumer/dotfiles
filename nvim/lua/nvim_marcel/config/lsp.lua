@@ -129,9 +129,9 @@ local function setup_tsserver()
     capabilities = require("nvim_marcel.config.cmp").get_lsp_capabilities(),
     flags = flags_common,
     init_options = {
-      preferences = {
-        importModuleSpecifierEnding = "js",
-      },
+      -- preferences = {
+      --   importModuleSpecifierEnding = "js",
+      -- },
     },
     on_attach = function(lsp_client, bufnr)
       lsp_client.resolved_capabilities.document_formatting = false
