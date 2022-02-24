@@ -11,6 +11,9 @@ export PATH=$HOME/go/bin:$PATH
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export PATH="$PATH:/Users/robotx/Library/Python/3.9/bin"
 export PATH="$PATH:/Applications/MacVim.app/Contents/bin"
+export PATH="$HOME/.pyenv/shims:$PATH"
+# Created by `pipx` on 2022-02-01 12:39:42
+export PATH="$PATH:/Users/robotx/.local/bin"
 
 export EDITOR="/usr/local/bin/nvim"
 export GIT_EDITOR=vim
@@ -41,8 +44,11 @@ alias lrt='ls -1Fcrt'
 
 # my aliases
 alias c='bin/cli'
+alias d='docker'
 alias g='git'
 alias k='kubectl'
+alias kgx='kubectl config get-contexts'
+alias ksx='kubectl config set-context'
 alias nr='npm run'
 alias gdalb='git branch | grep -v "master" | xargs git branch -D'
 
@@ -74,10 +80,17 @@ compdef _cli_yargs_completions c
 k8s_kubectl_completion()
 {
   source <(kubectl completion zsh)
-  complete -F __start_kubectl k
+  # complete -F __start_kubectl k
 }
+
+compdef k8s_kubectl_completion k
+compdef k8s_kubectl_completion kubectl
 
 k8s_minikube_docker()
 {
   eval $(minikube -p minikube docker-env)
 }
+
+
+eval "$(pyenv init -)"
+

@@ -87,6 +87,8 @@ local function setup_null_ls()
     -- null_ls.builtins.formatting.gofmt,
     null_ls.builtins.formatting.goimports,
     null_ls.builtins.diagnostics.golangci_lint,
+    null_ls.builtins.formatting.black,
+    -- null_ls.builtins.diagnostics.pylint,
   }
 
   if type_script_mode == "prettierd" then
@@ -120,7 +122,9 @@ local function setup_null_ls()
   null_ls.setup({
     debounce = 150,
     sources = sources,
-    on_attach = on_attach_common,
+    on_attach = function(lsp_client, bufnr)
+      on_attach_common(lsp_client, bufnr)
+    end,
   })
 end
 
@@ -196,6 +200,43 @@ local function setup_gopls()
   })
 end
 
+local function setup_pyright()
+  lspconfig.pyright.setup({
+    on_attach = function(lsp_client, bufnr)
+      -- lsp_client.resolved_capabilities.document_formatting = false
+      -- lsp_client.resolved_capabilities.document_range_formatting = false
+      on_attach_common(lsp_client, bufnr)
+    end,
+  })
+end
+
+local function setup_jedi_language_server()
+  lspconfig.jedi_language_server.setup({
+    on_attach = function(lsp_client, bufnr)
+      -- lsp_client.resolved_capabilities.document_formatting = false
+      -- lsp_client.resolved_capabilities.document_range_formatting = false
+      on_attach_common(lsp_client, bufnr)
+    end,
+  })
+end
+
+local function setup_yamlls()
+  lspconfig.yamlls.setup({
+    on_attach = on_attach_common,
+    settings = {
+      yaml = {
+        schemas = {
+          -- ["https://json.schemastore.org/chart.json"] = "/chart/*",
+          kubernetes = {
+            "k8s/**/*.yml",
+            "k8s/**/*.yaml",
+          },
+        },
+      },
+    },
+  })
+end
+
 local diagnostic_noise_level = 2
 
 local function setup_diagnostics()
@@ -231,6 +272,9 @@ setup_omnisharp()
 setup_gopls()
 setup_lua()
 setup_diagnostics()
+-- setup_pyright()
+setup_jedi_language_server()
+setup_yamlls()
 
 vim.cmd(
   [[command! -nargs=? DiagnosticNoiseLevel ]]

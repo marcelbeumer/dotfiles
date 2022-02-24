@@ -2,6 +2,9 @@ return require("packer").startup(function(use)
   -- Packer can manage itself
   use("wbthomason/packer.nvim")
 
+  -- Lua interactive repl
+  use("rafcamlet/nvim-luapad")
+
   -- Delete buffer helpers
   use({
     "kazhala/close-buffers.nvim",
@@ -182,6 +185,7 @@ return require("packer").startup(function(use)
       "hrsh7th/cmp-vsnip",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
     },
     wants = { "nvim-autopairs" },
     config = function()
