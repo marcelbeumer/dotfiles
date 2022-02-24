@@ -6,7 +6,7 @@ function M.setup_buffer(bufnr)
   local is_chart_tpl = string.match(path, "/chart/.*%.tpl") and 1 or 0
   if is_chart_tpl == 1 or is_chart_yaml == 1 then
     vim.diagnostic.disable()
-    vim.api.nvim_buf_set_option(bufnr, "ft", "text")
+    vim.api.nvim_buf_set_option(bufnr, "ft", "gotmpl")
   end
 end
 

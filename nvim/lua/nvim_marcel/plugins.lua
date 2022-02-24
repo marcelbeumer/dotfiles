@@ -46,6 +46,15 @@ return require("packer").startup(function(use)
       "RRethy/nvim-treesitter-textsubjects",
     },
     config = function()
+      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+      parser_config.gotmpl = {
+        install_info = {
+          url = "https://github.com/ngalaiko/tree-sitter-go-template",
+          files = { "src/parser.c" },
+        },
+        filetype = "gotmpl",
+        used_by = { "gohtmltmpl", "gotexttmpl", "gotmpl", "yaml" },
+      }
       require("nvim-treesitter.configs").setup({
         ensure_installed = "maintained",
         indent = { enable = false }, -- indenting is too quirky still
@@ -66,6 +75,7 @@ return require("packer").startup(function(use)
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
         set foldlevelstart=99
+        autocmd BufNewFile,BufRead *.tpl setlocal filetype=gotmpl
       ]])
     end,
   })
