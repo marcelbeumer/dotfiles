@@ -43,7 +43,6 @@ alias lart='ls -1Fcart'
 alias lrt='ls -1Fcrt'
 
 # my aliases
-alias c='bin/cli'
 alias d='docker'
 alias g='git'
 alias k='kubectl'
@@ -51,6 +50,7 @@ alias kgx='kubectl config get-contexts'
 alias ksx='kubectl config set-context'
 alias nr='npm run'
 alias gdalb='git branch | grep -v "master" | xargs git branch -D'
+alias ports='sudo lsof -P -i TCP -s TCP:LISTEN'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # source /usr/local/opt/asdf/asdf.sh
