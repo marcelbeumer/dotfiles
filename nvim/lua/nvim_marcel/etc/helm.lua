@@ -10,7 +10,7 @@ function M.setup_buffer(bufnr)
       and 1
     or 0
   if is_chart_file == 1 then
-    vim.diagnostic.disable()
+    vim.diagnostic.disable(0)
     vim.api.nvim_buf_set_option(bufnr, "ft", "gotmpl")
   end
 end
