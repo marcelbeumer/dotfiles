@@ -137,7 +137,7 @@ return require("packer").startup(function(use)
     requires = {
       "nvim-lua/plenary.nvim", -- nvim-lsp-ts-utils
       "jose-elias-alvarez/nvim-lsp-ts-utils",
-      "jose-elias-alvarez/null-ls.nvim",
+      {"jose-elias-alvarez/null-ls.nvim", commit="099d914e46688cda0f4a97be209f67f6f8720a54"},
       "rmagatti/goto-preview",
       "folke/lua-dev.nvim",
     },
