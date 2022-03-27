@@ -137,7 +137,7 @@ return require("packer").startup(function(use)
     requires = {
       "nvim-lua/plenary.nvim", -- nvim-lsp-ts-utils
       "jose-elias-alvarez/nvim-lsp-ts-utils",
-      {"jose-elias-alvarez/null-ls.nvim", commit="099d914e46688cda0f4a97be209f67f6f8720a54"},
+      "jose-elias-alvarez/null-ls.nvim",
       "rmagatti/goto-preview",
       "folke/lua-dev.nvim",
     },
@@ -189,7 +189,6 @@ return require("packer").startup(function(use)
   -- Autocompletion
   use({
     "hrsh7th/nvim-cmp",
-    -- commit = "baa39271b2f6b52d8bc6a9789e795dfd662a8f2a",
     requires = {
       "hrsh7th/vim-vsnip",
       "hrsh7th/cmp-vsnip",
