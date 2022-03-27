@@ -1,8 +1,3 @@
-Dotfiles
-========
+# Dotfiles
 
-Marcel's dotfiles 
-
-TODO: 
-
-- https://github.com/echasnovski/mini.nvim#minicompletion
+Marcel's dotfiles
