@@ -49,16 +49,15 @@ local on_attach_common = function(lsp_client, bufnr)
     bufmap("v", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>")
   end
 
-  -- FIXME: is broken with nvim nightly "expected lua number" error on clear_references()
-  -- if lsp_client.resolved_capabilities.document_highlight then
-  --   vim.cmd([[
-  --     augroup lsp_buffer_highlight
-  --       autocmd! * <buffer>
-  --       autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-  --       autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-  --     augroup END
-  --   ]])
-  -- end
+  if lsp_client.resolved_capabilities.document_highlight then
+    vim.cmd([[
+      augroup lsp_buffer_highlight
+        autocmd! * <buffer>
+        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+      augroup END
+    ]])
+  end
 end
 
 local function setup_null_ls()
