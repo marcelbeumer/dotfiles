@@ -172,7 +172,7 @@ end
 local function setup_lua()
   local luadev = require("lua-dev").setup({
     lspconfig = {
-      cmd = { "lua-langserver" },
+      cmd = { "lua-language-server" },
       on_attach = on_attach_common,
     },
   })
