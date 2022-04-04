@@ -208,6 +208,18 @@ return require("packer").startup(function(use)
     end,
   })
 
+  use({
+    "mfussenegger/nvim-dap",
+    requires = {
+      "leoluz/nvim-dap-go",
+      "rcarriga/nvim-dap-ui",
+    },
+    config = function()
+      require('dap-go').setup()
+      require("dapui").setup()
+    end,
+  })
+
   -- Highlight colors
   use({
     "norcalli/nvim-colorizer.lua",
