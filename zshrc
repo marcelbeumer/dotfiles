@@ -43,6 +43,7 @@ alias lart='ls -1Fcart'
 alias lrt='ls -1Fcrt'
 
 # my aliases
+alias v='nvim'
 alias d='docker'
 alias g='git'
 alias k='kubectl'
