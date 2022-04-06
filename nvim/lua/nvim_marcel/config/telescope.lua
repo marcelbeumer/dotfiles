@@ -35,6 +35,17 @@ M.project_files = function()
   if not ok then require'telescope.builtin'.find_files(opts) end
 end
 
+M.dirs = function()
+  local opts = {
+    previewer = false,
+    prompt_title = "Find dirs",
+    layout_strategy = 'vertical',
+    layout_config = { width = 0.5, height = 20, prompt_position = 'top' },
+    find_command = { "find", ".", "-type", "d" }
+  }
+  require'telescope.builtin'.find_files(opts)
+end
+
 M.buffers = function ()
   local opts = {
     previewer = false,
@@ -82,6 +93,7 @@ M.setup = function()
     nnoremap <leader>fx <cmd>lua require('telescope.builtin').builtin()<cr>
     nnoremap <leader>ff <cmd>lua require('nvim_marcel.config.telescope').project_files()<cr>
     nnoremap <leader>fb <cmd>lua require('nvim_marcel.config.telescope').buffers()<cr>
+    nnoremap <leader>fd <cmd>lua require('nvim_marcel.config.telescope').dirs()<cr>
     nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
     nnoremap <leader>f/ <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
     nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
