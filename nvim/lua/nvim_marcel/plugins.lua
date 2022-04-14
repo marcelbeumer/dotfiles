@@ -2,6 +2,9 @@ return require("packer").startup(function(use)
   -- Packer can manage itself
   use("wbthomason/packer.nvim")
 
+  use("folke/which-key.nvim")
+  use("folke/zen-mode.nvim")
+
   -- Lua interactive repl
   use("rafcamlet/nvim-luapad")
 
@@ -215,7 +218,7 @@ return require("packer").startup(function(use)
       "rcarriga/nvim-dap-ui",
     },
     config = function()
-      require('dap-go').setup()
+      require("dap-go").setup()
       require("dapui").setup()
     end,
   })

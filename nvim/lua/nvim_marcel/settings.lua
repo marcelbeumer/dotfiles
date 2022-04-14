@@ -23,6 +23,7 @@ vim.opt.smartindent = true
 vim.opt.ignorecase = true
 vim.opt.joinspaces = true
 vim.opt.linebreak = true
+vim.opt.timeoutlen = 500 -- for which_key
 
 -- Commands
 vim.cmd([[command W w]])
