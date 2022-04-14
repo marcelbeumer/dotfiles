@@ -54,6 +54,12 @@ alias gdalb='git branch | grep -v "master" | xargs git branch -D'
 alias ports='sudo lsof -P -i TCP -s TCP:LISTEN'
 alias psauxkill="awk '{print \$2}' | xargs -I {} kill -9 {}"
 
+source_env() {
+  set -a
+  source $1
+  set +a
+}
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # source /usr/local/opt/asdf/asdf.sh
 
