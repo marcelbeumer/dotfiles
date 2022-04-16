@@ -2,8 +2,6 @@ local lspconfig = require("lspconfig")
 
 local flags_common = { debounce_text_changes = 300 }
 
-local type_script_mode = "prettierd"
-
 local on_attach_common = function(lsp_client, bufnr)
   -- Setup omnicomplete (nice to have on the side)
   vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
@@ -32,6 +30,7 @@ local on_attach_common = function(lsp_client, bufnr)
   bufmap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>")
   -- Goto-preview
   bufmap("n", "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>")
+  bufmap("n", "gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>")
   bufmap("n", "gP", "<cmd>lua require('goto-preview').close_all_win()<CR>")
 
   if lsp_client.resolved_capabilities.document_formatting then
@@ -70,28 +69,9 @@ local function setup_null_ls()
     null_ls.builtins.diagnostics.golangci_lint,
     null_ls.builtins.formatting.black,
     -- null_ls.builtins.diagnostics.pylint,
+    null_ls.builtins.formatting.prettierd,
+    -- null_ls.builtins.diagnostics.eslint_d,
   }
-
-  if type_script_mode == "prettierd" then
-    vim.list_extend(sources, {
-      null_ls.builtins.formatting.prettierd,
-      -- null_ls.builtins.diagnostics.eslint_d,
-    })
-  end
-
-  if type_script_mode == "deno_fmt" then
-    vim.list_extend(sources, {
-      null_ls.builtins.formatting.deno_fmt,
-      -- null_ls.builtins.diagnostics.eslint_d,
-    })
-  end
-
-  if type_script_mode == "eslint_d" then
-    vim.list_extend(sources, {
-      null_ls.builtins.formatting.eslint_d,
-      -- null_ls.builtins.diagnostics.eslint_d,
-    })
-  end
 
   null_ls.setup({
     debounce = 150,
@@ -133,16 +113,6 @@ local function setup_tsserver()
   })
 end
 
-local function setup_denols()
-  lspconfig.denols.setup({
-    capabilities = require("nvim_marcel.config.cmp").get_lsp_capabilities(),
-    flags = flags_common,
-    on_attach = function(lsp_client, bufnr)
-      on_attach_common(lsp_client, bufnr)
-    end,
-  })
-end
-
 local function setup_lua()
   local luadev = require("lua-dev").setup({
     lspconfig = {
@@ -174,21 +144,9 @@ local function setup_gopls()
   })
 end
 
-local function setup_pyright()
-  lspconfig.pyright.setup({
-    on_attach = function(lsp_client, bufnr)
-      -- lsp_client.resolved_capabilities.document_formatting = false
-      -- lsp_client.resolved_capabilities.document_range_formatting = false
-      on_attach_common(lsp_client, bufnr)
-    end,
-  })
-end
-
 local function setup_jedi_language_server()
   lspconfig.jedi_language_server.setup({
     on_attach = function(lsp_client, bufnr)
-      -- lsp_client.resolved_capabilities.document_formatting = false
-      -- lsp_client.resolved_capabilities.document_range_formatting = false
       on_attach_common(lsp_client, bufnr)
     end,
   })
@@ -236,23 +194,22 @@ function M.command_diagnostic_noise_level(level)
   vim.diagnostic.show()
 end
 
-require("goto-preview").setup({})
+function M.setup()
+  require("goto-preview").setup({})
+  -- vim.lsp.set_log_level("debug")
+  setup_null_ls()
+  setup_tsserver()
+  setup_omnisharp()
+  setup_gopls()
+  setup_lua()
+  setup_diagnostics()
+  setup_jedi_language_server()
+  setup_yamlls()
 
--- vim.lsp.set_log_level("debug")
-setup_null_ls()
-setup_tsserver()
--- setup_denols()
-setup_omnisharp()
-setup_gopls()
-setup_lua()
-setup_diagnostics()
--- setup_pyright()
-setup_jedi_language_server()
-setup_yamlls()
-
-vim.cmd(
-  [[command! -nargs=? DiagnosticNoiseLevel ]]
-    .. [[lua require("nvim_marcel.config.lsp").command_diagnostic_noise_level(<args>)<CR>]]
-)
+  vim.cmd(
+    [[command! -nargs=? DiagnosticNoiseLevel ]]
+      .. [[lua require("nvim_marcel.config.lsp").command_diagnostic_noise_level(<args>)<CR>]]
+  )
+end
 
 return M

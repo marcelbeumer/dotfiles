@@ -2,8 +2,23 @@ return require("packer").startup(function(use)
   -- Packer can manage itself
   use("wbthomason/packer.nvim")
 
-  use("folke/which-key.nvim")
-  use("folke/zen-mode.nvim")
+  -- Show key bindings panel on timeout
+  use({
+    "folke/which-key.nvim",
+    config = function()
+      require("which-key").setup({})
+    end,
+  })
+
+  -- Distraction free writing
+  use({
+    "folke/zen-mode.nvim",
+    config = function()
+      require("zen-mode").setup({
+        width = 80,
+      })
+    end,
+  })
 
   -- Lua interactive repl
   use("rafcamlet/nvim-luapad")
@@ -32,7 +47,6 @@ return require("packer").startup(function(use)
         command! LoadSession lua require("persistence").load()<cr>
         command! SaveSession lua require("persistence").save()<cr>
         command! StopSession lua require("persistence").stop()<cr>
-        " VimLeavePre NerdTreeClose
       ]])
     end,
   })
@@ -59,7 +73,7 @@ return require("packer").startup(function(use)
         used_by = { "gohtmltmpl", "gotexttmpl", "gotmpl", "yaml" },
       }
       require("nvim-treesitter.configs").setup({
-        ensure_installed = "maintained",
+        ensure_installed = "all",
         indent = { enable = false }, -- indenting is too quirky still
         context_commentstring = {
           enable = true,
@@ -116,6 +130,8 @@ return require("packer").startup(function(use)
 
   -- Git
   use("tpope/vim-fugitive")
+
+  -- Lazygit inside nvim
   use("kdheepak/lazygit.nvim")
 
   --- Surround bindings
@@ -126,12 +142,6 @@ return require("packer").startup(function(use)
     "sbdchd/neoformat",
     opt = true,
     cmd = "Neoformat",
-    config = function()
-      vim.cmd([[
-        let g:neoformat_enabled_typescript = ['denofmt']
-        let g:neoformat_enabled_typescriptreact = ['denofmt']
-      ]])
-    end,
   })
 
   -- LSP config helpers
@@ -145,18 +155,9 @@ return require("packer").startup(function(use)
       "folke/lua-dev.nvim",
     },
     config = function()
-      require("nvim_marcel.config.lsp")
+      require("nvim_marcel.config.lsp").setup()
     end,
   })
-
-  -- use({
-  --   "mfussenegger/nvim-lint",
-  --   config = function()
-  --     require("lint").linters_by_ft = {
-  --       go = { "golangcilint" },
-  --     }
-  --   end,
-  -- })
 
   -- Fuzzy finder and more
   use({
@@ -220,6 +221,13 @@ return require("packer").startup(function(use)
     config = function()
       require("dap-go").setup()
       require("dapui").setup()
+    end,
+  })
+
+  use({
+    "ray-x/go.nvim",
+    config = function()
+      require("go").setup()
     end,
   })
 

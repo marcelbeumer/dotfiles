@@ -28,31 +28,33 @@ end
 M.project_files = function()
   local opts = {
     previewer = false,
-    layout_strategy = 'vertical',
-    layout_config = { width = 0.5, height = 20, prompt_position = 'top' },
+    layout_strategy = "vertical",
+    layout_config = { width = 0.5, height = 20, prompt_position = "top" },
   }
-  local ok = pcall(require'telescope.builtin'.git_files, opts)
-  if not ok then require'telescope.builtin'.find_files(opts) end
+  local ok = pcall(require("telescope.builtin").git_files, opts)
+  if not ok then
+    require("telescope.builtin").find_files(opts)
+  end
 end
 
 M.dirs = function()
   local opts = {
     previewer = false,
     prompt_title = "Find dirs",
-    layout_strategy = 'vertical',
-    layout_config = { width = 0.5, height = 20, prompt_position = 'top' },
-    find_command = { "find", ".", "-type", "d" }
+    layout_strategy = "vertical",
+    layout_config = { width = 0.5, height = 20, prompt_position = "top" },
+    find_command = { "find", ".", "-type", "d" },
   }
-  require'telescope.builtin'.find_files(opts)
+  require("telescope.builtin").find_files(opts)
 end
 
-M.buffers = function ()
+M.buffers = function()
   local opts = {
     previewer = false,
-    layout_strategy = 'vertical',
-    layout_config = { width = 0.5, height = 20, prompt_position = 'top' },
+    layout_strategy = "vertical",
+    layout_config = { width = 0.5, height = 20, prompt_position = "top" },
   }
-  require('telescope.builtin').buffers(opts)
+  require("telescope.builtin").buffers(opts)
 end
 
 M.setup = function()
@@ -84,7 +86,7 @@ M.setup = function()
     },
   })
 
-  require('telescope').load_extension('fzy_native')
+  require("telescope").load_extension("fzy_native")
 
   vim.cmd([[
     command! -nargs=* -complete=file TelescopeLiveGrep lua __nvim_marcel__telescope_live_grep(<q-args>)
@@ -98,6 +100,7 @@ M.setup = function()
     nnoremap <leader>f/ <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
     nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
     nnoremap <leader>flr <cmd>lua require('telescope.builtin').lsp_references()<cr>
+    nnoremap <leader>fli <cmd>lua require('telescope.builtin').lsp_implementations()<cr>
     nnoremap <leader>fls <cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>
     nnoremap <leader>flS <cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>
     nnoremap <leader>fld <cmd>lua require('telescope.builtin').lsp_definitions()<cr>
