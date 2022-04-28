@@ -82,6 +82,19 @@ local function setup_null_ls()
   })
 end
 
+local function setup_volar()
+  lspconfig.volar.setup({
+    filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
+    capabilities = require("nvim_marcel.config.cmp").get_lsp_capabilities(),
+    flags = flags_common,
+    on_attach = function(lsp_client, bufnr)
+      lsp_client.resolved_capabilities.document_formatting = false
+      lsp_client.resolved_capabilities.document_range_formatting = false
+      on_attach_common(lsp_client, bufnr)
+    end,
+  })
+end
+
 local function setup_tsserver()
   lspconfig.tsserver.setup({
     capabilities = require("nvim_marcel.config.cmp").get_lsp_capabilities(),
@@ -199,6 +212,7 @@ function M.setup()
   -- vim.lsp.set_log_level("debug")
   setup_null_ls()
   setup_tsserver()
+  -- setup_volar()
   setup_omnisharp()
   setup_gopls()
   setup_lua()

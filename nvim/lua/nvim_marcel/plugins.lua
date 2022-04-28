@@ -264,12 +264,25 @@ return require("packer").startup(function(use)
     end,
   })
 
-  vim.g.vscode_style = "dark"
-
   use({
     "Mofiqul/vscode.nvim",
     config = function()
+      vim.g.vscode_style = "dark"
       -- vim.cmd([[colorscheme vscode]])
+    end,
+  })
+
+  vim.g.rasmus_italic_comments = false
+  vim.g.rasmus_italic_keywords = false
+  vim.g.rasmus_italic_booleans = false
+  vim.g.rasmus_italic_functions = false
+  vim.g.rasmus_italic_variables = false
+  vim.g.rasmus_variant = "monochrome"
+
+  use({
+    "kvrohit/rasmus.nvim",
+    config = function()
+      -- vim.cmd([[colorscheme rasmus]])
     end,
   })
 end)
