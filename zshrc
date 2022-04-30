@@ -102,3 +102,4 @@ k8s_minikube_docker()
 
 eval "$(pyenv init -)"
 
+ulimit -n 10240
