@@ -1,4 +1,11 @@
-return require("packer").startup(function(use)
+local M = {}
+
+M.setup = function()
+  local packer = require("packer")
+  packer.init()
+  packer.reset()
+  local use = packer.use
+
   -- Packer can manage itself
   use("wbthomason/packer.nvim")
 
@@ -63,37 +70,7 @@ return require("packer").startup(function(use)
       "RRethy/nvim-treesitter-textsubjects",
     },
     config = function()
-      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-      parser_config.gotmpl = {
-        install_info = {
-          url = "https://github.com/ngalaiko/tree-sitter-go-template",
-          files = { "src/parser.c" },
-        },
-        filetype = "gotmpl",
-        used_by = { "gohtmltmpl", "gotexttmpl", "gotmpl", "yaml" },
-      }
-      require("nvim-treesitter.configs").setup({
-        ensure_installed = "all",
-        indent = { enable = false }, -- indenting is too quirky still
-        context_commentstring = {
-          enable = true,
-          enable_autocmd = false,
-        },
-        highlight = { enable = true },
-        textsubjects = {
-          enable = true,
-          keymaps = {
-            ["."] = "textsubjects-smart",
-            [";"] = "textsubjects-container-outer",
-          },
-        },
-      })
-      vim.cmd([[
-        set foldmethod=expr
-        set foldexpr=nvim_treesitter#foldexpr()
-        set foldlevelstart=99
-        " autocmd BufNewFile,BufRead *.tpl setlocal filetype=gotmpl
-      ]])
+      require("conf.plugins.treesitter").setup()
     end,
   })
 
@@ -155,7 +132,7 @@ return require("packer").startup(function(use)
       "folke/lua-dev.nvim",
     },
     config = function()
-      require("nvim_marcel.config.lsp").setup()
+      require("conf.plugins.lsp").setup()
     end,
   })
 
@@ -167,7 +144,7 @@ return require("packer").startup(function(use)
       { "nvim-telescope/telescope-fzy-native.nvim" },
     },
     config = function()
-      require("nvim_marcel.config.telescope").setup()
+      require("conf.plugins.telescope").setup()
     end,
   })
 
@@ -200,7 +177,6 @@ return require("packer").startup(function(use)
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lsp-signature-help",
     },
-    wants = { "nvim-autopairs" },
     config = function()
       vim.cmd([[
         let g:vsnip_filetypes = {}
@@ -208,7 +184,7 @@ return require("packer").startup(function(use)
         let g:vsnip_filetypes.typescriptreact = ['typescript']
         let g:vsnip_snippet_dir = expand('~/.config/nvim/vsnip')
       ]])
-      require("nvim_marcel.config.cmp")
+      require("conf.plugins.cmp").setup()
     end,
   })
 
@@ -252,37 +228,18 @@ return require("packer").startup(function(use)
     end,
   })
 
-  vim.g.tokyonight_style = "night"
-  vim.g.tokyonight_italic_comments = false
-  vim.g.tokyonight_italic_keywords = false
-
   -- Color schemes
   use({
     "folke/tokyonight.nvim",
+    setup = function()
+      vim.g.tokyonight_style = "night"
+      vim.g.tokyonight_italic_comments = false
+      vim.g.tokyonight_italic_keywords = false
+    end,
     config = function()
       vim.cmd([[colorscheme tokyonight]])
     end,
   })
+end
 
-  use({
-    "Mofiqul/vscode.nvim",
-    config = function()
-      vim.g.vscode_style = "dark"
-      -- vim.cmd([[colorscheme vscode]])
-    end,
-  })
-
-  vim.g.rasmus_italic_comments = false
-  vim.g.rasmus_italic_keywords = false
-  vim.g.rasmus_italic_booleans = false
-  vim.g.rasmus_italic_functions = false
-  vim.g.rasmus_italic_variables = false
-  vim.g.rasmus_variant = "monochrome"
-
-  use({
-    "kvrohit/rasmus.nvim",
-    config = function()
-      -- vim.cmd([[colorscheme rasmus]])
-    end,
-  })
-end)
+return M

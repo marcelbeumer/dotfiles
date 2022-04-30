@@ -1,7 +1,0 @@
-require("nvim_marcel.plugins")
-require("nvim_marcel.etc.dev")
-require("nvim_marcel.etc.quickfix")
-require("nvim_marcel.etc.date")
-require("nvim_marcel.etc.statusline")
-require("nvim_marcel.etc.helm")
-require("nvim_marcel.settings")

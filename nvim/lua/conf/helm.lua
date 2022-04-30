@@ -15,8 +15,10 @@ function M.setup_buffer(bufnr)
   end
 end
 
-vim.cmd([[
-  autocmd BufReadPost * :lua require('nvim_marcel.etc.helm').setup_buffer(0)
+M.setup = function()
+  vim.cmd([[
+  autocmd BufReadPost * :lua require('conf.helm').setup_buffer(0)
 ]])
+end
 
 return M

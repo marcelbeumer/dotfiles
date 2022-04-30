@@ -85,7 +85,7 @@ end
 local function setup_volar()
   lspconfig.volar.setup({
     filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
-    capabilities = require("nvim_marcel.config.cmp").get_lsp_capabilities(),
+    capabilities = require("conf.plugins.cmp").get_lsp_capabilities(),
     flags = flags_common,
     on_attach = function(lsp_client, bufnr)
       lsp_client.resolved_capabilities.document_formatting = false
@@ -97,7 +97,7 @@ end
 
 local function setup_tsserver()
   lspconfig.tsserver.setup({
-    capabilities = require("nvim_marcel.config.cmp").get_lsp_capabilities(),
+    capabilities = require("conf.plugins.cmp").get_lsp_capabilities(),
     flags = flags_common,
     init_options = {
       -- preferences = {
@@ -134,17 +134,6 @@ local function setup_lua()
     },
   })
   lspconfig.sumneko_lua.setup(luadev)
-end
-
-local function setup_omnisharp()
-  local pid = vim.fn.getpid()
-  -- On linux/darwin if using a release build, otherwise under scripts/OmniSharp(.Core)(.cmd)
-  local omnisharp_bin = vim.loop.os_homedir() .. "/dev/omnisharp-osx/run"
-  -- on Windows
-  -- local omnisharp_bin = "/path/to/omnisharp/OmniSharp.exe"
-  lspconfig.omnisharp.setup({
-    cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) },
-  })
 end
 
 local function setup_gopls()
@@ -213,7 +202,6 @@ function M.setup()
   setup_null_ls()
   setup_tsserver()
   -- setup_volar()
-  setup_omnisharp()
   setup_gopls()
   setup_lua()
   setup_diagnostics()
@@ -222,7 +210,7 @@ function M.setup()
 
   vim.cmd(
     [[command! -nargs=? DiagnosticNoiseLevel ]]
-      .. [[lua require("nvim_marcel.config.lsp").command_diagnostic_noise_level(<args>)<CR>]]
+      .. [[lua require("conf.plugins.lsp").command_diagnostic_noise_level(<args>)<CR>]]
   )
 end
 

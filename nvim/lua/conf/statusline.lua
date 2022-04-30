@@ -1,5 +1,7 @@
--- based on https://github.com/beauwilliams/statusline.lua/blob/e5d86eff45d1aef73f5f3ea8cb8209d0bedf60c9/lua/sections/_lsp.lua#L11
-function _G.__nvim_marcel__get_lsp_status()
+local M = {}
+
+M.statusline = function()
+  -- based on https://github.com/beauwilliams/statusline.lua/blob/e5d86eff45d1aef73f5f3ea8cb8209d0bedf60c9/lua/sections/_lsp.lua#L11
   local space = " "
   local diagnostics = ""
   local e = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
@@ -13,7 +15,11 @@ function _G.__nvim_marcel__get_lsp_status()
   return diagnostics
 end
 
--- based on https://unix.stackexchange.com/a/518439
-vim.cmd([[
-  set statusline=%f\ %h%w%m%r%=%-8.(%{v:lua.__nvim_marcel__get_lsp_status()}%)%-14.(%l,%c%V%)\ %P
+M.setup = function()
+  -- based on https://unix.stackexchange.com/a/518439
+  vim.cmd([[
+  set statusline=%f\ %h%w%m%r%=%-8.(%{v:lua.require'conf.statusline'.statusline()}%)%-14.(%l,%c%V%)\ %P
 ]])
+end
+
+return M

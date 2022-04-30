@@ -8,7 +8,7 @@ local function split_str(v)
   return args
 end
 
-function _G.__nvim_marcel__telescope_live_grep(v)
+M.live_grep = function(v)
   local opts = {}
   if #v > 0 then
     opts.search_dirs = split_str(v)
@@ -16,7 +16,7 @@ function _G.__nvim_marcel__telescope_live_grep(v)
   require("telescope.builtin").live_grep(opts)
 end
 
-function _G.__nvim_marcel__telescope_find_files(v)
+M.find_files = function(v)
   local opts = {}
   if #v > 0 then
     opts.search_dirs = split_str(v)
@@ -89,13 +89,13 @@ M.setup = function()
   require("telescope").load_extension("fzy_native")
 
   vim.cmd([[
-    command! -nargs=* -complete=file TelescopeLiveGrep lua __nvim_marcel__telescope_live_grep(<q-args>)
-    command! -nargs=* -complete=file TelescopeFindFiles lua __nvim_marcel__telescope_find_files(<q-args>)
+    command! -nargs=* -complete=file TelescopeLiveGrep lua require('conf.plugins.telescope').live_grep(<q-args>)
+    command! -nargs=* -complete=file TelescopeFindFiles lua require('conf.plugins.telescope').find_files(<q-args>)
 
+    nnoremap <leader>ff <cmd>lua require('conf.plugins.telescope').project_files()<cr>
+    nnoremap <leader>fb <cmd>lua require('conf.plugins.telescope').buffers()<cr>
+    nnoremap <leader>fd <cmd>lua require('conf.plugins.telescope').dirs()<cr>
     nnoremap <leader>fx <cmd>lua require('telescope.builtin').builtin()<cr>
-    nnoremap <leader>ff <cmd>lua require('nvim_marcel.config.telescope').project_files()<cr>
-    nnoremap <leader>fb <cmd>lua require('nvim_marcel.config.telescope').buffers()<cr>
-    nnoremap <leader>fd <cmd>lua require('nvim_marcel.config.telescope').dirs()<cr>
     nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
     nnoremap <leader>f/ <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
     nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
