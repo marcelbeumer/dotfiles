@@ -54,6 +54,7 @@ alias nr='npm run'
 alias gdalb='git branch | grep -v "master" | xargs git branch -D'
 alias ports='sudo lsof -P -i TCP -s TCP:LISTEN'
 alias psauxkill="awk '{print \$2}' | xargs -I {} kill -9 {}"
+alias serve="python -m http.server"
 
 source_env() {
   set -a
