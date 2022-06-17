@@ -47,7 +47,6 @@ alias v='nvim'
 alias d='docker'
 alias g='git'
 alias gg='lazygit'
-alias k='kubectl'
 alias ctx='kubectx'
 alias ns='kubens'
 alias nr='npm run'
@@ -60,6 +59,14 @@ source_env() {
   set -a
   source $1
   set +a
+}
+
+# function so I can use it in sleepwatch
+k() { kubectl "${@}" }
+
+# `sleepwatch k get po -A`
+sleepwatch() {
+  while true; do clear; "${@}"; sleep 2; done
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
