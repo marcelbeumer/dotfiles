@@ -64,8 +64,8 @@ source_env() {
 # function so I can use it in sleepwatch
 k() { kubectl "${@}" }
 
-# `sleepwatch k get po -A`
-sleepwatch() {
+# `rr k get po -A`
+rr() {
   while true; do clear; "${@}"; sleep 2; done
 }
 
@@ -112,3 +112,6 @@ k8s_minikube_docker()
 eval "$(pyenv init -)"
 
 ulimit -n 10240
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
