@@ -1,0 +1,13 @@
+{
+    "go.toolsManagement.autoUpdate": true,
+    "editor.bracketPairColorization.enabled": false,
+    "workbench.colorTheme": "Tokyo Night",
+    "editor.minimap.enabled": false,
+    "breadcrumbs.enabled": false,
+    "editor.renderWhitespace": "none",
+    "editor.renderControlCharacters": false,
+    "editor.fontFamily": "Jetbrains Mono",
+    "workbench.activityBar.visible": false,
+    "editor.wordWrap": "on",
+    "window.zoomLevel": 1
+}
