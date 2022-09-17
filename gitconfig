@@ -21,7 +21,8 @@
   cp = cherry-pick
   lg = log --stat --max-count=5
   lgg = log --graph --max-count=5
-  lp = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr by %an)%Creset' --abbrev-commit --date=relative
+  lp = log --graph --pretty='%Cred%h %Creset%s %Cgreen(%cr by %an)'
+  lpp = log --graph --pretty='%Cred%h %Creset%s %Cgreen(%ah by %an)'
   ss = status -s
   a = add
   ar = !git add . && git ls-files --deleted | xargs git rm
