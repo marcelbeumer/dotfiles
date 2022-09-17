@@ -45,6 +45,7 @@ alias psauxkill="awk '{print \$2}' | xargs -I {} kill -9 {}"
 alias serve="python -m http.server"
 alias title="kitty @ set-tab-title"
 alias ChromeUnthrottled="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --disable-background-timer-throttling"
+alias icat="kitty +kitten icat"
 
 # `source_env .env`
 source_env() {
