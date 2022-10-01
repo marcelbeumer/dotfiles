@@ -1,0 +1,15 @@
+set commentary
+set ideajoin
+set scrolloff=5
+set incsearch
+set clipboard+=unnamedplus
+
+" neovim LSP-like bindings
+nmap gd <Action>(GotoDeclaration)
+nmap gD <Action>(GotoDefinition)
+nmap gr <Action>(FindUsages)
+nmap gi <Action>(GotoImplementation)
+nmap gt <Action>(GotoTypeDeclaration)
+
+map <leader>d <Action>(Debug)
+map \b <Action>(ToggleLineBreakpoint)
