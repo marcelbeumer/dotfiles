@@ -4,12 +4,18 @@ set scrolloff=5
 set incsearch
 set clipboard+=unnamedplus
 
-" neovim LSP-like bindings
+" navigation
+nmap <leader>s <Action>(SplitHorizontally)
+nmap <leader>v <Action>(SplitVertically)
+nmap <leader>' <Action>(SelectInProjectView)
+
+" LSP
 nmap gd <Action>(GotoDeclaration)
 nmap gD <Action>(GotoDefinition)
 nmap gr <Action>(FindUsages)
 nmap gi <Action>(GotoImplementation)
 nmap gt <Action>(GotoTypeDeclaration)
 
+" Debug
 map <leader>d <Action>(Debug)
 map \b <Action>(ToggleLineBreakpoint)
