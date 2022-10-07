@@ -3,6 +3,7 @@ autoload -U +X bashcompinit && bashcompinit
 
 ulimit -n 10240
 bindkey -v
+source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 PROMPT='%2~ %# '
 
