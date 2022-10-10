@@ -4,6 +4,13 @@ autoload -U +X bashcompinit && bashcompinit
 ulimit -n 10240
 bindkey -v
 
+# zmodload zsh/complist
+# bindkey -M menuselect 'h' vi-backward-char
+# bindkey -M menuselect 'k' vi-up-line-or-history
+# bindkey -M menuselect 'l' vi-forward-char
+# bindkey -M menuselect 'j' vi-down-line-or-history
+# zstyle ':completion:*' menu select
+
 PROMPT='%2~ %# '
 
 export EDITOR="/usr/local/bin/nvim"
