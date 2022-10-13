@@ -19,7 +19,6 @@ export FZF_DEFAULT_OPTS='
   --color bg+:#292e42,bg:#1a1b26,spinner:#bb9af7,hl:#565f89,fg:#c0caf5,header:#565f89,info:#7dcfff,pointer:#bb9af7,marker:#7dcfff,fg+:#c0caf5,preview-bg:#16161e,prompt:#bb9af7,hl+:#bb9af7
 '
 
-export PATH="node_modules/.bin:$PATH"
 export PATH=$HOME/bin:$PATH
 export PATH=$HOME/.fnm:$PATH
 export PATH=$HOME/go/bin:$PATH
@@ -83,6 +82,8 @@ complete -o nospace -C /opt/homebrew/bin/terraform terraform
 eval "$(aws-vault --completion-script-zsh)"
 
 eval "$(fnm env)"
+export PATH="./node_modules/.bin:$PATH"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source $HOME/.cargo/env
 eval "$(pyenv init -)"
