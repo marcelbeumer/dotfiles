@@ -3,6 +3,7 @@
 	name = Marcel Beumer
 [core]
   tabwidth = 4
+  excludesfile = ~/.gitignore
 [alias]
 	ack = grep --break --heading --line-number
   st = status
