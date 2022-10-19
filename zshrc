@@ -1,15 +1,18 @@
 autoload -Uz compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 
+setopt autocd extendedglob nomatch menucomplete globcomplete interactive_comments
+
 ulimit -n 10240
 bindkey -v
+export KEYTIMEOUT=1
 
-# zmodload zsh/complist
-# bindkey -M menuselect 'h' vi-backward-char
-# bindkey -M menuselect 'k' vi-up-line-or-history
-# bindkey -M menuselect 'l' vi-forward-char
-# bindkey -M menuselect 'j' vi-down-line-or-history
-# zstyle ':completion:*' menu select
+zmodload zsh/complist
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+zstyle ':completion:*' menu select
 
 PROMPT='%2~ %# '
 
@@ -87,3 +90,7 @@ export PATH="./node_modules/.bin:$PATH"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source $HOME/.cargo/env
 eval "$(pyenv init -)"
+
+if [ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
