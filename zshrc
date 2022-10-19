@@ -84,7 +84,7 @@ compdef k8s_kubectl_completion kubectl
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
 eval "$(aws-vault --completion-script-zsh)"
 
-eval "$(fnm env)"
+eval "$(fnm env --use-on-cd)"
 export PATH="./node_modules/.bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
