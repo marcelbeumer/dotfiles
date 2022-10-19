@@ -3,7 +3,6 @@
 	name = Marcel Beumer
 [core]
   tabwidth = 4
-  pager = delta
 [alias]
 	ack = grep --break --heading --line-number
   st = status
@@ -39,9 +38,5 @@
   prompt = false
 [init]
 	defaultBranch = master
-[interactive]
-  diffFilter = delta --color-only
-[delta]
-  navigate = true
 [diff]
   colorMoved = default
