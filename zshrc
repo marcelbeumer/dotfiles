@@ -54,6 +54,7 @@ alias ports='sudo lsof -P -i TCP -s TCP:LISTEN'
 alias psauxkill="awk '{print \$2}' | xargs -I {} kill -9 {}"
 alias serve="python -m http.server"
 alias title="kitty @ set-tab-title"
+alias dirtitle="kitty @ set-tab-title \$(basename \`pwd\`)"
 alias ChromeUnthrottled="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --disable-background-timer-throttling"
 alias icat="kitty +kitten icat"
 
