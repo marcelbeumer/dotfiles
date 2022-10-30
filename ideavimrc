@@ -13,6 +13,7 @@ nmap <leader>' <Action>(SelectInProjectView)
 nmap gd <Action>(GotoDeclaration)
 nmap gD <Action>(GotoDefinition)
 nmap gr <Action>(FindUsages)
+nmap <space>rn <Action>(RenameElement)
 nmap gi <Action>(GotoImplementation)
 nmap gt <Action>(GotoTypeDeclaration)
 
