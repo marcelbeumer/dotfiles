@@ -25,6 +25,7 @@ export FZF_DEFAULT_OPTS='
 export PATH=$HOME/bin:$PATH
 export PATH=$HOME/.fnm:$PATH
 export PATH=$HOME/go/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export PATH="$HOME/.pyenv/shims:$PATH"
 export PATH="$PNPM_HOME:$PATH"
