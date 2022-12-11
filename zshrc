@@ -68,6 +68,29 @@ source_env() {
   set +a
 }
 
+repo() {
+  cd ~/g
+  dirs=$(ls -d * | xargs -I {} basename {})
+  if [[ -n "$1" ]]; then
+    dir=$(echo $dirs | fzf -f "$1" | head -1)
+  else
+    dir=$(echo $dirs | fzf)
+  fi
+  kitty @ set-tab-title $dir
+  cd $dir
+}
+
+vrepo() {
+  repo $1
+  nvim
+}
+
+vnotes() {
+  cd ~/g/notes
+  kitty @ set-tab-title notes
+  nvim
+}
+
 # function so I can use it in sleepwatch
 k() { kubectl "${@}" }
 
