@@ -1,22 +1,43 @@
-set commentary
-set ideajoin
-set scrolloff=5
-set incsearch
+set scrolloff=10
+set linenumber
+set showmode
+set showcmd
+set visualbell
 set clipboard+=unnamedplus
+
+" plugins
+set surround
+set highlightedyank
+set sneak
+set nerdtree
+set easymotion
+set notimeout
+set which-key
 
 " navigation
 nmap <leader>s <Action>(SplitHorizontally)
 nmap <leader>v <Action>(SplitVertically)
 nmap <leader>' <Action>(SelectInProjectView)
 
+" Easy visual indentation
+vnoremap < <gv
+vnoremap > >gv
+
+" Jump around with easymotion
+map <leader>j <Plug>(easymotion-s)
+
+" Comment lines
+nmap gc <action>(CommentByLineComment)
+vmap gc <action>(CommentByLineComment)
+
 " LSP
 nmap gd <Action>(GotoDeclaration)
 nmap gD <Action>(GotoDefinition)
-nmap gr <Action>(FindUsages)
+nmap gr <Action>(ShowUsages)
 nmap <space>rn <Action>(RenameElement)
 nmap gi <Action>(GotoImplementation)
 nmap gt <Action>(GotoTypeDeclaration)
 
 " Debug
 map <leader>d <Action>(Debug)
-map \b <Action>(ToggleLineBreakpoint)
+map <leader>b <Action>(ToggleLineBreakpoint)
