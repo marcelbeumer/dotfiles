@@ -68,7 +68,7 @@ source_env() {
   set +a
 }
 
-repo() {
+r() {
   cd ~/g
   dirs=$(ls -d * | xargs -I {} basename {})
   if [[ -n "$1" ]]; then
@@ -80,8 +80,8 @@ repo() {
   cd $dir
 }
 
-vrepo() {
-  repo $1
+vr() {
+  r $1
   nvim
 }
 
