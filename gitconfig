@@ -4,6 +4,7 @@
 [core]
   tabwidth = 4
   excludesfile = ~/.gitignore
+  pager = delta
 [alias]
 	ack = grep --break --heading --line-number
   st = status
@@ -41,3 +42,10 @@
 	defaultBranch = master
 [diff]
   colorMoved = default
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true    # use n and N to move between diff sections
+  light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+  side-by-side = true
+  line-numbers = true
