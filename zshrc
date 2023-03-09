@@ -22,13 +22,14 @@ export FZF_DEFAULT_OPTS='
   --color bg+:#292e42,bg:#1a1b26,spinner:#bb9af7,hl:#565f89,fg:#c0caf5,header:#565f89,info:#7dcfff,pointer:#bb9af7,marker:#7dcfff,fg+:#c0caf5,preview-bg:#16161e,prompt:#bb9af7,hl+:#bb9af7
 '
 
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export PATH=$HOME/bin:$PATH
-export PATH=$HOME/.fnm:$PATH
 export PATH=$HOME/go/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
-export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 export PATH="$HOME/.pyenv/shims:$PATH"
 export PATH="$PNPM_HOME:$PATH"
+export PATH=$HOME/.fnm:$PATH
 
 # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/common-aliases/common-aliases.plugin.zsh
 # ls, the common ones I use a lot shortened for rapid fire usage
