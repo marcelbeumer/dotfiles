@@ -4,7 +4,7 @@ autoload -U +X bashcompinit && bashcompinit
 setopt autocd extendedglob nomatch menucomplete globcomplete interactive_comments
 
 ulimit -n 10240
-bindkey -v
+bindkey -e
 export KEYTIMEOUT=1
 
 zmodload zsh/complist
