@@ -62,11 +62,16 @@ alias dirtitle="kitty @ set-tab-title \$(basename \`pwd\`)"
 alias ChromeUnthrottled="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --disable-background-timer-throttling"
 alias icat="kitty +kitten icat"
 
+# source_env() {
+#   set -a
+#   source $1
+#   set +a
+# }
+
 # `source_env .env`
 source_env() {
-  set -a
-  source $1
-  set +a
+  export $(echo $(cat $1 | sed 's/#.*//g'| xargs) | envsubst)
+}
 }
 
 r() {
