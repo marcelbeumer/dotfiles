@@ -72,7 +72,6 @@ alias icat="kitty +kitten icat"
 source_env() {
   export $(echo $(cat $1 | sed 's/#.*//g'| xargs) | envsubst)
 }
-}
 
 r() {
   cd ~/g
