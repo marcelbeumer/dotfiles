@@ -2,10 +2,11 @@
 
 dirname=`pwd`/`dirname "$0"`
 
+rm -f ~/.zshrc && ln -s $dirname/zshrc ~/.zshrc
 rm -f ~/.editorconfig && ln -s $dirname/editorconfig ~/.editorconfig
 rm -f ~/.gitconfig && ln -s $dirname/gitconfig ~/.gitconfig
 rm -f ~/.gitignore && ln -s $dirname/gitignore ~/.gitignore
-rm -f ~/.zshrc && ln -s $dirname/zshrc ~/.zshrc
+rm -f ~/.stylua && ln -s $dirname/stylua ~/.stylua
 rm -f ~/.ideavimrc && ln -s $dirname/ideavimrc ~/.ideavimrc
 
 mkdir -p ~/.config

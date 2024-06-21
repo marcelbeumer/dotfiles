@@ -14,14 +14,22 @@ bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 zstyle ':completion:*' menu select
 
-PROMPT='%2~ %# '
+function aws_vault_prompt {
+    if [[ -n "$AWS_VAULT" ]]; then
+        echo "($AWS_VAULT) "
+    fi
+}
+
+# PROMPT='%2~ %# '
+setopt PROMPT_SUBST
+PROMPT='%2~ `aws_vault_prompt`%# '
 
 export EDITOR="/usr/local/bin/nvim"
 export PNPM_HOME="/Users/laby/Library/pnpm"
-export FZF_DEFAULT_OPTS='
-  --color bg+:#292e42,bg:#1a1b26,spinner:#bb9af7,hl:#565f89,fg:#c0caf5,header:#565f89,info:#7dcfff,pointer:#bb9af7,marker:#7dcfff,fg+:#c0caf5,preview-bg:#16161e,prompt:#bb9af7,hl+:#bb9af7
-'
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools"
 
+export PATH="$PATH:$HOME/dev/flutter/bin"
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export PATH=$HOME/bin:$PATH
 export PATH=$HOME/go/bin:$PATH
@@ -30,6 +38,13 @@ export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 export PATH="$HOME/.pyenv/shims:$PATH"
 export PATH="$PNPM_HOME:$PATH"
 export PATH=$HOME/.fnm:$PATH
+
+# Company specific
+# export GONOPROXY=""
+# export GONOSUMDB=""
+# export GOPRIVATE=""
+# export NVIM_GOPLS_LOCAL=""
+# export NVIM_ENABLE_COPILOT="off"
 
 # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/common-aliases/common-aliases.plugin.zsh
 # ls, the common ones I use a lot shortened for rapid fire usage
@@ -45,8 +60,6 @@ alias lrt='ls -1Fcrt'
 # my aliases
 alias v='nvim'
 alias vd='dirtitle && v'
-alias vl='v +SessionLoad'
-alias vdl='dirtitle &% vl'
 alias d='docker'
 alias g='git'
 alias gg='lazygit'
@@ -56,62 +69,53 @@ alias nr='npm run'
 alias gdalb='git branch | grep -v "master" | xargs git branch -D'
 alias ports='sudo lsof -P -i TCP -s TCP:LISTEN'
 alias psauxkill="awk '{print \$2}' | xargs -I {} kill -9 {}"
-alias serve="python -m http.server"
-alias title="kitty @ set-tab-title"
-alias dirtitle="kitty @ set-tab-title \$(basename \`pwd\`)"
 alias ChromeUnthrottled="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --disable-background-timer-throttling"
 alias icat="kitty +kitten icat"
-
-# source_env() {
-#   set -a
-#   source $1
-#   set +a
-# }
+alias startdev="limactl start dev"
+alias stopdev="limactl stop dev"
+alias dev="limactl shell dev"
 
 # `source_env .env`
 source_env() {
+  # export $(echo $(cat $1 | sed 's/#.*//g'| xargs) | envsubst)
   export $(echo $(cat $1 | sed 's/#.*//g'| xargs) | envsubst)
+  set -a # automatically export all variables
+  source $1
+  set +a
 }
 
-r() {
-  cd ~/g
-  dirs=$(ls -d * | xargs -I {} basename {})
-  if [[ -n "$1" ]]; then
-    dir=$(echo $dirs | fzf -f "$1" | head -1)
+title() {
+  if [ -z "$KITTY_WINDOW_ID" ]; then
+    echo -e "\e]2;$1"
   else
-    dir=$(echo $dirs | fzf)
+    kitty @ set-tab-title $1
   fi
-  kitty @ set-tab-title $dir
-  cd $dir
 }
 
-vr() {
-  r $1
-  nvim
+dirtitle() {
+  v=$(basename `pwd`)
+  title $v
 }
 
-vnotes() {
-  cd ~/g/notes
-  kitty @ set-tab-title notes
-  nvim
+enable_proxy() {
+  export http_proxy=
+  export https_proxy=
 }
 
-# function so I can use it in sleepwatch
-k() { kubectl "${@}" }
-
-# `rr k get po -A`
-rr() {
-  while true; do clear; "${@}"; sleep 2; done
+disable_proxy() {
+  unset http_proxy
+  unset https_proxy
 }
 
-k8s_kubectl_completion()
-{
-  source <(kubectl completion zsh)
-  # complete -F __start_kubectl k
+switch_proxy() {
+  if [ -z "$https_proxy" ]; then
+    enable_proxy
+    echo "https_proxy set"
+  else
+    disable_proxy
+    echo "https_proxy unset"
+  fi
 }
-
-compdef k8s_kubectl_completion k
-compdef k8s_kubectl_completion kubectl
 
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
 eval "$(aws-vault --completion-script-zsh)"
@@ -120,6 +124,7 @@ eval "$(fnm env --use-on-cd)"
 export PATH="./node_modules/.bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 source $HOME/.cargo/env
 eval "$(pyenv init -)"
 

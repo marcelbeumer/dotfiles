@@ -24,7 +24,7 @@
   lgg = log --graph --max-count=5
   lp = log --graph --decorate --pretty='%Cred%h%C(yellow)%d%Creset %Creset%s %Cgreen(%cr by %an)'
   lpp = log --graph --decorate --all --pretty='%Cred%h%C(yellow)%d%Creset %Creset%s %Cgreen(%ah by %an)'
-  changelog = log --no-merges --pretty='%h %s (%ae)'
+  changelog = log --no-merges --pretty='%h %s'
   ss = status -s
   a = add
   ar = !git add . && git ls-files --deleted | xargs git rm
@@ -50,3 +50,5 @@
   light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
   side-by-side = true
   line-numbers = true
+[credential]
+	helper = store

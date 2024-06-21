@@ -1,0 +1,52 @@
+[user]
+	email = marcel@marcelbeumer.com
+	name = Marcel Beumer
+[core]
+  tabwidth = 4
+  excludesfile = ~/.gitignore
+  pager = delta
+[alias]
+	ack = grep --break --heading --line-number
+  st = status
+  l = pull
+  lr = pull --rebase
+  f = fetch
+  un = reset HEAD --
+  p = push
+  c = commit -v
+  ca = commit -v -a
+  co = checkout
+  cm = checkout master
+  b = branch
+  ba = branch -a
+  cp = cherry-pick
+  lg = log --stat --max-count=5
+  lgg = log --graph --max-count=5
+  lp = log --graph --decorate --pretty='%Cred%h%C(yellow)%d%Creset %Creset%s %Cgreen(%cr by %an)'
+  lpp = log --graph --decorate --all --pretty='%Cred%h%C(yellow)%d%Creset %Creset%s %Cgreen(%ah by %an)'
+  changelog = log --no-merges --pretty='%h %s'
+  ss = status -s
+  a = add
+  ar = !git add . && git ls-files --deleted | xargs git rm
+  m = merge
+  rh = reset HEAD
+  rhh = reset HEAD --hard
+  pick = cherry-pick
+[mergetool "nvim"]
+  cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+[merge]
+  tool = nvim
+  conflictstyle = diff3
+[mergetool]
+  prompt = false
+[init]
+	defaultBranch = master
+[diff]
+  colorMoved = default
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true    # use n and N to move between diff sections
+  light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+  side-by-side = true
+  line-numbers = true

@@ -1,0 +1,77 @@
+aws_vault_prompt() {
+    if [[ -n "$AWS_VAULT" ]]; then
+        echo "($AWS_VAULT) "
+    fi
+}
+
+PS1='\w $(aws_vault_prompt)^ '
+
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$HOME/go/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
+export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
+export PATH=$HOME/.fnm:$PATH
+export PATH="./node_modules/.bin:$PATH"
+
+# Company specific
+# export GONOPROXY=""
+# export GONOSUMDB=""
+# export GOPRIVATE=""
+# export NVIM_GOPLS_LOCAL=""
+# export NVIM_ENABLE_COPILOT="off"
+
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias g='git'
+alias gdalb='git branch | grep -v "master" | xargs git branch -D'
+alias ports='sudo lsof -P -i TCP -s TCP:LISTEN'
+
+# `source_env .env`
+source_env() {
+  # export $(echo $(cat $1 | sed 's/#.*//g'| xargs) | envsubst)
+  export $(echo $(cat $1 | sed 's/#.*//g'| xargs) | envsubst)
+  set -a # automatically export all variables
+  source $1
+  set +a
+}
+
+
+# OSC 52 clipboard copy
+pbcopy() {
+    printf "\033]52;c;$(cat | base64 | tr -d '\n')\a"
+}
+
+enable_proxy() {
+  export http_proxy=
+  export https_proxy=
+  export HTTP_PROXY=
+  export HTTPS_PROXY=
+}
+
+disable_proxy() {
+  unset http_proxy
+  unset https_proxy
+  unset HTTP_PROXY
+  unset HTTPS_PROXY
+}
+
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+# enable color support of ls and also add handy aliases
+# if [ -x /usr/bin/dircolors ]; then
+#     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+#     alias ls='ls --color=auto'
+#     #alias dir='dir --color=auto'
+#     #alias vdir='vdir --color=auto'
+# 
+#     alias grep='grep --color=auto'
+#     alias fgrep='fgrep --color=auto'
+#     alias egrep='egrep --color=auto'
+# fi
