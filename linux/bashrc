@@ -13,6 +13,9 @@ export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 export PATH=$HOME/.fnm:$PATH
 export PATH="./node_modules/.bin:$PATH"
 
+export NVIM_DARK=on
+export NVIM_CMP=off
+
 # Company specific
 # export GONOPROXY=""
 # export GONOSUMDB=""
@@ -36,6 +39,13 @@ source_env() {
   set +a
 }
 
+title() {
+  if [ -z "$KITTY_WINDOW_ID" ]; then
+    echo -e "\e]2;$1"
+  else
+    kitty @ set-tab-title $1
+  fi
+}
 
 # OSC 52 clipboard copy
 pbcopy() {
