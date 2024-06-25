@@ -1,3 +1,7 @@
+if [ -f ~/.bash_local ]; then
+  . ~/.bash_local
+fi
+
 aws_vault_prompt() {
     if [[ -n "$AWS_VAULT" ]]; then
         echo "($AWS_VAULT) "
@@ -18,11 +22,10 @@ export NVIM_DARK=on
 export NVIM_CMP=off
 
 # Company specific
-# export GONOPROXY=""
-# export GONOSUMDB=""
-# export GOPRIVATE=""
-# export NVIM_GOPLS_LOCAL=""
-# export NVIM_ENABLE_COPILOT="off"
+export GONOPROXY=$CONF_GNOPROXY
+export GONOSUMDB=$CONF_GONOSUMDB
+export GOPRIVATE=$CONF_GOPRIVATE
+export NVIM_GOPLS_LOCAL=$CONF_NVIM_GOPLS_LOCAL
 
 alias ll='ls -alF'
 alias la='ls -A'
@@ -54,10 +57,10 @@ pbcopy() {
 }
 
 enable_proxy() {
-  export http_proxy=
-  export https_proxy=
-  export HTTP_PROXY=
-  export HTTPS_PROXY=
+  export http_proxy=$CONF_HTTP_PROXY
+  export https_proxy=$CONF_HTTPS_PROXY
+  export HTTP_PROXY=$CONF_HTTP_PROXY
+  export HTTPS_PROXY=$CONF_HTTPS_PROXY
 }
 
 disable_proxy() {
