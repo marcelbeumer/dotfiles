@@ -4,14 +4,6 @@ decorations = "None"
 [font]
 size = 10.0
 
-# [font.bold]
-# family = "JetBrainsMonoNL Nerd Font"
-# style = "Bold"
-#
-# [font.italic]
-# family = "JetBrainsMonoNL Nerd Font"
-# style = "Regular"
-
 [font.normal]
 family = "JetBrainsMonoNL Nerd Font"
 style = "Regular"
