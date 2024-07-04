@@ -15,7 +15,6 @@ export PATH=$HOME/go/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
-export PATH=$HOME/.fnm:$PATH
 export PATH="./node_modules/.bin:$PATH"
 
 export NVIM_DARK=on
@@ -34,6 +33,7 @@ alias g='git'
 alias n='nerdctl'
 alias gdalb='git branch | grep -v "master" | xargs git branch -D'
 alias ports='sudo lsof -P -i TCP -s TCP:LISTEN'
+alias nrm="nerdctl ps | sed 1d | awk '{ print \$1 }' | xargs -r -I {} sh -c 'nerdctl stop {}; nerdctl rm -v {}'"
 
 # `source_env .env`
 source_env() {
@@ -90,3 +90,14 @@ fi
 #     alias fgrep='fgrep --color=auto'
 #     alias egrep='egrep --color=auto'
 # fi
+
+FNM_PATH="$HOME/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="$FNM_PATH:$PATH"
+  eval "`fnm env`"
+fi
+# Lima BEGIN
+# Make sure iptables and mount.fuse3 are available
+PATH="$PATH:/usr/sbin:/sbin"
+export PATH
+# Lima END
