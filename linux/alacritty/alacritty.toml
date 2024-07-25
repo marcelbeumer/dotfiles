@@ -1,5 +1,6 @@
 [window]
 decorations = "None"
+option_as_alt = "Both"
 
 [font]
 size = 10.0
