@@ -1,3 +1,7 @@
+if [ -f ~/.zsh_local ]; then
+  . ~/.zsh_local
+fi
+
 if type brew &>/dev/null
 then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
@@ -45,11 +49,10 @@ export PATH="$PNPM_HOME:$PATH"
 export PATH=$HOME/.fnm:$PATH
 
 # Company specific
-# export GONOPROXY=""
-# export GONOSUMDB=""
-# export GOPRIVATE=""
-# export NVIM_GOPLS_LOCAL=""
-# export NVIM_ENABLE_COPILOT="off"
+export GONOPROXY=$CONF_GNOPROXY
+export GONOSUMDB=$CONF_GONOSUMDB
+export GOPRIVATE=$CONF_GOPRIVATE
+export NVIM_GOPLS_LOCAL=$CONF_NVIM_GOPLS_LOCAL
 
 # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/common-aliases/common-aliases.plugin.zsh
 # ls, the common ones I use a lot shortened for rapid fire usage
@@ -103,13 +106,17 @@ dirtitle() {
 }
 
 enable_proxy() {
-  export http_proxy=
-  export https_proxy=
+  export http_proxy=$CONF_HTTP_PROXY
+  export https_proxy=$CONF_HTTPS_PROXY
+  export HTTP_PROXY=$CONF_HTTP_PROXY
+  export HTTPS_PROXY=$CONF_HTTPS_PROXY
 }
 
 disable_proxy() {
   unset http_proxy
   unset https_proxy
+  unset HTTP_PROXY
+  unset HTTPS_PROXY
 }
 
 switch_proxy() {
