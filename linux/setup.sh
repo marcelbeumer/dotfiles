@@ -10,6 +10,9 @@ rm -f ~/.editorconfig && ln -s $dirname/editorconfig ~/.editorconfig
 rm -f ~/.gitconfig && ln -s $dirname/gitconfig ~/.gitconfig
 rm -f ~/.gitignore && ln -s $dirname/gitignore ~/.gitignore
 
+mkdir -p ~/.gnupg
+rm -f ~/.gnupg/gpg.conf && ln -s $dirname/gpg.conf ~/.gnupg/gpg.conf
+
 mkdir -p ~/.config
 
 rm -rf ~/.config/kitty && ln -s $dirname/kitty ~/.config/kitty
