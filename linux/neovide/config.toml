@@ -1,6 +1,6 @@
 [font]
-# normal = ["JetBrainsMonoNL Nerd Font"]
-normal = ["Departure Mono"]
-size = 22
-hinting = "none"
-edging = "alias"
+normal = ["JetBrainsMonoNL Nerd Font"]
+# normal = ["Departure Mono"]
+size = 14
+# hinting = "none"
+# edging = "alias"
