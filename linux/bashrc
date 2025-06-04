@@ -32,6 +32,7 @@ alias la='ls -A'
 alias l='ls -CF'
 alias g='git'
 alias n='nerdctl'
+alias k='kubectl'
 alias gdalb='git branch | grep -v "master" | xargs git branch -D'
 alias ports='sudo lsof -P -i TCP -s TCP:LISTEN'
 alias nrm="nerdctl ps | sed 1d | awk '{ print \$1 }' | xargs -r -I {} sh -c 'nerdctl stop {}; nerdctl rm -v {}'"
