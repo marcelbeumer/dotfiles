@@ -2,6 +2,14 @@ if [ -f ~/.bash_local ]; then
   . ~/.bash_local
 fi
 
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
 aws_vault_prompt() {
     if [[ -n "$AWS_VAULT" ]]; then
         echo "($AWS_VAULT) "
@@ -18,9 +26,6 @@ export PATH=$HOME/.local/bin:$PATH
 export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 export PATH="./node_modules/.bin:$PATH"
 
-export NVIM_DARK=on
-export NVIM_CMP=off
-
 # Company specific
 export GONOPROXY=$CONF_GNOPROXY
 export GONOSUMDB=$CONF_GONOSUMDB
@@ -32,7 +37,7 @@ alias la='ls -A'
 alias l='ls -CF'
 alias g='git'
 alias n='nerdctl'
-alias k='kubectl'
+alias d='docker'
 alias gdalb='git branch | grep -v "master" | xargs git branch -D'
 alias ports='sudo lsof -P -i TCP -s TCP:LISTEN'
 alias nrm="nerdctl ps | sed 1d | awk '{ print \$1 }' | xargs -r -I {} sh -c 'nerdctl stop {}; nerdctl rm -v {}'"
@@ -73,12 +78,8 @@ disable_proxy() {
   unset HTTPS_PROXY
 }
 
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
+if [ -f ~/.bash_k8s ]; then
+  . ~/.bash_k8s
 fi
 
 # enable color support of ls and also add handy aliases
