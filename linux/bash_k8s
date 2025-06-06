@@ -1,0 +1,28 @@
+export KUBE_EDITOR="NVIM_DARK=on nvim"
+
+export K_O_JSONPATH_NODEPORT="-o jsonpath={.spec.ports[0].nodePort}"
+export K_O_JSONPATH_PORT="-o jsonpath={.spec.ports[0].port}"
+
+if command -v kubectl &>/dev/null; then
+  source <(kubectl completion bash)
+  alias k='kubectl'
+  complete -o default -F __start_kubectl k
+fi
+
+_k_svc_complete() {
+  local cur=${COMP_WORDS[COMP_CWORD]}  
+  local services=$(kubectl get svc --no-headers -o custom-columns=":metadata.name" 2>/dev/null)
+  COMPREPLY=($(compgen -W "$services" -- "$cur"))
+}
+
+k-svc-nodeport() {
+  kubectl get svc "$1" $K_O_JSONPATH_NODEPORT
+}
+
+complete -F _k_svc_complete k-svc-nodeport
+
+k-svc-port() {
+  kubectl get svc "$1" $K_O_JSONPATH_PORT
+}
+
+complete -F _k_svc_complete k-svc-port
