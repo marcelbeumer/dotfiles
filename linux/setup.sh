@@ -16,8 +16,6 @@ rm -f ~/.gnupg/gpg.conf && ln -s $dirname/gpg.conf ~/.gnupg/gpg.conf
 
 mkdir -p ~/.config
 
+rm -rf ~/.config/neovide && ln -s $dirname/neovide ~/.config/neovide
 rm -rf ~/.config/hypr && ln -s $dirname/hypr ~/.config/hypr
 rm -rf ~/.config/waybar && ln -s $dirname/waybar ~/.config/waybar
-rm -rf ~/.config/kitty && ln -s $dirname/kitty ~/.config/kitty
-rm -rf ~/.config/alacritty && ln -s $dirname/alacritty ~/.config/alacritty
-rm -rf ~/.config/neovide && ln -s $dirname/neovide ~/.config/neovide
