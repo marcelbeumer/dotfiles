@@ -9,6 +9,7 @@
   "modules-right": [
     "group/tray-expander",
     "bluetooth",
+    "custom/protonvpn",
     "network",
     "pulseaudio",
     "cpu",
@@ -127,5 +128,13 @@
   "tray": {
     "icon-size": 12,
     "spacing": 12
+  },
+  "custom/protonvpn": {
+    "format": "{icon}",
+    "format-icons": [" ", " "],
+    "exec": "~/bin/vpn-status",
+    "return-type": "json",
+    "interval": 5,
+    "tooltip": true
   }
 }

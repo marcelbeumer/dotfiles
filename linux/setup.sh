@@ -19,3 +19,7 @@ mkdir -p ~/.config
 rm -rf ~/.config/neovide && ln -s $dirname/neovide ~/.config/neovide
 rm -rf ~/.config/hypr && ln -s $dirname/hypr ~/.config/hypr
 rm -rf ~/.config/waybar && ln -s $dirname/waybar ~/.config/waybar
+
+mkdir -p ~/bin
+
+rm -f ~/bin/vpn-status && ln -s $dirname/bin/vpn-status ~/bin/vpn-status && chmod +x ~/bin/vpn-status
