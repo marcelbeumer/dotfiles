@@ -27,6 +27,8 @@ export PATH=$HOME/.local/bin:$PATH
 export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 export PATH="./node_modules/.bin:$PATH"
 
+export EDITOR=nvim
+
 # Company specific
 export GONOPROXY=$CONF_GNOPROXY
 export GONOSUMDB=$CONF_GONOSUMDB
