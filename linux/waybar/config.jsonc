@@ -141,7 +141,7 @@
     "spacing": 12
   },
   "custom/vpn": {
-    "format": "{text}",
+    "format": "{text}  ",
     "interval": 3,
     "return-type": "json",
     "exec": "sudo vpnctl waybar",
