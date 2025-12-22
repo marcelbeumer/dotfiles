@@ -92,17 +92,21 @@ pbcopy() {
 }
 
 enable_proxy() {
-  export http_proxy=$CONF_HTTP_PROXY
-  export https_proxy=$CONF_HTTPS_PROXY
+  # export http_proxy=$CONF_HTTP_PROXY
+  # export https_proxy=$CONF_HTTPS_PROXY
+  # export no_proxy=$CONF_NO_PROXY
   export HTTP_PROXY=$CONF_HTTP_PROXY
   export HTTPS_PROXY=$CONF_HTTPS_PROXY
+  export NO_PROXY=$CONF_NO_PROXY
 }
 
 disable_proxy() {
-  unset http_proxy
-  unset https_proxy
+  # unset http_proxy
+  # unset https_proxy
+  # unset no_proxy
   unset HTTP_PROXY
   unset HTTPS_PROXY
+  unset NO_PROXY
 }
 
 if ! shopt -oq posix; then
