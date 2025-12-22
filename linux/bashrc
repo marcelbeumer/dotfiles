@@ -14,10 +14,11 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$HOME/go/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/bin:$PATH
 export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 export PATH="./node_modules/.bin:$PATH"
 
-export NVIM_DARK=on
+export NVIM_DARK=off
 export NVIM_CMP=off
 
 # Company specific
@@ -34,6 +35,39 @@ alias n='nerdctl'
 alias gdalb='git branch | grep -v "master" | xargs git branch -D'
 alias ports='sudo lsof -P -i TCP -s TCP:LISTEN'
 alias nrm="nerdctl ps | sed 1d | awk '{ print \$1 }' | xargs -r -I {} sh -c 'nerdctl stop {}; nerdctl rm -v {}'"
+
+function kmode {
+  if [[ "$1" == "rancher" ]]; then
+    [[ "$2" != "-q" ]] && echo "Using rancher kubectl"
+  else
+    alias k='kubectl'
+    [[ "$2" != "-q" ]] && echo "Using regular kubectl"
+  fi
+  
+  # Update all aliases to use 'k'
+  alias kgp='k get pods'
+  alias kgs='k get svc'
+  alias kgn='k get nodes'
+  alias kdp='k describe pod'
+  alias kds='k describe svc'
+  alias kl='k logs'
+  alias klf='k logs -f'
+  alias kex='k exec -it'
+  alias kaf='k apply -f'
+  alias kdel='k delete'
+  alias kgpa='k get pods --all-namespaces'
+  alias kctx='k config use-context'
+  alias kns='k config set-context --current --namespace'
+  alias kcc='k config current-context'
+  alias kcx='k config get-contexts'
+  alias kcv='k config view --minify'
+}
+
+kmode regular -q
+
+function kexec {
+  kubectl exec -it $1 -- /bin/bash
+}
 
 # `source_env .env`
 source_env() {
@@ -101,3 +135,11 @@ fi
 PATH="$PATH:/usr/sbin:/sbin"
 export PATH
 # Lima END
+
+# fnm
+FNM_PATH="/home/robotx.linux/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="$FNM_PATH:$PATH"
+  eval "`fnm env`"
+fi
+. "$HOME/.cargo/env"
