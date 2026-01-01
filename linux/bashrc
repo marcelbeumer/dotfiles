@@ -41,6 +41,8 @@ alias l='ls -CF'
 alias g='git'
 alias n='nerdctl'
 alias d='docker'
+alias k='kubectl'
+alias tf='terraform'
 alias gdalb='git branch | grep -v "master" | xargs git branch -D'
 alias ports='sudo lsof -P -i TCP -s TCP:LISTEN'
 alias nrm="nerdctl ps | sed 1d | awk '{ print \$1 }' | xargs -r -I {} sh -c 'nerdctl stop {}; nerdctl rm -v {}'"
@@ -83,6 +85,10 @@ disable_proxy() {
 
 if [ -f ~/.bash_k8s ]; then
   . ~/.bash_k8s
+fi
+
+if [ -f ~/.bash_aws ]; then
+  . ~/.bash_aws
 fi
 
 # enable color support of ls and also add handy aliases

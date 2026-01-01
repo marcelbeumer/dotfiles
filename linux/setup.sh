@@ -4,6 +4,7 @@ dirname=`pwd`/`dirname "$0"`
 
 rm -f ~/.bashrc && ln -s $dirname/bashrc ~/.bashrc
 rm -f ~/.bash_k8s && ln -s $dirname/bash_k8s ~/.bash_k8s
+rm -f ~/.bash_aws && ln -s $dirname/bash_aws ~/.bash_aws
 rm -f ~/.bash_profile && ln -s $dirname/bash_profile ~/.bash_profile
 rm -f ~/.tmux.conf && ln -s $dirname/tmux.conf ~/.tmux.conf
 rm -f ~/.stylua && ln -s $dirname/stylua ~/.stylua
