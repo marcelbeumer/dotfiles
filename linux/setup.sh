@@ -3,6 +3,8 @@
 dirname=`pwd`/`dirname "$0"`
 
 rm -f ~/.bashrc && ln -s $dirname/bashrc ~/.bashrc
+rm -f ~/.bash_k8s && ln -s $dirname/bash_k8s ~/.bash_k8s
+rm -f ~/.bash_aws && ln -s $dirname/bash_aws ~/.bash_aws
 rm -f ~/.bash_profile && ln -s $dirname/bash_profile ~/.bash_profile
 rm -f ~/.tmux.conf && ln -s $dirname/tmux.conf ~/.tmux.conf
 rm -f ~/.stylua && ln -s $dirname/stylua ~/.stylua
@@ -15,6 +17,10 @@ rm -f ~/.gnupg/gpg.conf && ln -s $dirname/gpg.conf ~/.gnupg/gpg.conf
 
 mkdir -p ~/.config
 
-rm -rf ~/.config/kitty && ln -s $dirname/kitty ~/.config/kitty
-rm -rf ~/.config/alacritty && ln -s $dirname/alacritty ~/.config/alacritty
 rm -rf ~/.config/neovide && ln -s $dirname/neovide ~/.config/neovide
+rm -rf ~/.config/hypr && ln -s $dirname/hypr ~/.config/hypr
+rm -rf ~/.config/waybar && ln -s $dirname/waybar ~/.config/waybar
+
+mkdir -p ~/bin
+
+rm -f ~/bin/vpn-status && ln -s $dirname/bin/vpn-status ~/bin/vpn-status && chmod +x ~/bin/vpn-status

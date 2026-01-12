@@ -2,6 +2,14 @@ if [ -f ~/.bash_local ]; then
   . ~/.bash_local
 fi
 
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
 aws_vault_prompt() {
     if [[ -n "$AWS_VAULT" ]]; then
         echo "($AWS_VAULT) "
@@ -10,16 +18,17 @@ aws_vault_prompt() {
 
 PS1='\w $(aws_vault_prompt)^ '
 
+export PATH=$PATH:/$HOME/bin
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$HOME/go/bin:$PATH
+export PATH=$HOME/dev/zig:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/bin:$PATH
 export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 export PATH="./node_modules/.bin:$PATH"
 
-export NVIM_DARK=off
-export NVIM_CMP=off
+export EDITOR=nvim
 
 # Company specific
 export GONOPROXY=$CONF_GNOPROXY
@@ -32,6 +41,9 @@ alias la='ls -A'
 alias l='ls -CF'
 alias g='git'
 alias n='nerdctl'
+alias d='docker'
+alias k='kubectl'
+alias tf='terraform'
 alias gdalb='git branch | grep -v "master" | xargs git branch -D'
 alias ports='sudo lsof -P -i TCP -s TCP:LISTEN'
 alias nrm="nerdctl ps | sed 1d | awk '{ print \$1 }' | xargs -r -I {} sh -c 'nerdctl stop {}; nerdctl rm -v {}'"
@@ -109,12 +121,12 @@ disable_proxy() {
   unset NO_PROXY
 }
 
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
+if [ -f ~/.bash_k8s ]; then
+  . ~/.bash_k8s
+fi
+
+if [ -f ~/.bash_aws ]; then
+  . ~/.bash_aws
 fi
 
 # enable color support of ls and also add handy aliases
@@ -140,10 +152,6 @@ PATH="$PATH:/usr/sbin:/sbin"
 export PATH
 # Lima END
 
-# fnm
-FNM_PATH="/home/robotx.linux/.local/share/fnm"
-if [ -d "$FNM_PATH" ]; then
-  export PATH="$FNM_PATH:$PATH"
-  eval "`fnm env`"
-fi
-. "$HOME/.cargo/env"
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

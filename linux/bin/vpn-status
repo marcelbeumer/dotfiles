@@ -1,0 +1,11 @@
+#!/bin/bash
+
+INTERFACE="protonvpn"
+
+if ip link show "$INTERFACE" up &>/dev/null; then
+    # Connected: Interface is up
+    echo '{"text":"VPN","percentage":100,"tooltip":"VPN Connected"}'
+else
+    # Disconnected: Interface is down
+    echo '{"text":"VPN","percentage":0,"tooltip":"VPN Disconnected"}'
+fi
