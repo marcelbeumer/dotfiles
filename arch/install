@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -e
+
+script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+cd "$script_dir"
+
+link() {
+  [[ -L "$2" ]] && rm "$2"
+  [[ -e "$2" ]] && { echo "ERROR: $2 exists"; return 1; }
+  ln -s "$1" "$2"
+}
+
+for file in root/.*; do
+  [[ -f "$file" ]] || continue
+  name=$(basename "$file")
+  [[ "$name" == "." || "$name" == ".." ]] && continue
+  link "$script_dir/$file" "$HOME/$name"
+done
+
+mkdir -p "$HOME/.config"
+for dir in config/*; do
+  [[ -d "$dir" ]] || continue
+  link "$script_dir/$dir" "$HOME/.config/$(basename "$dir")"
+done
+
+sharedir="$HOME/.local/share/dotfiles"
+mkdir -p $sharedir
+link "$script_dir/bin" "$sharedir/bin"
