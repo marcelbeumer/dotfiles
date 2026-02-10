@@ -1,0 +1,75 @@
+@import "./theme.css";
+
+* {
+  color: @foreground;
+  border: none;
+  border-radius: 0;
+
+  /* font-family: "JetBrains Mono Nerd Font"; */
+  /* font-size: 12px; */
+  /* min-height: 0px; */
+  font-family: "Adwaita Sans";
+  font-size: 13px;
+  min-height: 30px;
+}
+
+window#waybar {
+  background-color: @background;
+}
+
+.modules-left {
+  margin-left: 0;
+}
+
+.modules-right {
+  margin-right: 0;
+}
+
+#workspaces button {
+  all: initial;
+  padding: 0 6px;
+  margin: 0 1.5px;
+  min-width: 8px;
+}
+
+#workspaces button.empty {
+  opacity: 0.5;
+}
+
+#tray,
+#cpu,
+#battery,
+#network,
+#bluetooth,
+#pulseaudio,
+#clock,
+#custom-menu,
+#custom-expand-icon {
+  min-width: 8px;
+  margin: 0 12px;
+}
+
+#cpu {
+  margin-right: 8px;
+}
+
+#pulseaudio {
+  margin-right: 4px;
+}
+
+#bluetooth {
+  margin-right: 4px;
+}
+
+#network {
+  margin-right: 8px;
+}
+
+#custom-expand-icon {
+  margin-left: 18px;
+  margin-right: 4px;
+}
+
+tooltip * {
+  padding: 2px;
+}

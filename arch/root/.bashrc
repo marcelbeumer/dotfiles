@@ -1,4 +1,3 @@
-
 aws_vault_prompt() {
     if [[ -n "$AWS_VAULT" ]]; then
         echo "($AWS_VAULT) "
@@ -51,4 +50,16 @@ FNM_PATH="$HOME/.local/share/fnm"
 if [ -d "$FNM_PATH" ]; then
   export PATH="$FNM_PATH:$PATH"
   eval "`fnm env`"
+fi
+
+if [ -f ~/.bash_aws ]; then
+  . ~/.bash_aws
+fi
+
+if [ -f ~/.bash_k8s ]; then
+  . ~/.bash_k8s
+fi
+
+if [ -f ~/.bash_local ]; then
+  . ~/.bash_local
 fi

@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+dir="${HOME}/.local/share/wallpapers"
+current="${dir}/.current"
+
+if [ -n "$1" ]; then
+    echo "$1" > "${current}"
+fi
+
+if [ ! -f "${current}" ]; then
+    echo "No wallpaper found, please set $current" >&2
+    exit 1
+fi
+
+killall swaybg 2>/dev/null
+
+name=$(cat "${current}")
+path="${dir}/${name}"
+swaybg -i "${path}" --mode fill >/dev/null 2>&1 &
