@@ -2,13 +2,16 @@
 # Launch or focus an already running TUI by binary name.
 #
 # Examples:
-#   dot-launch-or-focus-tui btop [ARGS]
+#   dot-launch-or-focus-tui btop [title] [ARGS]
 
 set -o errexit
 set -o pipefail
 set -o nounset
 
 APP="${1}"
+APP_TITLE="${2:-$APP}"
+shift
+[[ $# -gt 0 ]] && shift
 
 # Gets an app's last opened instance id, it's "null" if nothing is open.
 APP_ID=$(
@@ -33,10 +36,7 @@ if [ "${APP_ID}" == "null" ]; then
     exit 1
   fi
 
-  # We shift here so that $@ has all of the arguments but not the app name.
-  shift
-
-  niri msg action spawn -- alacritty --class="dot.alacritty.${APP}" -e "${APP}" "$@"
+  niri msg action spawn -- alacritty --class="dot.alacritty.${APP}" --title "${APP_TITLE}" -e "${APP}" "$@"
 else
   niri msg action focus-window --id "${APP_ID}"
 fi
