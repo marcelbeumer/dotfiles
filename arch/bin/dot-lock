@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
-dir="${HOME}/.local/share/wallpapers"
-current="${dir}/.current"
+current="${HOME}/.local/share/wallpaper/.current"
 
 args=()
 if [ -f "${current}" ]; then
-  name=$(cat "${current}")
-  args=(-i "${dir}/${name}")
+  path=$(cat "${current}")
+  args=(-i "${path}")
 fi
 
 swaylock "${args[@]}" -f
