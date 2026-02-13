@@ -1,6 +1,0 @@
-theme = "base"
-additional_theme_location = "./themes/base"
-# hide_action_hints = true
-
-[keybinds]
-quick_activate = []
