@@ -6,6 +6,11 @@ aws_vault_prompt() {
 
 PS1='\w $(aws_vault_prompt)^ '
 
+title() {
+  _title="$1"
+  PROMPT_COMMAND='printf "\033]0;%s\007" "$_title"'
+}
+
 export PATH="$HOME/.local/share/${USER}/bin:$PATH"
 export PATH="$HOME/.local/share/dotfiles/bin:$PATH"
 export PATH=$PATH:/$HOME/bin
