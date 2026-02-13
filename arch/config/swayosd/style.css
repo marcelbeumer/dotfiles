@@ -1,0 +1,26 @@
+@define-color foreground #eee;
+@define-color background rgba(0, 0, 0, 0.6);
+
+window {
+  border-radius: 20px;
+  opacity: 0.97;
+  background-color: @background;
+}
+
+label {
+  font-family: "Adwaita Sans";
+  font-size: 11pt;
+  color: @foreground;
+}
+
+image {
+  color: @foreground;
+}
+
+progressbar {
+  border-radius: 0;
+}
+
+progress {
+  background-color: @foreground;
+}
