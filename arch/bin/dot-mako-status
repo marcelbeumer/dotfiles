@@ -1,0 +1,6 @@
+#!/bin/bash
+if makoctl mode | grep -q do-not-disturb; then
+  echo '{"text": "󰽥", "tooltip": "Do Not Disturb", "class": "dnd"}'
+else
+  echo '{"text": "󰖨", "tooltip": "Notifications on", "class": "normal"}'
+fi

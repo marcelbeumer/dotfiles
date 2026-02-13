@@ -18,10 +18,18 @@
     "bluetooth",
     "network",
     "cpu",
+    "custom/mako",
     "battery"
   ],
   "custom/menu": {
     "format": "󰣇"
+  },
+  "custom/mako": {
+    "exec": "dot-mako-status",
+    "format": "{text}",
+    "return-type": "json",
+    "interval": 2,
+    "on-click": "makoctl mode -t do-not-disturb"
   },
   "niri/workspaces": {
     "on-click": "activate",

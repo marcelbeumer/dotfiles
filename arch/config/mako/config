@@ -1,0 +1,25 @@
+default-timeout=5000
+
+font=monospace 11
+
+anchor=top-right
+width=400
+height=100
+padding=8
+border-size=1
+border-radius=3
+outer-margin=20
+max-icon-size=32
+
+text-color=#a9b1d6
+border-color=#33ccff
+background-color=#1a1b26
+
+[mode=do-not-disturb]
+invisible=true
+
+[mode=do-not-disturb app-name=notify-send]
+invisible=false
+
+[urgency=critical]
+default-timeout=0
