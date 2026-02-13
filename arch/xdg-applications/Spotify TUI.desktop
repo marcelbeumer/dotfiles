@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Spotify TUI
+GenericName=Streaming Music Player
+Comment=The spotify_player TUI client
+Exec=dot-launch-or-focus-tui spotify_player Spotify
+Icon=spotify
+Terminal=false
+Categories=Audio;Music;Player;
+StartupNotify=true
+StartupWMClass=Spotify

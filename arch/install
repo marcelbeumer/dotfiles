@@ -23,6 +23,15 @@ for dir in config/*; do
   link "$script_dir/$dir" "$HOME/.config/$(basename "$dir")"
 done
 
+
+mkdir -p $HOME/.local/share/applications
+for file in xdg-applications/*; do
+  [[ -f "$file" ]] || continue
+  name=$(basename "$file")
+  [[ "$name" == "." || "$name" == ".." ]] && continue
+  link "$script_dir/$file" "$HOME/.local/share/applications/$name"
+done
+
 sharedir="$HOME/.local/share/dotfiles"
 mkdir -p $sharedir
 link "$script_dir/bin" "$sharedir/bin"
