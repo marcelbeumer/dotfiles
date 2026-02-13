@@ -25,7 +25,6 @@ input {
         natural-scroll
         accel-speed 0.4
         accel-profile "flat"
-        // scroll-method "no-scroll"
     }
 }
 
@@ -59,6 +58,10 @@ layout {
     }
 }
 
+overview {
+    zoom 0.25
+}
+
 hotkey-overlay {
     skip-at-startup
 }
@@ -71,6 +74,15 @@ window-rule {
 
 window-rule {
     match app-id="com.marcelbeumer.terminal.float"
+    match app-id="org.gnome.Calculator"
+    open-floating true
+}
+
+window-rule {
+    // This app-id regular expression will work for both:
+    // - host Firefox (app-id is "firefox")
+    // - Flatpak Firefox (app-id is "org.mozilla.firefox")
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true
 }
 
@@ -84,6 +96,7 @@ binds {
     Mod+E hotkey-overlay-title="Files" { spawn "nautilus" "--new-window"; }
     Mod+B hotkey-overlay-title="Browser" { spawn "firefox" "--new-window"; }
     Mod+Return hotkey-overlay-title="Terminal" { spawn "alacritty"; }
+    Mod+Shift+Return hotkey-overlay-title="Terminal" { spawn "alacritty" "--class=com.marcelbeumer.terminal.float"; }
 
     XF86AudioRaiseVolume    allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
     XF86AudioLowerVolume    allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
@@ -116,6 +129,8 @@ binds {
     Mod+Ctrl+J     { move-window-down-or-to-workspace-down; }
     Mod+Ctrl+K     { move-window-up-or-to-workspace-up; }
     Mod+Ctrl+L     { move-column-right; }
+
+    Mod+Alt+Shift+F { spawn "niri" "msg" "action" "move-floating-window" "-x" "10" "-y" "-100"; }
 
     // Alternative commands that move across workspaces when reaching
     // the first or last window in a column.
