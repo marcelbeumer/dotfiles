@@ -1,0 +1,97 @@
+/**
+ * Rofi theme matching waybar aesthetic
+ * Adwaita Sans 12
+ */
+
+* {
+    // bg: #14151f;
+    // bg-alt: #1e1f2e;
+    bg: #14151fdd;
+    bg-alt: #1e1f2eee;
+    fg: #cdd6f4;
+    fg-alt: #bac2de;
+    
+    accent: #33ccff;
+    accent-alt: #00ff99;
+    urgent: #f38ba8;
+    
+    background-color: transparent;
+    text-color: @fg;
+    font: "Adwaita Sans 12";
+}
+
+window {
+    background-color: @bg;
+    border: 2px;
+    // border: 0;
+    border-color: @accent;
+    border-radius: 0px;
+    padding: 0;
+    width: 600px;
+}
+
+mainbox {
+    border: 0;
+    padding: 0;
+}
+
+inputbar {
+    children: [prompt, textbox-prompt-colon, entry];
+    background-color: @bg-alt;
+    text-color: @fg;
+    padding: 12px;
+    border-radius: 0px;
+}
+
+prompt {
+    background-color: transparent;
+    text-color: @accent;
+    padding: 0 8px 0 0;
+}
+
+textbox-prompt-colon {
+    expand: false;
+    str: ":";
+    text-color: @accent;
+    padding: 0 4px 0 0;
+}
+
+entry {
+    background-color: transparent;
+    text-color: @fg;
+    placeholder-color: @fg-alt;
+    placeholder: "Search...";
+}
+
+listview {
+    background-color: @bg;
+    columns: 1;
+    lines: 4;
+    spacing: 0;
+    padding: 8px 0;
+    border: 0;
+}
+
+element {
+    padding: 10px 12px;
+    background-color: transparent;
+    text-color: @fg-alt;
+}
+
+element selected {
+    background-color: @bg-alt;
+    text-color: @accent;
+    border-radius: 0px;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+    highlight: bold #00ff99;
+}
+
+element-icon {
+    background-color: transparent;
+    size: 24px;
+    padding: 0 8px 0 0;
+}
