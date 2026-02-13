@@ -2,8 +2,6 @@ prefer-no-csd
 spawn-at-startup "swayidle" "-w"
 spawn-at-startup "mako"
 spawn-at-startup "waybar"
-spawn-at-startup "elephant"
-spawn-at-startup "walker" "--gapplication-service"
 spawn-sh-at-startup "dot-wallpaper-set"
 spawn-at-startup "swayidle" "-w" "timeout" "300" "dot-lock" "lock" "dot-lock" "before-sleep" "dot-lock"
 spawn-at-startup "xwayland-satellite"
@@ -88,10 +86,10 @@ window-rule {
 
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
-    Mod+Space hotkey-overlay-title="Launcher" { spawn "walker"; }
+    Mod+Space hotkey-overlay-title="Launcher" { spawn "rofi" "-show" "drun"; }
     Super+Alt+L hotkey-overlay-title="Lock" { spawn "dot-lock"; }
 
-    Mod+Slash hotkey-overlay-title="Launcher (windows)" { spawn "walker" "--provider" "windows"; }
+    Mod+Slash hotkey-overlay-title="Launcher (windows)" { spawn "rofi" "-show" "window"; }
     Mod+X { spawn "killall" "-SIGUSR1" "waybar"; }
     Mod+E hotkey-overlay-title="Files" { spawn "nautilus" "--new-window"; }
     Mod+B hotkey-overlay-title="Browser" { spawn "firefox" "--new-window"; }
