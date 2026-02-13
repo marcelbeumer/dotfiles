@@ -25,7 +25,7 @@ done
 
 
 mkdir -p $HOME/.local/share/applications
-for file in xdg-applications/*; do
+for file in xdg-applications/*.desktop; do
   [[ -f "$file" ]] || continue
   name=$(basename "$file")
   [[ "$name" == "." || "$name" == ".." ]] && continue

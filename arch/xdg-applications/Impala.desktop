@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Impala
+GenericName=TUI for managing wifi
+Comment=TUI for managing wifi
+Exec=dot-launch-or-focus-tui impala Impala
+Icon=Alacritty
+Terminal=false
+Categories=System;
+StartupNotify=true
+StartupWMClass=Alacritty

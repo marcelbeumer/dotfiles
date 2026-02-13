@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Bluetui
+GenericName=TUI for managing bluetooth
+Comment=TUI for managing bluetooth
+Exec=dot-launch-or-focus-tui bluetui Bluetui
+Icon=Alacritty
+Terminal=false
+Categories=System;
+StartupNotify=true
+StartupWMClass=Alacritty
