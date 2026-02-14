@@ -44,7 +44,6 @@ output "DP-2" {
 
 layout {
     gaps 12
-    center-focused-column "never"
     preset-column-widths {
         proportion 0.33333
         proportion 0.5
@@ -54,7 +53,6 @@ layout {
     default-column-width { proportion 0.5; }
 
     focus-ring {
-        // off
         width 2
         active-color "#7fc8ff"
         inactive-color "#505050"
