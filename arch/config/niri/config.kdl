@@ -91,15 +91,15 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+Space hotkey-overlay-title="Launcher" { spawn "rofi" "-show" "drun"; }
     Mod+Alt+L hotkey-overlay-title="Lock" { spawn "dot-lock"; }
-    Mod+Alt+P { power-off-monitors; }
-    Mod+Alt+S { spawn "systemctl" "suspend"; }
+    Mod+Alt+P hotkey-overlay-title="Power off monitors" { power-off-monitors; }
+    Mod+Alt+S hotkey-overlay-title="Suspend" { spawn "systemctl" "suspend"; }
 
     Mod+Slash hotkey-overlay-title="Launcher (windows)" { spawn "rofi" "-show" "window"; }
-    Mod+X { spawn "killall" "-SIGUSR1" "waybar"; }
+    Mod+X hotkey-overlay-title="Toggle waybar" { spawn "killall" "-SIGUSR1" "waybar"; }
     Mod+E hotkey-overlay-title="Files" { spawn "nautilus" "--new-window"; }
     Mod+B hotkey-overlay-title="Browser" { spawn "firefox" "--new-window"; }
     Mod+Return hotkey-overlay-title="Terminal" { spawn "alacritty"; }
-    Mod+Shift+Return hotkey-overlay-title="Terminal" { spawn "alacritty" "--class=com.marcelbeumer.terminal.float"; }
+    Mod+Shift+Return hotkey-overlay-title="Floating terminal" { spawn "alacritty" "--class=com.marcelbeumer.terminal.float"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn "swayosd-client" "--output-volume" "raise"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "swayosd-client" "--output-volume" "lower"; }
@@ -134,8 +134,6 @@ binds {
     Mod+Ctrl+J     { move-window-down-or-to-workspace-down; }
     Mod+Ctrl+K     { move-window-up-or-to-workspace-up; }
     Mod+Ctrl+L     { move-column-right; }
-
-    Mod+Alt+Shift+F { spawn "niri" "msg" "action" "move-floating-window" "-x" "10" "-y" "-100"; }
 
     // Alternative commands that move across workspaces when reaching
     // the first or last window in a column.
