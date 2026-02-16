@@ -4,6 +4,7 @@ baobab
 base
 base-devel
 bash-completion
+batsignal
 bluetui
 bluez
 bluez-utils
@@ -25,6 +26,7 @@ fzf
 gdm
 gimp
 git
+git-delta
 gnome-backgrounds
 gnome-calculator
 gnome-calendar
@@ -54,6 +56,8 @@ gnome-tweaks
 gnome-user-docs
 gnome-user-share
 gnome-weather
+gopass
+gpu-screen-recorder
 greetd
 greetd-tuigreet
 grilo-plugins
@@ -94,6 +98,7 @@ mako
 malcontent
 man-db
 mods
+mpv
 nano
 nautilus
 networkmanager
@@ -102,6 +107,7 @@ niri
 orca
 papers
 pass-otp
+peaclock
 pipewire
 pipewire-alsa
 pipewire-jack
@@ -111,6 +117,7 @@ polkit-kde-agent
 power-profiles-daemon
 qt5-wayland
 qt6-wayland
+restic
 rofi
 rygel
 showtime
@@ -141,6 +148,7 @@ vim
 vulkan-intel
 vulkan-nouveau
 vulkan-radeon
+w3m
 waybar
 wget
 wireless_tools
