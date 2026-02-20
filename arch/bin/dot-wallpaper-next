@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+dir="${HOME}/.local/share/wallpaper"
+current="${dir}/.current"
+list="${dir}/.list"
+
+if [ ! -f "${list}" ]; then
+    echo "No wallpaper list found, please set $list" >&2
+    exit 1
+fi
+
+list_contents=$(cat "${list}")
+
+current_path=""
+if [ -f "${current}" ]; then
+    current_path=$(cat "${current}")
+fi
+
+fallback=""
+next=""
+found_current=false
+
+while IFS= read -r line; do
+  [ -z "$line" ] && continue
+  if [ -z "$fallback" ]; then
+    fallback="$line"
+  fi
+  if $found_current; then
+    next="$line"
+    break
+  fi
+  if [ "$line" = "$current_path" ]; then
+    found_current=true
+  fi
+done <<< "$list_contents"
+
+if [ -z "$next" ]; then
+  next="$fallback"
+fi
+
+echo "$next" > "$current"
+killall swaybg 2>/dev/null
+swaybg -i "$next" --mode fill >/dev/null 2>&1 &
