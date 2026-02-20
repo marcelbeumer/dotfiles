@@ -1,19 +1,18 @@
+environment {
+  DISPLAY ":0"
+}
+
 prefer-no-csd
-spawn-at-startup "swayidle" "-w"
-spawn-at-startup "mako"
-spawn-at-startup "waybar"
-spawn-sh-at-startup "dot-wallpaper-set"
-spawn-at-startup "swayidle" "-w" "timeout" "300" "dot-lock" "lock" "dot-lock" "before-sleep" "dot-lock"
 spawn-at-startup "xwayland-satellite"
+spawn-sh-at-startup "dot-wallpaper-set"
+spawn-at-startup "mako"
+spawn-sh-at-startup "GTK_THEME=Adwaita:dark waybar" // GTK_THEME for tray icons
+spawn-at-startup "swayidle" "-w" "timeout" "300" "dot-lock" "lock" "dot-lock" "before-sleep" "dot-lock"
 
 // Start swayosd-server on GL because Intel Vulkan drivers need a few client
 // calls before something happens. GL is instant. 
 // https://github.com/ErikReider/SwayOSD/issues/198
 spawn-sh-at-startup "GSK_RENDERER=gl swayosd-server" 
-
-environment {
-  DISPLAY ":0"
-}
 
 input {
     keyboard {
