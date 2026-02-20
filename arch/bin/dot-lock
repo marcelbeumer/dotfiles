@@ -7,4 +7,10 @@ if [ -f "${current}" ]; then
   args=(-i "${path}")
 fi
 
-swaylock "${args[@]}" -f
+swaylock "${args[@]}" -f \
+  --indicator-idle-visible \
+  --indicator-thickness=10 \
+  --indicator-radius=60 \
+  --inside-color=#ffffff66 \
+  --text-color=#ffffff \
+  --ring-color=#ffffffCC
