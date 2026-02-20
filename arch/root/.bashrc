@@ -38,6 +38,9 @@ alias tf='terraform'
 alias gdalb='git branch | grep -v "master" | xargs git branch -D'
 alias ports='sudo lsof -P -i TCP -s TCP:LISTEN'
 
+# open like macOS
+open() { setsid xdg-open "$@" & }
+
 # `source_env .env`
 source_env() {
   # export $(echo $(cat $1 | sed 's/#.*//g'| xargs) | envsubst)
