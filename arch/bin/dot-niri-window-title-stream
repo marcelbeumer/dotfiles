@@ -1,5 +1,0 @@
-#!/bin/bash
-niri msg event-stream | while read -r event; do
-  title=$(niri msg --json windows | jq -r '.[] | select(.is_focused == true) | .title')
-  echo $title
-done

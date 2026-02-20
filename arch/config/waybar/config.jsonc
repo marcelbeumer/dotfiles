@@ -7,18 +7,19 @@
   "modules-left": [
     "custom/menu",
     "niri/workspaces",
-    "custom/niri-window-title"
+    "niri/window"
   ],
   "modules-center": [
     "clock"
   ],
   "modules-right": [
+    // "memory",
     "group/tray-expander",
     "pulseaudio",
     "bluetooth",
     "network",
-    "cpu",
     "custom/mako",
+    "cpu",
     "battery"
   ],
   "custom/menu": {
@@ -48,11 +49,8 @@
       "active": "󱓻"
     }
   },
-  "custom/niri-window-title": {
-    "exec": "dot-niri-window-title-stream",
-    "return-type": "",
-    "format": " {}",
-    "max-length": 50
+  "niri/window": {
+    "format": " {}"
   },
   "clock": {
     "format": "{:L%H:%M}",
@@ -127,8 +125,16 @@
     "on-click": "dot-launch-or-focus-tui impala"
   },
   "cpu": {
-    "interval": 5,
+    "interval": 1,
     "format": "󰍛",
+    // "format": "{usage}%",
+    // "format": "{icon0} {icon1} {icon2} {icon3}",
+    // "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+    "on-click": "dot-launch-or-focus-tui btop"
+  },
+  "memory": {
+    "interval": 3,
+    "format": "{used:0.1f}G/{total:0.1f}G",
     "on-click": "dot-launch-or-focus-tui btop"
   },
   "battery": {
