@@ -14,7 +14,8 @@
   ],
   "modules-right": [
     // "memory",
-    "group/tray-expander",
+    // "group/tray-expander",
+    "tray",
     "pulseaudio",
     "bluetooth",
     "network",
@@ -66,21 +67,21 @@
     "tooltip": true,
     "tooltip-format": "{tz_list}"
   },
-  "group/tray-expander": {
-    "orientation": "horizontal",
-    "drawer": {
-      "transition-duration": 300,
-      "children-class": "tray-group-item"
-    },
-    "modules": [
-      "custom/expand-icon",
-      "tray"
-    ]
-  },
-  "custom/expand-icon": {
-    "format": " ",
-    "tooltip": false
-  },
+  // "group/tray-expander": {
+  //   "orientation": "horizontal",
+  //   "drawer": {
+  //     "transition-duration": 300,
+  //     "children-class": "tray-group-item"
+  //   },
+  //   "modules": [
+  //     "custom/expand-icon",
+  //     "tray"
+  //   ]
+  // },
+  // "custom/expand-icon": {
+  //   "format": " ",
+  //   "tooltip": false
+  // },
   "pulseaudio": {
     "format": "{icon}",
     "on-click": "dot-launch-or-focus-tui wiremix",
