@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+main_menu() {
+  echo -e "Wallpaper\nPower" | rofi -dmenu -i -p "Menu"
+}
+
+wallpaper_menu() {
+  local filter="${1:-}"
+  echo -e "← Back\nNext" | rofi -dmenu -i -p "Wallpaper" -filter "$filter"
+}
+
+power_menu() {
+  local filter="${1:-}"
+  echo -e "← Back\nReboot\nShutdown" | rofi -dmenu -i -p "Power" -filter "$filter"
+}
+
+while true; do
+  choice=$(main_menu)
+  [[ -z "$choice" ]] && exit 0
+
+  case "$choice" in
+    Wallpaper)
+      filter=""
+      while true; do
+        sub=$(wallpaper_menu "$filter")
+        filter="$sub"
+        [[ -z "$sub" || "$sub" == "← Back" ]] && break
+        case "$sub" in
+          Next) dot-wallpaper-next ;;
+        esac
+      done
+      ;;
+    Power)
+      filter=""
+      while true; do
+        sub=$(power_menu "$filter")
+        filter="$sub"
+        [[ -z "$sub" || "$sub" == "← Back" ]] && break
+        case "$sub" in
+          Reboot) reboot ;;
+          Shutdown) shutdown now ;;
+        esac
+      done
+      ;;
+  esac
+done

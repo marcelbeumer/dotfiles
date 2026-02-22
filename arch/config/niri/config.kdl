@@ -89,6 +89,7 @@ window-rule {
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+Space hotkey-overlay-title="Launcher" { spawn "rofi" "-show" "drun"; }
+    Mod+P hotkey-overlay-title="Launcher (menu)" { spawn "dot-menu"; }
     Mod+Alt+L hotkey-overlay-title="Lock" { spawn "dot-lock"; }
     Mod+Alt+P hotkey-overlay-title="Power off monitors" { power-off-monitors; }
     Mod+Alt+S hotkey-overlay-title="Suspend" { spawn "systemctl" "suspend"; }
