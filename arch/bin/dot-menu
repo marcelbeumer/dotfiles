@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 main_menu() {
-  echo -e "Next wallpaper\nLock\nSleep\nReboot\nShutdown" | rofi -dmenu -i -p "Menu"
+  echo -e "Next wallpaper\nUpdate\nLock\nSleep\nReboot\nShutdown" | rofi -dmenu -theme-str 'listview { lines: 6; }' -i -p "Menu"
 }
 
 # Example submenu
@@ -17,6 +17,10 @@ while true; do
   case "$choice" in
     "Next wallpaper")
       dot-wallpaper-next
+      ;;
+    "Update")
+      dot-launch-floating-terminal sudo pacman -Syu &
+      break
       ;;
     "Lock")
       dot-lock

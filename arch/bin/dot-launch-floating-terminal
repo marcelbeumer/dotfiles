@@ -1,3 +1,3 @@
 #!/bin/bash
 cmd="$*"
-exec setsid niri msg action spawn -- alacritty --class=com.marcelbeumer.terminal.float --title=Terminal -e bash -c "$cmd; if [ \$? -ne 130 ]; then read; fi"
+exec setsid niri msg action spawn -- alacritty --class=com.marcelbeumer.terminal.float --title=Terminal -e bash -c "$cmd; if [ \$? -ne 130 ]; then dot-show-done; fi"
