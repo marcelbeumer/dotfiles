@@ -1,4 +1,5 @@
 alacritty
+aws-session-manager-plugin
 aws-vault
 baobab
 base
@@ -11,22 +12,27 @@ bluez-utils
 brightnessctl
 btop
 btrfs-progs
+chromium
 cmake
 cups
 cups-pk-helper
 decibels
+devpod-community-bin
+discord
 dolphin
 dunst
 efibootmgr
 epiphany
 fd
 firefox
+fuse2
 fuzzel
 fzf
 gdm
 gimp
 git
 git-delta
+glow
 gnome-backgrounds
 gnome-calculator
 gnome-calendar
@@ -77,6 +83,7 @@ gvfs-smb
 gvfs-wsdd
 htop
 hyprland
+hyprlock
 impala
 intel-media-driver
 intel-ucode
@@ -89,6 +96,8 @@ lazygit
 less
 lib32-vulkan-intel
 libpulse
+libreoffice-fresh
+libreoffice-fresh-nl
 libva-intel-driver
 linux
 linux-firmware
@@ -97,6 +106,7 @@ ly
 mako
 malcontent
 man-db
+mesa-utils
 mods
 mpv
 nano
@@ -123,6 +133,7 @@ rygel
 showtime
 signal-desktop
 simple-scan
+slack-desktop
 slurp
 smartmontools
 snap-pac
@@ -142,6 +153,8 @@ tecla
 tmux
 tofi
 torbrowser-launcher
+ttf-droid
+ttf-fira-mono
 ttf-jetbrains-mono-nerd
 uwsm
 vim
@@ -167,9 +180,11 @@ xf86-video-intel
 xf86-video-nouveau
 xorg-server
 xorg-xinit
+xsettingsd
 xwayland-satellite
 yay
 yay-debug
 yelp
 yq
+yt-dlp
 zram-generator
