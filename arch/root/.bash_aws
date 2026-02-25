@@ -2,6 +2,29 @@ if [ -f /usr/local/bin/aws_completer ]; then
   complete -C '/usr/local/bin/aws_completer' aws
 fi
 
+aws_ec2_list() {
+  aws ec2 describe-instances \
+    --query "Reservations[].Instances[].[InstanceId,State.Name,Tags[?Key=='Name'].Value|[0]]" \
+    "$@"
+}
+
+_ec2_fzf_pick() {
+  aws_ec2_list --output text | column -t | fzf --header 'Select EC2 Instance' | awk '{print $1}'
+}
+
+aws_ec2_pick() {
+  _ec2_fzf_pick
+}
+
+aws_ssm() {
+  aws ssm start-session --region "${AWS_REGION:?AWS_REGION not set}" --target "$1"
+}
+
+aws_ssm_pick() {
+  local instance_id
+  instance_id=$(_ec2_fzf_pick) && aws_ssm "$instance_id"
+}
+
 # Collection of commands to look at later
 # aws ec2 describe-instances --region eu-north-1 --filters 'Name=instance-state-name,Values=running'
 # aws ec2 describe-instances --region eu-north-1 --filters 'Name=instance-state-name,Values=running' | yq '.Reservations[].Instances[] | select(.Tags[]? | select(.Key == "Name" and .Value == "app-server"))'
