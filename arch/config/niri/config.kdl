@@ -34,6 +34,13 @@ output "eDP-1" {
   scale 1
 }
 
+output "DP-1" {
+  scale 1.25
+  // scale 1
+  // mode "2560x1440@59.951"
+  position x=-3840 y=0
+}
+
 output "DP-2" {
   scale 1.25
   // scale 1
