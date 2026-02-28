@@ -1,0 +1,53 @@
+#!/bin/bash
+set -euo pipefail
+
+# Sync the last N snapper snapshots to systemd-boot entries.
+# Run as root.
+#
+# To run automatically after pacman transactions (with snap-pac), create:
+# /etc/pacman.d/hooks/sync-snapper-boot.hook
+#
+#   [Trigger]
+#   Operation = Install
+#   Operation = Upgrade
+#   Operation = Remove
+#   Type = Package
+#   Target = *
+#
+#   [Action]
+#   Description = Syncing snapper snapshots to boot entries...
+#   When = PostTransaction
+#   Exec = /path/to/dot-sync-snapper-boot
+#   Depends = snapper
+
+case "${1:-}" in -h|--help) echo "Usage: dot-sync-snapper-boot [count=5]"; exit ;; esac
+
+COUNT="${1:-10}"
+ENTRIES_DIR="/boot/loader/entries"
+
+# Grab linux, initrd, options from an existing (non-snapshot) entry.
+base=$(find "$ENTRIES_DIR" -name '*.conf' ! -name 'snapshot-*' | head -1)
+base_linux=$(grep '^linux' "$base")
+base_initrd=$(grep '^initrd' "$base")
+base_options=$(grep '^options' "$base")
+[[ "$base_options" == *subvol=@* ]] || { echo "error: base entry has no subvol=@" >&2; exit 1; }
+
+# Get last N snapshot numbers.
+snapshots=$(ls /.snapshots | sort -rn | head -"$COUNT")
+
+# Clean old snapshot entries.
+rm -f "$ENTRIES_DIR"/snapshot-*.conf
+
+# Create new entries.
+for snap in $snapshots; do
+	opts=$(echo "$base_options" | sed "s|subvol=@[^ ]*|subvol=@/.snapshots/${snap}/snapshot|")
+
+	cat > "$ENTRIES_DIR/snapshot-${snap}.conf" <<-EOF
+	title   Arch Linux (snapshot ${snap})
+	${base_linux}
+	${base_initrd}
+	${opts}
+	EOF
+
+	echo ":: snapshot-${snap}.conf"
+done
