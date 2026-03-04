@@ -99,6 +99,9 @@
   "tray": {
     "icon-size": 12,
     "spacing": 12
+    // "icons": {
+    //   "Proton Mail Bridge": "user-info"
+    // }
   },
   "bluetooth": {
     "format": "",
