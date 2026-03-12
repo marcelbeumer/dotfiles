@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+config="${HOME}/.local/share/${USER}/livestreams"
+
+case "${1:-}" in -h|--help|"") echo "Usage: dot-livestream [-l|--list] <name> [quality=best]"; exit ;; esac
+case "${1:-}" in -l|--list) cat "$config" 2>/dev/null || echo "No livestreams config found" >&2; exit ;; esac
+
+if [ ! -f "$config" ]; then
+    echo "No livestreams config found, please set $config" >&2
+    exit 1
+fi
+
+url=$(awk -v name="$1" '$1 == name { print $2; exit }' "$config")
+
+if [ -z "$url" ]; then
+    echo "No livestream found for '$1'" >&2
+    exit 1
+fi
+
+quality="${2:-best}"
+streamlink "$url" "$quality" --player mpv & disown
