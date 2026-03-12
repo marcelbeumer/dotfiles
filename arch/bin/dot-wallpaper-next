@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-dir="${HOME}/.local/share/wallpaper"
-current="${dir}/.current"
-list="${dir}/.list"
+dir="${HOME}/.local/share/${USER}"
+current="${dir}/wallpaper-current"
+list="${dir}/wallpaper-list"
 
 if [ ! -f "${list}" ]; then
     echo "No wallpaper list found, please set $list" >&2

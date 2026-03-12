@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-dir="${HOME}/.local/share/wallpaper"
-current="${dir}/.current"
+dir="${HOME}/.local/share/${USER}"
+current="${dir}/wallpaper-current"
 
 if [ -n "$1" ]; then
     realpath "$1" > "${current}"
