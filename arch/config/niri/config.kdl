@@ -96,7 +96,9 @@ window-rule {
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+Space hotkey-overlay-title="Launcher" { spawn "rofi" "-show" "drun"; }
+    Mod+Shift+Space hotkey-overlay-title="Launcher (run)" { spawn "rofi" "-show" "run" "-run-command" "dot-launch-floating-terminal {cmd}"; }
     Mod+P hotkey-overlay-title="Launcher (menu)" { spawn "dot-menu"; }
+    Mod+BackSpace hotkey-overlay-title="Time zones" { spawn "dot-launch-floating-terminal" "-c" "50" "-l" "6" "-f" "16" "dot-time"; }
     Mod+Alt+L hotkey-overlay-title="Lock" { spawn "dot-lock"; }
     Mod+Alt+P hotkey-overlay-title="Power off monitors" { power-off-monitors; }
     Mod+Alt+S hotkey-overlay-title="Suspend" { spawn "systemctl" "suspend"; }
