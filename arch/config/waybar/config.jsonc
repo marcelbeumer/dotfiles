@@ -20,19 +20,19 @@
     "pulseaudio",
     "bluetooth",
     "network",
-    "custom/mako",
+    "custom/notifications",
     "cpu",
     "battery"
   ],
   "custom/menu": {
     "format": "󰣇"
   },
-  "custom/mako": {
-    "exec": "dot-mako-status",
+  "custom/notifications": {
+    "exec": "dot-notifications --waybar",
     "format": "{text}",
     "return-type": "json",
     "interval": 2,
-    "on-click": "makoctl mode -t do-not-disturb"
+    "on-click": "dot-notifications toggle"
   },
   "niri/workspaces": {
     "on-click": "activate",

@@ -1,0 +1,31 @@
+#!/bin/bash
+
+case "$1" in
+  "")
+    if makoctl mode | grep -q do-not-disturb; then
+      echo "off"
+    else
+      echo "on"
+    fi
+    ;;
+  --waybar)
+    if makoctl mode | grep -q do-not-disturb; then
+      echo '{"text": "󰽥", "tooltip": "Notifications off", "class": "off"}'
+    else
+      echo '{"text": "󰖨", "tooltip": "Notifications on", "class": "on"}'
+    fi
+    ;;
+  on)
+    makoctl mode -r do-not-disturb &>/dev/null
+    ;;
+  off)
+    makoctl mode -a do-not-disturb &>/dev/null
+    ;;
+  toggle)
+    makoctl mode -t do-not-disturb &>/dev/null
+    ;;
+  *)
+    echo "Usage: dot-notifications [on|off|toggle|--waybar]" >&2
+    exit 1
+    ;;
+esac
