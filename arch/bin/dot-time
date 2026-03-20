@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+timezones=("" "Europe/Amsterdam" "America/New_York" "America/Los_Angeles" "UTC")
+
+for tz in "${timezones[@]}"; do
+  if [ -z "$tz" ]; then
+    label="Local"
+  else
+    label="$tz"
+  fi
+  if [ -n "$tz" ]; then
+    time=$(TZ="$tz" date "+%A %d %B %H:%M %Z")
+  else
+    time=$(date "+%A %d %B %H:%M %Z")
+  fi
+  printf "%-20s %s\n" "$label" "$time"
+done
