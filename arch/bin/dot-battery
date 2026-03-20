@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+bat="/sys/class/power_supply/BAT0"
+if [ ! -d "$bat" ]; then
+  echo "No battery found"
+  exit 1
+fi
+
+capacity=$(cat "$bat/capacity")
+status=$(cat "$bat/status")
+power_now=$(cat "$bat/power_now")
+energy_now=$(cat "$bat/energy_now")
+energy_full=$(cat "$bat/energy_full")
+cycle_count=$(cat "$bat/cycle_count")
+
+watts=$(awk "BEGIN {printf \"%.1f\", $power_now / 1000000}")
+energy_wh=$(awk "BEGIN {printf \"%.1f\", $energy_now / 1000000}")
+full_wh=$(awk "BEGIN {printf \"%.1f\", $energy_full / 1000000}")
+
+echo "${capacity}% (${status})"
+echo "${watts}W"
+echo "${energy_wh}Wh / ${full_wh}Wh"
+echo "${cycle_count} cycles"
