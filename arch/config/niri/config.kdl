@@ -93,6 +93,13 @@ window-rule {
     open-floating true
 }
 
+recent-windows {
+    previews {
+        max-height 1080
+        max-scale 0.55
+    }
+}
+
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+Space hotkey-overlay-title="Launcher" { spawn "rofi" "-show" "drun"; }
