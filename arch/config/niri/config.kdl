@@ -75,7 +75,7 @@ hotkey-overlay {
 
 window-rule {
     draw-border-with-background false
-    // geometry-corner-radius 12
+    geometry-corner-radius 5
     clip-to-geometry true
 }
 
