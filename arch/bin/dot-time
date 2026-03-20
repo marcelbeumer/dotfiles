@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-timezones=("" "Europe/Amsterdam" "America/New_York" "America/Los_Angeles" "UTC")
+timezones=("Europe/Amsterdam" "America/New_York" "America/Los_Angeles" "UTC")
 
 for tz in "${timezones[@]}"; do
   if [ -z "$tz" ]; then
@@ -13,5 +13,5 @@ for tz in "${timezones[@]}"; do
   else
     time=$(date "+%A %d %B %H:%M %Z")
   fi
-  printf "%-20s %s\n" "$label" "$time"
+  printf "%s %s\n" "$time" "$label"
 done
