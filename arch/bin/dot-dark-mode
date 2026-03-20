@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+exec dot-color-mode dark

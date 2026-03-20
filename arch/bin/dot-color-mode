@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+schema="org.gnome.desktop.interface"
+key="color-scheme"
+
+if [ -z "$1" ]; then
+  value=$(gsettings get "$schema" "$key")
+  if [ "$value" = "'prefer-dark'" ]; then
+    echo "dark"
+  else
+    echo "light"
+  fi
+  exit 0
+fi
+
+case "$1" in
+  dark)
+    gsettings set "$schema" "$key" prefer-dark
+    ;;
+  light)
+    gsettings set "$schema" "$key" prefer-light
+    ;;
+  *)
+    echo "Usage: dot-color-mode [dark|light]" >&2
+    exit 1
+    ;;
+esac
