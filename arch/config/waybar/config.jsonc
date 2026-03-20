@@ -84,7 +84,7 @@
   // },
   "pulseaudio": {
     "format": "{icon}",
-    "on-click": "dot-launch-or-focus-tui wiremix",
+    "on-click": "dot-launch-or-focus-tui dot-sound",
     "tooltip-format": "Playback volume: {volume}%",
     "scroll-step": 5,
     "format-muted": "󰝟",
@@ -108,7 +108,7 @@
     "format-disabled": "󰂲",
     "format-connected": "",
     "tooltip-format": "Devices connected: {num_connections}",
-    "on-click": "dot-launch-or-focus-tui bluetui"
+    "on-click": "dot-launch-or-focus-tui dot-bluetooth"
   },
   "network": {
     "format-icons": [
@@ -126,7 +126,7 @@
     "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}\n\n{ipaddr}",
     "tooltip-format-disconnected": "Disconnected",
     "interval": 10,
-    "on-click": "dot-launch-or-focus-tui impala"
+    "on-click": "dot-launch-or-focus-tui dot-network"
   },
   "cpu": {
     "interval": 1,
