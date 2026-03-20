@@ -1,3 +1,21 @@
 #!/bin/bash
+cols=""
+lines=""
+fontsize=""
+
+while getopts "c:l:f:" opt; do
+  case "$opt" in
+    c) cols="$OPTARG" ;;
+    l) lines="$OPTARG" ;;
+    f) fontsize="$OPTARG" ;;
+  esac
+done
+shift $((OPTIND - 1))
+
 cmd="$*"
-exec setsid niri msg action spawn -- alacritty --class=com.marcelbeumer.terminal.float --title=Terminal -e bash -c "$cmd; if [ \$? -ne 130 ]; then dot-show-done; fi"
+opts=()
+[ -n "$cols" ] && opts+=(--option "window.dimensions.columns=$cols")
+[ -n "$lines" ] && opts+=(--option "window.dimensions.lines=$lines")
+[ -n "$fontsize" ] && opts+=(--option "font.size=$fontsize")
+
+exec setsid niri msg action spawn -- alacritty --class=com.marcelbeumer.terminal.float --title=Terminal "${opts[@]}" -e bash -c "$cmd; if [ \$? -ne 130 ]; then dot-show-done; fi"
