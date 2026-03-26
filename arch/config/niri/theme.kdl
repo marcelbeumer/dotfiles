@@ -24,3 +24,7 @@ window-rule {
         active-gradient from="#f38ba8ee" to="#cc241dee" angle=45
     }
 }
+
+window-rule {
+    geometry-corner-radius 5
+}
