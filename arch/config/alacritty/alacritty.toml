@@ -16,3 +16,6 @@ size = 11
 padding.x = 0 # 14
 padding.y = 0 # 14
 decorations = "None"
+
+[colors.primary]
+background = "#14161B"
