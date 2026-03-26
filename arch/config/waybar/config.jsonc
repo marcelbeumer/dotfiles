@@ -27,7 +27,7 @@
   ],
 
   "modules-right": [
-    "group/tray-drawer",
+    "tray",
     "cpu",
     "memory",
     "network",
@@ -52,8 +52,10 @@
     "on-click": "activate",
     "all-outputs": false,
     "format-icons": {
-      "default": "󱙝",
-      "active": "󰊠"
+      // "default": "󱙝",
+      // "active": "󰊠"
+      "default": "",
+      "active": ""
     }
   },
 
@@ -62,42 +64,19 @@
   },
 
   "clock": {
-    "format": "󱑑 {:%H:%M}",
-    "format-alt": "󰃭 {:%m/%d}",
-    "tooltip": true,
-    "tooltip-format": "<tt>{calendar}</tt><br/>{{tz_list}}",
+    "format": "󱑑 {:L%H:%M}",
+    "format-alt": "{:L%A %d %B %H:%M}",
+    "timezone-tooltip-format": "{:L%A %d %B %H:%M %Z}",
     "timezones": [
       "",
       "Europe/Amsterdam",
       "America/New_York",
       "America/Los_Angeles",
       "UTC"
-    ]
+    ],
+    "tooltip": true,
+    "tooltip-format": "{tz_list}"
   },
-
-  // "clock": {
-  //   "format": "{:L%H:%M}",
-  //   "format-alt": "{:L%A %d %B %H:%M}",
-  //   "timezone-tooltip-format": "{:L%A %d %B %H:%M %Z}",
-  //   "timezones": [
-  //     "",
-  //     "Europe/Amsterdam",
-  //     "America/New_York",
-  //     "America/Los_Angeles",
-  //     "UTC"
-  //   ],
-  //   "tooltip": true,
-  //   "tooltip-format": "{tz_list}"
-  // },
-  
-  // "custom/updates": {
-  //   "exec": "~/.config/waybar/scripts/waybar-updates",
-  //   "format": "󰏗 {}",
-  //   "interval": 43200,
-  //   "on-click": "ghostty -e bash -c '~/.config/waybar/scripts/waybar-updates --update'",
-  //   "tooltip": true,
-  //   "tooltip-format": "{} Updates available"
-  // },
   
   "idle_inhibitor": {
     "format": "{icon}",
@@ -110,37 +89,37 @@
     "tooltip-format-deactivated": "Idle Inhibitor: Inactive"
   },
 
-  "group/tray-drawer": {
+  "group/tray": {
     "orientation": "horizontal",
     "drawer": {
       "transition-duration": 200,
-      "transition-left-to-right": false
+      "transition-left-to-right": false,
+      "click-to-reveal": true
     },
-    "modules": ["custom/expand", "tray"]
+    "modules": ["custom/tray-icon", "tray"]
   },
 
-  "custom/expand": {
+  "custom/tray-icon": {
     "format": "󰅁",
     "tooltip": false
   },
 
   "tray": {
-    "icon-size": 14,
-    "spacing": 5
-    // "icon-size": 12,
-    // "spacing": 12
-  },
+    "icon-size": 15,
+    "spacing": 13
+  }, 
 
   "pulseaudio": {
+    "format": "{icon}",
     "tooltip": true,
     "format-bluetooth": "󰂰",
     "format-muted": "",
     "format-headset": "󰋋",
     "format-icons": {
-        "headphone": "󰋋",
-        "hands-free": "󰋎",
-        "headset": "󰋋",
-        "default": ["", "", ""]
+      "headphone": "󰋋",
+      "hands-free": "󰋎",
+      "headset": "󰋋",
+      "default": ["", "", ""]
     },
     "tooltip-format": "Volume: {volume}%",
     "tooltip-format-muted": "Muted",
@@ -169,7 +148,7 @@
 
   "cpu": {
     "interval": 5,
-    "format": "CPU {usage}%",
+    "format": " {usage}%",
     "tooltip": true,
     "tooltip-format": "CPU Usage: {usage}%",
     "on-click": "dot-launch-or-focus-tui btop"
@@ -177,7 +156,7 @@
 
   "memory": {
     "interval": 5,
-    "format": "RAM {percentage}%",
+    "format": " {percentage}%",
     "tooltip": true,
     "tooltip-format": "RAM: {used:0.1f}G / {total:0.1f}G\nSwap: {swapUsed:0.1f}G / {swapTotal:0.1f}G",
     "on-click": "dot-launch-or-focus-tui btop"
@@ -196,20 +175,20 @@
     "on-click": "dot-launch-or-focus-tui dot-network"
   },
 
-    "battery": {
-        "interval": 2,
-        "states": {
-            "good": 95,
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{icon} {capacity}%",
-        "format-charging": "󱐋 {capacity}%",
-        "format-plugged": " {capacity}%",
-        "format-full": "{icon} {capacity}%",
-        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
-        "tooltip": true,
-        "tooltip-format": "{timeTo}\nPower: {power:0.1f}W\nHealth: {health}%",
-        "on-click": "dot-launch-or-focus-tui btop"
+  "battery": {
+    "interval": 2,
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 15
     },
+    "format": "{icon} {capacity}%",
+    "format-charging": "󱐋 {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-full": "{icon} {capacity}%",
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "tooltip": true,
+    "tooltip-format": "{timeTo}\nPower: {power:0.1f}W\nHealth: {health}%",
+    "on-click": "dot-launch-or-focus-tui btop"
+  },
 }

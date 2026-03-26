@@ -1,28 +1,28 @@
 @import "./theme.css";
 
 * {
-    color: @neutral_tone;
-    border: none;
-    border-radius: 0;
-    font-family: "MonaspiceNe Nerd Font";
-    font-size: 13px;
-    box-shadow: none;
-    text-shadow: none;
+  color: @fg;
+  border: none;
+  border-radius: 0;
+  font-family: "MonaspiceNe Nerd Font";
+  font-size: 13px;
+  box-shadow: none;
+  text-shadow: none;
 }
 
 window#waybar {
-    background: @bg;
-  }
+  background: @bg;
+}
 
 tooltip {
-    background: @ui;
-    border: 1px solid @border;
-    border-radius: 4px;
+  background: @tooltip-bg;
+  border: 2px solid @tooltip-border;
+  border-radius: 5px;
 }
 
 tooltip label {
-    color: @neutral_tone;
-    padding: 6px 10px;
+  color: @tooltip-fg;
+  padding: 6px 10px;
 }
 
 #custom-logo,
@@ -37,53 +37,37 @@ tooltip label {
 #pulseaudio,
 #backlight,
 #battery,
-#custom-expand,
+#custom-tray-separator,
 #custom-notifications,
 #tray {
-    background: transparent;
-    padding: 0 10px;
-    margin: 0;
+  background: transparent;
+  padding: 0 10px;
+  margin: 0;
 }
 
 #custom-logo {
-    font-size: 14px;
-    padding-left: 12px;
+  font-size: 14px;
+  padding-left: 12px;
 }
 
 #workspaces button {
-    color: @neutral_tone;
-    opacity: 0.3;
-    background: transparent;
-    padding: 0 2px;
-    margin: 0;
+  color: @fg;
+  opacity: 0.3;
+  background: transparent;
+  padding: 0 2px;
+  margin: 0;
 }
 
 #workspaces button.active {
-    opacity: 1;
-    background: transparent;
-    padding: 0 2px;
+  opacity: 1;
+  background: transparent;
+  padding: 0 2px;
 }
 
-#clock { font-weight: 800; }
-#custom-updates { color: @updates_green; }
-#idle_inhibitor { color: @neutral_tone; }
-#idle_inhibitor.activated { color: @active_blue; }
-
-#cpu { color: @neutral_tone; }
-#memory { color: @neutral_tone; }
-#network { color: @neutral_tone; }
-#bluetooth { color: @neutral_tone; }
-#pulseaudio { color: @neutral_tone; }
-#backlight { color: @neutral_tone; }
-#battery { color: @neutral_tone; padding-right: 12px; }
-
-#battery.critical:not(.charging) { color: @alert_red; }
-#battery.warning:not(.charging) { color: @warning_yellow; }
-
-#custom-expand {
+#custom-tray-icon {
   color: @border;
 }
 
-#tray {
-  padding-right: 4px;
+#custom-tray-icon:hover {
+  color: @fg;
 }
