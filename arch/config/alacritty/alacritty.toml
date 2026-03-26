@@ -5,6 +5,9 @@ TERM = "xterm-256color"
 normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
 bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }
 italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
+# normal = { family = "MonaSpiceNe Nerd Font", style = "Regular" }
+# bold = { family = "MonaSpiceNe Nerd Font", style = "Bold" }
+# italic = { family = "MonaSpiceNe Nerd Font", style = "Italic" }
 size = 11
 
 [window]
