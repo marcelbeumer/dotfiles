@@ -1,32 +1,44 @@
 {
   "reload_style_on_change": true,
-  "start_hidden": true,
+  "start_hidden": false,
   "layer": "top",
   "position": "top",
+  "height": 32,
+  "margin-top": 0,
+  "margin-left": 0,
+  "margin-right": 0,
   "spacing": 0,
-  "height": 24,
+
   "modules-left": [
-    "custom/menu",
+    "custom/logo",
     "niri/workspaces",
     "niri/window"
   ],
+
+  "custom/logo": {
+    "format": "󰣇",
+    "tooltip": false,
+    "on-click": "dot-menu"
+  },
+
   "modules-center": [
     "clock"
+    // "custom/updates"
   ],
+
   "modules-right": [
-    // "memory",
-    // "group/tray-expander",
-    "tray",
-    "pulseaudio",
-    "bluetooth",
-    "network",
-    "custom/notifications",
+    "group/tray-drawer",
     "cpu",
+    "memory",
+    "network",
+    "bluetooth",
+    "idle_inhibitor",
+    "pulseaudio",
+    "custom/notifications",
+    "backlight", 
     "battery"
   ],
-  "custom/menu": {
-    "format": "󰣇"
-  },
+
   "custom/notifications": {
     "exec": "dot-notifications --waybar",
     "format": "{text}",
@@ -34,152 +46,170 @@
     "interval": 2,
     "on-click": "dot-notifications toggle"
   },
+
   "niri/workspaces": {
-    "on-click": "activate",
     "format": "{icon}",
+    "on-click": "activate",
+    "all-outputs": false,
     "format-icons": {
-      "default": "",
-      "1": "1",
-      "2": "2",
-      "3": "3",
-      "4": "4",
-      "5": "5",
-      "6": "6",
-      "7": "7",
-      "8": "8",
-      "9": "9",
-      "active": "󱓻"
+      "default": "󱙝",
+      "active": "󰊠"
     }
   },
+
   "niri/window": {
     "format": " {}"
   },
+
   "clock": {
-    "format": "{:L%H:%M}",
-    "format-alt": "{:L%A %d %B %H:%M}",
-    "timezone-tooltip-format": "{:L%A %d %B %H:%M %Z}",
+    "format": "󱑑 {:%H:%M}",
+    "format-alt": "󰃭 {:%m/%d}",
+    "tooltip": true,
+    "tooltip-format": "<tt>{calendar}</tt><br/>{{tz_list}}",
     "timezones": [
       "",
       "Europe/Amsterdam",
       "America/New_York",
       "America/Los_Angeles",
       "UTC"
-    ],
-    "tooltip": true,
-    "tooltip-format": "{tz_list}"
+    ]
   },
-  // "group/tray-expander": {
-  //   "orientation": "horizontal",
-  //   "drawer": {
-  //     "transition-duration": 300,
-  //     "children-class": "tray-group-item"
-  //   },
-  //   "modules": [
-  //     "custom/expand-icon",
-  //     "tray"
-  //   ]
+
+  // "clock": {
+  //   "format": "{:L%H:%M}",
+  //   "format-alt": "{:L%A %d %B %H:%M}",
+  //   "timezone-tooltip-format": "{:L%A %d %B %H:%M %Z}",
+  //   "timezones": [
+  //     "",
+  //     "Europe/Amsterdam",
+  //     "America/New_York",
+  //     "America/Los_Angeles",
+  //     "UTC"
+  //   ],
+  //   "tooltip": true,
+  //   "tooltip-format": "{tz_list}"
   // },
-  // "custom/expand-icon": {
-  //   "format": " ",
-  //   "tooltip": false
+  
+  // "custom/updates": {
+  //   "exec": "~/.config/waybar/scripts/waybar-updates",
+  //   "format": "󰏗 {}",
+  //   "interval": 43200,
+  //   "on-click": "ghostty -e bash -c '~/.config/waybar/scripts/waybar-updates --update'",
+  //   "tooltip": true,
+  //   "tooltip-format": "{} Updates available"
   // },
-  "pulseaudio": {
+  
+  "idle_inhibitor": {
     "format": "{icon}",
-    "on-click": "dot-launch-or-focus-tui dot-sound",
-    "tooltip-format": "Playback volume: {volume}%",
-    "scroll-step": 5,
-    "format-muted": "󰝟",
+    "tooltip": true,
     "format-icons": {
-      "default": [
-        "",
-        "",
-        ""
-      ]
-    }
+      "activated": "󰅶",
+      "deactivated": "󰾪"
+    },
+    "tooltip-format-activated": "Idle Inhibitor: Active",
+    "tooltip-format-deactivated": "Idle Inhibitor: Inactive"
   },
+
+  "group/tray-drawer": {
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 200,
+      "transition-left-to-right": false
+    },
+    "modules": ["custom/expand", "tray"]
+  },
+
+  "custom/expand": {
+    "format": "󰅁",
+    "tooltip": false
+  },
+
   "tray": {
-    "icon-size": 12,
-    "spacing": 12
-    // "icons": {
-    //   "Proton Mail Bridge": "user-info"
-    // }
+    "icon-size": 14,
+    "spacing": 5
+    // "icon-size": 12,
+    // "spacing": 12
   },
+
+  "pulseaudio": {
+    "tooltip": true,
+    "format-bluetooth": "󰂰",
+    "format-muted": "",
+    "format-headset": "󰋋",
+    "format-icons": {
+        "headphone": "󰋋",
+        "hands-free": "󰋎",
+        "headset": "󰋋",
+        "default": ["", "", ""]
+    },
+    "tooltip-format": "Volume: {volume}%",
+    "tooltip-format-muted": "Muted",
+    "on-click": "dot-launch-or-focus-tui dot-sound",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+  },
+
+  "backlight": {
+    "format": "{icon}",
+    "tooltip": true,
+    "on-click": "brightnessctl set +1%",
+    "on-click-right": "current=$(brightnessctl g); [ $current -gt 960 ] && brightnessctl set 1%- || brightnessctl set 960",
+    "format-icons": ["󰃞", "󰃝", "󰃟", "󰃠"],
+    "tooltip-format": "Brightness: {percent}%"
+  },
+
   "bluetooth": {
     "format": "",
     "format-disabled": "󰂲",
     "format-connected": "",
-    "tooltip-format": "Devices connected: {num_connections}",
+    "tooltip-format": "Bluetooth: {status}",
+    "tooltip-format-connected": "Connected ({num_connections}):\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "󰅂 {device_alias}",
     "on-click": "dot-launch-or-focus-tui dot-bluetooth"
   },
+
+  "cpu": {
+    "interval": 5,
+    "format": "CPU {usage}%",
+    "tooltip": true,
+    "tooltip-format": "CPU Usage: {usage}%",
+    "on-click": "dot-launch-or-focus-tui btop"
+  },
+
+  "memory": {
+    "interval": 5,
+    "format": "RAM {percentage}%",
+    "tooltip": true,
+    "tooltip-format": "RAM: {used:0.1f}G / {total:0.1f}G\nSwap: {swapUsed:0.1f}G / {swapTotal:0.1f}G",
+    "on-click": "dot-launch-or-focus-tui btop"
+  },
+
   "network": {
-    "format-icons": [
-      "󰤯",
-      "󰤟",
-      "󰤢",
-      "󰤥",
-      "󰤨"
-    ],
-    "format": "{icon}",
+    "interval": 2,
+    "tooltip": true,
     "format-wifi": "{icon}",
-    "format-ethernet": "󰀂",
-    "format-disconnected": "󰖪",
-    "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}\n\n{ipaddr}",
-    "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}\n\n{ipaddr}",
+    "format-ethernet": "󰈀",
+    "format-disconnected": "󰤭",
+    "format-icons": ["󰤟", "󰤟", "󰤢", "󰤥", "󰤨"],
+    "tooltip-format-wifi": "SSID: {essid}\nSignal: {signaldBm} dBm\nIP: {ipaddr}\n↓ {bandwidthDownBits}  ↑ {bandwidthUpBits}",
+    "tooltip-format-ethernet": "{ifname}\nIP: {ipaddr}\n↓ {bandwidthDownBits}  ↑ {bandwidthUpBits}",
     "tooltip-format-disconnected": "Disconnected",
-    "interval": 10,
     "on-click": "dot-launch-or-focus-tui dot-network"
   },
-  "cpu": {
-    "interval": 1,
-    "format": "󰍛",
-    // "format": "{usage}%",
-    // "format": "{icon0} {icon1} {icon2} {icon3}",
-    // "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
-    "on-click": "dot-launch-or-focus-tui btop"
-  },
-  "memory": {
-    "interval": 3,
-    "format": "{used:0.1f}G/{total:0.1f}G",
-    "on-click": "dot-launch-or-focus-tui btop"
-  },
-  "battery": {
-    "format": "{capacity}% {icon}",
-    "format-discharging": "{icon}",
-    "format-charging": "{icon}",
-    "format-plugged": "",
-    "format-icons": {
-      "charging": [
-        "󰢜",
-        "󰂆",
-        "󰂇",
-        "󰂈",
-        "󰢝",
-        "󰂉",
-        "󰢞",
-        "󰂊",
-        "󰂋",
-        "󰂅"
-      ],
-      "default": [
-        "󰁺",
-        "󰁻",
-        "󰁼",
-        "󰁽",
-        "󰁾",
-        "󰁿",
-        "󰂀",
-        "󰂁",
-        "󰂂",
-        "󰁹"
-      ]
+
+    "battery": {
+        "interval": 2,
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󱐋 {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-full": "{icon} {capacity}%",
+        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "tooltip": true,
+        "tooltip-format": "{timeTo}\nPower: {power:0.1f}W\nHealth: {health}%",
+        "on-click": "dot-launch-or-focus-tui btop"
     },
-    "format-full": "󰂅",
-    "tooltip-format-discharging": "{power:>1.0f}W↓ {capacity}%",
-    "tooltip-format-charging": "{power:>1.0f}W↑ {capacity}%",
-    "interval": 5,
-    "states": {
-      "warning": 20,
-      "critical": 10
-    }
-  }
 }

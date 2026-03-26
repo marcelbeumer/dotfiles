@@ -1,5 +1,15 @@
 /* @define-color foreground #cdd6f4; */
 /* @define-color background #1a1b26; */
-@define-color foreground #ddd;
+/* @define-color foreground #ddd; */
 /* @define-color background rgba(0, 0, 0, 0.3); */
-@define-color background #000;
+/* @define-color background #000; */
+
+/* @define-color bg             rgba(20, 21, 30, 0.55); */
+@define-color bg             rgba(20, 21, 30, 0.95);
+@define-color ui             rgba(27, 29, 43, 0.98);
+@define-color border         #363a56;
+@define-color neutral_tone   #cbced3;
+@define-color active_blue    #86aaec;
+@define-color alert_red      #dd6777;
+@define-color updates_green  #90ceaa;
+@define-color warning_yellow #ecd3a0;
