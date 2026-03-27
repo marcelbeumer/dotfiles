@@ -1,0 +1,7 @@
+# Theme files copied by dot-theme (not checked in)
+config/alacritty/theme.toml
+config/mako/theme
+config/niri/theme.kdl
+config/rofi/theme.rasi
+config/swayosd/theme.css
+config/waybar/theme.css

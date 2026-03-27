@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+state_dir="${HOME}/.local/share/${USER}"
+current="${state_dir}/theme"
+
+# Resolve the themes directory relative to this script's location in the repo.
+# bin/dot-theme -> ../../themes
+script_path="$(readlink -f "$0")"
+themes_dir="$(cd "$(dirname "$script_path")/../themes" && pwd)"
+
+# Query current theme.
+if [ -z "$1" ]; then
+  if [ -f "$current" ]; then
+    cat "$current"
+  else
+    echo "default"
+  fi
+  exit 0
+fi
+
+theme="$1"
+
+if [ ! -d "$themes_dir/$theme" ]; then
+  echo "Theme '$theme' not found" >&2
+  echo "Available: $(ls "$themes_dir" | tr '\n' ' ')" >&2
+  exit 1
+fi
+
+# Resolve the config directory relative to this script's location in the repo.
+config_dir="$(cd "$(dirname "$script_path")/../config" && pwd)"
+
+# Copy theme files into config directories.
+for app_dir in "$themes_dir/$theme"/*/; do
+  app=$(basename "$app_dir")
+  [ -d "$config_dir/$app" ] || continue
+  cp "$app_dir"* "$config_dir/$app/"
+done
+
+# Persist theme name.
+mkdir -p "$state_dir"
+echo "$theme" > "$current"
+
+# Set color mode if specified by the theme.
+color_mode="$themes_dir/$theme/color-mode"
+if [ -f "$color_mode" ]; then
+  dot-color-mode "$(cat "$color_mode")"
+fi
+
+# Reload apps that don't auto-detect file changes.
+makoctl reload 2>/dev/null
+dot-restart-app swayosd-server 2>/dev/null

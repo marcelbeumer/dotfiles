@@ -35,3 +35,7 @@ done
 sharedir="$HOME/.local/share/dotfiles"
 mkdir -p $sharedir
 link "$script_dir/bin" "$sharedir/bin"
+
+# Apply theme (uses persisted theme or default).
+theme=$(cat "$HOME/.local/share/$USER/theme" 2>/dev/null || echo default)
+"$script_dir/bin/dot-theme" "$theme"

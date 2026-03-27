@@ -11,9 +11,7 @@ border-radius=3
 outer-margin=20
 max-icon-size=32
 
-text-color=#a9b1d6
-border-color=#33ccff
-background-color=#1a1b26
+include=~/.config/mako/theme
 
 [mode=do-not-disturb]
 invisible=true

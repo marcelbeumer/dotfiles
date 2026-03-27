@@ -1,0 +1,5 @@
+@define-color bg rgba(241, 245, 249, 0.9);
+@define-color fg #334155;
+@define-color tooltip-bg rgba(248, 250, 252, 1);
+@define-color tooltip-fg #334155;
+@define-color tooltip-border #0891b2;

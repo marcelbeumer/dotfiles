@@ -1,0 +1,30 @@
+overview {
+    backdrop-color "#e2e8f0ff"
+}
+
+recent-windows {
+    highlight {
+        active-color "#e2e8f0ff"
+    }
+}
+
+layout {
+    focus-ring {
+        active-gradient from="#0891b2ee" to="#059669ee" angle=45
+        inactive-color "#94a3b8aa"
+    }
+
+    background-color "#f1f5f9ff"
+}
+
+window-rule {
+    match is-window-cast-target=true
+
+    focus-ring {
+        active-gradient from="#e11d48ee" to="#dc2626ee" angle=45
+    }
+}
+
+window-rule {
+    geometry-corner-radius 5
+}
