@@ -84,6 +84,12 @@ element selected {
     border-radius: 0px;
 }
 
+element selected.active,
+element.active {
+    background-color: @bg-alt;
+    text-color: @accent-alt;
+}
+
 element-text {
     background-color: transparent;
     text-color: inherit;
