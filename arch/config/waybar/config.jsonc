@@ -9,11 +9,7 @@
   "margin-right": 0,
   "spacing": 0,
 
-  "modules-left": [
-    "custom/logo",
-    "niri/workspaces",
-    "niri/window"
-  ],
+  "modules-left": ["custom/logo", "niri/workspaces", "niri/window"],
 
   "custom/logo": {
     "format": "󰣇",
@@ -35,7 +31,7 @@
     "idle_inhibitor",
     "pulseaudio",
     "custom/notifications",
-    "backlight", 
+    "backlight",
     "battery"
   ],
 
@@ -77,7 +73,7 @@
     "tooltip": true,
     "tooltip-format": "{tz_list}"
   },
-  
+
   "idle_inhibitor": {
     "format": "{icon}",
     "tooltip": true,
@@ -107,7 +103,7 @@
   "tray": {
     "icon-size": 15,
     "spacing": 13
-  }, 
+  },
 
   "pulseaudio": {
     "format": "{icon}",
@@ -190,5 +186,5 @@
     "tooltip": true,
     "tooltip-format": "{timeTo}\nPower: {power:0.1f}W\nHealth: {health}%",
     "on-click": "dot-launch-or-focus-tui btop"
-  },
+  }
 }
