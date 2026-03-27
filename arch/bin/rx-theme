@@ -29,11 +29,21 @@ if [ ! -d "$themes_dir/$theme" ]; then
   exit 1
 fi
 
-for app_dir in "$themes_dir/$theme"/*/; do
+for app_dir in "$themes_dir/$theme"/*; do
   app=$(basename "$app_dir")
   [ -d "$config_dir/$app" ] || continue
-  cp "$app_dir"* "$config_dir/$app/"
+  cp "$app_dir"/* "$config_dir/$app/"
 done
+
+if [ -d "$themes_dir/$theme/wallpapers" ]; then
+  rm -f "${state_dir}/wallpaper-current" "${state_dir}/wallpaper-list"
+
+  for image in "$themes_dir/$theme"/wallpapers/*; do
+    echo "$image" >> "${state_dir}/wallpaper-list"
+  done
+
+  rx-wallpaper-next
+fi
 
 mkdir -p "$state_dir"
 echo "$theme" > "$current"

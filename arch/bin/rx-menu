@@ -1,14 +1,12 @@
 #!/usr/bin/env bash
 
 main_menu() {
-  echo -e "Next wallpaper\nInstall\nInstall AUR\nRemove\nUpdate\nUpdate AUR\nUpdate All\nLock\nSleep\nReboot\nShutdown" | rofi -dmenu -theme-str 'listview { lines: 11; }' -i -p "Menu"
+  echo -e "Next wallpaper\nTheme\nInstall\nInstall AUR\nRemove\nUpdate\nUpdate AUR\nUpdate All\nLock\nSleep\nReboot\nShutdown" | rofi -dmenu -theme-str 'listview { lines: 12; }' -i -p "Menu"
 }
 
-# Example submenu
-# power_menu() {
-#   local filter="${1:-}"
-#   echo -e "← Back\nReboot\nShutdown" | rofi -dmenu -i -p "Power" -filter "$filter"
-# }
+theme_menu() {
+  { echo "← Back"; rx-theme -l; } | rofi -dmenu -i -p "Theme" -select $(rx-theme)
+}
 
 while true; do
   choice=$(main_menu)
@@ -56,18 +54,12 @@ while true; do
     "Shutdown")
       shutdown now
       ;;
-    # Example submenu
-    # Power)
-    #   filter=""
-    #   while true; do
-    #     sub=$(power_menu "$filter")
-    #     filter="$sub"
-    #     [[ -z "$sub" || "$sub" == "← Back" ]] && break
-    #     case "$sub" in
-    #       Reboot) reboot ;;
-    #       Shutdown) shutdown now ;;
-    #     esac
-    #   done
-    #   ;;
+    "Theme")
+      while true; do
+        sub=$(theme_menu)
+        [[ -z "$sub" || "$sub" == "← Back" ]] && break
+        rx-theme $sub
+      done
+      ;;
   esac
 done
