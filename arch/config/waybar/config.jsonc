@@ -14,7 +14,7 @@
   "custom/logo": {
     "format": "󰣇",
     "tooltip": false,
-    "on-click": "dot-menu"
+    "on-click": "rx-menu"
   },
 
   "modules-center": ["clock"],
@@ -34,20 +34,20 @@
   ],
 
   "custom/notifications": {
-    "exec": "dot-notifications --waybar",
+    "exec": "rx-notifications --waybar",
     "format": "{text}",
     "return-type": "json",
     "interval": 2,
-    "on-click": "dot-notifications toggle"
+    "on-click": "rx-notifications toggle"
   },
 
   "custom/updates": {
-    "exec": "dot-pending-updates-waybar",
+    "exec": "rx-pending-updates-waybar",
     "return-type": "json",
     "format": "{}",
     "interval": 3600,
     "signal": 8,
-    "on-click": "dot-launch-floating-terminal dot-pkg-all-update"
+    "on-click": "rx-launch-floating-terminal rx-pkg-all-update"
   },
 
   "niri/workspaces": {
@@ -126,7 +126,7 @@
     },
     "tooltip-format": "Volume: {volume}%",
     "tooltip-format-muted": "Muted",
-    "on-click": "dot-launch-or-focus-tui dot-sound",
+    "on-click": "rx-launch-or-focus-tui rx-sound",
     "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
   },
 
@@ -146,7 +146,7 @@
     "tooltip-format": "Bluetooth: {status}",
     "tooltip-format-connected": "Connected ({num_connections}):\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "󰅂 {device_alias}",
-    "on-click": "dot-launch-or-focus-tui dot-bluetooth"
+    "on-click": "rx-launch-or-focus-tui rx-bluetooth"
   },
 
   "cpu": {
@@ -154,7 +154,7 @@
     "format": " {usage}%",
     "tooltip": true,
     "tooltip-format": "CPU Usage: {usage}%",
-    "on-click": "dot-launch-or-focus-tui btop"
+    "on-click": "rx-launch-or-focus-tui btop"
   },
 
   "memory": {
@@ -162,7 +162,7 @@
     "format": " {percentage}%",
     "tooltip": true,
     "tooltip-format": "RAM: {used:0.1f}G / {total:0.1f}G\nSwap: {swapUsed:0.1f}G / {swapTotal:0.1f}G",
-    "on-click": "dot-launch-or-focus-tui btop"
+    "on-click": "rx-launch-or-focus-tui btop"
   },
 
   "network": {
@@ -175,7 +175,7 @@
     "tooltip-format-wifi": "SSID: {essid}\nSignal: {signaldBm} dBm\nIP: {ipaddr}\n↓ {bandwidthDownBits}  ↑ {bandwidthUpBits}",
     "tooltip-format-ethernet": "{ifname}\nIP: {ipaddr}\n↓ {bandwidthDownBits}  ↑ {bandwidthUpBits}",
     "tooltip-format-disconnected": "Disconnected",
-    "on-click": "dot-launch-or-focus-tui dot-network"
+    "on-click": "rx-launch-or-focus-tui rx-network"
   },
 
   "battery": {
@@ -192,6 +192,6 @@
     "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
     "tooltip": true,
     "tooltip-format": "{timeTo}\nPower: {power:0.1f}W\nHealth: {health}%",
-    "on-click": "dot-launch-or-focus-tui btop"
+    "on-click": "rx-launch-or-focus-tui btop"
   }
 }

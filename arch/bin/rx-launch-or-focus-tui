@@ -2,7 +2,7 @@
 # Launch or focus an already running TUI by binary name.
 #
 # Examples:
-#   dot-launch-or-focus-tui btop [title] [ARGS]
+#   rx-launch-or-focus-tui btop [title] [ARGS]
 
 set -o errexit
 set -o pipefail
@@ -36,7 +36,7 @@ if [ "${APP_ID}" == "null" ]; then
     exit 1
   fi
 
-  niri msg action spawn -- alacritty --class="dot.alacritty.${APP}" --title "${APP_TITLE}" -e "${APP}" "$@"
+  niri msg action spawn -- alacritty --class="rx.alacritty.${APP}" --title "${APP_TITLE}" -e "${APP}" "$@"
 else
   niri msg action focus-window --id "${APP_ID}"
 fi

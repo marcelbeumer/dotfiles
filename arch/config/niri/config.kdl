@@ -4,10 +4,10 @@ environment {
 
 prefer-no-csd
 spawn-at-startup "xwayland-satellite"
-spawn-sh-at-startup "dot-wallpaper-set"
+spawn-sh-at-startup "rx-wallpaper-set"
 spawn-at-startup "mako"
 spawn-sh-at-startup "GTK_THEME=Adwaita:dark waybar" // GTK_THEME for tray icons
-spawn-at-startup "swayidle" "-w" "timeout" "300" "dot-lock" "lock" "dot-lock" "before-sleep" "dot-lock"
+spawn-at-startup "swayidle" "-w" "timeout" "300" "rx-lock" "lock" "rx-lock" "before-sleep" "rx-lock"
 
 // Start swayosd-server on GL because Intel Vulkan drivers need a few client
 // calls before something happens. GL is instant. 
@@ -102,10 +102,10 @@ recent-windows {
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+Space hotkey-overlay-title="Launcher" { spawn "rofi" "-show" "drun"; }
-    Mod+Shift+Space hotkey-overlay-title="Launcher (run)" { spawn "rofi" "-show" "run" "-run-command" "dot-launch-floating-terminal {cmd}"; }
-    Mod+P hotkey-overlay-title="Launcher (menu)" { spawn "dot-menu"; }
-    Mod+BackSpace hotkey-overlay-title="Time zones" { spawn "dot-launch-floating-terminal" "-c" "50" "-l" "6" "-f" "16" "dot-time"; }
-    Mod+Alt+L hotkey-overlay-title="Lock" { spawn "dot-lock"; }
+    Mod+Shift+Space hotkey-overlay-title="Launcher (run)" { spawn "rofi" "-show" "run" "-run-command" "rx-launch-floating-terminal {cmd}"; }
+    Mod+P hotkey-overlay-title="Launcher (menu)" { spawn "rx-menu"; }
+    Mod+BackSpace hotkey-overlay-title="Time zones" { spawn "rx-launch-floating-terminal" "-c" "50" "-l" "6" "-f" "16" "rx-time"; }
+    Mod+Alt+L hotkey-overlay-title="Lock" { spawn "rx-lock"; }
     Mod+Alt+P hotkey-overlay-title="Power off monitors" { power-off-monitors; }
     Mod+Alt+S hotkey-overlay-title="Suspend" { spawn "systemctl" "suspend"; }
 

@@ -16,34 +16,34 @@ while true; do
 
   case "$choice" in
     "Next wallpaper")
-      dot-wallpaper-next
+      rx-wallpaper-next
       ;;
     "Install")
-      dot-launch-floating-terminal dot-pkg-install &
+      rx-launch-floating-terminal rx-pkg-install &
       break
       ;;
     "Install AUR")
-      dot-launch-floating-terminal dot-pkg-aur-install &
+      rx-launch-floating-terminal rx-pkg-aur-install &
       break
       ;;
     "Remove")
-      dot-launch-floating-terminal dot-pkg-remove &
+      rx-launch-floating-terminal rx-pkg-remove &
       break
       ;;
     "Update")
-      dot-launch-floating-terminal dot-pkg-update &
+      rx-launch-floating-terminal rx-pkg-update &
       break
       ;;
     "Update AUR")
-      dot-launch-floating-terminal dot-pkg-aur-update &
+      rx-launch-floating-terminal rx-pkg-aur-update &
       break
       ;;
     "Update All")
-      dot-launch-floating-terminal dot-pkg-all-update &
+      rx-launch-floating-terminal rx-pkg-all-update &
       break
       ;;
     "Lock")
-      dot-lock
+      rx-lock
       break
       ;;
     "Sleep")

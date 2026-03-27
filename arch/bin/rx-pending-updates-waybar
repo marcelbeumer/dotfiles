@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-pacman=$(dot-pending-updates)
-aur=$(dot-pending-aur-updates)
+pacman=$(rx-pending-updates)
+aur=$(rx-pending-aur-updates)
 total=$((pacman + aur))
 
 if [ "$total" -gt 0 ]; then

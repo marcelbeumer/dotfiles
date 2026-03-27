@@ -12,7 +12,7 @@ title() {
 }
 
 export PATH="$HOME/.local/share/${USER}/bin:$PATH"
-export PATH="$HOME/.local/share/dotfiles/bin:$PATH"
+export PATH="$HOME/.local/share/rx/bin:$PATH"
 export PATH=$PATH:/$HOME/bin
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$HOME/go/bin:$PATH

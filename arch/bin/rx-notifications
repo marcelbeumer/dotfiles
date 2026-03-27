@@ -25,7 +25,7 @@ case "$1" in
     makoctl mode -t do-not-disturb &>/dev/null
     ;;
   *)
-    echo "Usage: dot-notifications [on|off|toggle|--waybar]" >&2
+    echo "Usage: rx-notifications [on|off|toggle|--waybar]" >&2
     exit 1
     ;;
 esac

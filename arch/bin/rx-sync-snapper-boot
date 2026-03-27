@@ -17,10 +17,10 @@ set -euo pipefail
 #   [Action]
 #   Description = Syncing snapper snapshots to boot entries...
 #   When = PostTransaction
-#   Exec = /path/to/dot-sync-snapper-boot
+#   Exec = /path/to/rx-sync-snapper-boot
 #   Depends = snapper
 
-case "${1:-}" in -h|--help) echo "Usage: dot-sync-snapper-boot [count=5]"; exit ;; esac
+case "${1:-}" in -h|--help) echo "Usage: rx-sync-snapper-boot [count=5]"; exit ;; esac
 
 COUNT="${1:-10}"
 ENTRIES_DIR="/boot/loader/entries"

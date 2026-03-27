@@ -18,4 +18,4 @@ opts=()
 [ -n "$lines" ] && opts+=(--option "window.dimensions.lines=$lines")
 [ -n "$fontsize" ] && opts+=(--option "font.size=$fontsize")
 
-exec setsid niri msg action spawn -- alacritty --class=com.marcelbeumer.terminal.float --title=Terminal "${opts[@]}" -e bash -c "$cmd; if [ \$? -ne 130 ]; then dot-show-done; fi"
+exec setsid niri msg action spawn -- alacritty --class=com.marcelbeumer.terminal.float --title=Terminal "${opts[@]}" -e bash -c "$cmd; if [ \$? -ne 130 ]; then rx-show-done; fi"

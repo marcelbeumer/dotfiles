@@ -20,7 +20,7 @@ case "$1" in
     gsettings set "$schema" "$key" prefer-light
     ;;
   *)
-    echo "Usage: dot-color-mode [dark|light]" >&2
+    echo "Usage: rx-color-mode [dark|light]" >&2
     exit 1
     ;;
 esac

@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+exec rx-color-mode light

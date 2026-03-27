@@ -3,7 +3,7 @@ state_dir="${HOME}/.local/share/${USER}"
 current="${state_dir}/theme"
 
 # Resolve the themes directory relative to this script's location in the repo.
-# bin/dot-theme -> ../../themes
+# bin/rx-theme -> ../../themes
 script_path="$(readlink -f "$0")"
 themes_dir="$(cd "$(dirname "$script_path")/../themes" && pwd)"
 
@@ -42,9 +42,9 @@ echo "$theme" > "$current"
 # Set color mode if specified by the theme.
 color_mode="$themes_dir/$theme/color-mode"
 if [ -f "$color_mode" ]; then
-  dot-color-mode "$(cat "$color_mode")"
+  rx-color-mode "$(cat "$color_mode")"
 fi
 
 # Reload apps that don't auto-detect file changes.
 makoctl reload 2>/dev/null
-dot-restart-app swayosd-server 2>/dev/null
+rx-restart-app swayosd-server 2>/dev/null
