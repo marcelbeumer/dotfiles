@@ -17,15 +17,13 @@
     "on-click": "dot-menu"
   },
 
-  "modules-center": [
-    "clock"
-    // "custom/updates"
-  ],
+  "modules-center": ["clock"],
 
   "modules-right": [
     "tray",
     "cpu",
     "memory",
+    "custom/updates",
     "network",
     "bluetooth",
     "idle_inhibitor",
@@ -41,6 +39,15 @@
     "return-type": "json",
     "interval": 2,
     "on-click": "dot-notifications toggle"
+  },
+
+  "custom/updates": {
+    "exec": "dot-pending-updates-waybar",
+    "return-type": "json",
+    "format": "{}",
+    "interval": 3600,
+    "signal": 8,
+    "on-click": "dot-launch-floating-terminal dot-pkg-all-update"
   },
 
   "niri/workspaces": {

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+pacman=$(dot-pending-updates)
+aur=$(dot-pending-aur-updates)
+total=$((pacman + aur))
+
+if [ "$total" -gt 0 ]; then
+  printf '{"text": "󰏗 %s", "tooltip": "Pending updates: %s (pacman: %s, aur: %s)"}\n' "$total" "$total" "$pacman" "$aur"
+else
+  printf '{"text": "󰏗", "tooltip": "System is up to date"}\n'
+fi

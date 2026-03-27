@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 main_menu() {
-  echo -e "Next wallpaper\nInstall\nInstall AUR\nRemove\nUpdate\nLock\nSleep\nReboot\nShutdown" | rofi -dmenu -theme-str 'listview { lines: 9; }' -i -p "Menu"
+  echo -e "Next wallpaper\nInstall\nInstall AUR\nRemove\nUpdate\nUpdate AUR\nUpdate All\nLock\nSleep\nReboot\nShutdown" | rofi -dmenu -theme-str 'listview { lines: 11; }' -i -p "Menu"
 }
 
 # Example submenu
@@ -31,7 +31,15 @@ while true; do
       break
       ;;
     "Update")
-      dot-launch-floating-terminal sudo pacman -Syu &
+      dot-launch-floating-terminal dot-pkg-update &
+      break
+      ;;
+    "Update AUR")
+      dot-launch-floating-terminal dot-pkg-aur-update &
+      break
+      ;;
+    "Update All")
+      dot-launch-floating-terminal dot-pkg-all-update &
       break
       ;;
     "Lock")
