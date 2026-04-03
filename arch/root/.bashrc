@@ -18,6 +18,7 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$HOME/go/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
+export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 export PATH="./node_modules/.bin:$PATH"
 
 export EDITOR=nvim
