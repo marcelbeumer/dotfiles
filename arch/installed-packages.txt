@@ -26,7 +26,6 @@ dolphin
 dunst
 efibootmgr
 epiphany
-evolution
 fd
 firefox
 fuse2
@@ -112,9 +111,10 @@ ly
 mako
 malcontent
 man-db
-matugen
 mesa-utils
 mpv
+mpv-mpris
+mrupdater
 nano
 nautilus
 networkmanager
@@ -122,6 +122,7 @@ ninja
 niri
 orca
 otf-monaspace-nerd
+pacman-contrib
 papers
 pass-otp
 peaclock
@@ -158,8 +159,6 @@ swaylock
 swayosd
 system-config-printer
 tecla
-thunderbird
-thunderbird-i18n-nl
 tmux
 torbrowser-launcher
 ttf-droid
