@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-current="${HOME}/.local/share/wallpaper/.current"
+dir="${HOME}/.local/share/${USER}"
+current="${dir}/wallpaper-current"
 
 args=()
 if [ -f "${current}" ]; then
