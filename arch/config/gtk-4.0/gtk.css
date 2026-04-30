@@ -1,0 +1,11 @@
+/* Run GTK_DEBUG=interactive nautilus to see nodes and clases */
+
+.nautilus-window {
+  background-color: transparent;
+}
+.nautilus-window .sidebar-pane {
+  background-color: alpha(@sidebar_bg_color, 0.7);
+}
+.nautilus-window .content-pane {
+  background-color: alpha(@window_bg_color, 0.9);
+}

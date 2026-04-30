@@ -102,6 +102,13 @@ layer-rule {
 }
 
 window-rule {
+  match app-id="^org.gnome.Nautilus$"
+  background-effect {
+    blur true
+  }
+}
+
+window-rule {
   match app-id=r#"firefox$"#
   default-column-width { proportion 0.66667; }
 }
