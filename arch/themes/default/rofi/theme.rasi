@@ -6,8 +6,8 @@
 * {
     // bg: #14151f;
     // bg-alt: #1e1f2e;
-    bg: #14151fdd;
-    bg-alt: #1e1f2eee;
+    bg: #14151fbb;
+    bg-alt: #1e1f2ebb;
     fg: #cdd6f4;
     fg-alt: #bac2de;
     

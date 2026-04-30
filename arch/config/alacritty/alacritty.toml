@@ -19,4 +19,4 @@ size = 11
 padding.x = 0 # 14
 padding.y = 0 # 14
 decorations = "None"
-
+opacity = 0.8
