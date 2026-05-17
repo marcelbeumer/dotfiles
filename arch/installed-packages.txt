@@ -1,3 +1,4 @@
+7zip
 alacritty
 arch-install-scripts
 aws-session-manager-plugin
@@ -14,6 +15,7 @@ brightnessctl
 btop
 btrfs-progs
 cava
+cdecrypt-git
 chromium
 cmake
 cups
@@ -77,13 +79,13 @@ gvfs
 gvfs-afc
 gvfs-dnssd
 gvfs-goa
-gvfs-google
 gvfs-gphoto2
 gvfs-mtp
 gvfs-nfs
 gvfs-onedrive
 gvfs-smb
 gvfs-wsdd
+hplip
 htop
 hyprland
 hyprlock
@@ -111,6 +113,7 @@ ly
 mako
 malcontent
 man-db
+mcomix
 mesa-utils
 mpv
 mpv-mpris
@@ -133,6 +136,7 @@ pipewire-pulse
 plocate
 polkit-kde-agent
 power-profiles-daemon
+proton-vpn-cli
 qt5-wayland
 qt6-wayland
 restic
@@ -152,6 +156,7 @@ spotify-player
 steam
 streamlink
 sudo
+sunsetr-bin
 sushi
 swaybg
 swayidle
@@ -164,6 +169,7 @@ torbrowser-launcher
 ttf-droid
 ttf-fira-mono
 ttf-jetbrains-mono-nerd
+unrar
 uwsm
 vim
 vulkan-intel
@@ -190,6 +196,7 @@ xorg-server
 xorg-xinit
 xsettingsd
 xwayland-satellite
+yacreader
 yay
 yay-debug
 yelp
