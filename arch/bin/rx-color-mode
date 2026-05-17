@@ -1,6 +1,21 @@
 #!/usr/bin/env bash
+
 schema="org.gnome.desktop.interface"
 key="color-scheme"
+
+set_gtk3_dark() {
+  local value=$1
+  local file="$HOME/.config/gtk-3.0/settings.ini"
+  mkdir -p "$(dirname "$file")"
+  if [ ! -f "$file" ]; then
+    echo "[Settings]" > "$file"
+  fi
+  if ! grep -q "gtk-application-prefer-dark-theme=" "$file"; then
+    echo "gtk-application-prefer-dark-theme=$value" >> "$file"
+  else
+    sed -i "s/gtk-application-prefer-dark-theme=.*/gtk-application-prefer-dark-theme=$value/" "$file"
+  fi
+}
 
 if [ -z "$1" ]; then
   value=$(gsettings get "$schema" "$key")
@@ -15,9 +30,11 @@ fi
 case "$1" in
   dark)
     gsettings set "$schema" "$key" prefer-dark
+    set_gtk3_dark 1
     ;;
   light)
     gsettings set "$schema" "$key" prefer-light
+    set_gtk3_dark 0
     ;;
   *)
     echo "Usage: rx-color-mode [dark|light]" >&2
