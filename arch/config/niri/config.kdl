@@ -1,5 +1,6 @@
 environment {
   DISPLAY ":0"
+  QT_QPA_PLATFORMTHEME "xdgdesktopportal"
 }
 
 prefer-no-csd
