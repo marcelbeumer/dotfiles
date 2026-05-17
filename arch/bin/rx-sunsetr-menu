@@ -16,7 +16,7 @@ case "$1" in
 esac
 
 lines=$(echo -e "$items" | wc -l)
-choice=$(echo -e "$items" | rofi -dmenu -theme-str "listview { lines: $lines; }" -i -p "Sunsetr" -select "$preset")
+choice=$(echo -e "$items" | rofi -dmenu -theme-str "listview { lines: $lines; }" -i -p "Preset" -select "$preset")
 [[ -z "$choice" ]] && exit $EXIT_ESC
 [[ "$choice" == "← Back" ]] && exit $EXIT_BACK
 
