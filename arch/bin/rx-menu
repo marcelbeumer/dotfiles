@@ -1,11 +1,43 @@
 #!/usr/bin/env bash
 
+EXIT_BACK=1
+EXIT_ESC=2
+
+rofi_menu() {
+  local prompt=$1 select=${2:-}
+  shift 2
+  local lines=$#
+  printf '%s\n' "$@" | rofi -dmenu -i -p "$prompt" -theme-str "listview { lines: $lines; }" ${select:+-select "$select"}
+}
+
 main_menu() {
-  echo -e "Next wallpaper\nTheme\nSunsetr\nInstall\nInstall AUR\nRemove\nUpdate\nUpdate AUR\nUpdate All\nLock\nSleep\nReboot\nShutdown" | rofi -dmenu -theme-str 'listview { lines: 13; }' -i -p "Menu"
+  rofi_menu "Menu" "" "Settings" "Packages" "Power"
+}
+
+settings_menu() {
+  rofi_menu "Settings" "" "← Back" "Next wallpaper" "Theme" "Sunsetr"
 }
 
 theme_menu() {
-  { echo "← Back"; rx-theme -l; } | rofi -dmenu -i -p "Theme" -select $(rx-theme)
+  { echo "← Back"; rx-theme -l; } | rofi -dmenu -i -p "Theme" -select "$(rx-theme)"
+}
+
+sunsetr_menu() {
+  while true; do
+    rx-sunsetr-menu --sub
+    case $? in
+      $EXIT_ESC) exit 0 ;;
+      $EXIT_BACK) break ;;
+    esac
+  done
+}
+
+pkg_menu() {
+  rofi_menu "Packages" "" "← Back" "Install" "Install AUR" "Remove" "Update" "Update AUR" "Update All"
+}
+
+power_menu() {
+  rofi_menu "Power" "" "← Back" "Lock" "Sleep" "Reboot" "Shutdown"
 }
 
 while true; do
@@ -13,56 +45,52 @@ while true; do
   [[ -z "$choice" ]] && exit 0
 
   case "$choice" in
-    "Next wallpaper")
-      rx-wallpaper-next
-      ;;
-    "Install")
-      rx-launch-floating-terminal rx-pkg-install &
-      break
-      ;;
-    "Install AUR")
-      rx-launch-floating-terminal rx-pkg-aur-install &
-      break
-      ;;
-    "Remove")
-      rx-launch-floating-terminal rx-pkg-remove &
-      break
-      ;;
-    "Update")
-      rx-launch-floating-terminal rx-pkg-update &
-      break
-      ;;
-    "Update AUR")
-      rx-launch-floating-terminal rx-pkg-aur-update &
-      break
-      ;;
-    "Update All")
-      rx-launch-floating-terminal rx-pkg-all-update &
-      break
-      ;;
-    "Lock")
-      rx-lock
-      break
-      ;;
-    "Sleep")
-      systemctl suspend
-      break
-      ;;
-    "Reboot")
-      reboot
-      ;;
-    "Shutdown")
-      shutdown now
-      ;;
-    "Theme")
+    "Settings")
       while true; do
-        sub=$(theme_menu)
-        [[ -z "$sub" || "$sub" == "← Back" ]] && break
-        rx-theme $sub
+        sub=$(settings_menu)
+        case "$sub" in
+          "") exit 0 ;;
+          "← Back") break ;;
+          "Next wallpaper") rx-wallpaper-next ;;
+          "Theme")
+            while true; do
+              tsub=$(theme_menu)
+              [[ -z "$tsub" ]] && exit 0
+              [[ "$tsub" == "← Back" ]] && break
+              rx-theme "$tsub"
+            done
+            ;;
+          "Sunsetr") sunsetr_menu ;;
+        esac
       done
       ;;
-    "Sunsetr")
-      rx-sunsetr-menu --sub
+    "Packages")
+      while true; do
+        sub=$(pkg_menu)
+        case "$sub" in
+          "") exit 0 ;;
+          "← Back") break ;;
+          "Install")      rx-launch-floating-terminal rx-pkg-install & exit 0 ;;
+          "Install AUR")  rx-launch-floating-terminal rx-pkg-aur-install & exit 0 ;;
+          "Remove")       rx-launch-floating-terminal rx-pkg-remove & exit 0 ;;
+          "Update")       rx-launch-floating-terminal rx-pkg-update & exit 0 ;;
+          "Update AUR")   rx-launch-floating-terminal rx-pkg-aur-update & exit 0 ;;
+          "Update All")   rx-launch-floating-terminal rx-pkg-all-update & exit 0 ;;
+        esac
+      done
+      ;;
+    "Power")
+      while true; do
+        sub=$(power_menu)
+        case "$sub" in
+          "") exit 0 ;;
+          "← Back") break ;;
+          "Lock")     rx-lock; exit 0;;
+          "Sleep")    systemctl suspend; exit 0;;
+          "Reboot")   reboot ;;
+          "Shutdown")  shutdown now ;;
+        esac
+      done
       ;;
   esac
 done

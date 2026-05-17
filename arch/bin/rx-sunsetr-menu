@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+EXIT_BACK=1
+EXIT_ESC=2
+
 preset=$(sunsetr status --json 2>/dev/null | jq -r '.active_preset' 2>/dev/null)
 [[ "$preset" == "default" ]] && preset="Default"
 
@@ -14,7 +17,8 @@ esac
 
 lines=$(echo -e "$items" | wc -l)
 choice=$(echo -e "$items" | rofi -dmenu -theme-str "listview { lines: $lines; }" -i -p "Sunsetr" -select "$preset")
-[[ -z "$choice" || "$choice" == "← Back" ]] && exit 1
+[[ -z "$choice" ]] && exit $EXIT_ESC
+[[ "$choice" == "← Back" ]] && exit $EXIT_BACK
 
 case "$choice" in
   "Default")  sunsetr preset default ;;
@@ -22,3 +26,5 @@ case "$choice" in
   "Reading") sunsetr preset reading ;;
   "Warm")    sunsetr preset warm ;;
 esac
+
+sleep 1 # needs time to change state
