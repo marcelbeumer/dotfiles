@@ -15,7 +15,7 @@ main_menu() {
 }
 
 settings_menu() {
-  rofi_menu "Settings" "" "← Back" "Next wallpaper" "Theme" "Sunsetr"
+  rofi_menu "Settings" "" "← Back" "Next wallpaper" "Theme" "Color Temperature"
 }
 
 theme_menu() {
@@ -60,7 +60,7 @@ while true; do
               rx-theme "$tsub"
             done
             ;;
-          "Sunsetr") sunsetr_menu ;;
+          "Color Temperature") sunsetr_menu ;;
         esac
       done
       ;;
