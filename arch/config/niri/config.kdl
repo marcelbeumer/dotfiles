@@ -9,6 +9,7 @@ spawn-sh-at-startup "rx-wallpaper-set"
 spawn-at-startup "mako"
 spawn-sh-at-startup "GTK_THEME=Adwaita:dark waybar" // GTK_THEME for tray icons
 spawn-at-startup "swayidle" "-w" "timeout" "300" "rx-lock" "lock" "rx-lock" "before-sleep" "rx-lock"
+spawn-at-startup "sunsetr"
 
 // Start swayosd-server on GL because Intel Vulkan drivers need a few client
 // calls before something happens. GL is instant. 
