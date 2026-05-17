@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 main_menu() {
-  echo -e "Next wallpaper\nTheme\nInstall\nInstall AUR\nRemove\nUpdate\nUpdate AUR\nUpdate All\nLock\nSleep\nReboot\nShutdown" | rofi -dmenu -theme-str 'listview { lines: 12; }' -i -p "Menu"
+  echo -e "Next wallpaper\nTheme\nSunsetr\nInstall\nInstall AUR\nRemove\nUpdate\nUpdate AUR\nUpdate All\nLock\nSleep\nReboot\nShutdown" | rofi -dmenu -theme-str 'listview { lines: 13; }' -i -p "Menu"
 }
 
 theme_menu() {
@@ -60,6 +60,9 @@ while true; do
         [[ -z "$sub" || "$sub" == "← Back" ]] && break
         rx-theme $sub
       done
+      ;;
+    "Sunsetr")
+      rx-sunsetr-menu --sub
       ;;
   esac
 done

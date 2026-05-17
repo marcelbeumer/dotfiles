@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+preset=$(sunsetr status --json 2>/dev/null | jq -r '.active_preset' 2>/dev/null)
+[[ "$preset" == "default" ]] && preset="Default"
+
+case "$1" in
+  --sub)
+    items="← Back\nDefault\nDay\nReading\nWarm"
+    ;;
+  *)
+    items="Default\nDay\nReading\nWarm"
+    ;;
+esac
+
+lines=$(echo -e "$items" | wc -l)
+choice=$(echo -e "$items" | rofi -dmenu -theme-str "listview { lines: $lines; }" -i -p "Sunsetr" -select "$preset")
+[[ -z "$choice" || "$choice" == "← Back" ]] && exit 1
+
+case "$choice" in
+  "Default")  sunsetr preset default ;;
+  "Day")     sunsetr preset day ;;
+  "Reading") sunsetr preset reading ;;
+  "Warm")    sunsetr preset warm ;;
+esac

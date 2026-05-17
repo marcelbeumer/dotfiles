@@ -28,6 +28,7 @@
     "bluetooth",
     "idle_inhibitor",
     "pulseaudio",
+    "custom/sunsetr",
     "custom/notifications",
     "backlight",
     "battery"
@@ -48,6 +49,14 @@
     "interval": 3600,
     "signal": 8,
     "on-click": "rx-launch-floating-terminal rx-pkg-all-update"
+  },
+
+  "custom/sunsetr": {
+    "exec": "rx-sunsetr-waybar",
+    "return-type": "json",
+    "format": "{}",
+    "interval": 5,
+    "on-click": "rx-sunsetr-menu"
   },
 
   "niri/workspaces": {

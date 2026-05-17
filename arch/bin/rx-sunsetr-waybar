@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+temp=$(sunsetr status --json 2>/dev/null | jq -r '.current_temp' 2>/dev/null)
+if [[ "$temp" =~ ^[0-9]+$ ]]; then
+  printf '{"text": "%sK", "tooltip": "Sunsetr: %sK"}' "$temp" "$temp"
+else
+  printf '{"text": "off", "tooltip": "Sunsetr: off"}'
+fi
