@@ -1,0 +1,51 @@
+#!/bin/bash
+# Written with assistance from Claude (Anthropic, claude-sonnet-4-6)
+
+passdir="${PASSWORD_STORE_DIR:-$HOME/.password-store}"
+statefile="${XDG_RUNTIME_DIR:-/tmp}/passrofi.state"
+
+last=""
+if [[ -f "$statefile" ]]; then
+  (( $(date +%s) - $(date +%s -r "$statefile") < 60 )) && last=$(<"$statefile")
+fi
+
+selected=$(find "$passdir" -name "*.gpg" \
+  | sed "s|$passdir/||;s|\.gpg$||" \
+  | rofi -dmenu -i -p "Pass: " ${last:+-filter "$last" -select "$last"})
+
+if [[ -z "$selected" ]]; then
+  rm -f "$statefile"
+  exit 0
+fi
+
+echo "$selected" > "$statefile"
+
+secret=$(pass show "$selected") || exit 1
+second=$(echo "$secret" | sed -n '2p')
+
+fields=("Password")
+echo "$secret" | grep -qi "^otpauth://\|^totp:" && fields+=("OTP")
+
+if [[ -n "$second" ]]; then
+  if echo "$second" | grep -qP '^[^:]+:\s'; then
+    fields+=("$(echo "$second" | grep -oP '^[^:]+')")
+  else
+    fields+=("Username")
+  fi
+fi
+
+while IFS= read -r line; do
+  key=$(echo "$line" | grep -oP '^[^:]+(?=:\s)')
+  [[ -n "$key" ]] && fields+=("$key")
+done <<< "$(echo "$secret" | tail -n +3)"
+
+field=$(printf '%s\n' "${fields[@]}" | rofi -dmenu -i -p "$selected: ")
+[[ -z "$field" ]] && exit 0
+
+case "$field" in
+  Password) echo "$secret" | head -n1 | tr -d '\n' | wl-copy ;;
+  OTP)      pass otp -c "$selected" ;;
+  Username) echo "$second" | tr -d '\n' | wl-copy ;;
+  *)        echo "$secret" | grep -i "^$field:" | head -n1 \
+              | sed "s/^$field:\s*//i" | tr -d '\n' | wl-copy ;;
+esac
