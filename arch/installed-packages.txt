@@ -25,6 +25,7 @@ discord
 docker
 docker-compose
 dolphin
+dosfstools
 dunst
 efibootmgr
 epiphany
@@ -141,6 +142,7 @@ qt5-wayland
 qt6-wayland
 restic
 rofi
+rtorrent
 rygel
 showtime
 signal-desktop
@@ -166,6 +168,7 @@ system-config-printer
 tecla
 tmux
 torbrowser-launcher
+transmission-gtk
 ttf-droid
 ttf-fira-mono
 ttf-jetbrains-mono-nerd
