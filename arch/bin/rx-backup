@@ -3,9 +3,14 @@
 # rx-backup — restic backup for home and /etc
 #
 # CONFIGURATION
-#   Reads two required environment variables:
-#     RESTIC_REPO   restic repository URL  (e.g. sftp:user@host:/path/to/repo)
-#     BACKUP_USER   local user whose home directory is backed up
+#   Required environment variables:
+#     RESTIC_REPO          restic repository URL (e.g. sftp:user@host:/path/to/repo)
+#     BACKUP_USER          local user whose home directory is backed up
+#
+#   Optional environment variables:
+#     BACKUP_USER_EXCLUDE_FILE  path to a file with additional exclude paths, one per line
+#                               lines starting with # and blank lines are ignored
+#                               can live anywhere, e.g. /home/user/.config/rx-backup-excludes
 #
 # MANUAL RUN
 #   Use rx-backup-as-user
@@ -55,11 +60,22 @@ set -euo pipefail
 repo="${RESTIC_REPO:?RESTIC_REPO is not set}"
 backup_user="${BACKUP_USER:?BACKUP_USER is not set}"
 
+exclude_args=()
+if [[ -n "${BACKUP_USER_EXCLUDE_FILE:-}" ]]; then
+  mapfile -t _excludes < "$BACKUP_USER_EXCLUDE_FILE"
+  for _exc in "${_excludes[@]}"; do
+    [[ "$_exc" =~ ^# ]] && continue
+    [[ -z "$_exc" ]] && continue
+    exclude_args+=(--exclude "$_exc")
+  done
+fi
+
 pacman -Qqe > /home/$backup_user/pkglist.txt
 
 restic -r "$repo" backup /home/$backup_user \
   --exclude /home/$backup_user/.cache \
   --exclude /home/$backup_user/.local/share/Trash \
+  "${exclude_args[@]}" \
   --compression auto \
   --tag home
 
