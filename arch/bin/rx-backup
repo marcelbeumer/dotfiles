@@ -60,11 +60,11 @@ pacman -Qqe > /home/$backup_user/pkglist.txt
 restic -r "$repo" backup /home/$backup_user \
   --exclude /home/$backup_user/.cache \
   --exclude /home/$backup_user/.local/share/Trash \
-  --compression max \
+  --compression auto \
   --tag home
 
 restic -r "$repo" backup /etc \
-  --compression max \
+  --compression auto \
   --tag etc
 
 restic -r "$repo" forget \
