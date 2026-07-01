@@ -60,6 +60,9 @@ set -euo pipefail
 repo="${RESTIC_REPO:?RESTIC_REPO is not set}"
 backup_user="${BACKUP_USER:?BACKUP_USER is not set}"
 
+# restic -r "$repo" forget --keep-last 1
+# exit 0
+
 exclude_args=()
 if [[ -n "${BACKUP_USER_EXCLUDE_FILE:-}" ]]; then
   mapfile -t _excludes < "$BACKUP_USER_EXCLUDE_FILE"
@@ -74,10 +77,13 @@ pacman -Qqe > /home/$backup_user/pkglist.txt
 
 restic -r "$repo" backup \
   /home/$backup_user \
-  /etc \
   --exclude /home/$backup_user/.cache \
   --exclude /home/$backup_user/.local/share/Trash \
   ${exclude_args[@]+"${exclude_args[@]}"} \
+  --compression auto
+
+restic -r "$repo" backup \
+  /etc \
   --compression auto
 
 restic -r "$repo" forget \
@@ -87,4 +93,3 @@ restic -r "$repo" forget \
   --prune
 
 restic -r "$repo" snapshots
-restic -r "$repo" stats
