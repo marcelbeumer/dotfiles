@@ -72,19 +72,19 @@ fi
 
 pacman -Qqe > /home/$backup_user/pkglist.txt
 
-restic -r "$repo" backup /home/$backup_user \
+restic -r "$repo" backup \
+  /home/$backup_user \
+  /etc \
   --exclude /home/$backup_user/.cache \
   --exclude /home/$backup_user/.local/share/Trash \
-  "${exclude_args[@]}" \
-  --compression auto \
-  --tag home
-
-restic -r "$repo" backup /etc \
-  --compression auto \
-  --tag etc
+  ${exclude_args[@]+"${exclude_args[@]}"} \
+  --compression auto
 
 restic -r "$repo" forget \
   --keep-daily 7 \
   --keep-weekly 4 \
   --keep-monthly 6 \
   --prune
+
+restic -r "$repo" snapshots
+restic -r "$repo" stats
