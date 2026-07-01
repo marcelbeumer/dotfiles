@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+#
+# rx-backup — restic backup for home and /etc
+#
+# CONFIGURATION
+#   Reads two required environment variables:
+#     RESTIC_REPO   restic repository URL  (e.g. sftp:user@host:/path/to/repo)
+#     BACKUP_USER   local user whose home directory is backed up
+#
+# MANUAL RUN
+#   Use rx-backup-as-user
+#
+# SYSTEMD SETUP (system unit — runs as root)
+#
+#   1. Create an environment file (chmod 600 so only root can read it):
+#        cat > /etc/rx-backup.env <<EOF
+#        RESTIC_REPO=sftp:user@host:/storage/repo
+#        BACKUP_USER=alice
+#        EOF
+#        chmod 600 /etc/rx-backup.env
+#
+#   2. Create /etc/systemd/system/rx-backup.service:
+#        [Unit]
+#        Description=restic backup (home + etc)
+#        After=network-online.target
+#        Wants=network-online.target
+#
+#        [Service]
+#        Type=oneshot
+#        EnvironmentFile=/etc/rx-backup.env
+#        ExecStart=/usr/local/bin/rx-backup
+#
+#   3. Create /etc/systemd/system/rx-backup.timer:
+#        [Unit]
+#        Description=run rx-backup daily
+#
+#        [Timer]
+#        OnCalendar=daily
+#        Persistent=true
+#
+#        [Install]
+#        WantedBy=timers.target
+#
+#   4. Enable and start:
+#        systemctl daemon-reload
+#        systemctl enable --now rx-backup.timer
+
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run as root: sudo $0"
+  exit 1
+fi
+
+set -euo pipefail
+
+repo="${RESTIC_REPO:?RESTIC_REPO is not set}"
+backup_user="${BACKUP_USER:?BACKUP_USER is not set}"
+
+pacman -Qqe > /home/$backup_user/pkglist.txt
+
+restic -r "$repo" backup /home/$backup_user \
+  --exclude /home/$backup_user/.cache \
+  --exclude /home/$backup_user/.local/share/Trash \
+  --compression max \
+  --tag home
+
+restic -r "$repo" backup /etc \
+  --compression max \
+  --tag etc
+
+restic -r "$repo" forget \
+  --keep-daily 7 \
+  --keep-weekly 4 \
+  --keep-monthly 6 \
+  --prune

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Manual wrapper for rx-backup — loads /etc/rx-backup.env and runs as root.
+# See rx-backup for configuration and systemd setup.
+#
+# Usage: rx-backup-as-user
+
+set -euo pipefail
+
+script_path="$(readlink -f "$0")"
+script_dir="$(dirname "$script_path")"
+
+sudo bash -c "set -a; source /etc/rx-backup.env; set +a; exec '${script_dir}/rx-backup'"
