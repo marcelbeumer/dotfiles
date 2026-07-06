@@ -13,7 +13,10 @@
 #                               can live anywhere, e.g. /home/user/.config/rx-backup-excludes
 #
 # MANUAL RUN
-#   Use rx-backup-as-user
+#   Use rx-backup-as-user to run a backup manually.
+#   Use rx-restic-as-user to run arbitrary restic commands against the configured repo.
+#     e.g. rx-restic-as-user snapshots
+#          rx-restic-as-user key passwd
 #
 # SYSTEMD SETUP (system unit — runs as root)
 #

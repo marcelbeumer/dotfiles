@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Thin restic wrapper — loads /etc/rx-backup.env and runs restic with the configured repo.
+# All arguments are forwarded to restic.
+#
+# Usage: rx-restic <restic-args>...
+#   e.g. rx-restic snapshots
+#        rx-restic key passwd
+#        rx-restic restore latest --target /tmp/restore
+
+set -euo pipefail
+
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run as root: sudo $0"
+  exit 1
+fi
+
+source /etc/rx-backup.env
+
+repo="${RESTIC_REPO:?RESTIC_REPO is not set}"
+
+exec restic -r "$repo" "$@"

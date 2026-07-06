@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Manual wrapper for rx-restic — loads /etc/rx-backup.env and runs as root.
+# All arguments are forwarded to restic via rx-restic.
+#
+# Usage: rx-restic-as-user <restic-args>...
+#   e.g. rx-restic-as-user snapshots
+#        rx-restic-as-user key passwd
+#        rx-restic-as-user restore latest --target /tmp/restore
+
+set -euo pipefail
+
+script_path="$(readlink -f "$0")"
+script_dir="$(dirname "$script_path")"
+
+sudo bash -c "set -a; source /etc/rx-backup.env; set +a; exec '${script_dir}/rx-restic' \"\$@\"" -- "$@"
