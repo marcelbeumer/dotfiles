@@ -63,6 +63,12 @@ set -euo pipefail
 repo="${RESTIC_REPO:?RESTIC_REPO is not set}"
 backup_user="${BACKUP_USER:?BACKUP_USER is not set}"
 
+if [[ -z "${RESTIC_PASSWORD:-}" ]]; then
+  read -rsp "RESTIC_PASSWORD: " RESTIC_PASSWORD
+  echo
+  export RESTIC_PASSWORD
+fi
+
 # restic -r "$repo" forget --keep-last 1
 # exit 0
 
