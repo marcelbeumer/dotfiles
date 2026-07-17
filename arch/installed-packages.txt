@@ -1,5 +1,6 @@
 7zip
 alacritty
+anki
 arch-install-scripts
 aws-session-manager-plugin
 aws-vault
@@ -114,7 +115,6 @@ ly
 mako
 malcontent
 man-db
-mcomix
 mesa-utils
 mpv
 mpv-mpris
@@ -122,11 +122,13 @@ mrupdater
 nano
 nautilus
 networkmanager
+nfs-utils
 ninja
 niri
 orca
 otf-monaspace-nerd
 pacman-contrib
+pahole
 papers
 pass-otp
 peaclock
@@ -137,12 +139,16 @@ pipewire-pulse
 plocate
 polkit-kde-agent
 power-profiles-daemon
+powershell-bin
 proton-vpn-cli
 qt5-wayland
 qt6-wayland
+qt6ct
 restic
 rofi
+rsync
 rtorrent
+rustdesk-bin
 rygel
 showtime
 signal-desktop
@@ -188,7 +194,6 @@ wl-clipboard
 wofi
 xdg-desktop-portal-gnome
 xdg-desktop-portal-hyprland
-xdg-terminal-exec
 xdg-user-dirs-gtk
 xdg-utils
 xf86-video-amdgpu
@@ -201,7 +206,6 @@ xsettingsd
 xwayland-satellite
 yacreader
 yay
-yay-debug
 yelp
 yq
 yt-dlp
