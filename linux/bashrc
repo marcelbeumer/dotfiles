@@ -98,9 +98,10 @@ title() {
   fi
 }
 
-# OSC 52 clipboard copy
 pbcopy() {
-    printf "\033]52;c;$(cat | base64 | tr -d '\n')\a"
+    # OSC 52 clipboard copy
+    # printf "\033]52;c;$(cat | base64 | tr -d '\n')\a"
+    lemonade copy
 }
 
 enable_proxy() {
@@ -157,3 +158,6 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
 export AWS_VAULT_BACKEND=pass
+
+# opencode
+export PATH=/home/robotx.linux/.opencode/bin:$PATH

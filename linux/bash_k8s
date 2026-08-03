@@ -1,4 +1,4 @@
-export KUBE_EDITOR="NVIM_DARK=on nvim"
+export KUBE_EDITOR=nvim
 
 export K_O_JSONPATH_NODEPORT="-o jsonpath={.spec.ports[0].nodePort}"
 export K_O_JSONPATH_PORT="-o jsonpath={.spec.ports[0].port}"
