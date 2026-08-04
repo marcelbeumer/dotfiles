@@ -13,4 +13,6 @@ mkdir -p ~/.config
 
 rm -rf ~/.config/kitty && ln -s $dirname/kitty ~/.config/kitty
 rm -rf ~/.config/alacritty && ln -s $dirname/alacritty ~/.config/alacritty
+rm -rf ~/.config/ghostty && ln -s $dirname/ghostty ~/.config/ghostty
 rm -rf ~/.config/karabiner && ln -s $dirname/karabiner ~/.config/karabiner
+rm -rf ~/.config/neovide && ln -s $dirname/neovide ~/.config/neovide
