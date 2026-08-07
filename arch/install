@@ -10,11 +10,10 @@ link() {
   ln -s "$1" "$2"
 }
 
-for file in root/.*; do
+for file in dotfiles/*; do
   [[ -e "$file" ]] || continue
   name=$(basename "$file")
-  [[ "$name" == "." || "$name" == ".." ]] && continue
-  link "$script_dir/$file" "$HOME/$name"
+  link "$script_dir/$file" "$HOME/.$name"
 done
 
 mkdir -p "$HOME/.config"
