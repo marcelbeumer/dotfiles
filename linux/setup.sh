@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dirname=`pwd`/`dirname "$0"`
+dirname=$(pwd)/$(dirname "$0")
 
 rm -f ~/.bashrc && ln -s $dirname/bashrc ~/.bashrc
 rm -f ~/.bash_k8s && ln -s $dirname/bash_k8s ~/.bash_k8s
@@ -20,6 +20,8 @@ mkdir -p ~/.config
 rm -rf ~/.config/neovide && ln -s $dirname/neovide ~/.config/neovide
 rm -rf ~/.config/hypr && ln -s $dirname/hypr ~/.config/hypr
 rm -rf ~/.config/waybar && ln -s $dirname/waybar ~/.config/waybar
+
+rm -rf ~/.pi && ln -s $dirname/pi ~/.pi
 
 mkdir -p ~/bin
 
