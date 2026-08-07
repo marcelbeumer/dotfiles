@@ -6,9 +6,7 @@
   "theme": "dark",
   "tuiMode": "regular",
   "packages": [
-    "npm:@firstpick/pi-themes-bundle",
     "npm:pi-web-access",
-    "npm:pi-lens",
-    "npm:pi-mcp-adapter"
+    "npm:pi-lens"
   ]
 }
