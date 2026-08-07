@@ -6,6 +6,9 @@ font-size = 12
 # shell-integration-features = no-cursor
 adjust-cursor-thickness = 2
 
+cursor-color = cell-foreground
+cursor-text = cell-background
+
 background = #141618
 foreground = #c5c8c6
 
