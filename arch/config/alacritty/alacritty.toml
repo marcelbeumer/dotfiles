@@ -27,3 +27,8 @@ padding.x = 0 # 14
 padding.y = 0 # 14
 decorations = "None"
 opacity = 0.8
+
+[keyboard]
+bindings = [
+  { key = "Return", mods = "Shift", chars = "\x1b[13;2u" },
+]

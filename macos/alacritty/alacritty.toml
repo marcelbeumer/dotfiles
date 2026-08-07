@@ -27,3 +27,8 @@ size = 12.0
 # family = "JetBrainsMonoNL Nerd Font"
 # # family = "Departure mono"
 # style = "Regular"
+
+[keyboard]
+bindings = [
+  { key = "Return", mods = "Shift", chars = "\x1b[13;2u" },
+]
