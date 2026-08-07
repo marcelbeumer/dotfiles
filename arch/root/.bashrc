@@ -77,6 +77,7 @@ fi
 # State: ${XDG_STATE_HOME:-~/.local/state}/zmx/{last,current}
 
 zmx() {
+  set +u
   local state_dir old_current target
   state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/zmx"
 
@@ -114,6 +115,9 @@ zmx-last() {
 
   zmx a "$last"   # flows through zmx() → flips the pair → toggle
 }
+
+export -f zmx
+export -f zmx-last
 
 alias z=zmx
 alias zl=zmx-last
