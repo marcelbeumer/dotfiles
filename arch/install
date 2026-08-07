@@ -11,7 +11,7 @@ link() {
 }
 
 for file in root/.*; do
-  [[ -f "$file" ]] || continue
+  [[ -e "$file" ]] || continue
   name=$(basename "$file")
   [[ "$name" == "." || "$name" == ".." ]] && continue
   link "$script_dir/$file" "$HOME/$name"

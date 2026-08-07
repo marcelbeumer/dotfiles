@@ -1,0 +1,14 @@
+{
+  "lastChangelogVersion": "0.84.1",
+  "defaultProvider": "ollama-cloud",
+  "defaultModel": "glm-5.2",
+  "defaultThinkingLevel": "minimal",
+  "theme": "dark",
+  "tuiMode": "regular",
+  "packages": [
+    "npm:@firstpick/pi-themes-bundle",
+    "npm:pi-web-access",
+    "npm:pi-lens",
+    "npm:pi-mcp-adapter"
+  ]
+}
