@@ -1,0 +1,11 @@
+# pi writes runtime state (auth, sessions, node_modules, caches, npm
+# package.json/lock) into this dir at runtime; only track the config files
+# we actually want versioned. settings.json's "packages" array is the source
+# of truth — pi regenerates npm/* from it on startup.
+*
+!.gitignore
+!agent/
+agent/*
+!agent/settings.json
+!agent/models.json
+!agent/AGENTS.md
