@@ -1,7 +1,7 @@
 {
   "lastChangelogVersion": "0.84.1",
   "defaultProvider": "ollama-cloud",
-  "defaultModel": "kimi-k2.6:cloud",
+  "defaultModel": "glm-5.2:cloud",
   "defaultThinkingLevel": "minimal",
   "theme": "dark",
   "tuiMode": "regular",
