@@ -29,6 +29,6 @@ size = 12.0
 # style = "Regular"
 
 [keyboard]
-bindings = [
-  { key = "Return", mods = "Shift", chars = "\x1b[13;2u" },
-]
+# bindings = [
+#   { key = "Return", mods = "Shift", chars = "\\x1b[13;2u" },
+# ]
