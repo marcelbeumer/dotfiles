@@ -81,7 +81,7 @@ alias ChromeUnthrottled="/Applications/Google\ Chrome.app/Contents/MacOS/Google\
 alias icat="kitty +kitten icat"
 alias startdev="limactl start dev"
 alias stopdev="limactl stop dev"
-alias dev="limactl shell dev"
+alias dev="limactl shell --workdir . dev"
 
 # `source_env .env`
 source_env() {
