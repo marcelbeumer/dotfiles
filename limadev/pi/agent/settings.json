@@ -1,0 +1,12 @@
+{
+  "lastChangelogVersion": "0.84.1",
+  "defaultProvider": "github-copilot",
+  "defaultModel": "gpt-5.4",
+  "defaultThinkingLevel": "minimal",
+  "theme": "dark",
+  "tuiMode": "regular",
+  "packages": [
+    "npm:pi-web-access",
+    "npm:pi-lens"
+  ]
+}
