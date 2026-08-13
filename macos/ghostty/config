@@ -1,5 +1,8 @@
 font-family = JetBrainsMono Nerd Font
 font-size = 12
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
 
 # cursor-style = block
 # cursor-style-blink = false
