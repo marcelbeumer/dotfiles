@@ -22,7 +22,7 @@ export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/bin:$PATH
 export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 export PATH="./node_modules/.bin:$PATH"
-export CDPATH=.:~/g:~/g/simyo/s:~/g/simyo/gitlab:~/g/simyo/frontend:~/g/kpn
+export CDPATH=.:~/g
 export EDITOR=nvim
 
 export PATH="$HOME/.opencode/bin:$PATH"
@@ -41,6 +41,7 @@ alias d='docker'
 alias tf='terraform'
 alias ports='sudo lsof -P -i TCP -s TCP:LISTEN'
 alias k='kubectl'
+alias ll='ls -allh'
 
 if command -v kubectl &>/dev/null; then
   source <(kubectl completion bash)
@@ -144,3 +145,8 @@ aws_ssm_pick() {
   instance_id=$(_ec2_fzf_pick) && aws_ssm "$instance_id"
 }
 
+# Lima BEGIN
+# Make sure iptables and mount.fuse3 are available
+PATH="$PATH:/usr/sbin:/sbin"
+export PATH
+# Lima END
