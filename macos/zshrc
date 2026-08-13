@@ -79,9 +79,9 @@ alias ports='sudo lsof -P -i TCP -s TCP:LISTEN'
 alias psauxkill="awk '{print \$2}' | xargs -I {} kill -9 {}"
 alias ChromeUnthrottled="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --disable-background-timer-throttling"
 alias icat="kitty +kitten icat"
-alias startdev="limactl start dev"
-alias stopdev="limactl stop dev"
-alias dev="limactl shell --workdir . dev"
+alias startdev="limactl start dev0"
+alias stopdev="limactl stop dev0"
+alias dev="limactl shell --workdir . dev0"
 
 # `source_env .env`
 source_env() {
