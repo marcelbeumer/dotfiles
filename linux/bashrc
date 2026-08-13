@@ -1,7 +1,3 @@
-if [ -f ~/.bash_local ]; then
-  . ~/.bash_local
-fi
-
 aws_vault_prompt() {
     if [[ -n "$AWS_VAULT" ]]; then
         echo "($AWS_VAULT) "
@@ -150,3 +146,7 @@ aws_ssm_pick() {
 PATH="$PATH:/usr/sbin:/sbin"
 export PATH
 # Lima END
+
+if [ -f ~/.bash_local ]; then
+  . ~/.bash_local
+fi
