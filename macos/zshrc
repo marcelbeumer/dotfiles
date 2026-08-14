@@ -1,152 +1,15 @@
-if [ -f ~/.zsh_local ]; then
-  . ~/.zsh_local
-fi
-
-if type brew &>/dev/null
-then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-fi
-
-autoload -Uz compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
-
-setopt autocd extendedglob nomatch menucomplete globcomplete interactive_comments
-
 ulimit -n 10240
 bindkey -e
+
+PROMPT='%2~ %# '
+export EDITOR="nvim"
+export CDPATH=.:~/g
 export KEYTIMEOUT=1
 
-zmodload zsh/complist
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
-zstyle ':completion:*' menu select
-
-function aws_vault_prompt {
-    if [[ -n "$AWS_VAULT" ]]; then
-        echo "($AWS_VAULT) "
-    fi
-}
-
-# PROMPT='%2~ %# '
-setopt PROMPT_SUBST
-PROMPT='%2~ `aws_vault_prompt`%# '
-
-export EDITOR="/usr/local/bin/nvim"
-export PNPM_HOME="/Users/laby/Library/pnpm"
-export ANDROID_HOME="$HOME/Library/Android/sdk"
-export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools"
-
-export PATH="$PATH:$HOME/dev/flutter/bin"
-export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-export PATH=$HOME/bin:$PATH
-export PATH=$HOME/go/bin:$PATH
-export PATH=$HOME/.local/bin:$PATH
-export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
-export PATH="$HOME/.pyenv/shims:$PATH"
-export PATH="$PNPM_HOME:$PATH"
-export PATH=$HOME/.fnm:$PATH
-
-# Company specific
-export GONOPROXY=$CONF_GNOPROXY
-export GONOSUMDB=$CONF_GONOSUMDB
-export GOPRIVATE=$CONF_GOPRIVATE
-export NVIM_GOPLS_LOCAL=$CONF_NVIM_GOPLS_LOCAL
-
-# https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/common-aliases/common-aliases.plugin.zsh
-# ls, the common ones I use a lot shortened for rapid fire usage
-alias l='ls -lFh'     #size,show type,human readable
-alias la='ls -lAFh'   #long list,show almost all,show type,human readable
-alias lr='ls -tRFh'   #sorted by date,recursive,show type,human readable
-alias lt='ls -ltFh'   #long list,sorted by date,show type,human readable
-alias ll='ls -l'      #long list
-alias ldot='ls -ld .*'
-alias lS='ls -1FSsh'
-alias lart='ls -1Fcart'
-alias lrt='ls -1Fcrt'
-# my aliases
-alias v='nvim'
-alias vd='dirtitle && v'
-alias d='docker'
-alias g='git'
-alias gg='lazygit'
-alias ctx='kubectx'
-alias ns='kubens'
-alias nr='npm run'
-alias gdalb='git branch | grep -v "master" | xargs git branch -D'
-alias ports='sudo lsof -P -i TCP -s TCP:LISTEN'
-alias psauxkill="awk '{print \$2}' | xargs -I {} kill -9 {}"
-alias ChromeUnthrottled="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --disable-background-timer-throttling"
-alias icat="kitty +kitten icat"
 alias startdev="limactl start dev0"
 alias stopdev="limactl stop dev0"
 alias dev="limactl shell --workdir . dev0"
 
-# `source_env .env`
-source_env() {
-  # export $(echo $(cat $1 | sed 's/#.*//g'| xargs) | envsubst)
-  export $(echo $(cat $1 | sed 's/#.*//g'| xargs) | envsubst)
-  set -a # automatically export all variables
-  source $1
-  set +a
-}
-
-title() {
-  if [ -z "$KITTY_WINDOW_ID" ]; then
-    echo -e "\e]2;$1"
-  else
-    kitty @ set-tab-title $1
-  fi
-}
-
-dirtitle() {
-  v=$(basename `pwd`)
-  title $v
-}
-
-enable_proxy() {
-  export http_proxy=$CONF_HTTP_PROXY
-  export https_proxy=$CONF_HTTPS_PROXY
-  export HTTP_PROXY=$CONF_HTTP_PROXY
-  export HTTPS_PROXY=$CONF_HTTPS_PROXY
-}
-
-disable_proxy() {
-  unset http_proxy
-  unset https_proxy
-  unset HTTP_PROXY
-  unset HTTPS_PROXY
-}
-
-switch_proxy() {
-  if [ -z "$https_proxy" ]; then
-    enable_proxy
-    echo "https_proxy set"
-  else
-    disable_proxy
-    echo "https_proxy unset"
-  fi
-}
-
-complete -o nospace -C /opt/homebrew/bin/terraform terraform
-eval "$(aws-vault --completion-script-zsh)"
-
-eval "$(fnm env --use-on-cd)"
-export PATH="./node_modules/.bin:$PATH"
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-source $HOME/.cargo/env
-eval "$(pyenv init -)"
-
-if [ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-fi
-
-# fnm
-FNM_PATH="/Users/robotx/Library/Application Support/fnm"
-if [ -d "$FNM_PATH" ]; then
-  export PATH="/Users/robotx/Library/Application Support/fnm:$PATH"
-  eval "`fnm env`"
+if [ -f ~/.zsh_local ]; then
+  . ~/.zsh_local
 fi
