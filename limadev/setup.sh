@@ -16,3 +16,8 @@ mkdir -p ~/.gnupg
 rm -f ~/.gnupg/gpg.conf && ln -s $dirname/gpg.conf ~/.gnupg/gpg.conf
 
 rm -rf ~/.pi && ln -s $dirname/pi ~/.pi
+
+for f in $dirname/bin/*; do
+  fname=$(basename $f)
+  ln -sf $f ~/bin/$fname
+done
