@@ -13,3 +13,34 @@ alias dev="limactl shell --workdir . dev0"
 if [ -f ~/.zsh_local ]; then
   . ~/.zsh_local
 fi
+
+rp() { ( cd "$1" >/dev/null 2>&1 && pwd ); }
+
+enable_proxy() {
+  export HTTP_PROXY=$CONF_HTTP_PROXY
+  export HTTPS_PROXY=$CONF_HTTPS_PROXY
+  export NO_PROXY=$CONF_NO_PROXY
+}
+
+disable_proxy() {
+  unset HTTP_PROXY
+  unset HTTPS_PROXY
+  unset NO_PROXY
+}
+
+function sshtunnel {
+  if [[ $# -lt 3 ]]; then 
+    echo "Usage: $0 <host> <host_port> <local_port>" >&2
+    return 1
+  fi
+  local host=$1
+  local host_port=$2
+  local local_port=$3
+  ssh -v -NL $local_port:$host:$host_port $JUMPHOST "$@"
+}
+
+source_export() {
+  set -a
+  source $1
+  set +a
+}
