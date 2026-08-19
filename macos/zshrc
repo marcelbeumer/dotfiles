@@ -1,18 +1,30 @@
+autoload -Uz compinit compinit
 ulimit -n 10240
 bindkey -e
 
 PROMPT='%2~ %# '
-export EDITOR="nvim"
+
+export PATH=$HOME/bin:$PATH
+export PATH=/usr/local/go/bin:$PATH
+export PATH=$HOME/go/bin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/bin:$PATH
+export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
+export PATH="./node_modules/.bin:$PATH"
 export CDPATH=.:~/g
+export EDITOR=nvim
 export KEYTIMEOUT=1
 
+alias g='git'
+alias d='docker'
+alias tf='terraform'
+alias ports='sudo lsof -P -i TCP -s TCP:LISTEN'
+alias k='kubectl'
+alias ll='ls -allh'
 alias startdev="limactl start dev0"
 alias stopdev="limactl stop dev0"
 alias dev="limactl shell --workdir . dev0"
-
-if [ -f ~/.zsh_local ]; then
-  . ~/.zsh_local
-fi
 
 rp() { ( cd "$1" >/dev/null 2>&1 && pwd ); }
 
@@ -45,8 +57,30 @@ source_export() {
   set +a
 }
 
+function nvim_presenting {
+  export NVIM_DARK=1 
+  export NVIM_LESS_COLORS=0 
+  export NVIM_COLORSCHEME=catppuccin 
+}
+
+function nvim_default {
+  export NVIM_DARK=1
+  export NVIM_LESS_COLORS=1
+  export NVIM_COLORSCHEME=default
+}
+
+nvim_default
+
 FNM_PATH="$HOME/.local/share/fnm"
 if [ -d "$FNM_PATH" ]; then
   export PATH="$FNM_PATH:$PATH"
   eval "`fnm env`"
+fi
+
+if [[ -f "$HOME/.cargo/env" ]]; then
+  . "$HOME/.cargo/env"
+fi
+
+if [ -f ~/.zsh_local ]; then
+  . ~/.zsh_local
 fi
