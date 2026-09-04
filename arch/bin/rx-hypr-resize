@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+mode="${1:-width}"
+direction="${2:-+}"
+
+layout=$(hyprctl activeworkspace -j | jq -r '.tiledLayout // "dwindle"')
+
+if [[ "$layout" == "scrolling" && "$mode" == "width" ]]; then
+  [[ "$direction" == "-" ]] && sign="-" || sign="+"
+  hyprctl dispatch "hl.dsp.layout(\"colresize ${sign}0.1\")" >/dev/null 2>&1 || true
+  exit 0
+fi
+
+if [[ "$mode" == "height" ]]; then
+  [[ "$direction" == "-" ]] && y=-100 || y=100
+  hyprctl dispatch "hl.dsp.window.resize({x=0,y=$y,relative=true})" >/dev/null 2>&1 || true
+else
+  [[ "$direction" == "-" ]] && x=-100 || x=100
+  hyprctl dispatch "hl.dsp.window.resize({x=$x,y=0,relative=true})" >/dev/null 2>&1 || true
+fi

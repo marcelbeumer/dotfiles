@@ -1,0 +1,101 @@
+#!/usr/bin/env bash
+#
+# rx-screenshot [smart|region|windows|fullscreen] [copy|save|slurp]
+#
+# Defaults: smart selection, saved to $XDG_PICTURES_DIR/Screenshots AND copied
+# to the clipboard, with a mako notification. Uses only grim/slurp/wl-copy/jq.
+#
+# smart      drag a region, or click a window/output to snap to it (default)
+# region     free region select
+# windows    snap to a window/output outline
+# fullscreen the focused monitor
+#
+# copy   copy to clipboard only (no file)
+# save   save to file only (no clipboard)
+# slurp  save to file and copy to clipboard (default)
+
+set -euo pipefail
+
+# If a selection is already in progress, a second keypress cancels it.
+pkill slurp 2>/dev/null && exit 0
+
+[[ -f "$HOME/.config/user-dirs.dirs" ]] && source "$HOME/.config/user-dirs.dirs"
+OUTPUT_DIR="${RX_SCREENSHOT_DIR:-${XDG_PICTURES_DIR:-$HOME/Pictures}/Screenshots}"
+mkdir -p "$OUTPUT_DIR"
+
+MODE="${1:-smart}"
+PROCESSING="${2:-slurp}"
+
+# Emit "x,y WxH" geometry for each visible thing, accounting for scale and
+# rotated/transformed (portrait) outputs.
+JQ_MONITOR_GEO='
+  def format_geo:
+    .x as $x | .y as $y |
+    (.width / .scale | floor) as $w |
+    (.height / .scale | floor) as $h |
+    .transform as $t |
+    if $t == 1 or $t == 3 then "\($x),\($y) \($h)x\($w)"
+    else "\($x),\($y) \($w)x\($h)" end;
+'
+
+get_rectangles() {
+  local ws
+  ws=$(hyprctl monitors -j | jq -r '.[] | select(.focused == true) | .activeWorkspace.id')
+  hyprctl monitors -j | jq -r --arg ws "$ws" "${JQ_MONITOR_GEO} .[] | select(.activeWorkspace.id == (\$ws | tonumber)) | format_geo"
+  hyprctl clients -j | jq -r --arg ws "$ws" '.[] | select(.workspace.id == ($ws | tonumber)) | "\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"'
+}
+
+case "$MODE" in
+  region)
+    SELECTION=$(slurp 2>/dev/null || true)
+    ;;
+  windows)
+    SELECTION=$(get_rectangles | slurp -r 2>/dev/null || true)
+    ;;
+  fullscreen)
+    SELECTION=$(hyprctl monitors -j | jq -r "${JQ_MONITOR_GEO} .[] | select(.focused == true) | format_geo")
+    ;;
+  smart | *)
+    RECTS=$(get_rectangles)
+    SELECTION=$(echo "$RECTS" | slurp 2>/dev/null || true)
+    # A tiny (<20px^2) selection means "I clicked, didn't drag" -> snap to the
+    # window/output under the click instead of grabbing a 2px sliver.
+    if [[ $SELECTION =~ ^([0-9]+),([0-9]+)[[:space:]]([0-9]+)x([0-9]+)$ ]]; then
+      if ((${BASH_REMATCH[3]} * ${BASH_REMATCH[4]} < 20)); then
+        cx="${BASH_REMATCH[1]}"; cy="${BASH_REMATCH[2]}"
+        while IFS= read -r rect; do
+          if [[ $rect =~ ^([0-9]+),([0-9]+)[[:space:]]([0-9]+)x([0-9]+) ]]; then
+            rx="${BASH_REMATCH[1]}"; ry="${BASH_REMATCH[2]}"
+            rw="${BASH_REMATCH[3]}"; rh="${BASH_REMATCH[4]}"
+            if ((cx >= rx && cx < rx + rw && cy >= ry && cy < ry + rh)); then
+              SELECTION="${rx},${ry} ${rw}x${rh}"
+              break
+            fi
+          fi
+        done <<<"$RECTS"
+      fi
+    fi
+    ;;
+esac
+
+# Cancelled selection (Esc / empty) -> quietly do nothing.
+[[ -z "${SELECTION:-}" ]] && exit 0
+
+FILEPATH="$OUTPUT_DIR/screenshot-$(date +'%Y-%m-%d_%H-%M-%S').png"
+
+case "$PROCESSING" in
+  copy)
+    grim -g "$SELECTION" - | wl-copy
+    ;;
+  save)
+    grim -g "$SELECTION" "$FILEPATH"
+    notify-send "Screenshot saved" "$FILEPATH" -t 4000 -i "$FILEPATH" 2>/dev/null || true
+    echo "$FILEPATH"
+    ;;
+  slurp | *)
+    grim -g "$SELECTION" "$FILEPATH"
+    wl-copy <"$FILEPATH"
+    notify-send "Screenshot saved & copied" "$FILEPATH" -t 4000 -i "$FILEPATH" 2>/dev/null || true
+    echo "$FILEPATH"
+    ;;
+esac

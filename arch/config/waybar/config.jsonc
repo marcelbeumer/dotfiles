@@ -9,7 +9,13 @@
   "margin-right": 0,
   "spacing": 0,
 
-  "modules-left": ["custom/logo", "niri/workspaces", "niri/window"],
+  "modules-left": [
+    "custom/logo",
+    "niri/workspaces",
+    "niri/window",
+    "hyprland/workspaces",
+    "hyprland/window"
+  ],
 
   "custom/logo": {
     "format": "󰣇",
@@ -71,7 +77,21 @@
     }
   },
 
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "on-click": "activate",
+    "all-outputs": false,
+    "format-icons": {
+      "default": "",
+      "active": ""
+    }
+  },
+
   "niri/window": {
+    "format": " {}"
+  },
+
+  "hyprland/window": {
     "format": " {}"
   },
 
