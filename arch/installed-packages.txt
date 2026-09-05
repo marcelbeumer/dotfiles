@@ -1,4 +1,5 @@
 7zip
+ai-jail-bin
 alacritty
 anki
 arch-install-scripts
@@ -9,6 +10,7 @@ base
 base-devel
 bash-completion
 batsignal
+bchunk
 bluetui
 bluez
 bluez-utils
@@ -17,6 +19,8 @@ btop
 btrfs-progs
 cava
 cdecrypt-git
+cdrdao
+cdrtools
 chromium
 cmake
 cups
@@ -37,6 +41,7 @@ fuse2
 fuzzel
 fzf
 gdm
+ghostty
 gimp
 git
 git-delta
@@ -89,6 +94,7 @@ gvfs-nfs
 gvfs-onedrive
 gvfs-smb
 gvfs-wsdd
+hashcat
 hplip
 htop
 hyprland
@@ -99,14 +105,15 @@ intel-media-driver
 intel-ucode
 iwd
 jq
+k9s
 keyd
 kimageformats
 kitty
-kitty-terminfo
 lazydocker
 lazygit
 less
 lib32-vulkan-intel
+libisoburn
 libpulse
 libreoffice-fresh
 libreoffice-fresh-nl
@@ -119,6 +126,7 @@ mako
 malcontent
 man-db
 mesa-utils
+mise
 mpv
 mpv-mpris
 mrupdater
@@ -128,6 +136,8 @@ networkmanager
 nfs-utils
 ninja
 niri
+noctalia
+nodejs
 orca
 otf-monaspace-nerd
 pacman-contrib
@@ -144,10 +154,12 @@ plocate
 polkit-kde-agent
 power-profiles-daemon
 powershell-bin
+powertop
 proton-vpn-cli
 python-pip
 python-pipenv
 python-pipx
+python-zxcvbn
 qt5-wayland
 qt6-wayland
 qt6ct
@@ -157,6 +169,7 @@ rsync
 rtorrent
 rustdesk-bin
 rygel
+seclists
 showtime
 signal-desktop
 simple-scan
@@ -179,6 +192,7 @@ swaylock
 swayosd
 system-config-printer
 tecla
+tldr
 tmux
 torbrowser-launcher
 transmission-gtk
@@ -270,4 +284,6 @@ yay
 yelp
 yq
 yt-dlp
+zmx-bin
+zoxide
 zram-generator
