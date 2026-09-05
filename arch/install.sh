@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+script_path="$(readlink -f "$0")"
+script_dir="$(dirname "$script_path")"
 cd "$script_dir"
 
 link() {
@@ -31,10 +32,15 @@ for file in xdg-applications/*.desktop; do
   link "$script_dir/$file" "$HOME/.local/share/applications/$name"
 done
 
-sharedir="$HOME/.local/share/rx"
-mkdir -p $sharedir
-link "$script_dir/bin" "$sharedir/bin"
+# Expose the whole arch tree read-only at ~/.local/share/rx so that both the
+# wrapper scripts (rx/bin) and the agent config (rx/agents) resolve from one
+# namespace. State/auth/sessions live separately under ~/.local/state/rx.
+mkdir -p "$HOME/.local/share"
+link "$script_dir" "$HOME/.local/share/rx"
+mkdir -p "$HOME/.local/state/rx"
 
 # Apply theme (uses persisted theme or default).
-theme=$(cat "$HOME/.local/share/$USER/theme" 2>/dev/null || echo default)
+theme=$(cat "$HOME/.local/state/rx/theme" 2>/dev/null || echo default)
 "$script_dir/bin/rx-theme" "$theme"
+
+$script_dir/scripts/setup-ai-jail.sh

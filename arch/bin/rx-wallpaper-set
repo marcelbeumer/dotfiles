@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-dir="${HOME}/.local/share/${USER}"
+dir="${HOME}/.local/state/rx"
 current="${dir}/wallpaper-current"
 
 if [ -n "$1" ]; then
+    mkdir -p "${dir}"
     realpath "$1" > "${current}"
 fi
 

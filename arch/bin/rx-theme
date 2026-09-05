@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-state_dir="${HOME}/.local/share/${USER}"
+state_dir="${HOME}/.local/state/rx"
 current="${state_dir}/theme"
+mkdir -p "$state_dir"
 script_path="$(readlink -f "$0")"
 themes_dir="$(cd "$(dirname "$script_path")/../themes" && pwd)"
 config_dir="$(cd "$(dirname "$script_path")/../config" && pwd)"
@@ -45,7 +46,6 @@ if [ -d "$themes_dir/$theme/wallpapers" ]; then
   rx-wallpaper-next
 fi
 
-mkdir -p "$state_dir"
 echo "$theme" > "$current"
 
 color_mode="$themes_dir/$theme/color-mode"

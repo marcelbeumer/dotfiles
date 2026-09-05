@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Name-shadowing shim: mise installs its own pi binary ahead of rx/bin on PATH,
+# so this entry exists to win the name lookup. All real work lives in rx-pi;
+# resolving it from the same dir keeps this independent of PATH order.
+exec "$(dirname "$(readlink -f "$0")")/rx-pi" "$@"

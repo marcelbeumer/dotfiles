@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-dir="${HOME}/.local/share/${USER}"
+dir="${HOME}/.local/state/rx"
 current="${dir}/wallpaper-current"
 list="${dir}/wallpaper-list"
 

@@ -1,1 +1,4 @@
 /nvim/plugin/packer_compiled.lua
+
+# ai-jail auto-writes a per-project sandbox config; never commit it.
+.ai-jail

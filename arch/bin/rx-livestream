@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-config="${HOME}/.local/share/${USER}/livestreams"
+config="${HOME}/.local/state/rx/livestreams"
 
 case "${1:-}" in -h|--help|"") echo "Usage: rx-livestream [-l|--list] <name> [quality=best]"; exit ;; esac
 case "${1:-}" in -l|--list) cat "$config" 2>/dev/null || echo "No livestreams config found" >&2; exit ;; esac

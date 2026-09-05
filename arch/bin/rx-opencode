@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Omarchy-style mise stub: install latest on first run, then exec via mise.
+mise use -g --quiet opencode || {
+  echo "error: failed to install opencode via mise" >&2
+  exit 1
+}
+
+bin_path="$(mise which opencode)"
+install_dir="$(mise where opencode)"
+
+if [[ -z "$bin_path" || -z "$install_dir" ]]; then
+  echo "error: mise could not resolve opencode paths" >&2
+  exit 1
+fi
+
+mkdir -p $HOME/.local/state/rx/opencode
+
+# Hand the resolved binary straight to ai-jail. Since we already resolved
+# it via our own mise call, the sandbox never needs mise itself, skip its
+# auto-activation and just map the install dir in read-only.
+#
+# Config comes from the versioned dotfiles tree (agents/opencode), state/auth
+# from ~/.local/state/rx/opencode. Both are projected onto opencode's default
+# paths inside the sandbox only — on the host those defaults stay empty, so a
+# bare `opencode` run sees no keys, sessions, or config.
+exec ai-jail \
+  --no-mise \
+  --map "$install_dir" \
+  --rw-map "$HOME/.local/share/rx/agents/opencode:$HOME/.config/opencode" \
+  --rw-map "$HOME/.local/state/rx/opencode:$HOME/.local/share/opencode" \
+  -- "$bin_path" "$@"

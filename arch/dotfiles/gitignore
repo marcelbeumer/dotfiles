@@ -2,3 +2,4 @@
 .nvim
 DS_Store
 .node-version
+.ai-jail

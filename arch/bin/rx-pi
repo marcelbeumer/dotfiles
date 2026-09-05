@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Omarchy-style mise stub: install latest on first run, then exec via mise.
+mise use -g --quiet pi || {
+  echo "error: failed to install pi via mise" >&2
+  exit 1
+}
+
+bin_path="$(mise which pi)"
+install_dir="$(mise where pi)"
+
+if [[ -z "$bin_path" || -z "$install_dir" ]]; then
+  echo "error: mise could not resolve pi paths" >&2
+  exit 1
+fi
+
+mkdir -p $HOME/.local/state/rx/pi
+
+# Hand the resolved binary straight to ai-jail. Since we already resolved
+# it via our own mise call, the sandbox never needs mise itself, skip its
+# auto-activation and just map the install dir in read-only.
+#
+# pi merges config and state in one dir (~/.pi/agent), so we mount per-file:
+# config comes from the versioned dotfiles tree (agents/pi), state/auth from
+# ~/.local/state/rx/pi. On the host ~/.pi stays absent, so a bare `pi` run
+# sees no keys, sessions, or config.
+exec ai-jail \
+  --no-mise \
+  --map "$install_dir" \
+  --rw-map "$HOME/.local/state/rx/pi:$HOME/.pi" \
+  --rw-map "$HOME/.local/share/rx/agents/pi/AGENTS.md:$HOME/.pi/agent/AGENTS.md" \
+  --rw-map "$HOME/.local/share/rx/agents/pi/models.json:$HOME/.pi/agent/models.json" \
+  --rw-map "$HOME/.local/share/rx/agents/pi/settings.json:$HOME/.pi/agent/settings.json" \
+  -- "$bin_path" "$@"
