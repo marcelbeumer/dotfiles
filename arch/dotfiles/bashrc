@@ -6,10 +6,6 @@ aws_vault_prompt() {
 
 PS1='\w $(aws_vault_prompt)^ '
 
-if [[ -n $ZMX_SESSION ]]; then
-  export PS1="[$ZMX_SESSION] ${PS1}"
-fi
-
 # prepend
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH="$HOME/go/bin:$PATH"
