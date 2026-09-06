@@ -17,29 +17,11 @@ export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 export PATH="./node_modules/.bin:$PATH"
+export PATH="$HOME/.local/share/rx/bin:$PATH"
 
 if command -v mise &> /dev/null; then
   eval "$(mise activate bash)"
 fi
-
-# Set our own rx bin after mise so that our wrapper scripts
-# will always take precedence.
-export PATH="$HOME/.local/share/rx/bin:$PATH"
-
-# mise's hook-env runs on PROMPT_COMMAND (every prompt) and on every cd, and
-# rebuilds PATH from a snapshot taken BEFORE the export above — re-pushing
-# installs/<tool> ahead of rx/bin and shadowing our wrappers. So run last on
-# every prompt: strip any existing rx/bin entry and put one copy back at the
-# front. PATH is never empty here (lines 13-20 guarantee entries), so the
-# trailing-colon edge case of this strip cannot occur.
-__prepend_rx_bin() {
-  local rx="$HOME/.local/share/rx/bin"
-  export PATH="$rx:${PATH//"$rx:"/}"
-}
-case ";${PROMPT_COMMAND:-};" in
-  *";__prepend_rx_bin;"*) ;;
-  *) PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND;}__prepend_rx_bin" ;;
-esac
 
 export CDPATH=.:~/g/allow:~/g/deny:~/g/ask
 export EDITOR=nvim
