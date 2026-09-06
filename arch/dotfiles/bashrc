@@ -18,10 +18,6 @@ export PATH=$HOME/.local/bin:$PATH
 export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 export PATH="./node_modules/.bin:$PATH"
 
-if command -v mise &> /dev/null; then
-  eval "$(mise activate bash)"
-fi
-
 # Set our own rx bin after mise so that our wrapper scripts
 # will always take precedence.
 export PATH="$HOME/.local/share/rx/bin:$PATH"
@@ -40,6 +36,10 @@ case ";${PROMPT_COMMAND:-};" in
   *";__prepend_rx_bin;"*) ;;
   *) PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND;}__prepend_rx_bin" ;;
 esac
+
+if command -v mise &> /dev/null; then
+  eval "$(mise activate bash)"
+fi
 
 export CDPATH=.:~/g/allow:~/g/deny:~/g/ask
 export EDITOR=nvim
