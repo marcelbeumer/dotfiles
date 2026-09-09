@@ -17,12 +17,6 @@ for file in dotfiles/link/*; do
   link "$script_dir/$file" "$HOME/.$name"
 done
 
-for file in dotfiles/copy/*; do
-  [[ -e "$file" ]] || continue
-  name=$(basename "$file")
-  cp "$script_dir/$file" "$HOME/.$name"
-done
-
 mkdir -p "$HOME/.config"
 for dir in config/link/*; do
   [[ -d "$dir" ]] || continue
@@ -55,3 +49,5 @@ mkdir -p "$HOME/.local/state/rx"
 # Apply theme (uses persisted theme or default).
 theme=$(cat "$HOME/.local/state/rx/theme" 2>/dev/null || echo default)
 "$script_dir/bin/rx-theme" "$theme"
+
+"$script_dir/scripts/setup-ai-jail.sh"
