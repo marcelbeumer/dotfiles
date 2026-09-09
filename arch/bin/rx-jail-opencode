@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+HERDR_AGENT=opencode exec ai-jail opencode "$@"

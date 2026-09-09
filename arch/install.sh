@@ -11,16 +11,29 @@ link() {
   ln -s "$1" "$2"
 }
 
-for file in dotfiles/*; do
+for file in dotfiles/link/*; do
   [[ -e "$file" ]] || continue
   name=$(basename "$file")
   link "$script_dir/$file" "$HOME/.$name"
 done
 
+for file in dotfiles/copy/*; do
+  [[ -e "$file" ]] || continue
+  name=$(basename "$file")
+  cp "$script_dir/$file" "$HOME/.$name"
+done
+
 mkdir -p "$HOME/.config"
-for dir in config/*; do
+for dir in config/link/*; do
   [[ -d "$dir" ]] || continue
   link "$script_dir/$dir" "$HOME/.config/$(basename "$dir")"
+done
+
+for dir in config/copy/*; do
+  [[ -d "$dir" ]] || continue
+  name=$(basename "$dir")
+  rm -rf "$HOME/.config/$name"
+  cp -r "$script_dir/$dir" "$HOME/.config/$name"
 done
 
 
@@ -42,5 +55,3 @@ mkdir -p "$HOME/.local/state/rx"
 # Apply theme (uses persisted theme or default).
 theme=$(cat "$HOME/.local/state/rx/theme" 2>/dev/null || echo default)
 "$script_dir/bin/rx-theme" "$theme"
-
-$script_dir/scripts/setup-ai-jail.sh
