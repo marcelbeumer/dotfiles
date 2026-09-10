@@ -3,9 +3,11 @@ set -euo pipefail
 
 # usage: rx-agent-container [--runtime podman|docker] <agent> [args...]
 runtime="podman"
+extra_mounts=()
 while [[ $# -gt 0 ]]; do
   case "$1" in
     -r|--runtime) runtime="$2"; shift 2 ;;
+    -v|--volume) extra_mounts+=(-v "$2"); shift 2 ;;
     *) break ;;
   esac
 done
@@ -28,5 +30,6 @@ exec "$runtime" run -it --rm \
   -v "$HOME/.local/share/rx/agents/opencode:/home/agent/.config/opencode" \
   -v "$HOME/.local/share/rx/agents/pi:/home/agent/.pi" \
   -v "$HOME/.local/share/opencode:/home/agent/.local/share/opencode" \
+  "${extra_mounts[@]}" \
   rx-agent-box \
   "$@"
