@@ -1,4 +1,5 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "ollama-cloud/deepseek-v4-pro"
+  "model": "ollama-cloud/deepseek-v4-pro",
+  "default_agent": "plan"
 }

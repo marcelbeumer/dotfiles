@@ -19,6 +19,8 @@ RUN go install golang.org/x/tools/gopls@latest \
 
 COPY --chown=agent agents/opencode /home/agent/.config/opencode
 COPY --chown=agent agents/pi /home/agent/.pi
+COPY --chown=agent agents/config/sandbox/AGENTS.md /home/agent/.config/opencode/AGENTS.md
+COPY --chown=agent agents/config/sandbox/AGENTS.md /home/agent/.pi/agent/AGENTS.md
 
 WORKDIR /workspace
 CMD ["bash"]
