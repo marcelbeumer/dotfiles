@@ -1,2 +1,6 @@
 #!/usr/bin/env bash
-HERDR_AGENT=pi exec ai-jail pi "$@"
+if [[ "${HERDR_ENV:-}" == "1" ]]; then
+  HERDR_AGENT=pi exec ai-jail pi "$@"
+else
+  exec ai-jail pi "$@"
+fi

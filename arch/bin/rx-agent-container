@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# usage: rx-agent-container [--runtime podman|docker] <agent> [args...]
+runtime="podman"
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -r|--runtime) runtime="$2"; shift 2 ;;
+    *) break ;;
+  esac
+done
+
+if ! command -v "$runtime" >/dev/null 2>&1; then
+  echo "ERROR: runtime \"$runtime\" not found" >&2
+  exit 1
+fi
+
+userns_args=()
+[[ "$runtime" == "podman" ]] && userns_args=(--userns=keep-id)
+
+exec "$runtime" run -it --rm \
+  --user agent \
+  "${userns_args[@]}" \
+  --cap-drop=ALL \
+  -v "$(pwd)":/workspace \
+  -v "$HOME/g/allow:/home/agent/g/allow" \
+  -v "$HOME/g/ask:/home/agent/g/ask" \
+  -v "$HOME/.local/share/rx/agents/opencode:/home/agent/.config/opencode" \
+  -v "$HOME/.local/share/rx/agents/pi:/home/agent/.pi" \
+  -v "$HOME/.local/share/opencode:/home/agent/.local/share/opencode" \
+  rx-agent-box \
+  "$@"

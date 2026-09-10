@@ -4,6 +4,7 @@
       "name": "Ollama Cloud",
       "baseUrl": "https://ollama.com/v1",
       "api": "openai-completions",
+      "apiKey": "$OLLAMA_API_KEY",
       "compat": {
         "supportsDeveloperRole": false,
         "supportsReasoningEffort": false

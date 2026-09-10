@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+script_path="$(readlink -f "$0")"
+arch_dir="$(cd "$(dirname "$script_path")/.." && pwd)"
+
+# usage: rx-agent-container-build [--runtime podman|docker]
+runtime="podman"
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -r|--runtime) runtime="$2"; shift 2 ;;
+    *) break ;;
+  esac
+done
+
+if ! command -v "$runtime" >/dev/null 2>&1; then
+  echo "ERROR: runtime \"$runtime\" not found" >&2
+  exit 1
+fi
+
+cd "$arch_dir"
+exec "$runtime" build -f agents/container/Dockerfile -t rx-agent-box .

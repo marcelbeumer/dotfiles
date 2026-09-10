@@ -1,2 +1,6 @@
 #!/usr/bin/env bash
-HERDR_AGENT=opencode exec ai-jail opencode "$@"
+if [[ "${HERDR_ENV:-}" == "1" ]]; then
+  HERDR_AGENT=opencode exec ai-jail opencode "$@"
+else
+  exec ai-jail opencode "$@"
+fi

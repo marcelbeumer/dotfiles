@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# usage: rx-agent-container-pull [--runtime podman|docker] <container>
+runtime="podman"
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -r|--runtime) runtime="$2"; shift 2 ;;
+    *) break ;;
+  esac
+done
+
+if ! command -v "$runtime" >/dev/null 2>&1; then
+  echo "ERROR: runtime \"$runtime\" not found" >&2
+  exit 1
+fi
+
+container="${1:-}"
+if [[ -z "$container" ]]; then
+  echo "usage: $0 <container>" >&2
+  exit 1
+fi
+
+exec "$runtime" exec "$container" sh -c 'cd /workspace && git diff'
