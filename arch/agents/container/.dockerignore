@@ -1,9 +1,0 @@
-.git
-agents/opencode/node_modules
-agents/opencode/package.json
-agents/opencode/package-lock.json
-agents/opencode/bun.lock
-agents/pi/agent/auth.json
-agents/pi/agent/models-store.json
-agents/pi/agent/sessions
-agents/pi/agent/npm

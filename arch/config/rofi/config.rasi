@@ -1,5 +1,0 @@
-@theme "theme.rasi"
-configuration {
-  modes: "window,drun,run,ssh,filebrowser,recursivebrowser";
-  // display-drun: "application";
-}

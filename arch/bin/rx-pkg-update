@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-sudo pacman -Syu
-pkill -RTMIN+8 waybar 2>/dev/null
