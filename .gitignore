@@ -2,6 +2,3 @@
 
 # ai-jail auto-writes a per-project sandbox config; never commit it.
 .ai-jail
-
-# Leftover bind-mount sources (moved to rx-arch repo; can't be deleted while mounted)
-/arch/
