@@ -21,7 +21,7 @@ if command -v mise &> /dev/null; then
   eval "$(mise activate bash)"
 fi
 
-export CDPATH=.:~/g/allow:~/g/deny:~/g/ask
+export CDPATH=.:~/g/allow:~/g/deny:~/g/ask:~/dev
 export EDITOR=nvim
 export GONOPROXY=$CONF_GNOPROXY
 export GONOSUMDB=$CONF_GONOSUMDB
@@ -38,6 +38,7 @@ alias k='kubectl'
 alias tf='terraform'
 alias gdalb='git branch | grep -v "master" | xargs git branch -D'
 alias ports='sudo lsof -P -i TCP -s TCP:LISTEN'
+alias chat='cd ~/dev/chat && rx-jail-opencode'
 
 rp() { ( cd "$1" >/dev/null 2>&1 && pwd ); }
 # open like macOS
