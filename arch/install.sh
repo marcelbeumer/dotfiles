@@ -11,25 +11,17 @@ link() {
   ln -s "$1" "$2"
 }
 
-for file in dotfiles/link/*; do
+for file in dotfiles/*; do
   [[ -e "$file" ]] || continue
   name=$(basename "$file")
   link "$script_dir/$file" "$HOME/.$name"
 done
 
 mkdir -p "$HOME/.config"
-for dir in config/link/*; do
+for dir in config/*; do
   [[ -d "$dir" ]] || continue
   link "$script_dir/$dir" "$HOME/.config/$(basename "$dir")"
 done
-
-for dir in config/copy/*; do
-  [[ -d "$dir" ]] || continue
-  name=$(basename "$dir")
-  rm -rf "$HOME/.config/$name"
-  cp -r "$script_dir/$dir" "$HOME/.config/$name"
-done
-
 
 mkdir -p $HOME/.local/share/applications
 for file in xdg-applications/*.desktop; do

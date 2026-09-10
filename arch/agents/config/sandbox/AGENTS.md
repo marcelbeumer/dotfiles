@@ -12,10 +12,7 @@
 
 You are running inside a sandbox (ai-jail / container), not the real host.
 
-- The filesystem is a filtered view of the host. Only these are writable:
-  - `~/g/allow`, `~/g/ask`
-  - `~/.config/mise`, `~/.local/share/mise`
-  - `~/.config/opencode`, `~/.pi`, `~/.local/share/opencode`
+- The filesystem is a filtered view of the host.
 - Most of the host is hidden or read-only. Do not assume host paths, tools,
   services, or state exist.
 - No Docker socket, no systemd, no GPU, restricted network. Verify before
